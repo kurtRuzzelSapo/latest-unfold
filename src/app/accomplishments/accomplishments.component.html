@@ -1,0 +1,255 @@
+<app-topnav></app-topnav>
+<app-sidenav></app-sidenav>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+  <link rel="stylesheet" href="accomplishments.component.css" />
+
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap"
+  />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap"
+  />
+</head>
+<body>
+  <h1>kikkfsdfsdhjf</h1>
+  <div class="accomplishments">Accomplishments</div>
+  <div class="line2"></div>
+
+  <div class="text">Here you can showcase your accomplishments.</div>
+
+  <div class="button">
+    <button
+      type="button"
+      class="accomplishments-child3"
+      (click)="openModalpopup()"
+    >
+      <span class="add-accomplishment">Add Accomplishment</span>
+    </button>
+  </div>
+
+  <div class="accomplishmenttable">
+    <table mat-table [dataSource]="dataSource" class="accomplishment">
+      <!-- Image Column -->
+      <ng-container matColumnDef="accomImg">
+        <th mat-header-cell *matHeaderCellDef> Accomplishment Image </th>
+        <td mat-cell *matCellDef="let element">
+          <img [src]="element.accomImg" alt="Accomplishment Image" class="accomImg">
+        </td>
+      </ng-container>
+
+      <!-- Title Column -->
+      <ng-container matColumnDef="accomTitle">
+        <th mat-header-cell *matHeaderCellDef> Accomplishment Title </th>
+        <td mat-cell *matCellDef="let element"> {{element.accomTitle}} </td>
+      </ng-container>
+
+      <!-- Description Column -->
+      <ng-container matColumnDef="accomDesc">
+        <th mat-header-cell *matHeaderCellDef> Accomplishment Description </th>
+        <td mat-cell *matCellDef="let element"> {{element.accomDesc}} </td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element">
+          <button type="button" class="btn btn-primary" (click)="editopenModalpopup(element.accomTitle, element.accomDesc, element.accomImg, element.accomID)">
+            Edit
+          </button>
+          <button type="button" class="btn btn-danger" (click)="deleteAccomplishment(element.accomID)">
+            Delete
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+
+
+
+
+  <!-- Accomplishment Modal -->
+  <div
+    class="modal fade"
+    id="exampleModalCenter"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">
+            Upload a New Accomplishment
+          </h5>
+        </div>
+        <div class="modal-body">
+          <form
+            [formGroup]="applyForm"
+            (submit)="Insert()"
+            enctype="multipart/form-data"
+          >
+            <div class="form-group">
+              <label for="accomplishmentTitle">Accomplishment Title:</label>
+              <input
+                formControlName="accomTitle"
+                type="text"
+                class="form-control"
+                id="accomplishmentTitle"
+                placeholder="Enter accomplishment title"
+              />
+            </div>
+            <div class="form-group">
+              <label for="accomplishmentDescription"
+                >Accomplishment Description:</label
+              >
+              <textarea
+                formControlName="accomDesc"
+                class="form-control"
+                id="accomplishmentDescription"
+                rows="3"
+                placeholder="Enter accomplishment description"
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <label for="accomplishmentImage">Accomplishment Image:</label>
+              <input
+                formControlName="accomImg"
+                type="file"
+                class="form-control-file"
+                id="accomplishmentImage"
+                accept="image/*"
+                (change)="onFileSelected($event)"
+              />
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                (click)="closePopup()"
+              >
+                Close
+              </button>
+              <button type="submit" class="btn btn-primary">
+                Save changes
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDIT -->
+<div
+class="modal fade"
+id="editModalCenter"
+tabindex="-1"
+role="dialog"
+aria-labelledby="editModalCenterTitle"
+aria-hidden="true"
+>
+<div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="editModalLongTitle">
+        Edit Accomplishment
+      </h5>
+    </div>
+    <div class="modal-body">
+      <form novalidate [formGroup]="applyForm" (submit)="edit()">
+        <div class="form-group">
+          <label for="accomTitle">Accomplishment Title:</label>
+          <input
+            formControlName="accomID"
+            type="text"
+            class="form-control"
+            id="accomID"
+            [value]="selectedAccomplishmentId"
+            placeholder="Enter accomplishment ID"
+            style="display: none;"
+          />
+          <input
+            formControlName="accomTitle"
+            type="text"
+            class="form-control"
+            id="accomTitle"
+            [value]="selectedAccomplishmentTitle"
+            placeholder="Enter accomplishment title"
+          />
+        </div>
+        <div class="form-group">
+          <label for="accomDescription">Accomplishment Description:</label>
+          <textarea
+            formControlName="accomDesc"
+            class="form-control"
+            id="accomDesc"
+            rows="3"
+            [value]="selectedAccomplishmentDesc"
+            placeholder="Enter accomplishment description"
+          ></textarea>
+        </div>
+        <div style="width: 10%;" class="form-group">
+          <label for="accomImage">Accomplishment Image:</label>
+          <img
+            style="width: 10%; display: block;"
+            *ngIf="selectedAccomplishmentImg"
+            [src]="selectedAccomplishmentImg"
+            alt="Selected Accomplishment Image"
+          />
+          <!-- File input to select a new image -->
+          <input
+            formControlName="accomImg"
+            type="file"
+            class="form-control-file"
+            id="accomImage"
+            accept="image/*"
+            (change)="onFileSelected($event)"
+          />
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="editclosePopup()"
+          >
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary">
+            Save changes
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="successModalLongTitle">Success</h5>
+      </div>
+      <div class="modal-body">
+        Accomplishment successfully uploaded!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeSuccessModal()">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>

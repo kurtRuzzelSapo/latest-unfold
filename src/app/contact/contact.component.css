@@ -1,0 +1,69 @@
+.contact{
+    position: absolute;
+    font-weight: 500;
+    display: inline-block;
+  }
+.contact {
+    top: 110px;
+    left: 312px;
+    font-size: 30px;
+    width: 190px;
+    height: 36px;
+    font-family: 'Poppins', sans-serif;
+  }
+  .line2 {
+    position: absolute;
+    top: 165.5px;
+    left: 296px;
+    border-top: 1px solid #000;
+    box-sizing: border-box;
+    width: calc(100% - 297.5px); /* Adjust the subtraction value based on the left position of the line */
+    height: 1px;
+  }
+  .text {
+    top: 190px;
+    left: 312px;
+    width: 661px;
+    height: 36px;
+    position: absolute;
+    display: inline-block;
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+  }
+  .contact-child1 {
+    position: absolute;
+    top: 240px;
+    left: 312px; /* Adjust as needed */
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border: none;
+    border-radius: var(--br-3xs);
+    background-color: #4caf50;
+    width: 230px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .add-contact-info {
+    font-weight: 500;
+    color: #fff;
+    font-size: 22px;
+    font-family: 'Poppins', sans-serif;
+  }
+/* Add color to modal elements */
+.modal-header {
+  background-color: #40916c; /* Blue color */
+  color: #fff; /* Text color */
+}
+
+.modal-body {
+  background-color: #f8f9fa; /* Light gray color */
+}
+
+.modal-footer {
+  background-color: #fff; /* Blue color */
+  color: #fff; /* Text color */
+}
+  

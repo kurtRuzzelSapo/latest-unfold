@@ -1,0 +1,104 @@
+.services{
+    position: absolute;
+    font-weight: 500;
+    display: inline-block;
+  }
+.services {
+    top: 110px;
+    left: 312px;
+    font-size: 30px;
+    width: 190px;
+    height: 36px;
+    font-family: 'Poppins', sans-serif;
+  }
+  .line2 {
+    position: absolute;
+    top: 165.5px;
+    left: 296px;
+    border-top: 1px solid #000;
+    box-sizing: border-box;
+    width: calc(100% - 297.5px); /* Adjust the subtraction value based on the left position of the line */
+    height: 1px;
+  }
+  .text {
+    top: 190px;
+    left: 312px;
+    width: 661px;
+    height: 36px;
+    position: absolute;
+    display: inline-block;
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+  }
+  .services-child3 {
+    position: absolute;
+    top: 240px;
+    left: 312px; /* Adjust as needed */
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border: none;
+    border-radius: var(--br-3xs);
+    background-color: #f8955e;
+    width: 170px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .add-service {
+    font-weight: 500;
+    color: #fff;
+    font-size: 22px;
+    font-family: 'Poppins', sans-serif;
+  }
+  .modal-header {
+    background-color: #f8955e; /* Blue color */
+    color: #fff; /* Text color */
+  }
+  
+  .modal-body {
+    background-color: #f8f9fa; /* Light gray color */
+  }
+  
+  .modal-footer {
+    background-color: #fff; /* Blue color */
+    color: #fff; /* Text color */
+  }
+  .services-table {
+    width: 60%;
+    margin: 20px 0;
+    overflow-x: auto;
+    left: 500px;
+    top: 300px;
+    position: relative;
+    border-radius: 10px;
+  
+    .mat-elevation-z8 {
+      width: 100%;
+      border-collapse: collapse;
+  
+      th, td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+  
+      th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+      }
+  
+      tr:hover {
+        background-color: #f1f1f1;
+      }
+
+    }
+    .btn {
+      margin-right: 5px;
+    }
+  }
+  
+  
+  
+  

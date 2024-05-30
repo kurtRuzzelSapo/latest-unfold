@@ -1,0 +1,130 @@
+<app-topnav></app-topnav>
+<app-sidenav></app-sidenav>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+  <link rel="stylesheet" href="home.component.css" />
+
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap"
+  />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap"
+  />
+</head>
+<body>
+  <div class="home">Home </div>
+
+  <!-- <h3>{{studentPortfolio.about.aboutImg}}</h3> <img [src]="baseAPI + studentPortfolio.about.aboutImg" alt="Student img" /> -->
+
+  <div class="line2"></div>
+
+  <table *ngIf="userDetails.is_admin === 1">
+    <thead>
+      <tr>
+        <th>Student ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Contacts</th>
+        <th>Course</th>
+        <th>Sex</th>
+        <th>Birthdate</th>
+        <th>School</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of studentList">
+        <td>{{ student.studentID }}</td>
+        <td>{{ student.firstName }}</td>
+        <td>{{ student.lastName }}</td>
+        <td>{{ student.email }}</td>
+        <td>{{ student.address }}</td>
+        <td>{{ student.contacts }}</td>
+        <td>{{ student.course }}</td>
+        <td>{{ student.sex }}</td>
+        <td>{{ student.birthdate }}</td>
+        <td>{{ student.school }}</td>
+        <td>
+          <button class="delete-btn" (click)="deleteStudent(student)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  
+
+
+  <!-- <div
+  class="modal fade"
+  id="exampleModalCenter"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">
+          Upload a New Project
+        </h5>
+      </div>
+      <div class="modal-body">
+        <form novalidate [formGroup]="applyForm" (submit)="Update()">
+          <div class="form-group">
+            <label for="projectTitle">Project Title:</label>
+            <input
+              formControlName="proTitle"
+              type="text"
+              class="form-control"
+              id="projectTitle"
+              placeholder="Enter project title"
+            />
+          </div>
+          <div class="form-group">
+            <label for="projectDescription">Project Description:</label>
+            <textarea
+              formControlName="proDesc"
+              class="form-control"
+              id="projectDescription"
+              rows="3"
+              placeholder="Enter project description"
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label for="projectImage">Project Image:</label>
+            <input
+              formControlName="proImg"
+              type="file"
+              class="form-control-file"
+              id="projectImage"
+              accept="image/*"
+              (change)="onFileSelected($event)"
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              (click)="closePopup()"
+            >
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary">
+              Save changes
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div> -->
+</body>

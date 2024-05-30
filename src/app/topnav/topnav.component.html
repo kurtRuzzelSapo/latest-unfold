@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="topnav.component.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap"
+    />
+  </head>
+  <body>
+    
+    <div class="top-nav">
+      <div class="top-nav-child"></div>
+      <b class="unfold">UNFOLD</b>
+      <div>
+
+        <!-- <a class="view-portfolio"  routerLink="/signup" class="fw-bold text-danger">Here!</a> -->
+
+        <!-- <a style="text-decoration: none; font-weight: bold;" *ngIf="userDetails.is_admin === 0" routerLink="/portfolio" class="view-portfolio" href=""
+          >Main menu</a> -->
+        <a style="text-decoration: none; font-weight: bold;" *ngIf="userDetails.is_admin === 0" routerLink="/viewport/{{userDetails.studentID}}'"class="view-portfolio" href=""
+          >view portfolio</a
+        >
+        <a style="text-decoration: none; font-weight: bold;" *ngIf="userDetails.is_admin === 0" routerLink="/newsfeed" class="view-portfolio" href=""
+          >Newsfeed</a
+        >
+
+
+        <b class="user-details"
+          >{{ userDetails.firstName }} {{ userDetails.lastName }}</b
+        >
+
+      </div>
+    </div>
+  </body>
+</html>
+
+
+

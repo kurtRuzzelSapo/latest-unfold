@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap"
+    />
+    <title>Document</title>
+    <style>
+      @media screen and (max-width: 896px) {
+        /* body {
+          background-color: lightgreen;
+        }
+        h1 {
+          color: blue;
+        } */
+      }
+      .bg-custom {
+        background-color: #ee8d59 !important;
+      }
+      .login-container {
+        border: 6px solid #ffffff;
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body style="overflow: hidden">
+    <nav class="navbar bg-custom position-absolute">
+      <div class="container">
+        <!-- <a class="navbar-brand" href="#">
+          <img src="assets/icon.jpg" alt="Bootstrap" width="80" height="74" />
+        </a> -->
+      </div>
+    </nav>
+
+    <div
+      style="
+        min-height: 100vh;
+        overflow-y: hidden;
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+      "
+      class="container-fluid d-flex justify-content-around align-items-center text-white bg-custom"
+    >
+      <div>
+        <h1
+          style="
+            text-align: center;
+            font-size: 6rem;
+            font-family: 'Poppins', sans-serif;
+          "
+        >
+          Welcome!
+        </h1>
+        <p class="fs-5 fw-lighter">Let's unfold together.</p>
+      </div>
+
+      <div class="login-container">
+        <h2 class="m-0 p-0 text-center fs-3">Design Your Future</h2>
+        <h2 class="m-0 p-0 text-center fs-3">here, Students!</h2>
+        <p class="fs-6 fw-light pb-lg-4 mt-3 text-center">
+          Log in to Customize Your Portfolio
+        </p>
+        <form
+          [formGroup]="applyForm"
+          (submit)="Login()"
+          class="d-flex flex-column align-items-center justify-content-center"
+          style="width: 20rem"
+        >
+          <div class="mb-lg-5 form-floating">
+            <input
+              formControlName="email"
+              type="email"
+              class="form-control bg-custom text-light h-25"
+              placeholder="example@test.com"
+              required
+              style="width: 16rem"
+            />
+            @if(Error == "Incorrect email"){
+            <div class="text-danger">Incorrect email</div>
+            } @else{
+            <div class="text-danger"></div>
+            }
+
+            <label class="text-bg-custom" for="floatingInput">Email address</label>
+          </div>
+
+          <div class="mb-3 form-floating">
+            <input
+              formControlName="password"
+              type="password"
+              class="form-control bg-custom text-light"
+              id="exampleInputPassword1"
+              placeholder="..."
+              required
+              style="width: 16rem"
+            />
+            @if(Error == "Incorrect password"){
+            <div class="text-danger">Incorrect password</div>
+            } @else{
+            <div class="text-danger"></div>
+            }
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+          </div>
+          <div class="container d-flex justify-content-center">
+            <button
+              type="submit"
+              class="btn btn-danger mb-3 mt-4 ms-0 me-0"
+              style="width: 16rem"
+            >
+              Log in <i class="cis-arrow-right"></i>
+            </button>
+          </div>
+          <p class="">
+            Create new account
+            <a
+              routerLink="/signup"
+              class="fw-bold text-danger"
+              style="color: #f5652f !important;"
+              >Here!</a
+            >
+          </p>
+        </form>
+      </div>
+    </div>
+    <style>
+      .btn {
+        background-color: #f5652f;
+        border: none;
+      }
+    </style>
+  </body>
+</html>

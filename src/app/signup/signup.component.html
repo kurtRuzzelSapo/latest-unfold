@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap"
+    />
+    <title>Document</title>
+    <style>
+      .bg-custom {
+        background-color: #ee8d59 !important;
+      }
+      body {
+        font-family: 'Poppins', 'sans-serif';
+      }
+      .signup-container {
+        border: 6px solid #ffffff;
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body style="overflow: hidden">
+    <div
+      style="min-height: 100vh; margin: 0"
+      class="container-fluid d-flex justify-content-around align-items-center text-white bg-custom background-radial-gradient"
+    >
+      <div class="col-lg-3 mb-5 mb-lg-0">
+        <h1 class="my-5 display-5 fw-bold ls-tight" style="color: #f5652f">
+          Start your Portfolio <br />
+          <span style="color: hsl(218, 81%, 95%)">for your journey</span>
+        </h1>
+        <p class="mb-4 opacity-70" style="color: white">
+          Enter your personal Information before proceeding to make your own
+          Portfolio.
+        </p>
+      </div>
+
+      <div class="signup-container">
+        <h2 class="mt-5 fs-4 text-center m-0 p-0">
+          Let's Get Started here, Student!
+        </h2>
+        <p class="pt-1 fs-6 fw-light pb-lg-2 text-center">
+          Sign in to Customize Your Portfolio
+        </p>
+        <form
+          class="needs-validation"
+          novalidate
+          [formGroup]="applyForm"
+          (submit)="Signup()"
+        >
+          <div class="row">
+            <div class="col-md-6 mb-2">
+              <div class="form-outline">
+                <input
+                  formControlName="firstName"
+                  type="text"
+                  id="form3Example1"
+                  class="form-control"
+                  required
+                />
+                <label class="text-light form-label" for="form3Example1">First name</label>
+              </div>
+            </div>
+            <div class="col-md-6 mb-2">
+              <div class="form-outline">
+                <input
+                  formControlName="lastName"
+                  type="text"
+                  id="form3Example2"
+                  class="form-control"
+                  required
+                />
+                <label class="form-label" for="form3Example2">Last name</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-outline mb-2">
+            <input
+              formControlName="email"
+              type="email"
+              id="form3Example3"
+              class="form-control"
+              required
+            />
+            @if(email?.invalid && (email?.dirty)){
+            <div class="text-danger">Email is required.</div>
+            }
+            <label class="form-label" for="form3Example3">Email address</label>
+          </div>
+
+          <div class="form-outline mb-2">
+            <input
+              formControlName="password"
+              type="password"
+              id="form3Example4"
+              class="form-control"
+              required
+            />
+            @if(password?.invalid && (password?.dirty || password?.touched)){
+            <div class="text-danger">
+              Password is required and must be 8 characters.
+            </div>
+            }
+            <label class="form-label" for="form3Example4">Password</label>
+            <div id="emailHelp" class="form-text text-light">
+              We'll never share your password with anyone else.
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-2">
+              <div class="form-outline">
+                <select
+                  formControlName="sex"
+                  class="w-100 form-select w-25"
+                  aria-label="Default select example"
+                >
+                  <option selected hidden>Sex</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+                <label class="m-0 p-0" for="form3Example2">Sex</label>
+              </div>
+            </div>
+            <div class="col-md-6 mb-2">
+              <div class="form-outline">
+                <input
+                  formControlName="birthdate"
+                  type="date"
+                  id="form3Example2"
+                  class="form-control"
+                />
+                <label class="form-label" for="form3Example2">Birthdate</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-2">
+              <div class="form-outline">
+                <input
+                  formControlName="address"
+                  type="text"
+                  id="form3Example1"
+                  class="form-control"
+                  required
+                />
+                <label class="text-light form-label" for="form3Example1">Address</label>
+              </div>
+            </div>
+            <div class="col-md-6 mb-2">
+              <div class="form-outline">
+                <input
+                  type="tel"
+                  formControlName="contacts"
+                  id="form3Example2"
+                  class="form-control"
+                  required
+                />
+                <label class="form-label" for="form3Example2">Contacts</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-2">
+              <div class="form-outline">
+                <select
+                  formControlName="course"
+                  class="form-select"
+                  aria-label="Default select example"
+                >
+                  <option selected hidden>Course</option>
+                  <option value="BSIT">BSIT</option>
+                  <option value="BSCS">CS</option>
+                  <option value="BSEMC">EMC</option>
+                  <option value="ACT">ACT</option>
+                </select>
+                <label class="m-0 p-0" for="form3Example2">Course</label>
+              </div>
+            </div>
+            <div class="col-md-6 mb-2">
+              <div class="form-outline">
+                <input
+                  formControlName="school"
+                  type="text"
+                  id="form3Example1"
+                  class="form-control"
+                  required
+                />
+                <label class="m-0 p-0" for="form3Example2">School/University</label>
+              </div>
+            </div>
+          </div>
+          <p class="fs-6">
+            Already have an account
+            <a routerLink="/login" class="fw-bold text-danger" style="color: #f5652f !important;">Here!</a>
+          </p>
+          <div class="container d-flex justify-content-center text-white">
+            <button
+              type="submit"
+              class="btn bg-custom text-white border-white border-1"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                id="Outline"
+                viewBox="0 0 24 24"
+                width="90"
+                height="30"
+                fill="#fff"
+              >
+                <path
+                  d="M23.12,9.91,19.25,6a1,1,0,0,0-1.42,0h0a1,1,0,0,0,0,1.41L21.39,11H1a1,1,0,0,0-1,1H0a1,1,0,0,0,1,1H21.45l-3.62,3.61a1,1,0,0,0,0,1.42h0a1,1,0,0,0,1.42,0l3.87-3.88A3,3,0,0,0,23.12,9.91Z"
+                />
+              </svg>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

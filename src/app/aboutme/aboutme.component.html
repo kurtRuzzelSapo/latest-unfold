@@ -1,0 +1,119 @@
+<app-topnav></app-topnav>
+<app-sidenav></app-sidenav>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+  <link rel="stylesheet" href="aboutme.component.css" />
+
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap"
+  />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap"
+  />
+</head>
+<body>
+  <div class="aboutme">About Me</div>
+  <div class="line2"></div>
+
+  
+  <div class="button">
+    <button type="button" class="bio-child3"   (click)="openModalpopupbio()">
+      <span class="add-bio">Create Bio</span>
+    </button>
+  </div>
+
+  
+  <div class="abouttable">
+    <table mat-table [dataSource]="dataSource" class="about">
+      <!-- Image Column -->
+      <ng-container matColumnDef="aboutImg">
+        <th mat-header-cell *matHeaderCellDef> About Image </th>
+        <td mat-cell *matCellDef="let element">
+          <img [src]="element.aboutImg" alt="aboout Image" class="aboutImg">
+        </td>
+      </ng-container>
+
+      <!-- Description Column -->
+      <ng-container matColumnDef="aboutText">
+        <th mat-header-cell *matHeaderCellDef> About </th>
+        <td mat-cell *matCellDef="let element"> {{element.aboutText}} </td>
+      </ng-container>
+
+    <!-- Actions Column -->
+<ng-container matColumnDef="actions">
+  <th mat-header-cell *matHeaderCellDef> Actions </th>
+  <td mat-cell *matCellDef="let element">
+    <button type="button" class="btn btn-primary" (click)="editopenModalpopup( element.aboutText, element.aboutImg, element.aboutID)">
+      Edit
+    </button>
+    <button type="button" class="btn btn-danger" (click)="deleteabout(element.aboutID)">
+      Delete
+    </button>
+  </td>
+</ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="exampleModalCenterBio"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Create Bio</h5>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="applyForm" (submit)="Insert()">
+            <div class="form-group">
+              <label for="createBio"></label>
+              <textarea
+                formControlName="aboutText"
+                class="form-control"
+                id="createBio"
+                rows="3"
+                placeholder="Enter your bio"
+              ></textarea>
+            </div>
+            <div class="form-group" style="margin: 20px 0">
+              <label for="aboutImg">Profile: </label>
+              <br>
+              <input
+                formControlName="aboutImg"
+                type="file"
+                class="form-control-file"
+                id="aboutImg"
+                accept="image/*"
+                (change)="onFileSelected($event)"
+              />
+            </div>
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                (click)="closePopupbio()"
+              >
+                Close
+              </button>
+              <button type="submit" class="btn btn-primary">
+                Save changes
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
