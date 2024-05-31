@@ -46,6 +46,8 @@ constructor(private ds: DataService){}
           console.error('Error submitting application:', error);
         }
       )
+
+    console.log("#"); 
   }
 
   editProject(index: number): void {
