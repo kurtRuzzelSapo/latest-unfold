@@ -1,5 +1,5 @@
-<app-topnav></app-topnav>
-<app-sidenav></app-sidenav>
+<!-- <app-topnav></app-topnav>
+<app-sidenav></app-sidenav> -->
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="initial-scale=1, width=device-width" />
@@ -16,7 +16,7 @@
   />
 </head>
 <body>
-  <div class="aboutme">About Me</div>
+  <!-- <div class="aboutme">About Me</div>
   <div class="line2"></div>
 
   
@@ -24,42 +24,40 @@
     <button type="button" class="bio-child3"   (click)="openModalpopupbio()">
       <span class="add-bio">Create Bio</span>
     </button>
-  </div>
+  </div> -->
 
-  
-  <div class="abouttable">
-    <table mat-table [dataSource]="dataSource" class="about">
-      <!-- Image Column -->
-      <ng-container matColumnDef="aboutImg">
-        <th mat-header-cell *matHeaderCellDef> About Image </th>
-        <td mat-cell *matCellDef="let element">
-          <img [src]="element.aboutImg" alt="aboout Image" class="aboutImg">
+  <table>
+    <thead>
+      <tr>
+        <th>Student ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>action</th>
+        <th>action</th>
+      
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let about of aboutme">
+        <td>{{ about.studentID }} lol</td>
+        <td>{{ about.aboutText }}</td>
+        <td>{{ about.aboutDesc }}</td>
+        <td>{{ about.aboutImg }}</td>
+        <td>
+          <button type="button" class="btn btn-primary" (click)="editopenModalpopup(about.aboutText,about.aboutDesc,about.aboutImg)">
+            Edit
+          </button>
         </td>
-      </ng-container>
+        <td>
+          <!-- <button class="delete-btn" (click)="deleteStudent(student)">
+            Delete
+          </button> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-      <!-- Description Column -->
-      <ng-container matColumnDef="aboutText">
-        <th mat-header-cell *matHeaderCellDef> About </th>
-        <td mat-cell *matCellDef="let element"> {{element.aboutText}} </td>
-      </ng-container>
 
-    <!-- Actions Column -->
-<ng-container matColumnDef="actions">
-  <th mat-header-cell *matHeaderCellDef> Actions </th>
-  <td mat-cell *matCellDef="let element">
-    <button type="button" class="btn btn-primary" (click)="editopenModalpopup( element.aboutText, element.aboutImg, element.aboutID)">
-      Edit
-    </button>
-    <button type="button" class="btn btn-danger" (click)="deleteabout(element.aboutID)">
-      Delete
-    </button>
-  </td>
-</ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-  </div>
   <!-- Modal -->
   <div
     class="modal fade"
@@ -116,4 +114,7 @@
       </div>
     </div>
   </div>
+
+
+  
 </body>

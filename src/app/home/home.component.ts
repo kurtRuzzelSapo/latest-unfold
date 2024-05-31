@@ -47,7 +47,7 @@ constructor(private ds: DataService){}
         }
       )
 
-    console.log("#"); 
+  
   }
 
   editProject(index: number): void {

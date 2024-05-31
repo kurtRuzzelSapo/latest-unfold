@@ -32,6 +32,7 @@ export class AboutmeComponent implements OnInit {
   userDetails: any;
   applyForm: any;
   studentList: any = [];
+  aboutme: any = {};
   studentPortfolio: any ={};
   studentAbout: any ={};
   selectedAboutText: string = '';
@@ -68,19 +69,10 @@ export class AboutmeComponent implements OnInit {
 
   
   loadAbout(): void {
-    this.ds.getRequestWithParams("studentaboutme", { id: this.userDetails.studentID }).subscribe(
+    this.ds.getRequestWithParams("view-portfolio", { id: this.userDetails.studentID }).subscribe(
       (response: any) => {
-        if (response && response.payload) {
-          const aboutme = response.payload;
-          if (Array.isArray(aboutme)) { // Check if payload is an array
-            this.populateAboutTable(aboutme);
-            console.log('View About details:', aboutme);
-          } else {
-            console.error('Payload does not contain array of about:', aboutme);
-          }
-        } else {
-          console.error('Unexpected response structure, missing payload:', response);
-        }
+        this.aboutme = response.about;
+       console.log("This is my ABOUT", response.about)
       },
       (error) => {
         console.error('Error loading about:', error);
@@ -105,7 +97,7 @@ export class AboutmeComponent implements OnInit {
 
 
 populateAboutTable(about: any[]): void {
-  const baseURL = 'http://localhost/unfold/unfold-api-main/files/aboutme';
+  const baseURL = 'http://localhost/unfold/unfold-api/files/aboutme';
   this.dataSource.data = about.map(about => ({
     aboutImg: `${baseURL}${about.aboutImg}`,
     aboutText: about.aboutText,
