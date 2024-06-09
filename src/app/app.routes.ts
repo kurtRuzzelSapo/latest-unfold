@@ -15,6 +15,7 @@ import { ViewportComponent } from './viewport/viewport.component';
 import { FacultyComponent } from './faculty/faculty.component';
 import { CreateportfolioComponent } from './portfolio/createportfolio/createportfolio.component';
 import { DesignComponent } from './design/design.component';
+import { EditportfolioComponent } from './portfolio/editportfolio/editportfolio.component';
 
 export const routes: Routes = [
 
@@ -32,5 +33,6 @@ export const routes: Routes = [
     { title: "Unfold | ViewPortfolio", path: 'viewport/:studentID', component: ViewportComponent },
     { title: "Unfold | Faculty", path: 'faculty', component: FacultyComponent },
     { title: "Unfold | CreatPortfolio", path: 'createportfolio', component: CreateportfolioComponent },
+    { title: "Unfold | CreatPortfolio", path: 'editportfolio/:projectID', component: EditportfolioComponent },
     { title: "Unfold | Design", path: 'design', component: DesignComponent },
 ];

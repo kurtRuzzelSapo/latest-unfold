@@ -178,8 +178,8 @@
 								<td>{{studentPortfolio.projectDate}}</td>
 								<td><a target="_blank" href="{{studentPortfolio.projectLink}}">{{studentPortfolio.projectLink}}</a></td>
 								<td>
-									<a style="margin-right: 5px;" href="" class="btn btn-ed" >Edit</a>
-									<a href="" class="btn btn-del" >Delete</a>
+									<button style="margin-right: 5px;" href="" class="btn btn-ed" (click)="routeToEditPorfolio(studentPortfolio.projectID)">Edit</button>
+									<button style="margin-right: 5px;" href="" class="btn btn-del">Delete</button>
 								</td>
 								<!-- <td>{{studentPortfolio.projectImg}}</td> -->
 							</tr>

@@ -80,6 +80,7 @@ export class CreateportfolioComponent {
     }
   }
 
+ 
 
   Insert() {
     this.formData.append('projectTitle', this.applyForm.value.proTitle);
@@ -105,5 +106,9 @@ export class CreateportfolioComponent {
   routeToPorfolio(){
     // this.route.navigateByUrl('../createportfolio');
     this.route.navigate([`../portfolio`], { relativeTo: this.aRoute });
+  }
+  routeToEditPorfolio(){
+    // this.route.navigateByUrl('../createportfolio');
+    this.route.navigate([`../editportfolio`], { relativeTo: this.aRoute });
   }
 }
