@@ -191,5 +191,10 @@ export class PortfolioComponent implements OnInit {
     // this.route.navigateByUrl('../createportfolio');
     this.route.navigate([`../createportfolio`], { relativeTo: this.aRoute });
   }
+
+  routeToEditPorfolio(projectID:any){
+    // this.route.navigateByUrl('../createportfolio');
+    this.route.navigate([`../editportfolio/${projectID}`], { relativeTo: this.aRoute });
+  }
   
 }
