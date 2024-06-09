@@ -8,7 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { DataService } from '../data.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 import { TopnavComponent } from '../topnav/topnav.component';
 import { CookieService } from 'ngx-cookie-service';
@@ -22,7 +22,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-accomplishments',
   standalone: true,
-  imports: [ReactiveFormsModule, SidenavComponent, TopnavComponent, MatTableModule, MatIconModule, CommonModule],
+  imports: [ReactiveFormsModule, SidenavComponent, TopnavComponent, MatTableModule, MatIconModule, CommonModule, RouterLink,RouterLinkActive],
   providers: [CookieService],
   templateUrl: './accomplishments.component.html',
   styleUrl: './accomplishments.component.css',
@@ -34,11 +34,15 @@ export class AccomplishmentsComponent implements OnInit {
   userDetails: any;
   applyForm: any;
   studentAccomplishment: any ={};
+  studentPortfolio: any = {};
   selectedAccomplishmentTitle: string = '';
   selectedAccomplishmentDesc: string = '';
   selectedAccomplishmentImg: string = '';
   selectedAccomplishmentId: any;
-  baseAPI: string = 'https://unfoldap.online/unfold-api'
+  // ONLINE BASEAPI
+  // baseAPI: string = 'https://unfoldap.online/unfold-api';
+  // LOCALHOST BASEAPI
+  baseAPI:string = 'http://localhost/unfold/unfold-api/'
 
   displayedColumns: string[] = ['accomImg', 'accomTitle', 'accomDesc', 'actions'];
   dataSource = new MatTableDataSource<any>();
@@ -58,6 +62,16 @@ export class AccomplishmentsComponent implements OnInit {
     });
 
     this.loadAccomplishment();
+
+    this.ds.getRequestWithParams("view-portfolio", { id: this.userDetails.studentID }).subscribe(
+      (response: any) => {
+        this.studentPortfolio = response;
+        console.log('View Portfolio details:', response);
+      },
+      (error) => {
+        console.error('Error retrieving portfolio:', error);
+      }
+    );
   }
 
 

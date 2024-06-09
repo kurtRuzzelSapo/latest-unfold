@@ -1,306 +1,205 @@
-<app-topnav></app-topnav>
-<app-sidenav></app-sidenav>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="initial-scale=1, width=device-width" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link rel="stylesheet" href="portfolio.component.css">
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
 
-  <!-- Bootstrap CSS -->
-  <!-- <link
-    rel="stylesheet"
-    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-  /> -->
-
-  <!-- Your custom CSS -->
-  <link rel="stylesheet" href="portfolio.component.css" />
-  <!-- <link rel="stylesheet" href="/Unfold-new/src/styles.css" /> -->
-
-  <script
-    src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"
-  ></script>
-  <script
-    src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"
-  ></script>
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"
-  ></script>
-
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap"
-  />
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap"
-  />
+	<title>Student Dashboard</title>
 </head>
 <body>
-  <div class="responsive">
-  <div class="portfolio">Projects</div>
-  <div class="line2"></div>
-
-  <div class="text">Here you can showcase your projects.</div>
-
-  <div class="button">
-    <button type="button" class="portfolio-child1"  (click)="openModalpopup()">
-      <span class="upload-a-new">Upload a New Project</span>
-    </button>
-  </div>
-
-  <!-- <table style="width: 50%; margin-top: 20%; margin-left: 30%;" class="table">
-    <thead>
-      <tr>
-        <th scope="col">Image</th>
-        <th scope="col">Title</th>
-        <th scope="col">Description</th>
-        <th scope="col">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let project of studentPortfolio.project; let i = index">
-        <td>
-          <img style="width: 20%; height: 10%;" [src]="baseAPI + project.projectImg" alt="Student img" />
-        </td>
-        <td>{{project.projectTitle}}</td>
-        <td><p>{{project.projectDesc}}</p></td>
-        <td>
-
-          <button type="button" class="btn btn-primary" (click)="editopenModalpopup(project.projectTitle, project.projectDesc, baseAPI + project.projectImg, project.projectID)">Edit</button>
-        </td>
-      </tr>
 
 
-
-      <tr *ngFor="let adding++">
-        <th scope="row"><img style="width: 20%; height: 10%;" [src]="baseAPI + studentPortfolio.project[0].projectImg" alt="Student img" /></th>
-        <td>{{studentPortfolio.project[0].projectTitle}}</td>
-        <td><p>{{studentPortfolio.project[0].projectDesc}}</p></td>
-
-      </tr>
-      <tr *ngFor="let student of studentList">
-        <th scope="row"><img style="width: 20%; height: 10%;" [src]="baseAPI + studentPortfolio.project[0].projectImg" alt="Student img" /></th>
-        <td>{{studentPortfolio.project[1].projectTitle}}</td>
-        <td><p>{{studentPortfolio.project[1].projectDesc}}</p></td>
-
-      </tr>
-    </tbody>
-  </table> -->
-
-  <div class="projecttable">
-    <table mat-table [dataSource]="dataSource" class="project">
-      <!-- Image Column -->
-      <ng-container matColumnDef="projectImg">
-        <th mat-header-cell *matHeaderCellDef> Project Image </th>
-        <td mat-cell *matCellDef="let element">
-          <img [src]="element.projectImg" alt="Project Image" class="projectImg">
-        </td>
-      </ng-container>
-
-      <!-- Title Column -->
-      <ng-container matColumnDef="projectTitle">
-        <th mat-header-cell *matHeaderCellDef> Project Title </th>
-        <td mat-cell *matCellDef="let element"> {{element.projectTitle}} </td>
-      </ng-container>
-
-      <!-- Description Column -->
-      <ng-container matColumnDef="projectDesc">
-        <th mat-header-cell *matHeaderCellDef> Project Description </th>
-        <td mat-cell *matCellDef="let element"> {{element.projectDesc}} </td>
-      </ng-container>
-
-      <!-- Actions Column -->
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef> Actions </th>
-      <td mat-cell *matCellDef="let element">
-        <button type="button" class="btn btn-primary" (click)="editopenModalpopup(element.projectTitle, element.projectDesc, element.projectImg, element.projectID)">
-          Edit
-        </button>
-        <button type="button" class="btn btn-danger" (click)="deleteProject(element.projectID)">
-          Delete
-        </button>
-
-      </td>
-    </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-  </div>
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+			<i class='bx bxl-firebase'></i>
+			<span class="text">UNFOLD</span>
+		</a>
+		<ul class="side-menu top">
+			<li >
+				<a routerLink="/Home">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li class="active" *ngIf="userDetails.is_admin === 0">
+				<a routerLink="/portfolio">
+					<i class='bx bx-folder-open' ></i>
+					<span class="text">Projects</span>
+				</a>
+			</li>
+			<li *ngIf="userDetails.is_admin === 0">
+				<a routerLink="/skills">
+					<i class='bx bx-bulb' ></i>
+					<span class="text">Technologies</span>
+				</a>
+			</li>
+			<li *ngIf="userDetails.is_admin === 0">
+				<a routerLink="/accomplishments">
+					<i class='bx bx-trophy' ></i>
+					<span class="text">Competitions</span>
+				</a>
+			</li>
+			<li *ngIf="userDetails.is_admin === 0">
+				<a routerLink="/aboutme">
+					<i class='bx bx-user' ></i>
+					<span class="text">About Me</span>
+				</a>
+			</li>
+			<li *ngIf="userDetails.is_admin === 0" >
+				<a routerLink="/contact">
+					<i class='bx bxs-contact' ></i>
+					<span class="text">Contacts</span>
+				</a>
+			</li>
+			<li *ngIf="userDetails.is_admin === 0" >
+				<a routerLink="/design">
+					<i class='bx bxs-paint' ></i>
+					<span class="text">Design</span>
+				</a>
+			</li>
+			<li *ngIf="userDetails.is_admin === 1" >
+				<a routerLink="/faculty">
+					<i class='bx bxs-user' ></i>
+					<span class="text">Faculty</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a routerLink="/login" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
 
 
 
-  <!-- Modal -->
-  <div
-    class="modal fade"
-    id="exampleModalCenter"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">
-            Upload a New Project
-          </h5>
-        </div>
-        <div class="modal-body">
-          <form novalidate [formGroup]="applyForm" (submit)="Insert()">
-            <div class="form-group">
-              <label for="projectTitle">Project Title:</label>
-              <input
-                formControlName="proTitle"
-                type="text"
-                class="form-control"
-                id="projectTitle"
-                placeholder="Enter project title"
-              />
-            </div>
-            <div class="form-group">
-              <label for="projectDescription">Project Description:</label>
-              <textarea
-                formControlName="proDesc"
-                class="form-control"
-                id="projectDescription"
-                rows="3"
-                placeholder="Enter project description"
-              ></textarea>
-            </div>
-            <div class="form-group">
-              <label for="projectImage">Project Image:</label>
-              <input
-                formControlName="proImg"
-                type="file"
-                class="form-control-file"
-                id="projectImage"
-                accept="image/*"
-                (change)="onFileSelected($event)"
-              />
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                (click)="closePopup()"
-              >
-                Close
-              </button>
-              <button type="submit" class="btn btn-primary">
-                Save changes
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<div style="display: flex;">
 
-  <!-- EDIT -->
-  <div
-  class="modal fade"
-  id="editModalCenter"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="editModalCenterTitle"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="editModalLongTitle">
-          Edit Project
-        </h5>
-      </div>
-      <div class="modal-body">
-        <form novalidate [formGroup]="applyForm" (submit)="Edit()">
-          <div class="form-group">
-            <label for="projectTitle">Project Title:</label>
-            <input
-              formControlName="proID"
-              type="text"
-              class="form-control"
-              id="projectID"
-              [value]="selectedprojectID"
-              placeholder="Enter project title"
-              style="display: none;"
-            />
-            <input
-              formControlName="proTitle"
-              type="text"
-              class="form-control"
-              id="projectTitle"
-              [value]="selectedProjectTitle"
-              placeholder="Enter project title"
-            />
-          </div>
-          <div class="form-group">
-            <label for="projectDescription">Project Description:</label>
-            <textarea
-              formControlName="proDesc"
-              class="form-control"
-              id="projectDescription"
-              rows="3"
-              [value]="selectedProjectDesc"
-              placeholder="Enter project description"
-            ></textarea>
-          </div>
-          <div style="width: 10%;" class="form-group">
-            <label for="projectImage">Project Image:</label>
-            <img  style="width: 10%; display:block;" *ngIf="selectedProjectImg" [src]="selectedProjectImg" alt="Selected Project Image" />
+			
+				<a *ngIf="userDetails.is_admin === 0" routerLink="/viewport/{{userDetails.studentID}}'" class="nav-link">Portfolio</a>
+				<a *ngIf="userDetails.is_admin === 0" routerLink="/newsfeed" class="nav-link">Portfolio Feed</a>
+			</div>
+			<a class="profile">
+			  <b style="margin-right: 10px;" class="user-details"
+			  >{{ userDetails.firstName }} {{ userDetails.lastName }}</b>
+		 <img [src]="baseAPI + studentPortfolio.about[0].aboutImg" alt="">
+		  </a>
+		</nav>
+		<!-- NAVBAR -->
 
-<!-- File input to select a new image -->
-<input formControlName="proImg" type="file" class="form-control-file" id="projectImage" accept="image/*" (change)="onFileSelected($event)" />
-            <!-- <input
-              formControlName="proImg"
-              type="file"
-              class="form-control-file"
-              id="projectImage"
-              accept="image/*"
-              (change)="onFileSelected($event)"
-            /> -->
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              (click)="editclosePopup()"
-            >
-              Close
-            </button>
-            <button type="submit" class="btn btn-primary">
-              Save changes
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+		<!-- MAIN -->
+		<main>
+			<div class="head-title">
+				<div class="left">
+					<h1> Project Dashboard</h1>
+					
+					<!-- Button trigger modal -->
+					<button (click)="routeToCreatePorfolio()" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Upload a New Project</button>
+  
+						 
 
-<!-- Success Modal -->
-<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="successModalLongTitle">Success</h5>
-      </div>
-      <div class="modal-body">
-        Project successfully uploaded!
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="closeSuccessModal()">Close</button>
+				</div>
+			</div>
 
-      </div>
-    </div>
-  </div>
-</div>
+			<!-- <ul class="box-info">
+				<li>
+					<i class='bx bx-terminal' ></i>
+					<span class="text">
+						<h3>83</h3>
+						<p>BSIT</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bx-code-block' ></i>
+					<span class="text">
+						<h3>65</h3>
+						<p>BSCS</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bxs-devices' ></i>
+					<span class="text">
+						<h3>58</h3>
+						<p>BSEMC</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bx-laptop' ></i>
+					<span class="text">
+						<h3>36</h3>
+						<p>ACT</p>
+					</span>
+				</li>
+			</ul> -->
 
-</div>
+
+			<div class="table-data">
+				<div class="order">
+					<div class="head">
+						<h3>List of Projects</h3>
+						<i class='bx bx-search' ></i>
+						<i class='bx bx-filter' ></i>
+					</div>
+					<table >
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Image</th>
+								<th>Project Title</th>
+								<th>Description</th>
+								<th>Date</th>
+								<th>Link</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor=" let studentPortfolio of studentPortfolio.project ">
+								<td>{{studentPortfolio.projectID}}</td>
+								<td> <img [src]="baseAPI + studentPortfolio.projectImg" alt=""></td>
+								<td>{{studentPortfolio.projectTitle}}</td>
+								<td>{{studentPortfolio.projectDesc}}</td>
+								<td>{{studentPortfolio.projectDate}}</td>
+								<td><a target="_blank" href="{{studentPortfolio.projectLink}}">{{studentPortfolio.projectLink}}</a></td>
+								<td>
+									<a style="margin-right: 5px;" href="" class="btn btn-ed" >Edit</a>
+									<a href="" class="btn btn-del" >Delete</a>
+								</td>
+								<!-- <td>{{studentPortfolio.projectImg}}</td> -->
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				
+			</div>
+		</main>
+		<!-- MAIN -->
+
+		
+
+	
+
+	</section>
+	<!-- CONTENT -->
+	
+
+
+	<script src="script.js"></script>
 </body>
-
+</html>

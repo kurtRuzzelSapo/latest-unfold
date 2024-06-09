@@ -7,16 +7,20 @@ import {
   Validators,
 } from '@angular/forms';
 import { DataService } from '../data.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 import { TopnavComponent } from '../topnav/topnav.component';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpHeaders } from '@angular/common/http';
-
+import {MatTableDataSource} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
+import { MatHeaderRowDef, MatRowDef } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [ReactiveFormsModule,SidenavComponent,TopnavComponent],
+  imports: [ReactiveFormsModule,SidenavComponent,TopnavComponent, RouterLink, RouterLinkActive, CommonModule],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.scss'
 })
@@ -25,6 +29,11 @@ export class ContactComponent implements OnInit {
   formData: any;
   userDetails: any;
   applyForm: any;
+  studentPortfolio: any = {};
+   // ONLINE BASEAPI
+  // baseAPI: string = 'https://unfoldap.online/unfold-api';
+  // LOCALHOST BASEAPI
+  baseAPI:string = 'http://localhost/unfold/unfold-api/'
   constructor(private ds: DataService, private route: Router) {}
 
   ngOnInit(): void {
@@ -38,6 +47,16 @@ export class ContactComponent implements OnInit {
       contEmail: new FormControl(null, Validators.required),
       contHome: new FormControl(null, Validators.required)
     });
+
+    this.ds.getRequestWithParams("view-portfolio", { id: this.userDetails.studentID }).subscribe(
+      (response: any) => {
+        this.studentPortfolio = response;
+        console.log('View Portfolio details:', response);
+      },
+      (error) => {
+        console.error('Error retrieving portfolio:', error);
+      }
+    );
   }
   
 

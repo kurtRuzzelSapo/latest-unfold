@@ -1,119 +1,178 @@
-<app-topnav></app-topnav>
-<app-sidenav></app-sidenav>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="initial-scale=1, width=device-width" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link rel="stylesheet" href="aboutme.component.css">
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
 
-  <link rel="stylesheet" href="aboutme.component.css" />
-
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap"
-  />
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap"
-  />
+	<title>Student Dashboard</title>
 </head>
 <body>
-  <div class="aboutme">About Me</div>
-  <div class="line2"></div>
 
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+			<i class='bx bxl-firebase'></i>
+			<span class="text">UNFOLD</span>
+		</a>
+		<ul class="side-menu top">
+			<li >
+				<a routerLink="/Home">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li  *ngIf="userDetails.is_admin === 0">
+				<a routerLink="/portfolio">
+					<i class='bx bx-folder-open' ></i>
+					<span class="text">Projects</span>
+				</a>
+			</li>
+			<li  *ngIf="userDetails.is_admin === 0">
+				<a routerLink="/skills">
+					<i class='bx bx-bulb' ></i>
+					<span class="text">Technologies</span>
+				</a>
+			</li>
+			<li *ngIf="userDetails.is_admin === 0">
+				<a routerLink="/accomplishments">
+					<i class='bx bx-trophy' ></i>
+					<span class="text">Competitions</span>
+				</a>
+			</li>
+			<li class="active" *ngIf="userDetails.is_admin === 0">
+				<a routerLink="/aboutme">
+					<i class='bx bx-user' ></i>
+					<span class="text">About Me</span>
+				</a>
+			</li>
+			<li *ngIf="userDetails.is_admin === 0" >
+				<a routerLink="/contact">
+					<i class='bx bxs-contact' ></i>
+					<span class="text">Contacts</span>
+				</a>
+			</li>
+			<li *ngIf="userDetails.is_admin === 0" >
+				<a routerLink="/design">
+					<i class='bx bxs-paint' ></i>
+					<span class="text">Design</span>
+				</a>
+			</li>
+			<li *ngIf="userDetails.is_admin === 1" >
+				<a routerLink="/faculty">
+					<i class='bx bxs-user' ></i>
+					<span class="text">Faculty</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a routerLink="/login" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<div style="display: flex;">
+
+			
+				<a *ngIf="userDetails.is_admin === 0" routerLink="/viewport/{{userDetails.studentID}}'" class="nav-link">Portfolio</a>
+				<a *ngIf="userDetails.is_admin === 0" routerLink="/newsfeed" class="nav-link">Portfolio Feed</a>
+			</div>
+			<a class="profile">
+			  <b style="margin-right: 10px;" class="user-details"
+			  >{{ userDetails.firstName }} {{ userDetails.lastName }}</b>
+		 <img [src]="baseAPI + studentPortfolio.about[0].aboutImg" alt="">
+		  </a>
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+		<main style="height: 100vh;">
+			<div class="head-title">
+				<div class="left">
+					<h1> About me</h1>
+					
+					<!-- Button trigger modal -->
+					<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Upload a New Project</button> -->
   
-  <div class="button">
-    <button type="button" class="bio-child3"   (click)="openModalpopupbio()">
-      <span class="add-bio">Create Bio</span>
-    </button>
-  </div>
+						 
 
-  
-  <div class="abouttable">
-    <table mat-table [dataSource]="dataSource" class="about">
-      <!-- Image Column -->
-      <ng-container matColumnDef="aboutImg">
-        <th mat-header-cell *matHeaderCellDef> About Image </th>
-        <td mat-cell *matCellDef="let element">
-          <img [src]="element.aboutImg" alt="aboout Image" class="aboutImg">
-        </td>
-      </ng-container>
+				</div>
+			</div>
 
-      <!-- Description Column -->
-      <ng-container matColumnDef="aboutText">
-        <th mat-header-cell *matHeaderCellDef> About </th>
-        <td mat-cell *matCellDef="let element"> {{element.aboutText}} </td>
-      </ng-container>
+			<!-- <ul class="box-info">
+				<li>
+					<i class='bx bx-terminal' ></i>
+					<span class="text">
+						<h3>83</h3>
+						<p>BSIT</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bx-code-block' ></i>
+					<span class="text">
+						<h3>65</h3>
+						<p>BSCS</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bxs-devices' ></i>
+					<span class="text">
+						<h3>58</h3>
+						<p>BSEMC</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bx-laptop' ></i>
+					<span class="text">
+						<h3>36</h3>
+						<p>ACT</p>
+					</span>
+				</li>
+			</ul> -->
 
-    <!-- Actions Column -->
-<ng-container matColumnDef="actions">
-  <th mat-header-cell *matHeaderCellDef> Actions </th>
-  <td mat-cell *matCellDef="let element">
-    <button type="button" class="btn btn-primary" (click)="editopenModalpopup( element.aboutText, element.aboutImg, element.aboutID)">
-      Edit
-    </button>
-    <button type="button" class="btn btn-danger" (click)="deleteabout(element.aboutID)">
-      Delete
-    </button>
-  </td>
-</ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-  </div>
-  <!-- Modal -->
-  <div
-    class="modal fade"
-    id="exampleModalCenterBio"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Create Bio</h5>
+			<div style="display: flex; flex-direction: column; align-items: center;" class="table-data">
+				<div style="display:flex; flex-direction: column;">
+          <img width="230" height="230" style="border-radius: 10px;" [src]="baseAPI + studentPortfolio.about[0].aboutImg" alt="">
+          <input type="file">
         </div>
-        <div class="modal-body">
-          <form [formGroup]="applyForm" (submit)="Insert()">
-            <div class="form-group">
-              <label for="createBio"></label>
-              <textarea
-                formControlName="aboutText"
-                class="form-control"
-                id="createBio"
-                rows="3"
-                placeholder="Enter your bio"
-              ></textarea>
-            </div>
-            <div class="form-group" style="margin: 20px 0">
-              <label for="aboutImg">Profile: </label>
-              <br>
-              <input
-                formControlName="aboutImg"
-                type="file"
-                class="form-control-file"
-                id="aboutImg"
-                accept="image/*"
-                (change)="onFileSelected($event)"
-              />
-            </div>
+				<div style="box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.25); width: 50%; display:  flex; flex-direction: column; text-align: center;">
 
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                (click)="closePopupbio()"
-              >
-                Close
-              </button>
-              <button type="submit" class="btn btn-primary">
-                Save changes
-              </button>
-            </div>
-          </form>
+          <b style=" justify-self:flex-end;">My Introduction</b>
+          <p>{{studentPortfolio.about[0].aboutText}}</p>
         </div>
-      </div>
-    </div>
-  </div>
+			</div>
+		</main>
+		<!-- MAIN -->
+
+		
+
+	
+
+	</section>
+	<!-- CONTENT -->
+	
+
+
+	<script src="script.js"></script>
 </body>
+</html>

@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { DataService } from '../data.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 import { TopnavComponent } from '../topnav/topnav.component';
 import { CookieService } from 'ngx-cookie-service';
@@ -21,7 +21,7 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-aboutme',
   standalone: true,
-  imports: [ReactiveFormsModule, SidenavComponent, TopnavComponent, CommonModule, MatTableModule, MatIconModule],
+  imports: [ReactiveFormsModule, SidenavComponent, TopnavComponent, CommonModule, MatTableModule, MatIconModule, RouterLink, RouterLinkActive],
   templateUrl: './aboutme.component.html',
   styleUrl: './aboutme.component.scss',
 })
@@ -35,9 +35,13 @@ export class AboutmeComponent implements OnInit {
   studentPortfolio: any ={};
   studentAbout: any ={};
   selectedAboutText: string = '';
+  selectedAboutDesc: string = '';
   selectedAboutImg: string = '';
   selectedAboutId: any;
-  baseAPI: string = 'https://unfoldap.online/unfold-api'
+   // ONLINE BASEAPI
+  // baseAPI: string = 'https://unfoldap.online/unfold-api';
+  // LOCALHOST BASEAPI
+  baseAPI:string = 'http://localhost/unfold/unfold-api/'
 
   displayedColumns: string[] = ['aboutImg', 'aboutText', 'actions'];
   dataSource = new MatTableDataSource<any>();
@@ -53,34 +57,26 @@ export class AboutmeComponent implements OnInit {
     this.applyForm = new FormGroup({
       aboutText: new FormControl(null, Validators.required),
       aboutImg: new FormControl(null, Validators.required),
+      // aboutID: new FormControl(null, Validators.required),
     });
     this.loadAbout();
-    // this.ds.getRequestWithParams("view-portfolio",{id: this.userDetails.studentID}).subscribe(
-    //   (response: any) => {
-    //     this.studentPortfolio = response
-    //     console.log('View Portfolio details:', response);
-    //   },
-    //   (error) => {
-    //     console.error('Error submitting application:', error);
-    //   }
-    // )
+    this.ds.getRequestWithParams("view-portfolio", { id: this.userDetails.studentID }).subscribe(
+      (response: any) => {
+        this.studentPortfolio = response;
+        console.log('View Portfolio details:', response);
+      },
+      (error) => {
+        console.error('Error retrieving portfolio:', error);
+      }
+    );
   }
 
   
   loadAbout(): void {
-    this.ds.getRequestWithParams("studentaboutme", { id: this.userDetails.studentID }).subscribe(
+    this.ds.getRequestWithParams("view-portfolio", { id: this.userDetails.studentID }).subscribe(
       (response: any) => {
-        if (response && response.payload) {
-          const aboutme = response.payload;
-          if (Array.isArray(aboutme)) { // Check if payload is an array
-            this.populateAboutTable(aboutme);
-            console.log('View About details:', aboutme);
-          } else {
-            console.error('Payload does not contain array of about:', aboutme);
-          }
-        } else {
-          console.error('Unexpected response structure, missing payload:', response);
-        }
+          // const aboutme = response.payload;
+          this.populateAboutTable(response.about);
       },
       (error) => {
         console.error('Error loading about:', error);
@@ -104,13 +100,26 @@ export class AboutmeComponent implements OnInit {
 // }
 
 
-populateAboutTable(about: any[]): void {
-  const baseURL = 'http://localhost/unfold/unfold-api-main/files/aboutme';
-  this.dataSource.data = about.map(about => ({
-    aboutImg: `${baseURL}${about.aboutImg}`,
+// populateAboutTable(about: any[]): void {
+//   // const baseURL = 'http://localhost/unfold/unfold-api-main/files/aboutme';
+//   this.dataSource.data = about.map(about => ({
+//     aboutImg: `${baseURL}${about.aboutImg}`,
+//     aboutText: about.aboutText,
+//     aboutID: about.aboutID
+//   }));
+// }
+
+populateAboutTable(aboutme: any[]): void {
+  this.dataSource.data = aboutme.map(about => {
+    const imageURL = `${this.baseAPI}${about.aboutImg}`;
+    console.log('Image URL:', imageURL);
+    return {
+    aboutImg: imageURL,
     aboutText: about.aboutText,
-    aboutID: about.aboutID
-  }));
+    aboutDesc: about.aboutDesc,
+    aboutID: about.aboutID,
+    }
+  });
 }
 // populateAboutTable(about: any[]): void {
 //   this.dataSource.data = about.map(item => {
@@ -132,7 +141,6 @@ populateAboutTable(about: any[]): void {
   }
 
   Insert() {
-
     this.formData.append('aboutText', this.applyForm.value.aboutText);
     this.formData.append('studentID', this.userDetails.studentID);
     this.formData.append('aboutImg', this.selectedFile);
@@ -154,15 +162,15 @@ populateAboutTable(about: any[]): void {
 
   Edit() {
     // Assuming you have access to the aboutId
-    const aboutId = this.selectedAboutId; // Update this with the actual variable holding the aboutId
-  
-    this.formData.append('aboutID', this.applyForm.value.aboutID);
-    this.formData.append('aboutText', this.applyForm.value.abouText);
-    this.formData.append('aboutID', this.userDetails.studentID);
-    this.formData.append('aboutImg', this.selectedFile);
+    // const aboutId = this.selectedAboutId; // Update this with the actual variable holding the aboutId
+    const formData = new FormData();
+    formData.append('aboutID', this.applyForm.value.aboutID);
+    formData.append('aboutText', this.applyForm.value.abouText);
+    formData.append('studentID', this.userDetails.studentID);
+    formData.append('aboutImg', this.selectedFile);
   
     this.ds
-      .sendRequestWithMedia('editaboutme', this.formData)
+      .sendRequestWithMedia('editaboutme', formData)
       .subscribe(
         (response) => {
           // Handle successful response here if needed
@@ -177,12 +185,28 @@ populateAboutTable(about: any[]): void {
   }
   
   
-  editopenModalpopup( aboutText: string, aboutImg: string, aboutId:any) {
-    this.selectedAboutText = aboutText;
-    this.selectedAboutImg = aboutImg;
-    this.selectedAboutId = aboutId;
-    $('#editModalCenter').modal('show');
-    // You can also perform other actions related to opening the modal popup here
+  editopenModalpopup( aboutText: string, aboutImg: string, aboutID: any) {
+    const about = this.dataSource.data.find((a: any) => a.aboutID === aboutID);
+    if (about) {
+      this.selectedAboutText = about.aboutText;
+      this.selectedAboutImg = about.aboutImg;
+      this.selectedAboutId = about.aboutID;
+  
+      this.applyForm.patchValue({
+        aboutText: about.aboutText,
+        aboutID: about.aboutID,
+        aboutImg: null
+      });
+  
+      console.log('Received data:', {
+        aboutText: aboutText,
+        aboutImg: aboutImg,
+        aboutID: aboutID,
+      });
+      $('#editModalCenter').modal('show');
+    } else {
+      console.error('Accomplishment not found with ID:', aboutID);
+    }
   }
   
   editclosePopup() {
