@@ -1,5 +1,3 @@
-declare var $: any;
-
 import { Component, OnInit, inject } from '@angular/core';
 import {
   FormControl,
@@ -14,24 +12,15 @@ import { TopnavComponent } from '../topnav/topnav.component';
 import { CookieService } from 'ngx-cookie-service';
 import { CommonModule } from '@angular/common';
 import {MatTableDataSource} from '@angular/material/table';
-import { MatTableModule } from '@angular/material/table';
-import { MatHeaderRowDef, MatRowDef } from '@angular/material/table';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-
-
-
 
 @Component({
-  selector: 'app-portfolio',
+  selector: 'app-design',
   standalone: true,
-  imports: [ReactiveFormsModule, SidenavComponent, TopnavComponent, CommonModule, MatTableModule, MatButtonModule,
-    MatHeaderRowDef, MatRowDef, MatIconModule, RouterOutlet, RouterLink, RouterLinkActive],
-    providers: [CookieService],
-  templateUrl: './portfolio.component.html',
-  styleUrl: './portfolio.component.scss',
+  imports: [CommonModule,RouterLink,RouterLinkActive],
+  templateUrl: './design.component.html',
+  styleUrl: './design.component.css'
 })
-export class PortfolioComponent implements OnInit {
+export class DesignComponent {
   selectedFile: any;
   cookieService = inject(CookieService);
   formData: any;
@@ -191,5 +180,4 @@ export class PortfolioComponent implements OnInit {
     // this.route.navigateByUrl('../createportfolio');
     this.route.navigate([`../createportfolio`], { relativeTo: this.aRoute });
   }
-  
 }

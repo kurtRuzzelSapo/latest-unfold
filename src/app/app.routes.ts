@@ -12,6 +12,9 @@ import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
 import { NewsfeedComponent } from './newsfeed/newsfeed.component';
 import { ViewportComponent } from './viewport/viewport.component';
+import { FacultyComponent } from './faculty/faculty.component';
+import { CreateportfolioComponent } from './portfolio/createportfolio/createportfolio.component';
+import { DesignComponent } from './design/design.component';
 
 export const routes: Routes = [
 
@@ -27,4 +30,7 @@ export const routes: Routes = [
     { title: "Unfold | Signup", path: 'signup', component: SignupComponent },
     { title: "Unfold | Newsfeed", path: 'newsfeed', component: NewsfeedComponent },
     { title: "Unfold | ViewPortfolio", path: 'viewport/:studentID', component: ViewportComponent },
+    { title: "Unfold | Faculty", path: 'faculty', component: FacultyComponent },
+    { title: "Unfold | CreatPortfolio", path: 'createportfolio', component: CreateportfolioComponent },
+    { title: "Unfold | Design", path: 'design', component: DesignComponent },
 ];

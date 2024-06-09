@@ -7,29 +7,24 @@ import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-faculty',
   standalone: true,
-  imports: [SidenavComponent, TopnavComponent, CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
-  providers: [CookieService],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  imports: [CommonModule,RouterOutlet,RouterLink, RouterLinkActive],
+  templateUrl: './faculty.component.html',
+  styleUrl: './faculty.component.css'
 })
-export class HomeComponent implements OnInit {
+export class FacultyComponent {
   selectedFile: any;
   userDetails: any;
   formData: any;
   cookieService = inject(CookieService);
   studentList: any = [];
   studentPortfolio: any = {};
-  // ONLINE BASEAPI
-  // baseAPI: string = 'https://unfoldap.online/unfold-api';
-  // LOCALHOST BASEAPI
-   baseAPI:string = 'http://localhost/unfold/unfold-api/'
+  baseAPI: string = 'https://unfoldap.online/unfold-api';
   bsitCount: number = 0;
   bscsCount: number = 0;
   actCount: number = 0;
   bsemcCount: number = 0;
-  counts: { projects: number, technologies: number, competitions: number } = { projects: 0, technologies: 0, competitions: 0 };
 
   constructor(private ds: DataService) {}
 
@@ -52,15 +47,11 @@ export class HomeComponent implements OnInit {
       (response: any) => {
         this.studentPortfolio = response;
         console.log('View Portfolio details:', response);
-        this.updateCounts(response);
-      
       },
       (error) => {
         console.error('Error retrieving portfolio:', error);
       }
     );
-
-    
   }
 
   countBSITStudents(): void {
@@ -68,12 +59,6 @@ export class HomeComponent implements OnInit {
     this.bscsCount = this.studentList.filter((student: any) => student.course === 'BSCS').length;
     this.actCount = this.studentList.filter((student: any) => student.course === 'ACT').length;
     this.bsemcCount = this.studentList.filter((student: any) => student.course === 'BSEMC').length;
-  }
-
-  updateCounts(data: any): void {
-    this.counts.projects = data.project.length;
-    this.counts.technologies = data.skill.length;
-    this.counts.competitions = data.accomplishment.length;
   }
 
   editProject(index: number): void {

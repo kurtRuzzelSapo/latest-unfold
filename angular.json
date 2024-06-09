@@ -35,9 +35,11 @@
               "src/styles.css"
             ],
             "scripts": [
+              "src/assets/app.js",
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "node_modules/popper.js/dist/umd/popper.min.js"
+              "node_modules/popper.js/dist/umd/popper.min.js",
+              "node_modules/scrollreveal/dist/scrollreveal.min.js"
             ]
           },
           "configurations": {

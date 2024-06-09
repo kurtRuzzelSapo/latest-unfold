@@ -66,7 +66,8 @@ studentList: any = [];
           console.log('Application submitted successfully:', response);
           if (response.status.message == 'Login successful.') {
             this.cookieService.set("user_details", JSON.stringify(response.payload));        
-             this.route.navigateByUrl('/portfolio');
+            //  this.route.navigateByUrl('/portfolio');
+             this.route.navigateByUrl('/Home');
             console.log(this.applyForm);
           }
         },

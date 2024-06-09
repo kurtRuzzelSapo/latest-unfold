@@ -1,291 +1,389 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <head>
-      <title>Portfolio Website-Brad</title>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <!-- linking css file -->
-
-      <!-- bootstrap CDN -->
-      <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-      />
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-      <!-- font awesome -->
-      <script
-        src="https://kit.fontawesome.com/31149d48b0.js"
-        crossorigin="anonymous"
-      ></script>
-      <style>
-        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap");
-        .card {
-          border-radius: 10px;
-        }
-      </style>
-    </head>
+    <!-- --------- UNICONS ---------- -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+   
+    <!-- --------- CSS ---------- -->
 
 
+    <!-- --------- FAVICON ---------- -->
+    <!-- <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon"> -->
+
+        <!-- ----- TYPING JS Link ----- -->
+        <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+
+        <!-- ----- SCROLL REVEAL JS Link----- -->
+     <script src="https://unpkg.com/scrollreveal"></script>
+ 
+     <!-- ----- MAIN JS ----- -->
+     <!-- <script defer src="/src/assets/app.js"></script> -->
+
+<!-- <style>
+  .featured-image{
+     /* animation-name: slide;
+     animation-duration: 1.9s;  */
+     animation: slide 2s forwards;
+ }
+  .featured-text{
+     /* animation-name: slide;
+     animation-duration: 1.9s;  */
+     animation: slide-text 2s forwards;
+ }
+
+ @keyframes slide {
+    0% {
+        transform: translateX(500px); /* Start position (right) */
+    }
+    100% {
+        transform: translateX(0px); /* End position (left) */
+    }
+}
+ @keyframes slide-text {
+    0% {
+        transform: translateX(-500px); /* Start position (right) */
+    }
+    100% {
+        transform: translateX(0px); /* End position (left) */
+    }
+}
+</style> -->
+    <title>Portfolio | Ludiflex</title>
+</head>
+<body style="background-color: rgb(255, 252, 248);" >
+   <div  class="container">
+    <!-- --------------- HEADER --------------- -->
+      <nav id="header">
+        <div class="nav-logo">
+            <p class="nav-name">{{ studentPortfolio.student.firstName }}</p>
+            <span>.</span>
+        </div>
+        
+        <div class="nav-menu" id="myNavMenu">
+            <!-- <ul class="nav_menu_list">
+                <li class="nav_list">
+                    <a href="#home" class="nav-link active-link">Home</a>
+                    <div class="circle"></div>
+                </li>
+                <li class="nav_list">
+                    <a href="#about" class="nav-link">About</a>
+                    <div class="circle"></div>
+                </li>
+                <li class="nav_list">
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <div class="circle"></div>
+                </li>
+                <li class="nav_list">
+                    <a href="#contact" class="nav-link">Contact</a>
+                    <div class="circle"></div>
+                </li>
+            </ul> -->
+            <a *ngIf="userDetails.is_admin === 0" style="text-decoration: none; list-style-type: none; font-size: 20px; font-weight: bolder; color: #ee8d59;"    routerLink="/newsfeed" class="view-portfolio" href=""
+          ><li class="uil-left-arrow-from-left"></li></a>
+            <a *ngIf="userDetails.is_admin === 1" style="text-decoration: none; list-style-type: none; font-size: 20px; font-weight: bolder; color: #ee8d59;"    routerLink="/Home" class="view-portfolio" href=""
+          ><li class="uil-left-arrow-from-left"></li></a>
+            <ul class="nav_menu_list">
+                <li class="nav_list">
+                    <a  href="#projects" class="nav-link active-link">Home</a>
+                    <div class="circle"></div>
+                </li>
+                <li class="nav_list">
+                    <a [routerLink]="[]" fragment="about" class="nav-link">About</a>
+                    <div class="circle"></div>
+                </li>
+                <li class="nav_list">
+                    <a [routerLink]="[]" fragment="projects" class="nav-link">Projects</a>
+                    <div class="circle"></div>
+                </li>
+                <li class="nav_list">
+                    <a [routerLink]="[]" fragment="contact" class="nav-link">Contact</a>
+                    <div class="circle"></div>
+                </li>
+            </ul>
+        </div>
+        <div class="nav-button">
+            <button class="btn">Download CV <i class="uil uil-file-alt"></i></button>
+        </div>
+        <div class="nav-menu-btn">
+            <i class="uil uil-bars" onclick="myMenuFunction()"></i>
+        </div>
+      </nav>
 
 
-  <body>
-    <!-- navbar -->
-    <nav
-      style="background-color: #f8955e;"
-      class="navbar navbar-expand-lg fixed-top navbar-dark navbarScroll"
-    >
-      <div class="container">
-        <a class="navbar-brand" href="#">Unfold</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
+    <!-- -------------- MAIN ---------------- -->
+    <main class="wrapper">
+       <!-- -------------- FEATURED BOX ---------------- -->
+       <section class="featured-box" id="home">
+          <div class="featured-text">
+            <div class="featured-text-card">
+                
+            </div>
+            <div class="featured-name">
+                <p>I'm <span class="typedText">  {{ studentPortfolio.student.firstName }}
+                  {{ studentPortfolio.student.lastName }}</span></p>
+            </div>
+            <div class="featured-text-info">
+                <p>
+                  Hello! I'm {{ studentPortfolio.student.firstName }} {{ studentPortfolio.student.lastName }}, and I live at {{ studentPortfolio.student.address }}.
+                   I am a student at {{ studentPortfolio.student.school }}, currently pursuing a course in {{ studentPortfolio.student.course }}. 
+                   I am dedicated to both academic excellence and personal growth. I was born on  {{
+                    studentPortfolio.student.birthdate | date : "MMMM d, yyyy"
+                  }}. 
+                  Through this portfolio, I aim to share my journey, achievements, and aspirations with you.
+                  
+                </p>
+            </div>
+            <div class="featured-text-btn">
+                <button class="btn blue-btn">Hire Me</button>
+                <button class="btn">Download CV <i class="uil uil-file-alt"></i></button>
+            </div>
+            <div *ngIf="counts.contacts === null || counts.contacts === 0">
+                <p style="color: #ee8d59; font-weight: 500;" >This student doesn't have any social media accounts yet.</p>
+            </div>
+            <div *ngIf="counts.contacts !== null && counts.contacts !== 0">
+                <div class="social_icons" *ngFor=" let studentPortfolio of studentPortfolio.contact">
+                    <div  class="icon"><a target="_blank" href="{{studentPortfolio.contLinkedin}}"><i class="uil uil-linkedin-alt"></i></a></div>
+                    <div class="icon"><a target="_blank" href="{{studentPortfolio.contGithub}}"><i class="uil uil-github-alt"></i></a></div>
+                    <div class="icon"><a target="_blank" href="{{studentPortfolio.contFB}}"><i class="uil uil-facebook"></i></a></div>
+                    <div class="icon"><a target="_blank" href="{{studentPortfolio.contIG}}"><i class="uil uil-instagram"></i></a></div>
+                </div>
+            </div>
+          </div>
+          <div   class="featured-image">
+            <div  class="image">
+                <!-- <img src="https://dthezntil550i.cloudfront.net/u8/latest/u82311180646396480024838605/57ccfe71-b6c8-4353-b4fb-34ae4b11c80f.jpg" alt="avatar"> -->
+                <img [src]="baseAPI + studentPortfolio.about[0].aboutImg" alt="avatar">.about[0].aboutText
+               
+            </div>
+          </div>
+          <!-- <div class="scroll-icon-box">
+            <a href="#about" class="scroll-btn">
+                <i class="uil uil-mouse-alt"></i>
+                <p>Scroll Down</p>
+            </a>
+          </div> -->
+
+       </section>
+       <!-- -------------- ABOUT BOX ---------------- -->
+       <section class="section" id="about">
+          <div class="top-header">
+            <h1>About Me</h1>
+          </div>
+          <div class="row">
+            <div class="col">
+                <div class="about-info">
+                    <h3>My introduction</h3>
+                    <p>{{studentPortfolio.about[0].aboutText}}
+                    </p>
+                    <!-- <div class="about-btn">
+                        <button class="btn">Download CV <i class="uil uil-import"></i></button>
+                    </div> -->
+                </div>
+            </div>
+            <div class="col">
+                <div class="skills-box">
+                    <div class="skills-header">
+                        <h3>Technologies</h3>
+                    </div>
+                    <div *ngIf="counts.technologies === null || counts.technologies === 0">
+                        <p style="color: #ee8d59; font-weight: 500;" >This student hasn't acquired any technological skills yet.</p>
+                    </div>
+                    <div style="display: flex;" *ngIf="counts.technologies !== null && counts.technologies !== 0">
+                        <div style="display: flex;" class="skills-list" *ngFor="let studentPortfolio of studentPortfolio.skill">
+                            <span style="margin-right: 5px;">{{studentPortfolio.skillTitle}}</span>
+                            <!-- <span>CSS</span>
+                            <span>Bootstrap</span>
+                            <span>JavaScript</span>
+                            <span>Vue</span>
+                            <span>React</span>
+                            <span>Angular</span> -->
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+               
+            </div>
+          </div>
+       </section>
+
+       <!-- -------------- PROJECT BOX ---------------- -->
+
+       <section class="section" id="projects">
+          <div class="top-header">
+              <h1>Achievements</h1>
+          </div>
+          <div class="project-container">
+            <div  class="project-box">
+                <i class="uil uil-briefcase-alt"></i>
+                <h3>Completed</h3>
+                <label>{{counts.projects}}+ Finished Projects</label>
+            </div>
+            <div class="project-box">
+                <i class="uil uil-users-alt"></i>
+                <h3>Technologies</h3>
+                <label>{{counts.technologies}}+ Learned Skills</label>
+            </div>
+            <div class="project-box">
+                <i class="uil uil-award"></i>
+                <h3>Competition</h3>
+                <label>{{counts.competitions}}+ Times in the field</label>
+            </div>
+          </div>
+       </section>
+
+
+
+       <!------------------ PROJECT --------------------- -->
+       <section class="section contact" id="contact">
+        <div class="top-header">
+          <h1>Projects</h1>
+          <span>Do you have a project in your mind, contact me here</span>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col">
+                   <div style="display: flex;" class="contact-info">
+                     <img src="https://dthezntil550i.cloudfront.net/u8/latest/u82311180646396480024838605/57ccfe71-b6c8-4353-b4fb-34ae4b11c80f.jpg" alt="">
+                     <!-- <h1>mamamo</h1> -->
+                   </div>
+                </div>
+                <!-- <div class="col">
+                   <div class="form-control">
+                     
+                   </div>
+                </div> -->
+             </div>
+          
+        </div>
+     
+     </section>
+       <!------------------ COMPETIITION --------------------- -->
+       <section class="section contact" id="contact">
+        <div class="top-header">
+          <h1>Competitions</h1>
+          <span>Compentitions that I've joined recently</span>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col">
+                   <div style="display: flex;" class="contact-info">
+                     <img src="https://dthezntil550i.cloudfront.net/u8/latest/u82311180646396480024838605/57ccfe71-b6c8-4353-b4fb-34ae4b11c80f.jpg" alt="">
+                     <h1>mamamo</h1>
+                   </div>
+                </div>
+                <!-- <div class="col">
+                   <div class="form-control">
+                     
+                   </div>
+                </div> -->
+             </div>
+          
+        </div>
+     
+     </section>
+
+       <!-- <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2022/02/15-Iconic-Shonen-Anime-Protagonists-Ranked-By-Their-Intelligence-Tanjiro-Kamado.jpg" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2022/02/15-Iconic-Shonen-Anime-Protagonists-Ranked-By-Their-Intelligence-Tanjiro-Kamado.jpg" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2022/02/15-Iconic-Shonen-Anime-Protagonists-Ranked-By-Their-Intelligence-Tanjiro-Kamado.jpg" class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item active">
-              <a
-                class="nav-link"
-                *ngIf="userDetails.is_admin === 0"
-                routerLink="/portfolio"
-                >Main menu</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                *ngIf="userDetails.is_admin === 0"
-                routerLink="/newsfeed"
-                >Newsfeed</a
-              >
-            </li>
-            <!-- <li class="nav-item">
-              <a
-                class="nav-link"
-                *ngIf="userDetails.is_admin === 0"
-                routerLink="/viewport"
-                >View Portfolio</a
-              >
-            </li> -->
-            <!-- <li class="nav-item">
-                        <a class="nav-link" >Portfolio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" >Contact</a>
-                    </li> -->
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <!-- main banner -->
-    <section style="background-image:url('{{studentImage}}');" class="bgimage" id="home">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 hero-text">
-            <h2 class="hero_title">
-              Hi it's me {{ studentPortfolio.student.firstName }}!
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div> -->
 
-            </h2>
-            <p class="hero_desc">
-              Studying at {{ studentPortfolio.student.school }}
-            </p>
+
+   
+
+       <!-- -------------- CONTACT BOX ---------------- -->
+
+       <section class="section contact" id="contact">
+          <div class="top-header">
+            <h1>Get in touch</h1>
+            <span>Do you have a project in your mind, contact me here</span>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <hr>
-    <br>
+          <div class="row">
+             <div class="col">
+                <div class="contact-info">
+                    <h2>Find Me <i class="uil uil-corner-right-down"></i></h2>
+                    <p><i class="uil uil-envelope"></i>{{ studentPortfolio.student.email }}</p>
+                    <p><i class="uil uil-phone"></i>{{ studentPortfolio.student.contacts }}</p>
+                </div>
+             </div>
+             <!-- <div class="col">
+                <div class="form-control">
+                    <div class="form-inputs">
+                        <input type="text" class="input-field" placeholder="Name">
+                        <input type="text" class="input-field" placeholder="Email">
+                    </div>
+                    <div class="text-area">
+                        <textarea placeholder="Message"></textarea>
+                    </div>
+                    <div class="form-button">
+                        <button class="btn">Send <i class="uil uil-message"></i></button>
+                    </div>
+                </div>
+             </div> -->
+          </div>
+       </section>
     
-    <!-- about section-->
-    <section id="about">
-      <div class="container mt-4 pt-4">
-        <h1 class="text-center">About Me</h1>
-        <div class="row mt-4">
-          <div class="col-lg-4">
-            <img
-              [src]="baseAPI + studentPortfolio.about.aboutImg"
-              class="imageAboutPage"
-              alt=""
-            />
-          </div>
 
-          <div class="col-lg-8">
-            <div class="row mt-3">
-              <div class="col-md-6">
-                <ul>
-                  <li>
-                    Full name:
-                    {{ studentPortfolio.student.firstName }}
-                    {{ studentPortfolio.student.lastName }}
-                  </li>
-                  <li>School:{{ studentPortfolio.student.school }}</li>
-                  <li>Course: {{ studentPortfolio.student.course }}</li>
-                  <li>Sex: {{ studentPortfolio.student.sex }}</li>
-                  <li>
-                    Birthdate:
-                    {{
-                      studentPortfolio.student.birthdate | date : "MMMM d, yyyy"
-                    }}
-                  </li>
-                  <li>Address: {{ studentPortfolio.student.address }}</li>
-                  <li>Email: {{ studentPortfolio.student.email }}</li>
-                  <li>Contact: {{ studentPortfolio.student.contacts }}</li>
-                </ul>
-              </div>
-            </div>
-            <div class="row mt-3">
-              <p>{{ studentPortfolio.about.aboutText }}</p>
-            </div>
-          </div>
+    </main>
+
+
+    <!-- --------------- FOOTER --------------- -->
+    <footer>
+        <div class="top-footer">
+            <p> {{ studentPortfolio.student.firstName }}</p>
         </div>
-      </div>
-    </section>
-      <!-- </section> -->
-      <br>
-        <hr>
-        <br>
-        <!-- services section -->
-<h1 class="text-center">Services</h1>
-<section id="services">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-3 col-md-6 mt-4" *ngFor="let project of studentPortfolio.service; let i = index">
-        <div class="card servicesText">
-          <div class="card-body">
-            <i class="fas servicesIcon fa-wrench"></i>
-            <h4 class="card-title mt-3">{{ project.serviceTitle }}</h4>
-            <p class="card-text mt-3">{{ project.serviceDesc }}</p>
-          </div>
+        <div class="middle-footer">
+            <ul class="footer-menu">
+                <li class="footer_menu_list">
+                    <a href="#home">Home</a>
+                </li>
+                <li class="footer_menu_list">
+                    <a href="#about">About</a>
+                </li>
+                <li class="footer_menu_list">
+                    <a href="#projects">Projects</a>
+                </li>
+                <li class="footer_menu_list">
+                    <a href="#contact">Contact</a>
+                </li>
+            </ul>
         </div>
-      </div>
+        <div class="footer-social-icons">
+            <div class="icon"><i class="uil uil-instagram"></i></div>
+            <div class="icon"><i class="uil uil-linkedin-alt"></i></div>
+            <div class="icon"><i class="uil uil-dribbble"></i></div>
+            <div class="icon"><i class="uil uil-github-alt"></i></div>
+        </div>
+        <div class="bottom-footer">
+            <p>Copyright &copy; <a href="#home" style="text-decoration: none;"> {{ studentPortfolio.student.firstName }}</a> - All rights reserved</p>
+        </div>
+    </footer>
+
     </div>
-  </div>
-</section>
-<br>
-<hr>
-<br>
 
-<!-- projects section -->
-<section id="projects">
-  <h1 class="text-center">Projects</h1>
-  <div class="container mt-3">
-    <div class="row">
-      <div class="col-lg-4 col-md-6 mt-4" *ngFor="let project of studentPortfolio.project; let i = index">
-        <div class="card">
-          <img class="card-img-top" [src]="baseAPI + project.projectImg" alt="Card image" />
-          <div class="card-body">
-            <h4 class="card-title">{{ project.projectTitle }}</h4>
-            <p class="card-text">{{ project.projectDesc }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<br>
-<hr>
-<br>
-<!-- skills section -->
-<h1 class="text-center mt-1">Skills</h1>
-<section id="skills">
-  <div class="container mt-3">
-    <div class="row">
-      <div class="col-lg-3 col-md-6 mt-4" *ngFor="let skill of studentPortfolio.skill; let i = index">
-        <div class="card skillText">
-          <div class="card-body">
-            <h4 class="card-title">{{ skill.skillTitle }}</h4>
-            <p class="card-text">{{ skill.skillDesc }}</p>
-            <!-- <div class="text-center">
-              <a href="#" class="btn btn-success">Link</a>
-            </div> -->
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<br>
-<hr>
-<br>
-<!-- accomplishment section -->
-<h1 class="text-center">Accomplishments</h1>
-<section id="portfolio">
-  <div class="container mt-3">
-    <div class="row">
-      <div class="col-lg-3 col-md-6 mt-4" *ngFor="let accomplishment of studentPortfolio.accomplishment; let i = index">
-        <div class="card">
-          <img class="card-img-top" [src]="baseAPI + accomplishment.accomImg" alt="Card image" style="width: 100%" />
-          <div class="card-body">
-            <h4 class="card-title">{{ accomplishment.accomTitle }}</h4>
-            <p class="card-text">{{ accomplishment.accomDesc }}</p>
-            <!-- <div class="text-center">
-              <a href="#" class="btn btn-success">Link</a>
-            </div> -->
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    <script defer src="/src/assets/app.js"></script>
 
-<br>
-       
-        <!-- footer section-->
-        <footer id="footer">
-          <div class="container-fluid">
-            <!-- social media icons -->
-            <div class="social-icons mt-4">
-              <a href="https://www.facebook.com/" target="_blank"
-                ><i class="fab fa-facebook"></i
-              ></a>
-              <a href="https://www.instagram.com/" target="_blank"
-                ><i class="fab fa-instagram"></i
-              ></a>
-              <a href="https://www.twitter.com/" target="_blank"
-                ><i class="fab fa-twitter"></i
-              ></a>
-              <a href="https://www.linkedin.com/" target="_blank"
-                ><i class="fab fa-linkedin"></i
-              ></a>
-              <a href="https://www.twitch.tv/" target="_blank"
-                ><i class="fab fa-twitch"></i
-              ></a>
-            </div>
-          </div>
-        </footer>
-
-        <!-- load javascript after loading all html content -->
-        <script>
-          const header = document.querySelector(".navbar");
-          console.log(header);
-          window.onscroll = function () {
-            const top = window.scrollY;
-            if (top >= 100) {
-              header.classList.add("navbarDark");
-            } else {
-              header.classList.remove("navbarDark");
-            }
-          };
-
-          const navLinks = document.querySelectorAll(".nav-item");
-          const menuToggle = document.getElementById("navbarSupportedContent");
-
-          navLinks.forEach((l) => {
-            l.addEventListener("click", () => {
-              new bootstrap.Collapse(menuToggle).toggle();
-            });
-          });
-        </script>
-      
-  </body>
+</body>
 </html>

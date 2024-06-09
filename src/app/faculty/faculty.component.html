@@ -27,28 +27,16 @@
 			<span class="text">UNFOLD</span>
 		</a>
 		<ul class="side-menu top">
-			<li class="active">
+			<li >
 				<a routerLink="/Home">
 					<i class='bx bxs-dashboard' ></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
 			<li *ngIf="userDetails.is_admin === 0">
-				<a routerLink="/portfolio">
+				<a routerLink="/projects">
 					<i class='bx bx-folder-open' ></i>
 					<span class="text">Projects</span>
-				</a>
-			</li>
-			<li *ngIf="userDetails.is_admin === 0">
-				<a routerLink="/skills">
-					<i class='bx bx-bulb' ></i>
-					<span class="text">Technologies</span>
-				</a>
-			</li>
-			<li *ngIf="userDetails.is_admin === 0">
-				<a routerLink="/accomplishments">
-					<i class='bx bx-trophy' ></i>
-					<span class="text">Competitions</span>
 				</a>
 			</li>
 			<li *ngIf="userDetails.is_admin === 0">
@@ -57,23 +45,34 @@
 					<span class="text">About Me</span>
 				</a>
 			</li>
+			<li *ngIf="userDetails.is_admin === 0">
+				<a href="#">
+					<i class='bx bx-trophy' ></i>
+					<span class="text">Accomplishments</span>
+				</a>
+			</li>
+			<li *ngIf="userDetails.is_admin === 0">
+				<a href="#">
+					<i class='bx bx-bulb' ></i>
+					<span class="text">Skills</span>
+				</a>
+			</li>
 			<li *ngIf="userDetails.is_admin === 0" >
-				<a routerLink="/contact">
-					<i class='bx bxs-contact' ></i>
-					<span class="text">Contacts</span>
+				<a href="#">
+					<i class='bx bxs-cog' ></i>
+					<span class="text">Services</span>
+				</a>
+			</li>
+			<li class="active" *ngIf="userDetails.is_admin === 1" >
+				<a routerLink="/faculty">
+					<i class='bx bxs-user' ></i>
+					<span class="text">Faculty</span>
 				</a>
 			</li>
 			<li *ngIf="userDetails.is_admin === 0" >
 				<a routerLink="/design">
 					<i class='bx bxs-paint' ></i>
 					<span class="text">Design</span>
-				</a>
-			</li>
-			<!---------------- ADMIN ------------->
-      <li *ngIf="userDetails.is_admin === 1" >
-				<a routerLink="/faculty">
-					<i class='bx bxs-user' ></i>
-					<span class="text">Faculty</span>
 				</a>
 			</li>
 		</ul>
@@ -94,17 +93,17 @@
 	<section id="content">
 		<!-- NAVBAR -->
 		<nav>
-			<div style="display: flex;">
-
+			<i class='bx bx-menu' ></i>
+		
 			
-				<a *ngIf="userDetails.is_admin === 0" routerLink="/viewport/{{userDetails.studentID}}'" class="nav-link">Portfolio</a>
-				<a *ngIf="userDetails.is_admin === 0" routerLink="/newsfeed" class="nav-link">Portfolio Feed</a>
-			</div>
-			<a class="profile">
-			  <b style="margin-right: 10px;" class="user-details"
-			  >{{ userDetails.firstName }} {{ userDetails.lastName }}</b>
-		 <img [src]="baseAPI + studentPortfolio.about[0].aboutImg" alt="">
-		  </a>
+		
+			
+			<a *ngIf="userDetails.is_admin === 0" routerLink="/viewport/{{userDetails.studentID}}'" class="nav-link">Portfolio</a>
+			<a *ngIf="userDetails.is_admin === 0" routerLink="/newsfeed" class="nav-link">Portfolio Feed</a>
+
+		
+			
+		
 		</nav>
 		<!-- NAVBAR -->
 
@@ -112,71 +111,19 @@
 		<main>
 			<div class="head-title">
 				<div class="left">
-					<h1> Student Dashboard</h1>
-				</div>		
+					<h1>Faculty Dashboard</h1>
+					
+					<!-- Button trigger modal -->
+                    <button style="margin-top: 20px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Faculty Member</button>
+
+				</div>
+			
 			</div>
-
-			<ul *ngIf="userDetails.is_admin === 0" class="box-info">
-				<li>
-					<i class='bx bx-terminal'></i>
-					<span class="text">
-						<h3>{{ counts.projects }}</h3>
-						<p>Projects</p>
-					</span>
-				</li>
-				<li>
-					<i class='bx bx-code-block'></i>
-					<span class="text">
-						<h3>{{ counts.technologies }}</h3>
-						<p>Technologies</p>
-					</span>
-				</li>
-				<li>
-					<i class='bx bxs-devices'></i>
-					<span class="text">
-						<h3>{{ counts.competitions }}</h3>
-						<p>Competitions</p>
-					</span>
-				</li>
-				<!--   -->
-			</ul>
-			<ul *ngIf="userDetails.is_admin === 1" class="box-info">
-				<li>
-					<i class='bx bx-terminal' ></i>
-					<span class="text">
-						<h3>{{bsitCount}}</h3>
-						<p>BSIT</p>
-					</span>
-				</li>
-				<li>
-					<i class='bx bx-code-block' ></i>
-					<span class="text">
-						<h3>{{actCount}}</h3>
-						<p>ACT</p>
-					</span>
-				</li>
-				<li>
-					<i class='bx bxs-devices' ></i>
-					<span class="text">
-						<h3>{{bsemcCount}}</h3>
-						<p>BSEMC</p>
-					</span>
-				</li>
-				<li>
-					<i class='bx bxs-devices' ></i>
-					<span class="text">
-						<h3>{{bscsCount}}</h3>
-						<p>BSCS</p>
-					</span>
-				</li>
-				<!--   -->
-			</ul>
-
 
 			<div *ngIf="userDetails.is_admin === 1" class="table-data">
 				<div class="order">
 					<div class="head">
-						<h3>List of Students</h3>
+						<h3>List of Faculty Members</h3>
 						<i class='bx bx-search' ></i>
 						<i class='bx bx-filter' ></i>
 					</div>
@@ -213,9 +160,7 @@
                     Delete
                   </button>
                 </td>
-                <td>
-                 <button class="btn btn-ed"><a  style="color: white;" routerLink="/viewport/{{student.studentID}}'"><b>View Portfolio</b></a></button> 
-                </td>
+                
               </tr>		
 						</tbody>
 					</table>

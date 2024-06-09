@@ -1,255 +1,203 @@
-<app-topnav></app-topnav>
-<app-sidenav></app-sidenav>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="initial-scale=1, width=device-width" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link rel="stylesheet" href="accomplishments.component.css">
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
 
-  <link rel="stylesheet" href="accomplishments.component.css" />
-
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap"
-  />
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap"
-  />
+	<title>Student Dashboard</title>
 </head>
 <body>
-  <h1>kikkfsdfsdhjf</h1>
-  <div class="accomplishments">Accomplishments</div>
-  <div class="line2"></div>
-
-  <div class="text">Here you can showcase your accomplishments.</div>
-
-  <div class="button">
-    <button
-      type="button"
-      class="accomplishments-child3"
-      (click)="openModalpopup()"
-    >
-      <span class="add-accomplishment">Add Accomplishment</span>
-    </button>
-  </div>
-
-  <div class="accomplishmenttable">
-    <table mat-table [dataSource]="dataSource" class="accomplishment">
-      <!-- Image Column -->
-      <ng-container matColumnDef="accomImg">
-        <th mat-header-cell *matHeaderCellDef> Accomplishment Image </th>
-        <td mat-cell *matCellDef="let element">
-          <img [src]="element.accomImg" alt="Accomplishment Image" class="accomImg">
-        </td>
-      </ng-container>
-
-      <!-- Title Column -->
-      <ng-container matColumnDef="accomTitle">
-        <th mat-header-cell *matHeaderCellDef> Accomplishment Title </th>
-        <td mat-cell *matCellDef="let element"> {{element.accomTitle}} </td>
-      </ng-container>
-
-      <!-- Description Column -->
-      <ng-container matColumnDef="accomDesc">
-        <th mat-header-cell *matHeaderCellDef> Accomplishment Description </th>
-        <td mat-cell *matCellDef="let element"> {{element.accomDesc}} </td>
-      </ng-container>
-
-      <!-- Actions Column -->
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef> Actions </th>
-        <td mat-cell *matCellDef="let element">
-          <button type="button" class="btn btn-primary" (click)="editopenModalpopup(element.accomTitle, element.accomDesc, element.accomImg, element.accomID)">
-            Edit
-          </button>
-          <button type="button" class="btn btn-danger" (click)="deleteAccomplishment(element.accomID)">
-            Delete
-          </button>
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-  </div>
 
 
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+			<i class='bx bxl-firebase'></i>
+			<span class="text">UNFOLD</span>
+		</a>
+		<ul class="side-menu top">
+			<li >
+				<a routerLink="/Home">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li *ngIf="userDetails.is_admin === 0">
+				<a routerLink="/portfolio">
+					<i class='bx bx-folder-open' ></i>
+					<span class="text">Projects</span>
+				</a>
+			</li>
+			<li *ngIf="userDetails.is_admin === 0">
+				<a routerLink="/skills">
+					<i class='bx bx-bulb' ></i>
+					<span class="text">Technologies</span>
+				</a>
+			</li>
+			<li class="active" *ngIf="userDetails.is_admin === 0">
+				<a routerLink="/accomplishments">
+					<i class='bx bx-trophy' ></i>
+					<span class="text">Competitions</span>
+				</a>
+			</li>
+			<li *ngIf="userDetails.is_admin === 0">
+				<a routerLink="/aboutme">
+					<i class='bx bx-user' ></i>
+					<span class="text">About Me</span>
+				</a>
+			</li>
+			<li *ngIf="userDetails.is_admin === 0" >
+				<a routerLink="/contact">
+					<i class='bx bxs-contact' ></i>
+					<span class="text">Contacts</span>
+				</a>
+			</li>
+			<li *ngIf="userDetails.is_admin === 0" >
+				<a routerLink="/design">
+					<i class='bx bxs-paint' ></i>
+					<span class="text">Design</span>
+				</a>
+			</li>
+			<li *ngIf="userDetails.is_admin === 1" >
+				<a routerLink="/faculty">
+					<i class='bx bxs-user' ></i>
+					<span class="text">Faculty</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a routerLink="/login" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
 
 
 
-  <!-- Accomplishment Modal -->
-  <div
-    class="modal fade"
-    id="exampleModalCenter"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">
-            Upload a New Accomplishment
-          </h5>
-        </div>
-        <div class="modal-body">
-          <form
-            [formGroup]="applyForm"
-            (submit)="Insert()"
-            enctype="multipart/form-data"
-          >
-            <div class="form-group">
-              <label for="accomplishmentTitle">Accomplishment Title:</label>
-              <input
-                formControlName="accomTitle"
-                type="text"
-                class="form-control"
-                id="accomplishmentTitle"
-                placeholder="Enter accomplishment title"
-              />
-            </div>
-            <div class="form-group">
-              <label for="accomplishmentDescription"
-                >Accomplishment Description:</label
-              >
-              <textarea
-                formControlName="accomDesc"
-                class="form-control"
-                id="accomplishmentDescription"
-                rows="3"
-                placeholder="Enter accomplishment description"
-              ></textarea>
-            </div>
-            <div class="form-group">
-              <label for="accomplishmentImage">Accomplishment Image:</label>
-              <input
-                formControlName="accomImg"
-                type="file"
-                class="form-control-file"
-                id="accomplishmentImage"
-                accept="image/*"
-                (change)="onFileSelected($event)"
-              />
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                (click)="closePopup()"
-              >
-                Close
-              </button>
-              <button type="submit" class="btn btn-primary">
-                Save changes
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<div style="display: flex;">
 
-  <!-- EDIT -->
-<div
-class="modal fade"
-id="editModalCenter"
-tabindex="-1"
-role="dialog"
-aria-labelledby="editModalCenterTitle"
-aria-hidden="true"
->
-<div class="modal-dialog modal-dialog-centered" role="document">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title" id="editModalLongTitle">
-        Edit Accomplishment
-      </h5>
-    </div>
-    <div class="modal-body">
-      <form novalidate [formGroup]="applyForm" (submit)="edit()">
-        <div class="form-group">
-          <label for="accomTitle">Accomplishment Title:</label>
-          <input
-            formControlName="accomID"
-            type="text"
-            class="form-control"
-            id="accomID"
-            [value]="selectedAccomplishmentId"
-            placeholder="Enter accomplishment ID"
-            style="display: none;"
-          />
-          <input
-            formControlName="accomTitle"
-            type="text"
-            class="form-control"
-            id="accomTitle"
-            [value]="selectedAccomplishmentTitle"
-            placeholder="Enter accomplishment title"
-          />
-        </div>
-        <div class="form-group">
-          <label for="accomDescription">Accomplishment Description:</label>
-          <textarea
-            formControlName="accomDesc"
-            class="form-control"
-            id="accomDesc"
-            rows="3"
-            [value]="selectedAccomplishmentDesc"
-            placeholder="Enter accomplishment description"
-          ></textarea>
-        </div>
-        <div style="width: 10%;" class="form-group">
-          <label for="accomImage">Accomplishment Image:</label>
-          <img
-            style="width: 10%; display: block;"
-            *ngIf="selectedAccomplishmentImg"
-            [src]="selectedAccomplishmentImg"
-            alt="Selected Accomplishment Image"
-          />
-          <!-- File input to select a new image -->
-          <input
-            formControlName="accomImg"
-            type="file"
-            class="form-control-file"
-            id="accomImage"
-            accept="image/*"
-            (change)="onFileSelected($event)"
-          />
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            (click)="editclosePopup()"
-          >
-            Close
-          </button>
-          <button type="submit" class="btn btn-primary">
-            Save changes
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-</div>
+			
+				<a *ngIf="userDetails.is_admin === 0" routerLink="/viewport/{{userDetails.studentID}}'" class="nav-link">Portfolio</a>
+				<a *ngIf="userDetails.is_admin === 0" routerLink="/newsfeed" class="nav-link">Portfolio Feed</a>
+			</div>
+			<a class="profile">
+			  <b style="margin-right: 10px;" class="user-details"
+			  >{{ userDetails.firstName }} {{ userDetails.lastName }}</b>
+		 <img [src]="baseAPI + studentPortfolio.about[0].aboutImg" alt="">
+		  </a>
+		</nav>
+		<!-- NAVBAR -->
 
-<!-- Success Modal -->
-<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="successModalLongTitle">Success</h5>
-      </div>
-      <div class="modal-body">
-        Accomplishment successfully uploaded!
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="closeSuccessModal()">Close</button>
+		<!-- MAIN -->
+		<main>
+			<div class="head-title">
+				<div class="left">
+					<h1>Competitions Dashboard</h1>
+					
+					<!-- Button trigger modal -->
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Upload a New Project</button>
+  
+						 
 
-      </div>
-    </div>
-  </div>
-</div>
+				</div>
+			</div>
 
+			<!-- <ul class="box-info">
+				<li>
+					<i class='bx bx-terminal' ></i>
+					<span class="text">
+						<h3>83</h3>
+						<p>BSIT</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bx-code-block' ></i>
+					<span class="text">
+						<h3>65</h3>
+						<p>BSCS</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bxs-devices' ></i>
+					<span class="text">
+						<h3>58</h3>
+						<p>BSEMC</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bx-laptop' ></i>
+					<span class="text">
+						<h3>36</h3>
+						<p>ACT</p>
+					</span>
+				</li>
+			</ul> -->
+
+
+			<div class="table-data">
+				<div class="order">
+					<div class="head">
+						<h3>List of Students</h3>
+						<i class='bx bx-search' ></i>
+						<i class='bx bx-filter' ></i>
+					</div>
+					<table>
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Image</th>
+								<th>Title</th>
+								<th>Description</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor=" let studentPortfolio of studentPortfolio.accomplishment ">
+								<td>{{studentPortfolio.accomID}}</td>
+								<td> <img [src]="baseAPI + studentPortfolio.accomImg" alt=""></td>
+								<td>{{studentPortfolio.accomTitle}}</td>
+								<td>{{studentPortfolio.accomDesc}}</td>
+							
+								<td>
+									<a style="margin-right: 5px;" href="" class="btn btn-ed" >Edit</a>
+									<a href="" class="btn btn-del" >Delete</a>
+								</td>
+								<!-- <td>{{studentPortfolio.projectImg}}</td> -->
+							</tr>
+							
+						</tbody>
+					</table>
+				</div>
+				
+			</div>
+		</main>
+		<!-- MAIN -->
+
+		
+
+	
+
+	</section>
+	<!-- CONTENT -->
+	
+
+
+	<script src="script.js"></script>
 </body>
+</html>

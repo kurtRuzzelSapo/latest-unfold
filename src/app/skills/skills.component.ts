@@ -8,7 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { DataService } from '../data.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 import { TopnavComponent } from '../topnav/topnav.component';
 import { CookieService } from 'ngx-cookie-service';
@@ -24,8 +24,7 @@ import { MatIconModule } from '@angular/material/icon';
   selector: 'app-skills',
   standalone: true,
   imports: [ReactiveFormsModule,SidenavComponent,TopnavComponent, CommonModule, MatTableModule, MatIconModule,
-    MatRowDef, MatHeaderRowDef
-  ],
+    MatRowDef, MatHeaderRowDef, RouterLink,RouterLinkActive],
   providers: [CookieService],
   templateUrl: './skills.component.html',
   styleUrl: './skills.component.scss'
@@ -41,7 +40,10 @@ export class SkillsComponent implements OnInit{
   selectedskillID: any;
   studentPortfolio: any = {};
 
-  baseAPI:string = 'https://unfoldap.online/unfold-api-main'
+   // ONLINE BASEAPI
+  // baseAPI: string = 'https://unfoldap.online/unfold-api';
+  // LOCALHOST BASEAPI
+  baseAPI:string = 'http://localhost/unfold/unfold-api/'
 
   displayedColumns: string[] = ['skillTitle', 'skillDesc', 'actions'];
   dataSource = new MatTableDataSource<any>();
@@ -61,6 +63,16 @@ export class SkillsComponent implements OnInit{
     });
 
     this.loadSkill();
+
+    this.ds.getRequestWithParams("view-portfolio", { id: this.userDetails.studentID }).subscribe(
+      (response: any) => {
+        this.studentPortfolio = response;
+        console.log('View Portfolio details:', response);
+      },
+      (error) => {
+        console.error('Error retrieving portfolio:', error);
+      }
+    );
     }
 
 

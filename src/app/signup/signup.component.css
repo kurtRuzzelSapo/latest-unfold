@@ -1,0 +1,66 @@
+.login-container{
+    width: 25rem;
+    /* height: 27rem; */
+  }
+  .icon{
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+  }
+  
+  .child{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  
+  }
+  
+  .bg-button{
+    background-color: #f5652f;
+  }
+  #icon-title{
+      font-family: "Poppins", sans-serif;
+      color: #f5652f;
+      font-weight: 600;
+  }
+  .img-icon{
+    width: 25%;
+    margin-right: 5px;
+  }
+  
+  .bg-custom {
+    font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+    background-color: #FFFFFF !important;
+    /* background-image: url("https://t4.ftcdn.net/jpg/02/48/81/11/360_F_248811130_crMXqBDFeCVT42TQG90Cy0yyzu9g3zsV.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; */
+  }
+  .login-container {
+    border: 6px solid #ffffff;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+  }
+  /* .signup-container{
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    
+  } */
+  
+  @media screen and (max-width: 896px) {
+  
+  .left-box{
+  display: none;
+  }
+  
+  
+  
+  }
+  
