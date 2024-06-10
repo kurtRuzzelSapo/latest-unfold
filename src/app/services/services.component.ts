@@ -104,7 +104,7 @@ export class ServicesComponent implements OnInit{
     this.formData.append('studentID', this.userDetails.studentID);
     serviceID: new FormControl(null)
 
-    this.ds.sendRequestWitoutMedia('addservice', this.formData).subscribe(
+    this.ds.sendRequestWithoutMedia('addservice', this.formData).subscribe(
       (response) => {
         // Handle successful response here if needed
         console.log('Application submitted successfully:', response);
@@ -130,7 +130,7 @@ export class ServicesComponent implements OnInit{
     formData.append('serviceDesc', this.applyForm.value.serviceDesc);
     formData.append('studentID', this.userDetails.studentID);
 
-    this.ds.sendRequestWitoutMedia('editservice', formData).subscribe(
+    this.ds.sendRequestWithoutMedia('editservice', formData).subscribe(
       (response) => {
         console.log('Service edited successfully:', response);
         this.loadService(); // Reload the services to reflect changes

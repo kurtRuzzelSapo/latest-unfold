@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { DataService } from '../data.service';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, ActivatedRoute } from '@angular/router';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 import { TopnavComponent } from '../topnav/topnav.component';
 import { CookieService } from 'ngx-cookie-service';
@@ -22,7 +22,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [ReactiveFormsModule,SidenavComponent,TopnavComponent, RouterLink, RouterLinkActive, CommonModule],
   templateUrl: './contact.component.html',
-  styleUrl: './contact.component.scss'
+  styleUrl: './contact.component.css'
 })
 export class ContactComponent implements OnInit {
   cookieService = inject(CookieService);
@@ -34,18 +34,19 @@ export class ContactComponent implements OnInit {
   // baseAPI: string = 'https://unfoldap.online/unfold-api';
   // LOCALHOST BASEAPI
   baseAPI:string = 'http://localhost/unfold/unfold-api/'
-  constructor(private ds: DataService, private route: Router) {}
+  constructor(private ds: DataService, private route: Router, private aRoute: ActivatedRoute,) {}
 
   ngOnInit(): void {
     this.formData = new FormData();
-
     this.userDetails = JSON.parse(this.cookieService.get('user_details'));
 
     this.applyForm = new FormGroup({
       contName: new FormControl(null, Validators.required),
-      contNumber: new FormControl(null, Validators.required),
       contEmail: new FormControl(null, Validators.required),
-      contHome: new FormControl(null, Validators.required)
+      contFB: new FormControl(null, Validators.required),
+      contIG: new FormControl(null, Validators.required),
+      contLinkedin: new FormControl(null, Validators.required),
+      contGithub: new FormControl(null, Validators.required),
     });
 
     this.ds.getRequestWithParams("view-portfolio", { id: this.userDetails.studentID }).subscribe(
@@ -57,24 +58,47 @@ export class ContactComponent implements OnInit {
         console.error('Error retrieving portfolio:', error);
       }
     );
+
   }
   
-
-  Insert() {
-    this.formData.append('contName', this.applyForm.value.contName);
-    this.formData.append('contNumber', this.applyForm.value.contNumber);
-    this.formData.append('contEmail', this.applyForm.value.contEmail);
-    this.formData.append('contHome', this.applyForm.value.contHome);
-    this.formData.append('studentID', this.userDetails.studentID);
-
-    this.ds.sendRequestWitoutMedia('add-contact', this.formData).subscribe(
-      (response) => {
-        // Handle successful response here if needed
-        console.log('Application submitted successfully:', response);
-        console.log(this.applyForm);
+  loadContact(): void {
+    this.ds.getRequestWithParams("view-portfolio", { id: this.userDetails.studentID }).subscribe(
+      (response: any) => {
+        if (response && response.contact) {
+          this.studentPortfolio = response;
+       
+          console.log('View Contact details:', response);
+          console.log("Checking:", this.studentPortfolio);
+        } else {
+          console.error('Unexpected response structure:', response);
+        }
       },
       (error) => {
-        // Handle error response here if needed
+        console.error('Error loading portfolio:', error);
+      }
+    );
+  }
+
+
+  Insert() {
+    
+    // this.formData.append('contName', this.applyForm.contName);
+    // this.formData.append('contEmail', this.applyForm.contEmail);
+    this.formData.append('contFB', this.applyForm.value.contFB);
+    this.formData.append('contIG', this.applyForm.value.contIG);
+    this.formData.append('contLinkedin', this.applyForm.value.contLinkedin);
+    this.formData.append('contGithub', this.applyForm.value.contGithub);
+    this.formData.append('studentID', this.userDetails.studentID);
+ 
+
+    this.ds.sendRequestWithoutMedia('add-contact', this.formData).subscribe(
+      (response) => {
+        console.log('Application submitted successfully:', response);
+        alert("Inserted Successfully!");
+        console.log(this.applyForm);
+       
+      },
+      (error) => {
         console.error('Error submitting application:', error);
       }
     );
@@ -86,5 +110,10 @@ export class ContactComponent implements OnInit {
   
   closePopup(){
     $('#exampleModalCenter').modal('hide')
+  }
+
+  routeToAddContact(){
+    // this.route.navigateByUrl('../createportfolio');
+    this.route.navigate([`/addcontact`], { relativeTo: this.aRoute });
   }
 }

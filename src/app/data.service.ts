@@ -26,7 +26,7 @@ export class DataService {
   // sendRequestWitoutMedia(endpoint: string, data: any, headers: any = null): Observable<Status> {
   //   return this.http.post<Status>(this.apiURL + endpoint, JSON.stringify(data), {headers});
   // }
-  sendRequestWitoutMedia(endpoint: string, data: any, ): Observable<Status> {
+  sendRequestWithoutMedia(endpoint: string, data: any, ): Observable<Status> {
     return this.http.post<Status>(this.apiURL + endpoint, data);
   }
 

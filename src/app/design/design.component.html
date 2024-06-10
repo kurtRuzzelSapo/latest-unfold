@@ -30,7 +30,7 @@
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
-			<li class="active" *ngIf="userDetails.is_admin === 0">
+			<li  *ngIf="userDetails.is_admin === 0">
 				<a routerLink="/portfolio">
 					<i class='bx bx-folder-open' ></i>
 					<span class="text">Projects</span>
@@ -60,7 +60,7 @@
 					<span class="text">Contacts</span>
 				</a>
 			</li>
-			<li *ngIf="userDetails.is_admin === 0" >
+			<li class="active" *ngIf="userDetails.is_admin === 0" >
 				<a routerLink="/design">
 					<i class='bx bxs-paint' ></i>
 					<span class="text">Design</span>
@@ -108,10 +108,10 @@
 		<main>
 			<div class="head-title">
 				<div class="left">
-					<h1> Project Dashboard</h1>
+					<h1> Design Dashboard</h1>
 					
 					<!-- Button trigger modal -->
-					<button (click)="routeToCreatePorfolio()" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Upload a New Project</button>
+					<button (click)="routeToCreatePorfolio()" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Customize Portfolio</button>
   
 						 
 

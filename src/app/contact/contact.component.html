@@ -112,7 +112,7 @@
 					<h1>Contacts</h1>
 					
 					<!-- Button trigger modal -->
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Upload a New Project</button>
+					<button (click)="routeToAddContact()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Contact Info</button>
 					<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Upload a New Project</button> -->
   
 						 
@@ -152,14 +152,56 @@
 			</ul> -->
 
 
-			<div style="display: flex; flex-direction: column; align-items: start;	" class="table-data contacts" *ngFor=" let studentPortfolio of studentPortfolio.contact">
+			<!-- <div style="display: flex; flex-direction: column; align-items: start;	" class="table-data contacts" *ngFor=" let studentPortfolio of studentPortfolio.contact">
 				<div  class="icon"><i class="uil uil-linkedin-alt">:</i><a target="_blank" href="{{studentPortfolio.contLinkedin}}">{{studentPortfolio.contLinkedin}}</a></div>
                 <div class="icon"><i class="uil uil-github-alt"></i><a target="_blank" href="{{studentPortfolio.contGithub}}">{{studentPortfolio.contGithub}}</a></div>
                 <div class="icon"><i class="uil uil-facebook"></i><a target="_blank" href="{{studentPortfolio.contFB}}">{{studentPortfolio.contFB}}</a></div>
                 <div class="icon"><i class="uil uil-instagram"></i><a target="_blank" href="{{studentPortfolio.contIG}}">{{studentPortfolio.contIG}}</a></div>
                 <div class="icon"><i class="uil uil-phone"></i><a href="#">{{userDetails.contacts}}</a></div>
                 <div class="icon"><i class="uil uil-mailbox"></i><a href="#">{{userDetails.email}}</a></div>
-			</div>
+			</div> -->
+
+			<div *ngIf="studentPortfolio">
+				<div style="display: flex; flex-direction: column; align-items: start;" class="table-data contacts" *ngFor="let studentPortfolio of studentPortfolio.contact">
+				  <div class="icon"><i class="uil uil-linkedin-alt"></i>: <a target="_blank" href="{{studentPortfolio.contLinkedin}}">{{studentPortfolio.contLinkedin}}</a></div>
+				  <div class="icon"><i class="uil uil-github-alt"></i>: <a target="_blank" href="{{studentPortfolio.contGithub}}">{{studentPortfolio.contGithub}}</a></div>
+				  <div class="icon"><i class="uil uil-facebook"></i>: <a target="_blank" href="{{studentPortfolio.contFB}}">{{studentPortfolio.contFB}}</a></div>
+				  <div class="icon"><i class="uil uil-instagram"></i>: <a target="_blank" href="{{studentPortfolio.contIG}}">{{studentPortfolio.contIG}}</a></div>
+				</div>
+				<!-- <div class="icon"><i class="uil uil-phone"></i><a href="#">{{userDetails.contacts}}</a></div>
+				<div class="icon"><i class="uil uil-mailbox"></i><a href="#">{{userDetails.email}}</a></div> -->
+			  </div>
+			  
+
+			<!-- <div *ngIf="studentPortfolio.contact?.length > 0" style="display: flex; flex-direction: column; align-items: start;" class="table-data contacts">
+				<div *ngFor="let contact of studentPortfolio.contact" class="contact-item">
+				  <div class="icon">
+					<i class="uil uil-linkedin-alt"></i>:
+					<a target="_blank" href="{{studentPortfolio.contLinkedin}}">{{studentPortfolio.contLinkedin}}</a>
+				  </div>
+				  <div class="icon">
+					<i class="uil uil-github-alt"></i>
+					<a target="_blank" href="{{studentPortfolio.contGithub}}">{{studentPortfolio.contGithub}}</a>
+				  </div>
+				  <div class="icon">
+					<i class="uil uil-facebook"></i>
+					<a target="_blank" href="{{studentPortfolio.contFB}}">{{studentPortfolio.contFB}}</a>
+				  </div>
+				  <div class="icon">
+					<i class="uil uil-instagram"></i>
+					<a target="_blank" href="{{studentPortfolio.contIG}}">{{studentPortfolio.contIG}}</a>
+				  </div>
+				</div>
+				<div class="icon">
+				  <i class="uil uil-phone"></i>
+				  <a href="tel:{{userDetails.contacts}}">{{userDetails.contacts}}</a>
+				</div>
+				<div class="icon">
+				  <i class="uil uil-mailbox"></i>
+				  <a href="mailto:{{userDetails.email}}">{{userDetails.email}}</a>
+				</div>
+			  </div> -->
+			  
 		</main>
 		<!-- MAIN -->
 

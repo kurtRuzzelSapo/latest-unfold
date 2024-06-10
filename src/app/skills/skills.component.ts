@@ -8,7 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { DataService } from '../data.service';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, ActivatedRoute } from '@angular/router';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 import { TopnavComponent } from '../topnav/topnav.component';
 import { CookieService } from 'ngx-cookie-service';
@@ -48,7 +48,7 @@ export class SkillsComponent implements OnInit{
   displayedColumns: string[] = ['skillTitle', 'skillDesc', 'actions'];
   dataSource = new MatTableDataSource<any>();
 
-  constructor(private ds: DataService, private route: Router) {}
+  constructor(private ds: DataService, private route: Router, private aRoute: ActivatedRoute,) {}
 
   ngOnInit(): void {
     this.formData = new FormData();
@@ -120,7 +120,7 @@ export class SkillsComponent implements OnInit{
     this.formData.append('studentID', this.userDetails.studentID);
     skillID: new FormControl(null)
 
-    this.ds.sendRequestWitoutMedia('addskill', this.formData).subscribe(
+    this.ds.sendRequestWithoutMedia('addskill', this.formData).subscribe(
       (response) => {
         // Handle successful response here if needed
         console.log('Application submitted successfully:', response);
@@ -146,7 +146,7 @@ export class SkillsComponent implements OnInit{
     formData.append('skillDesc', this.applyForm.value.skillDesc);
     formData.append('studentId', this.userDetails.studentID);
 
-    this.ds.sendRequestWitoutMedia('editskill', formData).subscribe(
+    this.ds.sendRequestWithoutMedia('editskill', formData).subscribe(
       (response) => {
         console.log('Skill edited successfully:', response);
         this.loadSkill(); // Reload the skills to reflect changes
@@ -209,5 +209,9 @@ export class SkillsComponent implements OnInit{
     }
 }
 
+routeToCreateSkill(){
+  // this.route.navigateByUrl('../createportfolio');
+  this.route.navigate([`/createskill`], { relativeTo: this.aRoute });
+}
 
 }
