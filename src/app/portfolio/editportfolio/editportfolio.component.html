@@ -120,7 +120,7 @@
 						  class="form-control"
 						  required
 						  
-						  placeholder="{{this.projectData.project[0].projectID}}"
+						  placeholder="{{this.projectData.project.projectID}}"
 						 
 						/>
 						<input
@@ -129,7 +129,7 @@
 						  id="form3Example3"
 						  class="form-control"
 						  required
-						  placeholder="{{this.projectData.project[0].projectTitle}}"
+						  placeholder="{{this.projectData.project.projectTitle}}"
 						 
 						/>
 						<label class="form-label" for="form3Example3">Edit Project Title</label>
@@ -141,7 +141,7 @@
 						  id="form3Example3"
 						  class="form-control"
 						  required
-						  placeholder="{{this.projectData.project[0].projectLink}}"
+						  placeholder="{{this.projectData.project.projectLink}}"
 						/>
 						<label class="form-label" for="form3Example3">Project Link</label>
 					  </div>
@@ -158,7 +158,7 @@
                 (change)="onFileSelected($event)"
 							  />
 							  <label class="text-black form-label" for="form3Example1">Previous Image:</label>
-							  <img [src]="baseAPI + this.projectData.project[0].projectImg" width="100" height="100" alt="">
+							  <img [src]="baseAPI + this.projectData.project.projectImg" width="100" height="100" alt="">
 							</div>
 						  </div>
 						<div class="col-md-6 mb-2">
@@ -168,7 +168,7 @@
 							  type="date"
 							  id="form3Example2"
 							  class="form-control"
-							  
+							  placeholder="{{this.projectData.project.projectDate}}" 
 							/>
 							<label class="form-label" for="form3Example2">Project Date</label>
 						  </div>
@@ -177,7 +177,7 @@
 					  <div class="form-outline mb-2">
 						<div class="mb-3">
 							<label for="exampleFormControlTextarea1" class="form-label">Description</label>
-							<textarea placeholder="{{this.projectData.project[0].projectDesc}}" formControlName="proDesc" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+							<textarea placeholder="{{this.projectData.project.projectDesc}}" formControlName="proDesc" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
 						  </div>
 					  </div>
 					  <div class="d-flex justify-content-end">

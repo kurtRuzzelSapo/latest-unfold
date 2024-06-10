@@ -17,8 +17,8 @@ import { CreateportfolioComponent } from './portfolio/createportfolio/createport
 import { DesignComponent } from './design/design.component';
 import { CreateskillComponent } from './skills/createskill/createskill.component';
 import { CreateaccomplishmentComponent } from './accomplishments/createaccomplishment/createaccomplishment.component';
-import { AddcontactComponent } from './contact/addcontact/addcontact.component';
 import { EditportfolioComponent } from './portfolio/editportfolio/editportfolio.component';
+
 
 export const routes: Routes = [
 
@@ -40,7 +40,8 @@ export const routes: Routes = [
     { title: "Unfold | Design", path: 'design', component: DesignComponent },
     { title: "Unfold | CreateTechnology", path: 'createskill', component: CreateskillComponent },
     { title: "Unfold | CreateCompetition", path: 'createaccomplishment', component: CreateaccomplishmentComponent },
-    { title: "Unfold | AddContact", path: 'addcontact', component: AddcontactComponent },
+
+  
 
 ];
 

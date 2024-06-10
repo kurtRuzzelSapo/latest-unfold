@@ -20,8 +20,8 @@ import { CommonModule } from '@angular/common';
 })
 export class EditportfolioComponent implements OnInit {
   cookieService = inject(CookieService);
-  formData: any;
-  applyForm: any;
+  formData: FormData;
+  applyForm: FormGroup;
   userDetails: any;
   studentPortfolio: any = {};
   selectedFile: any;
@@ -37,10 +37,19 @@ export class EditportfolioComponent implements OnInit {
     private ds: DataService,
     private route: Router,
     private aRoute: ActivatedRoute,
-  ) {}
+  ) {
+    // Initialize the form group
+    this.applyForm = new FormGroup({
+      proTitle: new FormControl('', Validators.required),
+      proLink: new FormControl('', Validators.required),
+      proImg: new FormControl(null, Validators.required),
+      proDate: new FormControl('', Validators.required),
+      proDesc: new FormControl('', Validators.required)
+    });
+    this.formData = new FormData();
+  }
 
   ngOnInit(): void {
-    this.formData = new FormData();
     this.userDetails = JSON.parse(this.cookieService.get('user_details'));
 
     this.aRoute.paramMap.subscribe(params => {
@@ -51,14 +60,6 @@ export class EditportfolioComponent implements OnInit {
       } else {
         console.error('Project ID not found in route parameters');
       }
-    });
-
-    this.applyForm = new FormGroup({
-      proTitle: new FormControl('', Validators.required),
-      proLink: new FormControl('', Validators.required),
-      proImg: new FormControl(null, Validators.required),
-      proDate: new FormControl('', Validators.required),
-      proDesc: new FormControl('', Validators.required)
     });
 
     this.ds.getRequestWithParams("view-portfolio", { id: this.userDetails.studentID }).subscribe(
@@ -72,7 +73,7 @@ export class EditportfolioComponent implements OnInit {
     );
   }
 
-  getData(projectID: number): void {
+  getData(projectID: any): void {
     this.ds.getRequestWithParams("get-project", { projectID: projectID }).subscribe(
       (response: any) => {
         if (response && response.project) {
@@ -81,10 +82,10 @@ export class EditportfolioComponent implements OnInit {
 
           // Initialize the form with the fetched project data
           this.applyForm.patchValue({
-            proTitle: this.projectData.project[0].projectTitle,
-            proLink: this.projectData.project[0].projectLink,
-            proDate: this.projectData.project[0].projectDate,
-            proDesc: this.projectData.project[0].projectDesc
+            proTitle: this.projectData.project.projectTitle,
+            proLink: this.projectData.project.projectLink,
+            proDate: this.projectData.project.projectDate,
+            proDesc: this.projectData.project.projectDesc
           });
         } else {
           console.error('Unexpected response structure:', response);

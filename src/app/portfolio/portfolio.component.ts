@@ -73,7 +73,7 @@ export class PortfolioComponent implements OnInit {
         console.error('Error retrieving portfolio:', error);
       }
     );
-
+    this.loadPortfolio();
   }
 
   loadPortfolio(): void {
@@ -112,7 +112,10 @@ export class PortfolioComponent implements OnInit {
       (response) => {
         console.log('Application submitted successfully:', response);
         console.log(this.applyForm);
+        this.route.navigateByUrl('/portfolio');
+        this.route.navigateByUrl('../../portfolio');
         this.loadPortfolio(); // Reload the portfolio to reflect new project
+
       },
       (error) => {
         console.error('Error submitting application:', error);
@@ -120,27 +123,27 @@ export class PortfolioComponent implements OnInit {
     );
   }
 
-  Edit() {
-    const projectId = this.selectedprojectID;
-    const formData = new FormData();
+  // Edit() {
+  //   const projectId = this.selectedprojectID;
+  //   const formData = new FormData();
 
-    formData.append('projectID', projectId);
-    formData.append('projectTitle', this.applyForm.value.proTitle);
-    formData.append('projectDesc', this.applyForm.value.proDesc);
-    formData.append('studentID', this.userDetails.studentID);
-    formData.append('projectImg', this.selectedFile);
+  //   formData.append('projectID', projectId);
+  //   formData.append('projectTitle', this.applyForm.value.proTitle);
+  //   formData.append('projectDesc', this.applyForm.value.proDesc);
+  //   formData.append('studentID', this.userDetails.studentID);
+  //   formData.append('projectImg', this.selectedFile);
 
-    this.ds.sendRequestWithMedia('edit-project', formData).subscribe(
-      (response) => {
-        console.log('Project edited successfully:', response);
-        console.log(this.applyForm);
-        this.loadPortfolio(); // Reload the portfolio to reflect changes
-      },
-      (error) => {
-        console.error('Error editing project:', error);
-      }
-    );
-  }
+  //   this.ds.sendRequestWithMedia('edit-project', formData).subscribe(
+  //     (response) => {
+  //       console.log('Project edited successfully:', response);
+  //       console.log(this.applyForm);
+  //       this.loadPortfolio(); // Reload the portfolio to reflect changes
+  //     },
+  //     (error) => {
+  //       console.error('Error editing project:', error);
+  //     }
+  //   );
+  // }
 
   // deleteProject(id: string) {
   //   if (confirm("Are you sure you want to delete this project?")) {
@@ -170,22 +173,58 @@ export class PortfolioComponent implements OnInit {
   //   }
   // }
 
-  deleteProject(id: string): void {
-    console.log('Deleting project with ID:', id); // Log the project ID for debugging
-    if (confirm('Are you sure you want to delete this project?')) {
-      const payload = { projectID: id };
-      console.log('Payload being sent:', payload); // Log the payload for debugging
-      this.ds.deleteRequest('deleteproject', payload).subscribe(
-        (response) => {
-          console.log('Project deleted successfully:', response);
-          this.loadPortfolio(); // Reload the portfolio after deletion
-        },
-        (error) => {
-          console.error('Error deleting project:', error);
-        }
-      );
+// Delete(projectID: any): void{
+//   this.ds.sendRequestWithMedia('delete-project', {projectID: projectID}).subscribe(
+//     (response) => {
+//       console.log('Project delete successfully:', response);
+//       alert("Deleted Successfully!");
+//       this.loadPortfolio(); // Reload the portfolio to reflect changes
+//     },
+//     (error) => {
+//       console.error('Error editing project:', error);
+//     }
+//   );
+
+// }
+
+// Delete(studentPortfolio: any): void {
+//   const projectID = studentPortfolio.projectID;
+//   console.log('Project ID:', projectID);
+  
+//   this.ds.sendRequestWithMedia('delete-project', { projectID: projectID }).subscribe(
+//     (response) => {
+//       console.log('Project deleted successfully:', response);
+//       alert("Deleted Successfully!");
+//       this.loadPortfolio(); // Reload the portfolio to reflect changes
+//     },
+//     (error) => {
+//       console.error('Error deleting project:', error);
+//     }
+//   );
+// }
+
+Delete(data: any): void {
+  console.log("click");
+  console.log(data.projectID);
+  const payload = {
+    id: data.projectID,
+    
+  };
+
+  this.ds.deleteRequest("delete-project", payload).subscribe(
+    (response: any) => {
+      if (response.status_code === 200) {
+        alert("Student Deleted Successfully");
+        this.route.navigateByUrl('/portfolio');
+        this.loadPortfolio();
+      }
+    },
+    (error) => {
+      console.error('Error deleting student:', error);
     }
-  }
+  );
+}
+
   
   routeToCreatePorfolio(){
     // this.route.navigateByUrl('../createportfolio');
