@@ -56,7 +56,7 @@ studentList: any = [];
     password: new FormControl(null, Validators.required),
   });
     Login() {
-      this.ds.sendRequestWitoutMedia('login', this.applyForm.value).subscribe(
+      this.ds.sendRequestWithoutMedia('login', this.applyForm.value).subscribe(
         (response: any) => {
           // this.ds.setUserData(response.payload);
           this.Error = response.status.message;

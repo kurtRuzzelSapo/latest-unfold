@@ -8,7 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { DataService } from '../data.service';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, ActivatedRoute  } from '@angular/router';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 import { TopnavComponent } from '../topnav/topnav.component';
 import { CookieService } from 'ngx-cookie-service';
@@ -47,7 +47,7 @@ export class AccomplishmentsComponent implements OnInit {
   displayedColumns: string[] = ['accomImg', 'accomTitle', 'accomDesc', 'actions'];
   dataSource = new MatTableDataSource<any>();
 
-  constructor(private ds: DataService, private route: Router) {}
+  constructor(private ds: DataService, private route: Router, private aRoute: ActivatedRoute,) {}
 
   ngOnInit(): void {
     this.formData = new FormData();
@@ -79,30 +79,32 @@ export class AccomplishmentsComponent implements OnInit {
     this.ds.getRequestWithParams("view-portfolio", { id: this.userDetails.studentID }).subscribe(
       (response: any) => {
         if (response && response.accomplishment) {
-          this.populateAccomplishmentTable(response.accomplishment);
-          console.log('View Accomplishment details:', response.accomplishment);
+          this.studentPortfolio = response;
+       
+          console.log('View Accomplishment details:', response);
+          console.log("Checking:", this.studentPortfolio);
         } else {
           console.error('Unexpected response structure:', response);
         }
       },
       (error) => {
-        console.error('Error loading accomplishment:', error);
+        console.error('Error loading portfolio:', error);
       }
     );
   }
 
-  populateAccomplishmentTable(accomplishments: any[]): void {
-    this.dataSource.data = accomplishments.map(accomplishment => {
-      const imageURL = `${this.baseAPI}${accomplishment.accomImg}`;
-      console.log('Image URL:', imageURL);
-      return {
-      accomImg: imageURL,
-      accomTitle: accomplishment.accomTitle,
-      accomDesc: accomplishment.accomDesc,
-      accomID: accomplishment.accomID,
-      }
-    });
-  }
+  // populateAccomplishmentTable(accomplishments: any[]): void {
+  //   this.dataSource.data = accomplishments.map(accomplishment => {
+  //     const imageURL = `${this.baseAPI}${accomplishment.accomImg}`;
+  //     console.log('Image URL:', imageURL);
+  //     return {
+  //     accomImg: imageURL,
+  //     accomTitle: accomplishment.accomTitle,
+  //     accomDesc: accomplishment.accomDesc,
+  //     accomID: accomplishment.accomID,
+  //     }
+  //   });
+  // }
 
 
 onFileSelected(event: any) {
@@ -218,6 +220,11 @@ editclosePopup() {
             }
         );
     }
+}
+
+routeToCreateAccomplishment(){
+  // this.route.navigateByUrl('../createportfolio');
+  this.route.navigate([`../createaccomplishment`], { relativeTo: this.aRoute });
 }
 
 }
