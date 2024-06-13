@@ -18,6 +18,11 @@ import { DesignComponent } from './design/design.component';
 import { CreateskillComponent } from './skills/createskill/createskill.component';
 import { CreateaccomplishmentComponent } from './accomplishments/createaccomplishment/createaccomplishment.component';
 import { EditportfolioComponent } from './portfolio/editportfolio/editportfolio.component';
+import { EditskillsComponent } from './skills/editskills/editskills.component';
+import { EditaccomplishmentsComponent } from './accomplishments/editaccomplishments/editaccomplishments.component';
+import { EditaboutmeComponent } from './aboutme/editaboutme/editaboutme.component';
+import { CreatecontactComponent } from './contact/createcontact/createcontact.component';
+import { EditcontactComponent } from './contact/editcontact/editcontact.component';
 
 
 export const routes: Routes = [
@@ -39,9 +44,14 @@ export const routes: Routes = [
     { title: "Unfold | EditPortfolio", path: 'editportfolio/:projectID', component: EditportfolioComponent },
     { title: "Unfold | Design", path: 'design', component: DesignComponent },
     { title: "Unfold | CreateTechnology", path: 'createskill', component: CreateskillComponent },
-    { title: "Unfold | CreateCompetition", path: 'createaccomplishment', component: CreateaccomplishmentComponent },
-
-  
+    { title: "Unfold | CreateCompetion", path: 'createaccomplishment', component: CreateaccomplishmentComponent },
+    { title: "Unfold | EditSkills", path: 'editskill/:skillID', component: EditskillsComponent },
+    { title: "Unfold | EditCompetition", path: 'editaccomplishment/:accomID', component: EditaccomplishmentsComponent },
+    { title: "Unfold | EditAboutme", path: 'editaboutme/:aboutID', component: EditaboutmeComponent },
+    { title: "Unfold | CreateContact", path: 'createcontact', component: CreatecontactComponent },
+    { title: "Unfold | EditContact", path: 'editcontact/:contID', component: EditcontactComponent },
+    
+    
 
 ];
 

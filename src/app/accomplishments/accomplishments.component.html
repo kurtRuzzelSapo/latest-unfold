@@ -179,8 +179,8 @@
 								<td><a target="_blank" href="{{studentPortfolio.accomLink}}">{{studentPortfolio.accomLink}}</a></td>
 							
 								<td>
-									<a style="margin-right: 5px;" href="" class="btn btn-ed" >Edit</a>
-									<a href="" class="btn btn-del" >Delete</a>
+									<button style="margin-right: 5px;" href="" class="btn btn-ed" (click)="routeToEditAccomplishment(studentPortfolio.accomID)" >Edit</button>
+									<button href="" class="btn btn-del" (click)="deleteAccomplishment(studentPortfolio.accomID)" >Delete</button>
 								</td>
 								<!-- <td>{{studentPortfolio.projectImg}}</td> -->
 							</tr>

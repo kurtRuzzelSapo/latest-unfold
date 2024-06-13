@@ -5,9 +5,10 @@ import {
   FormGroup,
   ReactiveFormsModule,
   Validators,
+  FormBuilder
 } from '@angular/forms';
 import { DataService } from '../data.service';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, ActivatedRoute } from '@angular/router';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 import { TopnavComponent } from '../topnav/topnav.component';
 import { CookieService } from 'ngx-cookie-service';
@@ -43,10 +44,24 @@ export class AboutmeComponent implements OnInit {
   // LOCALHOST BASEAPI
   baseAPI:string = 'http://localhost/unfold/unfold-api/'
 
-  displayedColumns: string[] = ['aboutImg', 'aboutText', 'actions'];
-  dataSource = new MatTableDataSource<any>();
 
-  constructor(private ds: DataService, private route: Router) {}
+
+  constructor(
+    private fb: FormBuilder,
+    private ds: DataService,
+    private route: Router,
+    private aRoute: ActivatedRoute,
+  ) {
+    // Initialize the form group
+    this.applyForm = new FormGroup({
+      proTitle: new FormControl('', Validators.required),
+      proLink: new FormControl('', Validators.required),
+      proImg: new FormControl(null, Validators.required),
+      proDate: new FormControl('', Validators.required),
+      proDesc: new FormControl('', Validators.required)
+    });
+    this.formData = new FormData();
+  }
 
   ngOnInit(): void {
     this.formData = new FormData();
@@ -54,11 +69,7 @@ export class AboutmeComponent implements OnInit {
     this.userDetails = JSON.parse(this.cookieService.get('user_details'));
 
 
-    this.applyForm = new FormGroup({
-      aboutText: new FormControl(null, Validators.required),
-      aboutImg: new FormControl(null, Validators.required),
-      // aboutID: new FormControl(null, Validators.required),
-    });
+  
     this.loadAbout();
     this.ds.getRequestWithParams("view-portfolio", { id: this.userDetails.studentID }).subscribe(
       (response: any) => {
@@ -76,62 +87,15 @@ export class AboutmeComponent implements OnInit {
     this.ds.getRequestWithParams("view-portfolio", { id: this.userDetails.studentID }).subscribe(
       (response: any) => {
           // const aboutme = response.payload;
-          this.populateAboutTable(response.about);
+       
       },
       (error) => {
         console.error('Error loading about:', error);
       }
     );
 }
-// loadAbout(): void {
-//   this.ds.getRequestWithParams('view-portfolio', { id: this.userDetails.studentID }).subscribe(
-//     (response: any) => {
-//       if (response && response.payload && Array.isArray(response.payload.about)) {
-//         this.populateAboutTable(response.payload.about);
-//         console.log('View About details:', response.payload.about);
-//       } else {
-//         console.error('Unexpected response structure:', response);
-//       }
-//     },
-//     (error) => {
-//       console.error('Error loading about:', error);
-//     }
-//   );
-// }
 
 
-// populateAboutTable(about: any[]): void {
-//   // const baseURL = 'http://localhost/unfold/unfold-api-main/files/aboutme';
-//   this.dataSource.data = about.map(about => ({
-//     aboutImg: `${baseURL}${about.aboutImg}`,
-//     aboutText: about.aboutText,
-//     aboutID: about.aboutID
-//   }));
-// }
-
-populateAboutTable(aboutme: any[]): void {
-  this.dataSource.data = aboutme.map(about => {
-    const imageURL = `${this.baseAPI}${about.aboutImg}`;
-    console.log('Image URL:', imageURL);
-    return {
-    aboutImg: imageURL,
-    aboutText: about.aboutText,
-    aboutDesc: about.aboutDesc,
-    aboutID: about.aboutID,
-    }
-  });
-}
-// populateAboutTable(about: any[]): void {
-//   this.dataSource.data = about.map(item => {
-//     const imageURL = `${this.baseAPI}${item.aboutImg}`;
-//     console.log('Image URL:', imageURL);
-//     return {
-//       aboutImg: imageURL,
-//       aboutText: item.aboutText,
-//       aboutID: item.aboutID,
-//     };
-//   });
-// }
 
 
   onFileSelected(event: any) {
@@ -185,52 +149,8 @@ populateAboutTable(aboutme: any[]): void {
   }
   
   
-  editopenModalpopup( aboutText: string, aboutImg: string, aboutID: any) {
-    const about = this.dataSource.data.find((a: any) => a.aboutID === aboutID);
-    if (about) {
-      this.selectedAboutText = about.aboutText;
-      this.selectedAboutImg = about.aboutImg;
-      this.selectedAboutId = about.aboutID;
-  
-      this.applyForm.patchValue({
-        aboutText: about.aboutText,
-        aboutID: about.aboutID,
-        aboutImg: null
-      });
-  
-      console.log('Received data:', {
-        aboutText: aboutText,
-        aboutImg: aboutImg,
-        aboutID: aboutID,
-      });
-      $('#editModalCenter').modal('show');
-    } else {
-      console.error('Accomplishment not found with ID:', aboutID);
-    }
-  }
-  
-  editclosePopup() {
-    $('#editModalCenter').modal('hide');
-  }
-
-  openModalpopup() {
-    $('#exampleModalCenter').modal('show');
-  }
-
-  closePopup() {
-    $('#exampleModalCenter').modal('hide');
-  }
-
-  openModalpopupbio() {
-    $('#exampleModalCenterBio').modal('show');
-  }
-
-  closePopupbio() {
-    $('#exampleModalCenterBio').modal('hide');
-  }
-  
-
-  deleteabout(id: string) {
-    // Implement the function to delete a about
+  routeToEditAboutme(aboutID:any){
+    // this.route.navigateByUrl('../createportfolio');
+    this.route.navigate([`../editaboutme/${aboutID}`], { relativeTo: this.aRoute });
   }
 }

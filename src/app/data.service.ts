@@ -63,13 +63,15 @@ deleteProject(projectId: number): Observable<any> {
   return this.http.delete<any>(`${this.apiURL}delete-project/${projectId}`);
 }
 
-
 deleteAccomplishment(accomplishmentId: number): Observable<any> {
   return this.http.delete<any>(`${this.apiURL}delete-accomplishment/${accomplishmentId}`);
 }
 
 deleteSkill(skillId: number): Observable<any> {
   return this.http.delete<any>(`${this.apiURL}delete-skill/${skillId}`);
+}
+deleteContact(contId: number): Observable<any> {
+  return this.http.delete<any>(`${this.apiURL}delete-contact/${contId}`);
 }
 
 deleteService(serviceId: number): Observable<any> {

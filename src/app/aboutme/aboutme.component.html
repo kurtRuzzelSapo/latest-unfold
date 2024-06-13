@@ -110,8 +110,10 @@
 				<div class="left">
 					<h1> About me</h1>
 					
+					
 					<!-- Button trigger modal -->
 					<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Upload a New Project</button> -->
+					<button type="button" class="btn btn-primary" (click)="routeToEditAboutme(studentPortfolio.about[0].aboutID)">Edit</button>
   
 						 
 
@@ -153,7 +155,7 @@
 			<div style="display: flex; flex-direction: column; align-items: center;" class="table-data">
 				<div style="display:flex; flex-direction: column;">
           <img width="230" height="230" style="border-radius: 10px;" [src]="baseAPI + studentPortfolio.about[0].aboutImg" alt="">
-          <input type="file">
+          
         </div>
 				<div style="box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.25); width: 50%; display:  flex; flex-direction: column; text-align: center;">
 

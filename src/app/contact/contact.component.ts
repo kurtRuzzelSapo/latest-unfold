@@ -34,6 +34,7 @@ export class ContactComponent implements OnInit {
   // baseAPI: string = 'https://unfoldap.online/unfold-api';
   // LOCALHOST BASEAPI
   baseAPI:string = 'http://localhost/unfold/unfold-api/'
+  counts: { projects: number, technologies: number, competitions: number, contacts:number } = { projects: 0, technologies: 0, competitions: 0, contacts: 0 };
   constructor(private ds: DataService, private route: Router, private aRoute: ActivatedRoute,) {}
 
   ngOnInit(): void {
@@ -53,6 +54,7 @@ export class ContactComponent implements OnInit {
       (response: any) => {
         this.studentPortfolio = response;
         console.log('View Portfolio details:', response);
+        this.updateCounts(response);
       },
       (error) => {
         console.error('Error retrieving portfolio:', error);
@@ -104,16 +106,38 @@ export class ContactComponent implements OnInit {
     );
   }
 
-  openModalpopup(){
-    $('#exampleModalCenter').modal('show')
+  updateCounts(data: any): void {
+    this.counts.projects = data.project.length;
+    this.counts.technologies = data.skill.length;
+    this.counts.competitions = data.accomplishment.length;
+    this.counts.contacts = data.contacts.length;
   }
+
+  deleteContact(contId: number): void {
   
-  closePopup(){
-    $('#exampleModalCenter').modal('hide')
-  }
+    this.ds.deleteContact(contId).subscribe(
+        (response) => {
+            console.log('Accomplishment deleted successfully:', response);
+            // Reload the portfolio to reflect changes
+            this.loadContact();
+        },
+        (error) => {
+            console.error('Error deleting accomplishment:', error);
+            if (error.status === 401) {
+                console.warn('Unauthorized access - redirecting to login');
+                this.route.navigateByUrl('/login'); // Or your login route
+            }
+        }
+    );
+
+}
 
   routeToAddContact(){
     // this.route.navigateByUrl('../createportfolio');
-    this.route.navigate([`/addcontact`], { relativeTo: this.aRoute });
+    this.route.navigate([`/createcontact`], { relativeTo: this.aRoute });
+  }
+  routeToEditContact(contID:number){
+    // this.route.navigateByUrl('../createportfolio');
+    this.route.navigate([`../editcontact/${contID}`], { relativeTo: this.aRoute });
   }
 }

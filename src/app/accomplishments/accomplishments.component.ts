@@ -93,18 +93,6 @@ export class AccomplishmentsComponent implements OnInit {
     );
   }
 
-  // populateAccomplishmentTable(accomplishments: any[]): void {
-  //   this.dataSource.data = accomplishments.map(accomplishment => {
-  //     const imageURL = `${this.baseAPI}${accomplishment.accomImg}`;
-  //     console.log('Image URL:', imageURL);
-  //     return {
-  //     accomImg: imageURL,
-  //     accomTitle: accomplishment.accomTitle,
-  //     accomDesc: accomplishment.accomDesc,
-  //     accomID: accomplishment.accomID,
-  //     }
-  //   });
-  // }
 
 
 onFileSelected(event: any) {
@@ -126,7 +114,7 @@ Insert() {
         console.log('Application submitted successfully:', response);
         this.route.navigateByUrl('/accomplishments');
         this.loadAccomplishment();
-        this.closePopup();
+        
         $('#successModal').modal('show');
       },
       (error) => {
@@ -161,70 +149,37 @@ edit() {
 }
 
 
-// editopenModalpopup(accomplishmentTitle: string, accomplishmentDesc: string, accomplishmentImg: string, accomplishmentId:any) {
-//   this.selectedAccomplishmentTitle = accomplishmentTitle;
-//   this.selectedAccomplishmentDesc = accomplishmentDesc;
-//   this.selectedAccomplishmentImg = accomplishmentImg;
-//   this.selectedAccomplishmentId = accomplishmentId;
-//   $('#editModalCenter').modal('show');
-//   // You can also perform other actions related to opening the modal popup here
-// }
 
-editopenModalpopup(accomTitle: string, accomDesc: string, accomImg: string, accomID: any) {
-  const accomplishment = this.dataSource.data.find((a: any) => a.accomID === accomID);
-  if (accomplishment) {
-    this.selectedAccomplishmentTitle = accomplishment.accomTitle;
-    this.selectedAccomplishmentDesc = accomplishment.accomDesc;
-    this.selectedAccomplishmentImg = accomplishment.accomImg;
-    this.selectedAccomplishmentId = accomplishment.accomID;
 
-    this.applyForm.patchValue({
-      accomTitle: accomplishment.accomTitle,
-      accomDesc: accomplishment.accomDesc,
-      accomImg: null
-    });
 
-    console.log('Received data:', {
-      accomTitle: accomTitle,
-      accomDesc: accomDesc,
-      accomImg: accomImg,
-      accomID: accomID
-    });
-    $('#editModalCenter').modal('show');
-  } else {
-    console.error('Accomplishment not found with ID:', accomID);
-  }
+
+deleteAccomplishment(accomplishmentId: number): void {
+  
+      this.ds.deleteAccomplishment(accomplishmentId).subscribe(
+          (response) => {
+              console.log('Accomplishment deleted successfully:', response);
+              // Reload the portfolio to reflect changes
+              this.loadAccomplishment();
+          },
+          (error) => {
+              console.error('Error deleting accomplishment:', error);
+              if (error.status === 401) {
+                  console.warn('Unauthorized access - redirecting to login');
+                  this.route.navigateByUrl('/login'); // Or your login route
+              }
+          }
+      );
+  
 }
 
-editclosePopup() {
-  $('#editModalCenter').modal('hide');
-}
-  openModalpopup() {
-    this.applyForm.reset();
-    $('#exampleModalCenter').modal('show');
-  }
-
-  closePopup() {
-    $('#exampleModalCenter').modal('hide');
-  }
-
-  deleteAccomplishment(accomplishmentId: number): void {
-    if (confirm("Are you sure you want to delete this accomplishment?")) {
-        this.ds.deleteAccomplishment(accomplishmentId).subscribe(
-            (response) => {
-                console.log('Accomplishment deleted successfully:', response);
-                this.loadAccomplishment(); // Reload the portfolio to reflect changes
-            },
-            (error) => {
-                console.error('Error deleting accomplishment:', error);
-            }
-        );
-    }
-}
 
 routeToCreateAccomplishment(){
   // this.route.navigateByUrl('../createportfolio');
   this.route.navigate([`../createaccomplishment`], { relativeTo: this.aRoute });
+}
+
+routeToEditAccomplishment(accomID: any) {
+  this.route.navigate([`../editaccomplishment/${accomID}`], { relativeTo: this.aRoute });
 }
 
 }

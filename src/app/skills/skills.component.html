@@ -173,8 +173,8 @@
 								<td>{{studentPortfolio.skillDesc}}</td>
 								<!-- <td>{{studentPortfolio.skillImg}}</td> -->
 								<td>
-									<a style="margin-right: 5px;" href="" class="btn btn-ed" >Edit</a>
-									<a href="" class="btn btn-del" >Delete</a>
+									<button style="margin-right: 5px;" href="" class="btn btn-ed" (click)="routeToEditSkill(studentPortfolio.skillID)" >Edit</button>
+									<button href="" class="btn btn-del" (click)="deleteSkill(studentPortfolio.skillID)" >Delete</button>
 								</td>
 							</tr>
 

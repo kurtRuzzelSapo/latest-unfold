@@ -26,8 +26,10 @@ export class NewsfeedComponent implements OnInit, AfterViewInit{
   filteredStudents: any = [];
   searchTerm: string = '';
   selectedCategory: string = '';
-  
-  baseAPI:string = 'https://unfoldap.online/unfold-api'
+   // ONLINE BASEAPI
+  // baseAPI: string = 'https://unfoldap.online/unfold-api';
+  // LOCALHOST BASEAPI
+  baseAPI: string = 'http://localhost/unfold/unfold-api/';
 
   constructor(private ds: DataService, private route: Router) {}
 

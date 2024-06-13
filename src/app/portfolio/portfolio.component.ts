@@ -203,26 +203,45 @@ export class PortfolioComponent implements OnInit {
 //   );
 // }
 
-Delete(data: any): void {
-  console.log("click");
-  console.log(data.projectID);
-  const payload = {
-    id: data.projectID,
+// Delete(data: any): void {
+//   console.log("click");
+//   console.log(data.projectID);
+//   const payload = {
+//     id: data.projectID,
     
-  };
+//   };
 
-  this.ds.deleteRequest("delete-project", payload).subscribe(
-    (response: any) => {
-      if (response.status_code === 200) {
-        alert("Student Deleted Successfully");
-        this.route.navigateByUrl('/portfolio');
-        this.loadPortfolio();
+//   this.ds.deleteRequest("delete-project", payload).subscribe(
+//     (response: any) => {
+//       if (response.status_code === 200) {
+//         alert("Student Deleted Successfully");
+//         this.route.navigateByUrl('/portfolio');
+//         this.loadPortfolio();
+//       }
+//     },
+//     (error) => {
+//       console.error('Error deleting student:', error);
+//     }
+//   );
+// }
+
+deleteProject(projectId: number): void {
+  
+  this.ds.deleteProject(projectId).subscribe(
+      (response) => {
+          console.log('Accomplishment deleted successfully:', response);
+          // Reload the portfolio to reflect changes
+          this.loadPortfolio();
+      },
+      (error) => {
+          console.error('Error deleting accomplishment:', error);
+          if (error.status === 401) {
+              console.warn('Unauthorized access - redirecting to login');
+              this.route.navigateByUrl('/login'); // Or your login route
+          }
       }
-    },
-    (error) => {
-      console.error('Error deleting student:', error);
-    }
   );
+
 }
 
   
