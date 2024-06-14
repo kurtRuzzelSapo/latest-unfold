@@ -22,13 +22,13 @@
     <!-- ----- MAIN JS ----- -->
     <script defer src="/src/assets/app.js"></script>
 
-    <title>Kurt</title>
+    <title>Portfolio | Ludiflex</title>
 
     <style>
         
     </style>
 </head>
-<body style="background-color: wheat;">
+<body style="height: auto;">
    <div class="container">
       <!-- --------------- HEADER --------------- -->
       <nav id="header">
@@ -61,34 +61,34 @@
         <div class="nav-menu-btn">
             <i class="uil uil-bars" onclick="myMenuFunction()"></i>
         </div>
+
+         <!-- Search and Filter Container -->
+         <div class="search-filter-container">
+          <div class="search-container">
+              <input type="text" class="search-input" placeholder="Search..." [(ngModel)]="searchTerm"
+                  (input)="filterStudents()">
+              <button class="search-button"><i class="uil uil-search"></i></button>
+          </div>
+
+          <!-- Filter Dropdown -->
+          <div class="filter-container">
+              <select [(ngModel)]="selectedCategory" (change)="filterStudents()" name="filter" id="filter">
+                  <option value="">All</option>
+                  <option value="bsit">BSIT</option>
+                  <option value="bscs">BSCS</option>
+                  <option value="bsemc">BSEMC</option>
+                  <option value="act">ACT</option>
+              </select>
+          </div>
+      </div>
       </nav>
    </div>
    
 
-  
-   <div style="height: auto; width: 100%;">
-    <!-- <div  class="search-filter-container">
-      <div class="search-container">
-          <input type="text" class="search-input" placeholder="Search..." [(ngModel)]="searchTerm"
-          (input)="filterStudents()">
-          <button class="search-button"><i class="uil uil-search"></i></button>
-      </div>
-  
-     
-      <div class="filter-container">
-       
-  <select [(ngModel)]="selectedCategory" (change)="filterStudents()" name="filter" id="filter">
-  <option value="">All</option>
-  <option value="bsit">BSIT</option>
-  <option value="bscs">BSCS</option>
-  <option value="bsemc">BSEMC</option>
-  <option value="act">ACT</option>
-  </select>
-  
-      </div>
-  </div> -->
+
+   
   <main  style="width: 100%;background-color: #FFFCF8; height: auto; display: flex; justify-content: center; " class="wrapper">
-            <!-- Search Container with Magnifying Glass Icon -->
+          
 
     <section style="width: 80%;" class="section" id="projects">
         <!-- <div style="margin-top: 120px; padding-bottom: 40px; " class="project-container">
@@ -157,7 +157,7 @@
           </div> -->
           <!-- Inside the <section> element -->
             <div style="margin-top: 120px; padding-bottom: 40px; " class="project-container">
-<div style="display: flex;" class="project-box" *ngFor="let student of filteredStudents;  let i = index" [style.animation-delay]="i * 0.2 + 's'" >
+              <div style="display: flex;" class="project-box" *ngFor="let student of filteredStudents;  let i = index" [style.animation-delay]="i * 0.2 + 's'" >
   <div class="wew" style="display: flex; justify-content: space-around; align-items: center; width: 90%;">
       <img width="140" height="140" style="border-radius: 50%;" [src]="baseAPI + student.aboutImg" alt="{{ student.firstName }} {{ student.lastName }}" class="student-image">
       <div style="text-align: center;">
@@ -179,7 +179,6 @@
 
      </section>
     </main>
-  </div>
    <script>
        function myMenuFunction() {
            var menu = document.getElementById("myNavMenu");
@@ -189,9 +188,6 @@
                menu.style.display = "block";
            }
        }
-  
-      
-</script>
-
+   </script>
 </body>
 </html>

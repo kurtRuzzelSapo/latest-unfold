@@ -201,20 +201,26 @@ export class NewsfeedComponent implements OnInit, AfterViewInit{
   filterStudents(): void {
     console.log("Selected category:", this.selectedCategory);
     console.log("Search term:", this.searchTerm);
+
+
     this.filteredStudents = this.studentList.filter((student: any) => {
-      const fullName = `${student.firstName} ${student.lastName}`.toLowerCase();
-      const matchesSearch = fullName.includes(this.searchTerm.toLowerCase()) ||
-        student.aboutText.toLowerCase().includes(this.searchTerm.toLowerCase());
+      // Check if student and its properties exist
+      if (student && student.firstName && student.lastName && student.course) {
+        const fullName = `${student.firstName} ${student.lastName}`.toLowerCase();
+        const matchesSearch = fullName.includes(this.searchTerm.toLowerCase());
+        const matchesCategory = this.selectedCategory ? 
+                                student.course.toLowerCase() === this.selectedCategory.toLowerCase() : true;
   
-      console.log("Student:", student);
-      console.log("Matches search:", matchesSearch);
+        const matchResult = matchesSearch && matchesCategory;
   
-
-      const matchesCategory = this.selectedCategory ? student.course.toLowerCase() === this.selectedCategory.toLowerCase() : true;
-
-      console.log("Matches category:", matchesCategory);
+        if (!matchResult) {
+          console.log("Account not shown:", student.firstName, student.lastName);
+        }
   
-      return matchesSearch && matchesCategory;
+        return matchResult;
+      } else {
+        return false; 
+      }
     });
   }
   
