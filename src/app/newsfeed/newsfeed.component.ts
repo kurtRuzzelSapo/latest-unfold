@@ -17,16 +17,16 @@ import ScrollReveal from 'scrollreveal';
   templateUrl: './newsfeed.component.html',
   styleUrl: './newsfeed.component.css'
 })
-export class NewsfeedComponent implements OnInit, AfterViewInit{
-  formData:any  
+export class NewsfeedComponent implements OnInit, AfterViewInit {
+  formData: any;
   userDetails: any;
   cookieService = inject(CookieService);
   studentList: any = [];
-  studentPortfolio: any ={};
   filteredStudents: any = [];
   searchTerm: string = '';
   selectedCategory: string = '';
-   // ONLINE BASEAPI
+
+  // ONLINE BASEAPI
   // baseAPI: string = 'https://unfoldap.online/unfold-api';
   // LOCALHOST BASEAPI
   baseAPI: string = 'http://localhost/unfold/unfold-api/';
@@ -35,32 +35,20 @@ export class NewsfeedComponent implements OnInit, AfterViewInit{
 
   ngOnInit(): void {
     this.formData = new FormData();
-      this.userDetails = JSON.parse(this.cookieService.get('user_details'));
+    this.userDetails = JSON.parse(this.cookieService.get('user_details'));
 
-      this.ds.getRequest("get-all-students").subscribe(
-        (response: any) => {
-          this.studentList = response;  
-          this.filteredStudents = response;
-          console.log('User details:', response);
-        },
-        (error) => {
-          console.error('Error submitting application:', error);
-        }
-      )
-
-
-      this.ds.getRequest("view-allportfolio").subscribe(
-        (response: any) => {
-          this.studentPortfolio = response
-          console.log("this is about me ",this.studentPortfolio.aboutme)
-          console.log('View ALL Portfolio details:', response);
-        },
-        (error) => {
-          console.error('Error submitting application:', error);
-        }
-      )
+    this.ds.getRequest("get-all-students").subscribe(
+      (response: any) => {
+        this.studentList = response;
+        this.filteredStudents = response;
+        console.log('User details:', response);
+        this.filterStudents(); // Filter after fetching data
+      },
+      (error) => {
+        console.error('Error fetching student details:', error);
+      }
+    );
   }
-
 
   ngAfterViewInit(): void {
     this.initTyped();
@@ -101,9 +89,7 @@ export class NewsfeedComponent implements OnInit, AfterViewInit{
 
   initTyped() {
     new Typed(".typedText", {
-    //  identity:String = this.studentPortfolio.student.firstName,
       strings: ["Student", "Dreamer", "mama mo"],
-      // strings: ["Designer", this.studentPortfolio.student.firstName, this.studentPortfolio.about.aboutext],
       loop: true,
       typeSpeed: 100,
       backSpeed: 80,
@@ -167,63 +153,41 @@ export class NewsfeedComponent implements OnInit, AfterViewInit{
     });
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-  ViewPortfolio(e:any,studentID: string){
+  ViewPortfolio(e: any, studentID: string) {
     e.preventDefault();
     this.route.navigateByUrl(`viewport/${studentID}`);
-   
-    
     console.log(studentID);
   }
-  // filterStudents(): void {
-  //   this.filteredStudents = this.studentList.filter((student: any) => {
-  //     const fullName = `${student.firstName} ${student.lastName}`.toLowerCase();
-  //     const matchesSearch = fullName.includes(this.searchTerm.toLowerCase()) ||
-  //       student.aboutText.toLowerCase().includes(this.searchTerm.toLowerCase());
-  
-  //     const matchesCategory = this.selectedCategory ? student.course === this.selectedCategory : true;
-  
-  //     return matchesSearch && matchesCategory;
-  //   });
-  // }
+
   filterStudents(): void {
     console.log("Selected category:", this.selectedCategory);
     console.log("Search term:", this.searchTerm);
 
-
     this.filteredStudents = this.studentList.filter((student: any) => {
       // Check if student and its properties exist
-      if (student && student.firstName && student.lastName && student.course) {
+      if (student && student.firstName && student.lastName && student.course && student.address && student.school) {
         const fullName = `${student.firstName} ${student.lastName}`.toLowerCase();
-        const matchesSearch = fullName.includes(this.searchTerm.toLowerCase());
-        const matchesCategory = this.selectedCategory ? 
-                                student.course.toLowerCase() === this.selectedCategory.toLowerCase() : true;
-  
+        const course = student.course.toLowerCase();
+        const address = student.address.toLowerCase();
+        const school = student.school.toLowerCase();
+        const searchTerm = this.searchTerm.toLowerCase();
+
+        const skillTitles = (student.skills || []).map((skill: any) => skill.toLowerCase());
+        const matchesSkills = skillTitles.some((title: string) => title.includes(searchTerm));
+
+        const matchesSearch = fullName.includes(searchTerm) || course.includes(searchTerm) || address.includes(searchTerm) || school.includes(searchTerm) || matchesSkills;
+        const matchesCategory = this.selectedCategory ? course === this.selectedCategory.toLowerCase() : true;
+
         const matchResult = matchesSearch && matchesCategory;
-  
+
         if (!matchResult) {
           console.log("Account not shown:", student.firstName, student.lastName);
         }
-  
+
         return matchResult;
       } else {
-        return false; 
+        return false;
       }
     });
   }
-  
-  
 }
-
