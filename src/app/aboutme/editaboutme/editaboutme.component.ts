@@ -27,7 +27,10 @@ export class EditaboutmeComponent implements OnInit {
   selectedFile: any;
   aboutID: any;
   aboutData: any;
-  baseAPI: string = 'http://localhost/unfold/unfold-api/';
+    // ONLINE BASEAPI
+  // baseAPI: string = 'https://unfoldap.online/unfold-api';
+  // LOCALHOST BASEAPI
+  baseAPI:string = 'http://localhost/unfold/unfold-api/';
 
   constructor(
     private fb: FormBuilder,
@@ -35,10 +38,10 @@ export class EditaboutmeComponent implements OnInit {
     private route: Router,
     private aRoute: ActivatedRoute,
   ) {
-    // Initialize the form group
-    this.applyForm = this.fb.group({
-      aboutImg: [null, Validators.required],
-      aboutText: ['', Validators.required],
+    this.applyForm = new FormGroup({
+      aboutText: new FormControl('', Validators.required),
+      aboutImg: new FormControl(null, Validators.required),
+     
     });
     this.formData = new FormData();
   }
@@ -52,40 +55,52 @@ export class EditaboutmeComponent implements OnInit {
         this.aboutID = +idParam; // Convert string to number
         this.getData(this.aboutID);
       } else {
-        console.error('Project ID not found in route parameters');
+        console.error('About ID not found in route parameters');
       }
     });
 
-    this.loadPortfolio();
-  }
+    this.applyForm = new FormGroup({
+      aboutText: new FormControl(null, Validators.required),
+      aboutImg: new FormControl(null, Validators.required),
+     });
 
-  loadPortfolio(): void {
-    this.ds.getRequestWithParams("view-portfolio", { id: this.userDetails.studentID }).subscribe(
+     this.ds.getRequestWithParams("view-portfolio", { id: this.userDetails.studentID }).subscribe(
       (response: any) => {
-        if (response && response.project) {
-          this.studentPortfolio = response;
-          console.log('View Portfolio details:', response);
-        } else {
-          console.error('Unexpected response structure:', response);
-        }
+        this.studentPortfolio = response;
+        console.log('View Competition details:', response);
       },
       (error) => {
-        console.error('Error loading portfolio:', error);
+        console.error('Error retrieving portfolio:', error);
       }
     );
   }
+
+  // loadPortfolio(): void {
+  //   this.ds.getRequestWithParams("view-portfolio", { id: this.userDetails.studentID }).subscribe(
+  //     (response: any) => {
+  //       if (response && response.project) {
+  //         this.studentPortfolio = response;
+  //         console.log('View Portfolio details:', response);
+  //       } else {
+  //         console.error('Unexpected response structure:', response);
+  //       }
+  //     },
+  //     (error) => {
+  //       console.error('Error loading portfolio:', error);
+  //     }
+  //   );
+  // }
 
   getData(aboutID: any): void {
     this.ds.getRequestWithParams("get-about", { aboutID: aboutID }).subscribe(
       (response: any) => {
         if (response && response.about) {
-          this.aboutData = response;
+          this.aboutData = response.about;
           console.log('AboutData', response);
 
           // Initialize the form with the fetched project data
           this.applyForm.patchValue({
-            aboutText: this.aboutData.about.aboutText,
-            aboutImg: this.aboutData.about.aboutImg || null
+            aboutText: this.aboutData.aboutText,
           });
         } else {
           console.error('Unexpected response structure:', response);
@@ -106,13 +121,7 @@ export class EditaboutmeComponent implements OnInit {
   Edit() {
     this.formData.append('aboutText', this.applyForm.value.aboutText);
     this.formData.append('aboutID', this.aboutID);
-
-    if (this.selectedFile) {
-      this.formData.append('aboutImg', this.selectedFile);
-    } else if (this.applyForm.value.aboutImg) {
-      // Preserve existing image if no new file is selected
-      this.formData.append('aboutImg', this.applyForm.value.aboutImg);
-    }
+    this.formData.append('aboutImg', this.selectedFile);
 
     this.ds.sendRequestWithMedia('edit-about', this.formData).subscribe(
       (response) => {
