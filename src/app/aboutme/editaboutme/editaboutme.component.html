@@ -109,8 +109,14 @@
       <form class="needs-validation" novalidate [formGroup]="applyForm" (submit)="Edit()">
         <div style="display: flex; flex-direction: column; align-items: center;" class="table-data">
           <div style="box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.25);  width: 17.7%;  display: flex; flex-direction: column;">
-            <img width="230" height="230" style="border-radius: 10px;" [src]="baseAPI + this.aboutData.about.aboutImg" alt="">
-            <input type="file" required accept="image/*" (change)="onFileSelected($event)"/>
+            <input formControlName="aboutImg"
+            type="file"
+            id="form3Example1"
+            class="form-control"
+            required
+            accept="image/*"
+            (change)="onFileSelected($event)"/>
+            <img width="230" height="230" style="border-radius: 10px;" [src]="baseAPI + this.aboutData.aboutImg" alt="">
           </div>
           <div style="box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.25); width: 50%; display: flex; flex-direction: column; text-align: center;">
             <b style="justify-self:flex-end;">My New Introduction</b>

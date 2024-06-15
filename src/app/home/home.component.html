@@ -103,7 +103,7 @@
 			<a class="profile">
 			  <b style="margin-right: 10px;" class="user-details"
 			  >{{ userDetails.firstName }} {{ userDetails.lastName }}</b>
-		 <img [src]="baseAPI + studentPortfolio.about[0].aboutImg" alt="">
+		 <img *ngIf="userDetails.is_admin === 0"  [src]="baseAPI + studentPortfolio.about[0].aboutImg" alt="">
 		  </a>
 		</nav>
 		<!-- NAVBAR -->
@@ -116,30 +116,6 @@
 				</div>		
 			</div>
 
-			<ul *ngIf="userDetails.is_admin === 0" class="box-info">
-				<li>
-					<i class='bx bx-terminal'></i>
-					<span class="text">
-						<h3>{{ counts.projects }}</h3>
-						<p>Projects</p>
-					</span>
-				</li>
-				<li>
-					<i class='bx bx-code-block'></i>
-					<span class="text">
-						<h3>{{ counts.technologies }}</h3>
-						<p>Technologies</p>
-					</span>
-				</li>
-				<li>
-					<i class='bx bxs-devices'></i>
-					<span class="text">
-						<h3>{{ counts.competitions }}</h3>
-						<p>Competitions</p>
-					</span>
-				</li>
-				<!--   -->
-			</ul>
 			<ul *ngIf="userDetails.is_admin === 1" class="box-info">
 				<li>
 					<i class='bx bx-terminal' ></i>
@@ -169,7 +145,31 @@
 						<p>BSCS</p>
 					</span>
 				</li>
-				<!--   -->
+			</ul>
+
+			<ul *ngIf="userDetails.is_admin === 0" class="box-info">
+				<li>
+					<i class='bx bx-terminal'></i>
+					<span class="text">
+						<h3>{{ counts.projects }}</h3>
+						<p>Projects</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bx-code-block'></i>
+					<span class="text">
+						<h3>{{ counts.technologies }}</h3>
+						<p>Technologies</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bxs-devices'></i>
+					<span class="text">
+						<h3>{{ counts.competitions }}</h3>
+						<p>Competitions</p>
+					</span>
+				</li>
+				
 			</ul>
 
 
