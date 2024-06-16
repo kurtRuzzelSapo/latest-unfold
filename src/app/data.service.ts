@@ -77,6 +77,12 @@ deleteContact(contId: number): Observable<any> {
 deleteService(serviceId: number): Observable<any> {
   return this.http.delete<any>(`${this.apiURL}delete-service/${serviceId}`);
 }
+addViews(studentID: any): Observable<any> {
+  return this.http.delete<any>(`${this.apiURL}add-views/${studentID}`);
+}
+Approved(studentID: any): Observable<any> {
+  return this.http.delete<any>(`${this.apiURL}approved/${studentID}`);
+}
 
   sendRequest(endpoint: string, data: any): Observable<Status> {
     return this.http.post<Status>(this.apiURL + endpoint, JSON.stringify(data));

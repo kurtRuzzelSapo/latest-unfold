@@ -65,9 +65,17 @@ studentList: any = [];
           // console.log(response.payload.address);
           console.log('Application submitted successfully:', response);
           if (response.status.message == 'Login successful.') {
-            this.cookieService.set("user_details", JSON.stringify(response.payload));        
+            this.cookieService.set("user_details", JSON.stringify(response.payload));   
+            
+            this.userDetails = JSON.parse(this.cookieService.get('user_details'));
             //  this.route.navigateByUrl('/portfolio');
-             this.route.navigateByUrl('/Home');
+            if(this.userDetails.is_faculty === 1){
+
+              this.route.navigateByUrl('/newsfeed');
+            }else{
+
+              this.route.navigateByUrl('/Home');
+            }
             console.log(this.applyForm);
           }
         },

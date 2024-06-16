@@ -22,7 +22,7 @@
     <!-- ----- MAIN JS ----- -->
     <script defer src="/src/assets/app.js"></script>
 
-    <title>Portfolio | Ludiflex</title>
+    <title>Portfolio</title>
 
     <style>
         
@@ -37,27 +37,84 @@
             <span>.</span>
         </div>
 
-        
-        
         <div class="nav-menu" id="myNavMenu">
-            <ul class="nav_menu_list">
-                <li class="nav_list">
-                    <a  routerLink="/portfolio" class="nav-link active-link">Dashboard</a>
+            <ul class="nav_menu_list dash">
+              <li *ngIf="userDetails.is_faculty === 0 || userDetails.is_admin === 0" class="nav_list ">
+                  <a routerLink="/viewport/{{userDetails.studentID}}'" id="portfolio"  class="nav-link">Portfolio Spotlight</a>
+                  <div class="circle"></div>
+              </li>
+                <li *ngIf="userDetails.is_faculty === 0 || userDetails.is_admin === 0" class="nav_list">
+                    <a  routerLink="/portfolio" class="nav-link active-link" id="dash">Dashboard</a>
                     <div class="circle"></div>
                 </li>
-                <li class="nav_list">
-                    <a  routerLink="/newsfeed" class="nav-link">Portfolio feed</a>
+                <li *ngIf="userDetails.is_admin === 1" class="nav_list">
+                    <a  routerLink="/Home" class="nav-link active-link" id="dash">Dashboard</a>
                     <div class="circle"></div>
                 </li>
-                <li class="nav_list">
-                    <a routerLink="/viewport/{{userDetails.studentID}}'" class="nav-link">My Portfolio</a>
+                <!-- <li *ngIf="userDetails.is_faculty === 0 || userDetails.is_admin === 0" class="nav_list feed">
+                    <a  routerLink="/newsfeed" class="nav-link" id="feed">Portfolio feed</a>
+                    <div class="circle"></div>
+                </li> -->
+                <li *ngIf="userDetails.is_faculty === 0 || userDetails.is_admin === 0" class="nav_list ">
+                    <a routerLink="/viewport/{{userDetails.studentID}}'" id="portfolio"  class="nav-link">My Portfolio</a>
                     <div class="circle"></div>
                 </li>
             </ul>
         </div>
-        <div class="nav-button">
-            <button class="btn"><a style="text-decoration: none; color: black;" routerLink="/login">Logout</a></button>
+        <!-- STUDENT -->
+        <div *ngIf="userDetails.is_admin === 0"  class="profile" (click)="toggleDropdown($event)">
+          <b style="margin-right: 10px;" class="user-details">
+            {{ userDetails.firstName }} {{ userDetails.lastName }}
+          </b>
+          <img class="prof-icon" *ngIf="userDetails.is_admin === 0" width="60" height="60" [src]="baseAPI + studentPortfolio.about[0].aboutImg" alt="">
+          
+          <!-- Dropdown Menu -->
+          <div class="dropdown-menu" [class.show]="isDropdownVisible" (click)="$event.stopPropagation()">
+            <ul>
+              <li><a routerLink="/login">Logout</a></li>
+            </ul>
+          </div>
         </div>
+
+        <!-- ADMIN -->
+        <div *ngIf="userDetails.is_admin === 1"  class="profile" (click)="toggleDropdown($event)">
+          <b style="margin-right: 10px;" class="user-details">
+            {{ userDetails.firstName }} {{ userDetails.lastName }}
+          </b>
+          <img class="prof-icon" *ngIf="userDetails.is_admin === 1" width="60" height="60" [src]="baseAPI + studentPortfolio.about[0].aboutImg" alt="">
+          
+          <!-- Dropdown Menu -->
+          <div class="dropdown-menu" [class.show]="isDropdownVisible" (click)="$event.stopPropagation()">
+            <ul>
+              <li><a routerLink="/login">Logout</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- FACULTY -->
+        <div *ngIf="userDetails.is_faculty === 1"  class="profile" (click)="toggleDropdown($event)">
+          <b style="margin-right: 10px;" class="user-details">
+            {{ userDetails.facFirstname }} {{ userDetails.facLastname }}
+          </b>
+          <img  *ngIf="userDetails.is_faculty === 1" class="prof-icon"  width="50" height="50" [src]="baseAPI + this.userDetails.facImg" alt="">
+          
+          <!-- Dropdown Menu -->
+          <div class="dropdown-menu" [class.show]="isDropdownVisible" (click)="$event.stopPropagation()">
+            <ul>
+              <li><a routerLink="/login">Logout</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        
+        <!-- <a class="profile">
+			  <b style="margin-right: 10px;" class="user-details"
+			  >{{ userDetails.firstName }} {{ userDetails.lastName }}</b>
+		 <img *ngIf="userDetails.is_admin === 0" width="60" height="60"  [src]="baseAPI + studentPortfolio.about[0].aboutImg" alt="">
+		  </a> -->
+      <!-- <div class="nav-button">
+        <button class="btn"><a style="text-decoration: none; color: black;" routerLink="/login">Logout</a></button>
+    </div> -->
         <div class="nav-menu-btn">
             <i class="uil uil-bars" onclick="myMenuFunction()"></i>
         </div>
@@ -84,13 +141,14 @@
       </nav>
    </div>
    
-
+  
 
    
   <main  style="width: 100%;background-color: #FFFCF8; height: auto; display: flex; justify-content: center; " class="wrapper">
           
 
     <section style="width: 80%;" class="section" id="projects">
+      
         <!-- <div style="margin-top: 120px; padding-bottom: 40px; " class="project-container">
           <div style="display: flex;"  class="project-box" *ngFor="let student of studentList">
             <div class="wew" style="display: flex; justify-content: space-around; align-items: center; width: 90%;">
@@ -159,7 +217,11 @@
             <div style="margin-top: 120px; padding-bottom: 40px; " class="project-container">
               <div style="display: flex;" class="project-box" *ngFor="let student of filteredStudents;  let i = index" [style.animation-delay]="i * 0.2 + 's'" >
   <div class="wew" style="display: flex; justify-content: space-around; align-items: center; width: 90%;">
-      <img width="140" height="140" style="border-radius: 50%;" [src]="baseAPI + student.aboutImg" alt="{{ student.firstName }} {{ student.lastName }}" class="student-image">
+    <div style="display: flex; flex-direction: column; justify-content: space-evenly; align-items: center;">
+      <img width="140" height="140" style="border-radius: 50%; margin-top: 20px;" [src]="baseAPI + student.aboutImg" alt="{{ student.firstName }} {{ student.lastName }}" class="student-image">
+      <label style="padding-top: 45px;">Approved: <b style="color: #F8955E;">{{ student.approved }}</b></label>
+
+    </div>
       <div style="text-align: center;">
           <h2>{{ student.firstName }} {{ student.lastName }}</h2>
           <div style="display:flex; flex-direction: column;">
@@ -172,6 +234,10 @@
                   View Portfolio
               </button>
           </div>
+          <br>
+          <label>Portfolio Views: <b style="color: #F8955E;">{{ student.portfolioView }}</b></label>
+          <br>
+          
       </div>
   </div>
 </div>

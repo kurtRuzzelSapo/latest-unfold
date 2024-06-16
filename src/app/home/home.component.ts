@@ -4,7 +4,7 @@ import { TopnavComponent } from '../topnav/topnav.component';
 import { CookieService } from 'ngx-cookie-service';
 import { DataService } from '../data.service';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet, ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   formData: any;
   cookieService = inject(CookieService);
   studentList: any = [];
+  facultyList: any = [];
   studentPortfolio: any = {};
   // ONLINE BASEAPI
   // baseAPI: string = 'https://unfoldap.online/unfold-api';
@@ -31,7 +32,7 @@ export class HomeComponent implements OnInit {
   bsemcCount: number = 0;
   counts: { projects: number, technologies: number, competitions: number } = { projects: 0, technologies: 0, competitions: 0 };
 
-  constructor(private ds: DataService) {}
+  constructor(private ds: DataService, private route: Router,  private aRoute: ActivatedRoute,) {}
 
   ngOnInit(): void {
     this.formData = new FormData();
@@ -45,6 +46,17 @@ export class HomeComponent implements OnInit {
       },
       (error) => {
         console.error('Error retrieving students:', error);
+      }
+    );
+
+    this.ds.getRequest("get-all-faculty").subscribe(
+      (response: any) => {
+        this.facultyList = response;
+        this.countBSITStudents();
+        console.log('Faculty details:', response);
+      },
+      (error) => {
+        console.error('Error retrieving faculty:', error);
       }
     );
 
@@ -107,4 +119,6 @@ export class HomeComponent implements OnInit {
       this.selectedFile = event.target.files[0];
     }
   }
+
+  
 }

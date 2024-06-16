@@ -23,12 +23,11 @@ export class NewsfeedComponent implements OnInit, AfterViewInit {
   cookieService = inject(CookieService);
   studentList: any = [];
   filteredStudents: any = [];
+  studentPortfolio: any = {};
   searchTerm: string = '';
   selectedCategory: string = '';
+  highestViewStudent: any = null; // Property to store student with highest views
 
-  // ONLINE BASEAPI
-  // baseAPI: string = 'https://unfoldap.online/unfold-api';
-  // LOCALHOST BASEAPI
   baseAPI: string = 'http://localhost/unfold/unfold-api/';
 
   constructor(private ds: DataService, private route: Router) {}
@@ -36,18 +35,63 @@ export class NewsfeedComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.formData = new FormData();
     this.userDetails = JSON.parse(this.cookieService.get('user_details'));
-
+  
     this.ds.getRequest("get-all-students").subscribe(
       (response: any) => {
         this.studentList = response;
         this.filteredStudents = response;
         console.log('User details:', response);
         this.filterStudents(); // Filter after fetching data
+  
+        // Find and store the student with the highest views
+        this.highestViewStudent = this.getStudentWithHighestViews();
+        console.log(`Student with highest views:`, this.highestViewStudent);
+        console.log(`Student with highest views:`, this.highestViewStudent.firstName);
       },
       (error) => {
         console.error('Error fetching student details:', error);
       }
     );
+
+    this.ds.getRequestWithParams("view-portfolio", { id: this.userDetails.studentID }).subscribe(
+      (response: any) => {
+        this.studentPortfolio = response;
+        console.log('View Portfolio details:', response);
+        
+      
+      },
+      (error) => {
+        console.error('Error retrieving portfolio:', error);
+      }
+    );
+  }
+  
+  isDropdownVisible = false;
+
+  toggleDropdown(event: MouseEvent) {
+    event.stopPropagation();
+    this.isDropdownVisible = !this.isDropdownVisible;
+  }
+
+  @HostListener('document:click', ['$event'])
+  handleClickOutside(event: MouseEvent) {
+    if (this.isDropdownVisible) {
+      this.isDropdownVisible = false;
+    }
+  }
+
+  getStudentWithHighestViews(): any {
+    let highestViews = -1;
+    let topStudent = null;
+  
+    this.studentList.forEach((student: any) => {
+      if (student.portfolioView > highestViews) {
+        highestViews = student.portfolioView;
+        topStudent = student;
+      }
+    });
+  
+    return topStudent;
   }
 
   ngAfterViewInit(): void {
@@ -154,9 +198,23 @@ export class NewsfeedComponent implements OnInit, AfterViewInit {
   }
 
   ViewPortfolio(e: any, studentID: string) {
+      this.ds.addViews(studentID).subscribe(
+          (response) => {
+              console.log('Accomplishment deleted successfully:', response);
+              // Reload the portfolio to reflect changes
+          },
+          (error) => {
+              console.error('Error deleting accomplishment:', error);
+              if (error.status === 401) {
+                  console.warn('Unauthorized access - redirecting to login');
+                  this.route.navigateByUrl('/login'); // Or your login route
+              }
+          }
+      );
     e.preventDefault();
     this.route.navigateByUrl(`viewport/${studentID}`);
     console.log(studentID);
+
   }
 
   filterStudents(): void {

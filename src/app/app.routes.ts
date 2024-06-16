@@ -23,6 +23,7 @@ import { EditaccomplishmentsComponent } from './accomplishments/editaccomplishme
 import { EditaboutmeComponent } from './aboutme/editaboutme/editaboutme.component';
 import { CreatecontactComponent } from './contact/createcontact/createcontact.component';
 import { EditcontactComponent } from './contact/editcontact/editcontact.component';
+import { CreatefacultyComponent } from './faculty/createfaculty/createfaculty.component';
 
 
 export const routes: Routes = [
@@ -50,6 +51,7 @@ export const routes: Routes = [
     { title: "Unfold | EditAboutme", path: 'editaboutme/:aboutID', component: EditaboutmeComponent },
     { title: "Unfold | CreateContact", path: 'createcontact', component: CreatecontactComponent },
     { title: "Unfold | EditContact", path: 'editcontact/:contID', component: EditcontactComponent },
+    { title: "Unfold | CreateFaculty", path: 'createfaculty', component: CreatefacultyComponent },
     
     
 
