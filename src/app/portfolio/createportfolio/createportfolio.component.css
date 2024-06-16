@@ -48,6 +48,46 @@ body {
 	overflow-x: hidden;
 }
 
+/* Form inputs and textarea */
+.form-control {
+    border-radius: 10px !important;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important; */
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) !important;
+    font-size: 1.2em; /* Increased font size */
+    padding: 12px; /* Increased padding */
+	background-color: white;
+	
+
+	
+}
+
+/* Form labels to match the design */
+.form-label {
+    font-weight: 600;
+    color: var(--dark);
+    font-size: 1.2em; /* Increased font size */
+	
+}
+
+/* Add this for file input consistency */
+.form-control[type="file"] {
+    border-radius: 10px !important;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) !important;
+	background-color: white;
+    font-size: 1.2em; /* Increased font size */
+    padding: 10px; /* Increased padding */
+}
+
+/* Adjusting text area */
+textarea.form-control {
+    border-radius: 10px !important;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) !important;
+	background-color: white;
+    font-size: 1.2em; /* Increased font size */
+    padding: 12px; /* Increased padding */
+}
+
+
 
 /* SIDEBAR */
 #sidebar {
@@ -229,6 +269,7 @@ body {
 	max-width: 400px;
 	width: 100%;
 	margin-right: auto;
+	/* box-shadow: 10px 10px lightblue; */
 }
 #content nav form .form-input {
 	display: flex;
@@ -259,6 +300,7 @@ body {
 	outline: none;
 	border-radius: 0 36px 36px 0;
 	cursor: pointer;
+	
 }
 
 #content nav .profile img {
@@ -411,7 +453,6 @@ body {
 	display: inline-block;
   }
 
-
 #content main .table-data {
 	display: flex;
 	flex-wrap: wrap;
@@ -419,12 +460,25 @@ body {
 	margin-top: 24px;
 	width: 100%;
 	color: var(--dark);
+	justify-content: center; /* Add this line */
+
 }
+
+
 #content main .table-data > div {
 	border-radius: 20px;
 	background: var(--light);
 	padding: 24px;
 	overflow-x: auto;
+	border: 2px solid lightsalmon;
+	box-shadow: 10px 10px lightsalmon;
+	display: flex; /* Add this line */
+    justify-content: center; /* Add this line */
+    align-items: center; /* Add this line */
+	padding: 48px; /* Increased from 24px to 48px */
+	margin: 10px; /* Add margin to give some space around the div */
+    width: calc(40% - 40px); /* Adjust width to account for the margin */
+	
 }
 #content main .table-data .head {
 	display: flex;
@@ -539,6 +593,7 @@ body {
 		background: transparent;
 		border-radius: none;
 		color: var(--dark);
+		
 	}
 
 	#content nav form.show .form-input input {
@@ -551,6 +606,7 @@ body {
 		border-radius: 0 36px 36px 0;
 		color: var(--light);
 		background: var(--red);
+	
 	}
 
 	#content nav form.show ~ .notification,
