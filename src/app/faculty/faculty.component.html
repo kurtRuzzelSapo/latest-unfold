@@ -93,17 +93,17 @@
 	<section id="content">
 		<!-- NAVBAR -->
 		<nav>
-			<i class='bx bx-menu' ></i>
-		
-			
-		
-			
-			<a *ngIf="userDetails.is_admin === 0" routerLink="/viewport/{{userDetails.studentID}}'" class="nav-link">Portfolio</a>
-			<a *ngIf="userDetails.is_admin === 0" routerLink="/newsfeed" class="nav-link">Portfolio Feed</a>
+			<div style="display: flex;">
 
-		
 			
-		
+				<a *ngIf="userDetails.is_admin === 0" routerLink="/viewport/{{userDetails.studentID}}'" class="nav-link">Portfolio</a>
+				<a *ngIf="userDetails.is_admin === 1" routerLink="/newsfeed" class="nav-link">Portfolio Feed</a>
+			</div>
+			<a class="profile">
+			  <b style="margin-right: 10px;" class="user-details"
+			  >{{ userDetails.firstName }} {{ userDetails.lastName }}</b>
+		 <img *ngIf="userDetails.is_admin === 0"  [src]="baseAPI + studentPortfolio.about[0].aboutImg" alt="">
+		  </a>
 		</nav>
 		<!-- NAVBAR -->
 
@@ -114,7 +114,7 @@
 					<h1>Faculty Dashboard</h1>
 					
 					<!-- Button trigger modal -->
-                    <button style="margin-top: 20px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Faculty Member</button>
+                    <button style="margin-top: 20px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="routeToCreateFaculty()">Add Faculty Member</button>
 
 				</div>
 			
@@ -130,33 +130,23 @@
 					<table *ngIf="userDetails.is_admin === 1">
 						<thead>
 							<tr>
-                <th>Student ID</th>
+                <th>Faculty ID</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Email</th>
-                <th>Address</th>
-                <th>Contacts</th>
-                <th>Course</th>
-                <th>Sex</th>
-                <th>Birthdate</th>
-                <th>School</th>
+                <th>Position</th>
                 <th>Action</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr *ngFor="let student of studentList">
-                <td>{{ student.studentID }}</td>
-                <td>{{ student.firstName }}</td>
-                <td>{{ student.lastName }}</td>
-                <td>{{ student.email }}</td>
-                <td>{{ student.address }}</td>
-                <td>{{ student.contacts }}</td>
-                <td>{{ student.course }}</td>
-                <td>{{ student.sex }}</td>
-                <td>{{ student.birthdate }}</td>
-                <td>{{ student.school }}</td>
+							<tr *ngFor="let faculty of facultyList">
+                <td>{{ faculty.facID }}</td>
+                <td>{{ faculty.facFirstname }}</td>
+                <td>{{ faculty.facLastname }}</td>
+                <td>{{ faculty.facEmail }}</td>
+                <td>{{ faculty.facPosition }}</td>
                 <td>
-                  <button class="btn btn-del"  (click)="deleteStudent(student)">
+                  <button class="btn btn-del"  (click)="deleteStudent(faculty)">
                     Delete
                   </button>
                 </td>

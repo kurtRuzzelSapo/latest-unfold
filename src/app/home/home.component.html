@@ -86,7 +86,7 @@
 			</li>
 		</ul>
 	</section> 
-	<!-- SIDEBAR
+	<!-- SIDEBAR -->
 
 
 
@@ -98,6 +98,7 @@
 
 			
 				<a *ngIf="userDetails.is_admin === 0" routerLink="/viewport/{{userDetails.studentID}}'" class="nav-link">Portfolio</a>
+				<a *ngIf="userDetails.is_admin === 1" routerLink="/newsfeed" class="nav-link">Portfolio Feed</a>
 				<a *ngIf="userDetails.is_admin === 0" routerLink="/newsfeed" class="nav-link">Portfolio Feed</a>
 			</div>
 			<a class="profile">

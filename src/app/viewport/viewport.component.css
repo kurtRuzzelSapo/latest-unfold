@@ -210,9 +210,34 @@ nav{
     background-color: #efefef;;
     color: var(--color-white);
 }
-.featured-text-btn>.blue-btn:hover{
+/* .featured-text-btn>.grey-btn:hover{
+ 
     background: var(--first-color-hover);
+} */
+
+
+.featured-text-btn > .blue-btn {
+    transition: background 0.3s ease-in-out;
 }
+
+.featured-text-btn > .blue-btn:hover {
+    background: #ffe234;
+}
+
+.featured-text-btn > .blue-btn .uil-star {
+    transition: color 0.3s ease-in-out;
+}
+
+.featured-text-btn > .blue-btn:hover .uil-star {
+    color: #000; /* Change this to your desired color */
+}
+
+
+
+
+
+
+
 .social_icons{
     display: flex;
     margin-top: 5em;
@@ -396,7 +421,8 @@ h3{
 }
 .project-box>i{
     font-size: 50px;
-    color: #00B5E7;
+    /* color: #00B5E7; */
+    color: #ee8d59;
     margin-bottom: 25px;
 }
 .project-box label{

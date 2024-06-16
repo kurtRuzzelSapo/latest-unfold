@@ -1,164 +1,3 @@
-// import { Component, OnInit, inject } from '@angular/core';
-// import { SidenavComponent } from '../sidenav/sidenav.component';
-// import { TopnavComponent } from '../topnav/topnav.component';
-// import { CookieService } from 'ngx-cookie-service';
-// import { DataService } from '../data.service';
-// import { CommonModule } from '@angular/common';
-// import { Router, RouterLink } from '@angular/router';
-// import { ReactiveFormsModule } from '@angular/forms';
-// import { ActivatedRoute } from '@angular/router';
-// @Component({
-//   selector: 'app-viewport',
-//   standalone: true,
-//   imports: [TopnavComponent, CommonModule,  ReactiveFormsModule, RouterLink],
-//   providers: [CookieService],
-//   templateUrl: './viewport.component.html',
-//   styleUrl: './viewport.component.css'
-// })
-
-
-// export class ViewportComponent {
-//   formData:any  
-//   userDetails: any;
-//  studentImage: any;
-//   cookieService = inject(CookieService);
-//   studentList: any = [CommonModule];
-//   studentID: any;
-//   studentPortfolio: any = {};
-//   baseAPI:string = 'https://unfoldap.online/unfold-api'
-//   // baseAPI:string = 'https://unfoldap.online/unfold-api'
-//   // baseAPI:string = 'https://unfoldap.online/unfold-api'
-//   // baseAPI:string = 'http://localhost/unfold/unfold-api'
-//   constructor(private ds: DataService,private route: ActivatedRoute){}
-
-//   ngOnInit(): void {
-//     this.formData = new FormData();
-//       this.userDetails = JSON.parse(this.cookieService.get('user_details'));
-
-//       this.ds.getRequest("get-all-students").subscribe(
-//         (response: any) => {
-//           this.studentList = response;  
-//           console.log('User details:', response);
-//         },
-//         (error) => {
-//           console.error('Error submitting application:', error);
-//         }
-//       )
-
-
-//       this.route.params.subscribe(params => {
-//         // Access parameter values
-//         const studentID = params['studentID'];
-//         console.log('Student ID:', studentID);
-
-//         this.ds.getRequestWithParams("view-portfolio",{id: studentID}).subscribe(
-//           (response: any) => {
-//             this.studentPortfolio = response
-//             console.log('View Portfolio details:', response);
-//             console.log('aboutext', this.studentPortfolio.about.aboutext)
-//             console.log('abouimage', this.studentPortfolio.about.aboutext)
-//             this.studentImage = `${this.baseAPI}${this.studentPortfolio.about.aboutImg}`;
-//           },
-//           (error) => {
-//             console.error('Error submitting application:', error);
-//           }
-//         )
-//       });
-
-//       // this.ds.getRequest("view-allportfolio").subscribe(
-//       //   (response: any) => {
-//       //     this.studentPortfolio = response
-//       //     console.log("this is about me ",this.studentPortfolio.aboutme)
-//       //     console.log('View ALL Portfolio details:', response);
-//       //   },
-//       //   (error) => {
-//       //     console.error('Error submitting application:', error);
-//       //   }
-//       // )
-
-      
-     
-//   }
-// }
-// ===========================
-// import { Component, OnInit, inject } from '@angular/core';
-// import { SidenavComponent } from '../sidenav/sidenav.component';
-// import { TopnavComponent } from '../topnav/topnav.component';
-// import { CookieService } from 'ngx-cookie-service';
-// import { DataService } from '../data.service';
-// import { CommonModule } from '@angular/common';
-// import { Router, RouterLink } from '@angular/router';
-// import { ReactiveFormsModule } from '@angular/forms';
-// import { ActivatedRoute } from '@angular/router';
-
-// @Component({
-//   selector: 'app-viewport',
-//   standalone: true,
-//   imports: [TopnavComponent, CommonModule,  ReactiveFormsModule, RouterLink],
-//   providers: [CookieService],
-//   templateUrl: './viewport.component.html',
-//   styleUrl: './viewport.component.css'
-// })
-
-
-// export class ViewportComponent {
-//   formData:any  
-//   userDetails: any;
-//  studentImage: any;
-//   cookieService = inject(CookieService);
-//   studentList: any = [CommonModule];
-//   studentPortfolio: any ={};
-//   studentID: any;
-//   baseAPI:string = 'https://unfoldap.online/unfold-api'
-//   constructor(private ds: DataService,private route: ActivatedRoute){}
-
-//   ngOnInit(): void {
-//     this.formData = new FormData();
-//       this.userDetails = JSON.parse(this.cookieService.get('user_details'));
-
-//       this.ds.getRequest("get-all-students").subscribe(
-//         (response: any) => {
-//           this.studentList = response;  
-//           console.log('User details:', response);
-//         },
-//         (error) => {
-//           console.error('Error submitting application:', error);
-//         }
-//       )
-
-
-//       this.route.params.subscribe(params => {
-//         // Access parameter values
-//         const studentID = params['studentID'];
-//         // console.log('Student ID:', studentID);
-
-//         this.ds.getRequestWithParams("view-portfolio",{id: studentID}).subscribe(
-//           (response: any) => {
-//             this.studentPortfolio = response
-//             console.log('View Portfolio details:', response);
-//             console.log(this.studentPortfolio.firstName);
-//             console.log('About Text:', response.about[0].aboutText);
-//             this.studentImage = `${this.baseAPI}${this.studentPortfolio.about.aboutImg}`;
-//           },
-//           (error) => {
-//             console.error('Error submitting application:', error);
-//           }
-//         )
-//       });
-
-
-      // +++++++++++++++++++++++++
-      // this.ds.getRequest("view-allportfolio").subscribe(
-      //   (response: any) => {
-      //     this.studentPortfolio = response
-      //     console.log("this is about me ",this.studentPortfolio.aboutme)
-      //     console.log('View ALL Portfolio details:', response);
-      //   },
-      //   (error) => {
-      //     console.error('Error submitting application:', error);
-      //   }
-      // )
-
       import { Component, OnInit, AfterViewInit, HostListener } from '@angular/core';
       import Typed from 'typed.js';
       import ScrollReveal from 'scrollreveal';
@@ -166,13 +5,13 @@
       import { DataService } from '../data.service';
       import { CommonModule } from '@angular/common';
       import { RouterLink } from '@angular/router';
-      import { ReactiveFormsModule } from '@angular/forms';
+      import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
       import { ActivatedRoute } from '@angular/router';
       
       @Component({
         selector: 'app-viewport',
         standalone: true,
-        imports: [CommonModule, ReactiveFormsModule, RouterLink],
+        imports: [CommonModule, ReactiveFormsModule, RouterLink , ReactiveFormsModule],
         providers: [CookieService],
         templateUrl: './viewport.component.html',
         styleUrls: ['./viewport.component.css']
@@ -180,8 +19,10 @@
       export class ViewportComponent implements OnInit, AfterViewInit {
         formData: any;
         userDetails: any;
+        applyForm: any;
         studentImage: any;
         studentList: any = [];
+        facultyList: any = [];
         studentPortfolio: any = {};
         studentID: any;
         counts: { projects: number, technologies: number, competitions: number, contacts: number } = { projects: 0, technologies: 0, competitions: 0, contacts: 0 };
@@ -197,6 +38,11 @@
         ngOnInit(): void {
           this.formData = new FormData();
           this.userDetails = JSON.parse(this.cookieService.get('user_details'));
+
+          
+          this.applyForm = new FormGroup({
+            testDesc: new FormControl(null, Validators.required),
+          });
       
           this.ds.getRequest("get-all-students").subscribe(
             (response: any) => {
@@ -205,6 +51,17 @@
             },
             (error) => {
               console.error('Error fetching students:', error);
+            }
+          );
+
+          this.ds.getRequest("get-all-faculty").subscribe(
+            (response: any) => {
+              this.facultyList = response;
+             
+              console.log('Faculty details:', response);
+            },
+            (error) => {
+              console.error('Error retrieving faculty:', error);
             }
           );
       
@@ -336,6 +193,47 @@
             }
           });
         }
+
+        Insert() {
+          this.formData.append('testDesc', this.applyForm.value.testDesc);
+          this.formData.append('studentID', this.studentPortfolio.student.studentID);
+          this.formData.append('testFirstname', this.userDetails.facFirstname);
+          this.formData.append('testLastname', this.userDetails.facLastname);
+          this.formData.append('testPosition', this.userDetails.facPosition);
+          this.formData.append('testImg', this.userDetails.facImg);
+      
+          this.ds.sendRequestWithMedia('add-testimony', this.formData).subscribe(
+            (response) => {
+              console.log('Application submitted successfully:', response);
+              alert("Inserted Successfully!");
+              console.log(this.applyForm);
+             
+            },
+            (error) => {
+              console.error('Error submitting application:', error);
+            }
+          );
+        }
+
+
+        Approved(studentID: string) {
+          this.ds.Approved(studentID).subscribe(
+              (response) => {
+                  console.log('Student Approved successfully:', response);
+                  alert("You approved a student!")
+                  // Reload the portfolio to reflect changes
+              },
+              (error) => {
+                  console.error('Error deleting accomplishment:', error);
+                  if (error.status === 401) {
+                      console.warn('Unauthorized access - redirecting to login');
+                      // Or your login route
+                  }
+              }
+          );
+
+    
+      }
       }
       
 
