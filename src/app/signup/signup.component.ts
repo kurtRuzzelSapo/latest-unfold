@@ -28,6 +28,7 @@ export class SignupComponent {
       // Validators.pattern('$'),
     ]),
     sex: new FormControl(null, Validators.required),
+    position: new FormControl(null, Validators.required),
     birthdate: new FormControl(null, Validators.required),
     address: new FormControl(null, Validators.required),
     contacts: new FormControl(null, [Validators.required]),

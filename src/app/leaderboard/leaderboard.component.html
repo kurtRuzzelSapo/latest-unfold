@@ -1,0 +1,18 @@
+<div class="leaderboard">
+    <h2>Leaderboard</h2>
+    <ol>
+      <li *ngFor="let student of studentList; let i = index"
+          [class.top-three]="i < 3"
+          [class.me]="student.studentID === userDetails.studentID">
+        <span class="rank">{{ i + 1 }}</span>
+        <span class="name">{{ student.firstName }} {{ student.lastName }}</span>
+        <span class="views">{{ student.portfolioView }} views</span>
+      </li>
+    </ol>
+    
+    <div *ngIf="myRanking > 0" class="my-ranking">
+      <h3>Your Ranking</h3>
+      <p>You are ranked <strong>{{ myRanking }}</strong> out of {{ studentList.length }} students.</p>
+    </div>
+  </div>
+  

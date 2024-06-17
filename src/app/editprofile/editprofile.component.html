@@ -1,0 +1,88 @@
+<div class="container-xl px-4 mt-4">
+    <!-- Account page navigation-->
+    <!-- <nav class="nav nav-borders">
+        <a class="nav-link active ms-0" href="https://www.bootdey.com/snippets/view/bs5-edit-profile-account-details" target="__blank">Profile</a>
+        <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-profile-billing-page" target="__blank">Billing</a>
+        <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-profile-security-page" target="__blank">Security</a>
+        <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-edit-notifications-page"  target="__blank">Notifications</a>
+    </nav> -->
+    <!-- <hr class="mt-0 mb-4"> -->
+    <div class="row">
+        <div class="col-xl-4">
+            <!-- Profile picture card-->
+            <div class="card mb-4 mb-xl-0">
+                <div class="card-header">Profile Picture</div>
+                <div class="card-body text-center">
+                    <!-- Profile picture image-->
+                    <img class="img-account-profile rounded-circle mb-2" [src]="baseAPI + studentProfile[0].aboutImg" alt="">
+                    <!-- Profile picture help block-->
+                     
+                    <div class="small font-italic text-muted mb-1">Portfolio Views: <b>{{studentData.portfolioView}}</b>   Approvals: <b>{{studentData.approved}}</b></div>
+                    <!-- Profile picture upload button-->
+                    <button class="btn btn-primary" type="button">Upload new image</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-8">
+            <!-- Account details card-->
+            <div class="card mb-4">
+                <div class="card-header">Account Details</div>
+                <div class="card-body">
+                    <form [formGroup]="applyForm"
+                    (submit)="Edit()">
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (first name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputFirstName">First name</label>
+                                <input formControlName="firstName" class="form-control" id="inputFirstName" type="text" placeholder="{{studentData.firstName}}" >
+                            </div>
+                            <!-- Form Group (last name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputLastName">Last name</label>
+                                <input formControlName="lastName" class="form-control" id="inputLastName" type="text" placeholder="{{studentData.lastName}}" >
+                            </div>
+                        </div>
+                        <!-- Form Row        -->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (organization name)-->
+                            <div class="col-md-6">
+                              
+                                <label class="small mb-1" for="inputEmailAddress">Contact</label>
+                                <input formControlName="contacts" class="form-control" id="inputEmailAddress" type="email" placeholder="{{studentData.contacts}}">
+                            </div>
+                            <!-- Form Group (location)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputLocation">Birthdate</label>
+                                <input formControlName="birthdate" class="form-control" id="inputLocation" type="date" placeholder="{{studentData.birthdate}}" >
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" for="inputOrgName">Position</label>
+                                <input formControlName="position" class="form-control" id="inputOrgName" type="text" placeholder="{{studentData.position}}" > 
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" for="inputOrgName">Address</label>
+                                <input formControlName="address" class="form-control" id="inputOrgName" type="text" placeholder="{{studentData.address}}" > 
+                        </div>
+                        <!-- Form Row-->
+                        <!-- <div class="row gx-3 mb-3">
+                         
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputPhone">Course</label>
+                                <input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number" >
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputBirthday">School</label>
+                                <input class="form-control" id="inputBirthday" type="text" name="birthday" placeholder="" >
+                            </div>
+                        </div> -->
+                        <!-- Save changes button-->
+                        <button class="btn btn-primary" type="submit">Save changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

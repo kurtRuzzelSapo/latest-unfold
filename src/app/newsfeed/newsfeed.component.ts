@@ -4,7 +4,7 @@ import { TopnavComponent } from '../topnav/topnav.component';
 import { CookieService } from 'ngx-cookie-service';
 import { DataService } from '../data.service';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import Typed from 'typed.js';
@@ -15,7 +15,7 @@ import ScrollReveal from 'scrollreveal';
   standalone: true,
   imports: [TopnavComponent, CommonModule, RouterLink, RouterLinkActive, ReactiveFormsModule, FormsModule],
   templateUrl: './newsfeed.component.html',
-  styleUrl: './newsfeed.component.css'
+  styleUrls: ['./newsfeed.component.css']
 })
 export class NewsfeedComponent implements OnInit, AfterViewInit {
   formData: any;
@@ -30,7 +30,7 @@ export class NewsfeedComponent implements OnInit, AfterViewInit {
 
   baseAPI: string = 'http://localhost/unfold/unfold-api/';
 
-  constructor(private ds: DataService, private route: Router) {}
+  constructor(private ds: DataService, private route: Router,  private aRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.formData = new FormData();
@@ -47,6 +47,14 @@ export class NewsfeedComponent implements OnInit, AfterViewInit {
         this.highestViewStudent = this.getStudentWithHighestViews();
         console.log(`Student with highest views:`, this.highestViewStudent);
         console.log(`Student with highest views:`, this.highestViewStudent.firstName);
+
+        // Get top 3 students
+        const topThreeStudents = this.getTopThreeStudents();
+        console.log('Top 3 Students:', topThreeStudents);
+
+        // Get my ranking
+        const myRanking = this.getMyRanking();
+        console.log('My Ranking:', myRanking);
       },
       (error) => {
         console.error('Error fetching student details:', error);
@@ -92,6 +100,25 @@ export class NewsfeedComponent implements OnInit, AfterViewInit {
     });
   
     return topStudent;
+  }
+
+  getTopThreeStudents(): any[] {
+    // Sort the students by portfolioView in descending order
+    const sortedStudents = [...this.studentList].sort((a, b) => b.portfolioView - a.portfolioView);
+    
+    // Get the top 3 students
+    return sortedStudents.slice(0, 3);
+  }
+
+  getMyRanking(): number {
+    // Sort the students by portfolioView in descending order
+    const sortedStudents = [...this.studentList].sort((a, b) => b.portfolioView - a.portfolioView);
+
+    // Find the index of "me" in the sorted list
+    const myIndex = sortedStudents.findIndex(student => student.studentID === this.userDetails.studentID);
+    
+    // Ranking is index + 1 (since index is zero-based)
+    return myIndex + 1;
   }
 
   ngAfterViewInit(): void {
@@ -222,30 +249,41 @@ export class NewsfeedComponent implements OnInit, AfterViewInit {
     console.log("Search term:", this.searchTerm);
 
     this.filteredStudents = this.studentList.filter((student: any) => {
-      // Check if student and its properties exist
-      if (student && student.firstName && student.lastName && student.course && student.address && student.school) {
-        const fullName = `${student.firstName} ${student.lastName}`.toLowerCase();
-        const course = student.course.toLowerCase();
-        const address = student.address.toLowerCase();
-        const school = student.school.toLowerCase();
-        const searchTerm = this.searchTerm.toLowerCase();
+        // Check if student and its properties exist
+        if (student && student.firstName && student.lastName && student.course && student.address && student.school && student.position) {
+            const fullName = `${student.firstName} ${student.lastName}`.toLowerCase();
+            const course = student.course.toLowerCase();
+            const address = student.address.toLowerCase();
+            const school = student.school.toLowerCase();
+            const position = student.position.toLowerCase();
+            const searchTerm = this.searchTerm.toLowerCase();
 
-        const skillTitles = (student.skills || []).map((skill: any) => skill.toLowerCase());
-        const matchesSkills = skillTitles.some((title: string) => title.includes(searchTerm));
+            const skillTitles = (student.skills || []).map((skill: any) => skill.toLowerCase());
+            const matchesSkills = skillTitles.some((title: string) => title.includes(searchTerm));
 
-        const matchesSearch = fullName.includes(searchTerm) || course.includes(searchTerm) || address.includes(searchTerm) || school.includes(searchTerm) || matchesSkills;
-        const matchesCategory = this.selectedCategory ? course === this.selectedCategory.toLowerCase() : true;
+            const matchesSearch = fullName.includes(searchTerm) || 
+                                  course.includes(searchTerm) || 
+                                  address.includes(searchTerm) || 
+                                  school.includes(searchTerm) || 
+                                  position.includes(searchTerm) || 
+                                  matchesSkills;
+            const matchesCategory = this.selectedCategory ? course === this.selectedCategory.toLowerCase() : true;
 
-        const matchResult = matchesSearch && matchesCategory;
+            const matchResult = matchesSearch && matchesCategory;
 
-        if (!matchResult) {
-          console.log("Account not shown:", student.firstName, student.lastName);
+            if (!matchResult) {
+                console.log("Account not shown:", student.firstName, student.lastName);
+            }
+
+            return matchResult;
+        } else {
+            return false;
         }
-
-        return matchResult;
-      } else {
-        return false;
-      }
     });
-  }
+}
+
+routeToEditProfile(studentID: any) {
+  this.route.navigate([`../editprofile/${studentID}`], { relativeTo: this.aRoute });
+}
+
 }
