@@ -40,7 +40,11 @@
         <div class="nav-menu" id="myNavMenu">
             <ul class="nav_menu_list dash">
               <li *ngIf="userDetails.is_faculty === 0 || userDetails.is_admin === 0" class="nav_list ">
-                  <a routerLink="/viewport/{{userDetails.studentID}}'" id="portfolio"  class="nav-link">Portfolio Spotlight</a>
+                  <a routerLink="/leaderboard" id="portfolio"  class="nav-link">Portfolio Spotlight</a>
+                  <div class="circle"></div>
+              </li>
+              <li *ngIf="userDetails.is_faculty === 0 || userDetails.is_admin === 0" class="nav_list ">
+                  <a routerLink="/leaderboardapprove" id="portfolio"  class="nav-link">Portfolio Most Approved</a>
                   <div class="circle"></div>
               </li>
                 <li *ngIf="userDetails.is_faculty === 0 || userDetails.is_admin === 0" class="nav_list">
@@ -49,6 +53,14 @@
                 </li>
                 <li *ngIf="userDetails.is_admin === 1" class="nav_list">
                     <a  routerLink="/Home" class="nav-link active-link" id="dash">Dashboard</a>
+                    <div class="circle"></div>
+                </li>
+                <li *ngIf="userDetails.is_faculty === 1" class="nav_list">
+                  <a routerLink="/leaderboard" id="portfolio"  class="nav-link">Portfolio Spotlight</a>
+                    <div class="circle"></div>
+                </li>
+                <li *ngIf="userDetails.is_faculty === 1" class="nav_list">
+                  <a routerLink="/viewport/{{userDetails.studentID}}'" id="portfolio"  class="nav-link">Newsfeed</a>
                     <div class="circle"></div>
                 </li>
                 <!-- <li *ngIf="userDetails.is_faculty === 0 || userDetails.is_admin === 0" class="nav_list feed">
@@ -72,6 +84,9 @@
           <div class="dropdown-menu" [class.show]="isDropdownVisible" (click)="$event.stopPropagation()">
             <ul>
               <li><a routerLink="/login">Logout</a></li>
+              <button style="background-color: #f8955e; border:1px solid #f5652f; margin-top: 10px;" class="btn btn-primary" (click)="routeToEditProfile( userDetails.studentID)">
+                Edit Profile
+            </button>
             </ul>
           </div>
         </div>
@@ -219,7 +234,7 @@
   <div class="wew" style="display: flex; justify-content: space-around; align-items: center; width: 90%;">
     <div style="display: flex; flex-direction: column; justify-content: space-evenly; align-items: center;">
       <img width="140" height="140" style="border-radius: 50%; margin-top: 20px;" [src]="baseAPI + student.aboutImg" alt="{{ student.firstName }} {{ student.lastName }}" class="student-image">
-      <label style="padding-top: 45px;">Approved: <b style="color: #F8955E;">{{ student.approved }}</b></label>
+      <label style="padding-top: 44px;">Faculty Approved: <b style="color: #F8955E;">{{ student.approved }} <i class="uil-check"></i></b></label>
 
     </div>
       <div style="text-align: center;">
@@ -227,7 +242,7 @@
           <div style="display:flex; flex-direction: column;">
               <label>{{ student.school }}</label>
               <label>{{ student.course }}</label>
-              <label>{{ student.email }}</label>
+              <label><b>{{ student.position }}</b></label>
           </div>
           <div>
               <button style="background-color: #f8955e; border:1px solid #f5652f; margin-top: 10px;" class="btn btn-primary" (click)="ViewPortfolio($event, student.studentID)">
@@ -235,7 +250,7 @@
               </button>
           </div>
           <br>
-          <label>Portfolio Views: <b style="color: #F8955E;">{{ student.portfolioView }}</b></label>
+          <label>Portfolio Views: <b style="color: #F8955E;">{{ student.portfolioView }} <i class="uil-eye"></i> </b></label>
           <br>
           
       </div>

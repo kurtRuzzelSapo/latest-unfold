@@ -24,6 +24,9 @@ import { EditaboutmeComponent } from './aboutme/editaboutme/editaboutme.componen
 import { CreatecontactComponent } from './contact/createcontact/createcontact.component';
 import { EditcontactComponent } from './contact/editcontact/editcontact.component';
 import { CreatefacultyComponent } from './faculty/createfaculty/createfaculty.component';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import { LeaderboardapproveComponent } from './leaderboardapprove/leaderboardapprove.component';
+import { EditprofileComponent } from './editprofile/editprofile.component';
 
 
 export const routes: Routes = [
@@ -52,6 +55,9 @@ export const routes: Routes = [
     { title: "Unfold | CreateContact", path: 'createcontact', component: CreatecontactComponent },
     { title: "Unfold | EditContact", path: 'editcontact/:contID', component: EditcontactComponent },
     { title: "Unfold | CreateFaculty", path: 'createfaculty', component: CreatefacultyComponent },
+    { title: "Unfold | Portfolio Spotlight", path: 'leaderboard', component: LeaderboardComponent },
+    { title: "Unfold | Portfolio Approve", path: 'leaderboardapprove', component: LeaderboardapproveComponent },
+    { title: "Unfold | Edit Profile", path: 'editprofile/:studentID', component: EditprofileComponent },
     
     
 

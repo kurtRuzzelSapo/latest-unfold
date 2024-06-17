@@ -1,0 +1,56 @@
+.leaderboard {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .leaderboard h2 {
+    text-align: center;
+  }
+  
+  .leaderboard ol {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .leaderboard li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .leaderboard li.top-three {
+    font-weight: bold;
+    background-color: #f0f0f0;
+  }
+  
+  .leaderboard li.me {
+    background-color: #d0ffd0;
+  }
+  
+  .rank, .name, .views {
+    flex: 1;
+  }
+  
+  .rank {
+    text-align: left;
+  }
+  
+  .name {
+    text-align: center;
+  }
+  
+  .views {
+    text-align: right;
+  }
+  
+  .my-ranking {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .my-ranking strong {
+    font-size: 1.2em;
+  }
+  
