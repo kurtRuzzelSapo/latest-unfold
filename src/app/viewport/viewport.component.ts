@@ -18,6 +18,7 @@
       })
       export class ViewportComponent implements OnInit, AfterViewInit {
         formData: any;
+        fullName:any
         userDetails: any;
         applyForm: any;
         studentImage: any;
@@ -127,14 +128,35 @@
         }
       
         initTyped() {
+
+          this.route.params.subscribe(params => {
+            const studentID = params['studentID'];
+      
+            this.ds.getRequestWithParams("view-portfolio", { id: studentID }).subscribe(
+              (response: any) => {
+                this.studentPortfolio = response;
+                console.log('View Portfolio details:', response);
+                console.log(this.studentPortfolio.student.firstName)
+                this.updateCounts(response);
+                this.studentImage = `${this.baseAPI}${this.studentPortfolio.about[0].aboutImg}`;
+              },
+              (error) => {
+                console.error('Error fetching portfolio:', error);
+              }
+            );
+          });
+
+
+          // this.userDetails = JSON.parse(this.cookieService.get('user_details'));
+          this.fullName = this.studentPortfolio.student.firstName + " "+ this.studentPortfolio.student.lastName;
           new Typed(".typedText", {
           //  identity:String = this.studentPortfolio.student.firstName,
-            strings: ["Student", "Dreamer"],
+            strings: [this.fullName, this.studentPortfolio.student.position],
             // strings: ["Designer", this.studentPortfolio.student.firstName, this.studentPortfolio.about.aboutext],
             loop: true,
             typeSpeed: 100,
             backSpeed: 80,
-            backDelay: 4000
+            backDelay: 1000
           });
         }
       

@@ -162,15 +162,15 @@
 							<tr>
 								<th>ID</th>
 								<th>Technology</th>
-								<th>Description</th>
+								<!-- <th>Description</th> -->
 								<th>Action</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr *ngFor=" let studentPortfolio of studentPortfolio.skill">
 								<td>{{studentPortfolio.skillID}}</td>
-								<td class="skill"><span>{{studentPortfolio.skillTitle}}</span></td>
-								<td>{{studentPortfolio.skillDesc}}</td>
+								<td  class="skill"><span>{{studentPortfolio.skillTitle}}</span></td>
+								<!-- <td>{{studentPortfolio.skillDesc}}</td> -->
 								<!-- <td>{{studentPortfolio.skillImg}}</td> -->
 								<td>
 									<button style="margin-right: 5px;" href="" class="btn btn-ed" (click)="routeToEditSkill(studentPortfolio.skillID)" >Edit</button>

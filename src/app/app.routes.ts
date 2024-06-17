@@ -27,6 +27,7 @@ import { CreatefacultyComponent } from './faculty/createfaculty/createfaculty.co
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { LeaderboardapproveComponent } from './leaderboardapprove/leaderboardapprove.component';
 import { EditprofileComponent } from './editprofile/editprofile.component';
+import { UploadprofileComponent } from './uploadprofile/uploadprofile.component';
 
 
 export const routes: Routes = [
@@ -58,6 +59,7 @@ export const routes: Routes = [
     { title: "Unfold | Portfolio Spotlight", path: 'leaderboard', component: LeaderboardComponent },
     { title: "Unfold | Portfolio Approve", path: 'leaderboardapprove', component: LeaderboardapproveComponent },
     { title: "Unfold | Edit Profile", path: 'editprofile/:studentID', component: EditprofileComponent },
+    { title: "Unfold | Upload Profile", path: 'uploadprofile/:studentID', component: UploadprofileComponent },
     
     
 

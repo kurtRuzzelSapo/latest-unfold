@@ -60,6 +60,10 @@
                     <div class="circle"></div>
                 </li>
                 <li *ngIf="userDetails.is_faculty === 1" class="nav_list">
+                  <a routerLink="/leaderboardapprove" id="portfolio"  class="nav-link">Portfolio Most Approved</a>
+                    <div class="circle"></div>
+                </li>
+                <li *ngIf="userDetails.is_faculty === 1" class="nav_list">
                   <a routerLink="/viewport/{{userDetails.studentID}}'" id="portfolio"  class="nav-link">Newsfeed</a>
                     <div class="circle"></div>
                 </li>
@@ -84,9 +88,10 @@
           <div class="dropdown-menu" [class.show]="isDropdownVisible" (click)="$event.stopPropagation()">
             <ul>
               <li><a routerLink="/login">Logout</a></li>
-              <button style="background-color: #f8955e; border:1px solid #f5652f; margin-top: 10px;" class="btn btn-primary" (click)="routeToEditProfile( userDetails.studentID)">
+              <li><a (click)="routeToEditProfile( userDetails.studentID)">Edit Profile</a></li>
+              <!-- <button style="background-color: #f8955e; border:1px solid #f5652f; margin-top: 10px;" class="btn btn-primary" (click)="routeToEditProfile( userDetails.studentID)">
                 Edit Profile
-            </button>
+            </button> -->
             </ul>
           </div>
         </div>
