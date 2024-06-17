@@ -18,8 +18,22 @@
                     <!-- Profile picture help block-->
                      
                     <div class="small font-italic text-muted mb-1">Portfolio Views: <b>{{studentData.portfolioView}}</b>   Approvals: <b>{{studentData.approved}}</b></div>
+                    <form [formGroup]="applyForm"
+                    (submit)="Edit()">
+                        <input
+								formControlName="aboutImg"
+								type="file"
+								id="form3Example1"
+								class="form-control"
+								required
+								accept="image/*"
+                (change)="onFileSelected($event)"
+							  />
+
+                              <button class="btn btn-primary mt-3" type="submit">Save new image</button>
+                            </form>
+                            <button class="btn btn-secondary mt-3 mx-2" (click)="routeToEditProfile( userDetails.studentID)">cancel</button>
                     <!-- Profile picture upload button-->
-                    <button class="btn btn-primary" (click)="routeToUploadProfile(userDetails.studentID)">Upload new image</button>
                 </div>
             </div>
         </div>
@@ -86,19 +100,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -40,7 +40,7 @@ export class EditaboutmeComponent implements OnInit {
   ) {
     this.applyForm = new FormGroup({
       aboutText: new FormControl('', Validators.required),
-      aboutImg: new FormControl(null, Validators.required),
+  
      
     });
     this.formData = new FormData();
@@ -61,7 +61,7 @@ export class EditaboutmeComponent implements OnInit {
 
     this.applyForm = new FormGroup({
       aboutText: new FormControl(null, Validators.required),
-      aboutImg: new FormControl(null, Validators.required),
+     
      });
 
      this.ds.getRequestWithParams("view-portfolio", { id: this.userDetails.studentID }).subscribe(
@@ -121,7 +121,7 @@ export class EditaboutmeComponent implements OnInit {
   Edit() {
     this.formData.append('aboutText', this.applyForm.value.aboutText);
     this.formData.append('aboutID', this.aboutID);
-    this.formData.append('aboutImg', this.selectedFile);
+   
 
     this.ds.sendRequestWithMedia('edit-about', this.formData).subscribe(
       (response) => {

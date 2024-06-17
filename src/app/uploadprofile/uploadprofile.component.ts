@@ -12,13 +12,13 @@ import { CookieService } from 'ngx-cookie-service';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-editprofile',
+  selector: 'app-uploadprofile',
   standalone: true,
-  imports: [CommonModule, RouterLinkActive, ReactiveFormsModule, RouterLink],
-  templateUrl: './editprofile.component.html',
-  styleUrl: './editprofile.component.css'
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  templateUrl: './uploadprofile.component.html',
+  styleUrl: './uploadprofile.component.css'
 })
-export class EditprofileComponent implements OnInit {
+export class UploadprofileComponent {
   cookieService = inject(CookieService);
   formData: any;
   applyForm: any;
@@ -41,12 +41,9 @@ export class EditprofileComponent implements OnInit {
   ) {
     // Initialize the form group
     this.applyForm = new FormGroup({
-      firstName: new FormControl(null, Validators.required),
-      lastName: new FormControl(null, Validators.required),
-      position: new FormControl(null, Validators.required),
-      birthdate: new FormControl(null, Validators.required),
-      address: new FormControl(null, Validators.required),
-      contacts: new FormControl(null, [Validators.required]),
+      aboutImg: new FormControl(null, Validators.required),
+      aboutID: new FormControl(null, Validators.required),
+      
     });
     this.formData = new FormData();
   }
@@ -127,19 +124,15 @@ export class EditprofileComponent implements OnInit {
 
   Edit() {
  
-    this.formData.append('studentID', this.studentID);
-    this.formData.append('firstName', this.applyForm.value.firstName);
-    this.formData.append('lastName', this.applyForm.value.lastName);
-    this.formData.append('position', this.applyForm.value.position);
-    this.formData.append('birthdate', this.applyForm.value.birthdate);
-    this.formData.append('address', this.applyForm.value.address);
-    this.formData.append('contacts', this.applyForm.value.contacts);
+    this.formData.append('aboutImg', this.selectedFile);
+    this.formData.append('aboutID', this.studentProfile[0].aboutID);
   
 
-    this.ds.sendRequestWithMedia('edit-profile', this.formData).subscribe(
+    this.ds.sendRequestWithMedia('edit-profileImg', this.formData).subscribe(
       (response) => {
         console.log('Application submitted successfully:', response);
         alert("Updated Successfully!");
+       
         console.log(this.applyForm);
       },
       (error) => {
@@ -149,6 +142,10 @@ export class EditprofileComponent implements OnInit {
   }
 
   routeToUploadProfile(studentID:any){
-    this.route.navigate([`../../uploadprofile/${studentID}`], { relativeTo: this.aRoute });
+    this.route.navigate([`uploadprofile/${studentID}`], { relativeTo: this.aRoute });
+  }
+
+  routeToEditProfile(studentID: any) {
+    this.route.navigate([`../../editprofile/${studentID}`], { relativeTo: this.aRoute });
   }
 }
