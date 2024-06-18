@@ -228,7 +228,12 @@
           this.ds.sendRequestWithMedia('add-testimony', this.formData).subscribe(
             (response) => {
               console.log('Application submitted successfully:', response);
-              alert("Inserted Successfully!");
+              // alert("Inserted Successfully!");
+              Swal.fire({
+                title: "Thank you!",
+                text: "Your testimony has been submitted.",
+                icon: "success"
+              });
               console.log(this.applyForm);
              
             },
