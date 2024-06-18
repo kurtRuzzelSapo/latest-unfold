@@ -9,7 +9,7 @@ import { DataService } from '../../data.service';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { CommonModule } from '@angular/common';
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-createportfolio',
@@ -93,8 +93,13 @@ export class CreateportfolioComponent {
     this.ds.sendRequestWithMedia('add-project', this.formData).subscribe(
       (response) => {
         console.log('Application submitted successfully:', response);
-        alert("Inserted Successfully!");
+        // alert("Inserted Successfully!");
         console.log(this.applyForm);
+        Swal.fire({
+          title: "Inserted Successfully",
+          icon: "success"
+        });
+        this.route.navigate(['/portfolio']);
        
       },
       (error) => {

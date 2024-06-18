@@ -5,7 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { DataService } from '../data.service';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-faculty',
   standalone: true,
@@ -88,7 +88,11 @@ export class FacultyComponent {
     this.ds.deleteRequest("delete-student", payload).subscribe(
       (response: any) => {
         if (response.status_code === 200) {
-          alert("Student Deleted Successfully");
+          // alert("Student Deleted Successfully");
+          Swal.fire({
+            title: "Deleted Successfully",
+            icon: "success"
+          });
           window.location.reload();
         }
       },

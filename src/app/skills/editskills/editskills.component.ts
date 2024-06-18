@@ -12,6 +12,7 @@ import { Router, RouterLink, RouterLinkActive, ActivatedRoute, RouterOutlet } fr
 import { CookieService } from 'ngx-cookie-service';
 import { HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -119,8 +120,13 @@ export class EditskillsComponent {
     this.ds.sendRequestWithMedia('edit-skill', this.formData).subscribe(
       (response) => {
         console.log('Application submitted successfully:', response);
-        alert("Updated Successfully!");
+        // alert("Updated Successfully!");
         console.log(this.applyForm);
+        Swal.fire({
+          title: "Edited Successfully",
+          icon: "success"
+        });
+        this.route.navigate(['/skills']);
       },
       (error) => {
         console.error('Error submitting application:', error);

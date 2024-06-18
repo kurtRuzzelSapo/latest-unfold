@@ -18,6 +18,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatHeaderRowDef, MatRowDef } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-accomplishments',
@@ -160,6 +161,10 @@ deleteAccomplishment(accomplishmentId: number): void {
               console.log('Accomplishment deleted successfully:', response);
               // Reload the portfolio to reflect changes
               this.loadAccomplishment();
+              Swal.fire({
+                title: "Deleted Successfully",
+                icon: "success"
+              });
           },
           (error) => {
               console.error('Error deleting accomplishment:', error);

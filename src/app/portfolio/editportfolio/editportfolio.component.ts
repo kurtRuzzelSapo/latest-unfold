@@ -10,6 +10,7 @@ import { DataService } from '../../data.service';
 import { Router, RouterLink, RouterLinkActive, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-editportfolio',
@@ -151,8 +152,13 @@ export class EditportfolioComponent implements OnInit {
     this.ds.sendRequestWithMedia('edit-project', this.formData).subscribe(
       (response) => {
         console.log('Application submitted successfully:', response);
-        alert("Updated Successfully!");
+        // alert("Updated Successfully!");
         console.log(this.applyForm);
+        Swal.fire({
+          title: "Edited Successfully",
+          icon: "success"
+        });
+        this.route.navigate(['/portfolio']);
       },
       (error) => {
         console.error('Error submitting application:', error);
