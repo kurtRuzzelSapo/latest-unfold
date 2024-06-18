@@ -10,6 +10,7 @@ import { DataService } from '../../data.service';
 import { Router, RouterLink, RouterLinkActive, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-editaboutme',
@@ -126,7 +127,12 @@ export class EditaboutmeComponent implements OnInit {
     this.ds.sendRequestWithMedia('edit-about', this.formData).subscribe(
       (response) => {
         console.log('Application submitted successfully:', response);
-        alert("Updated Successfully!");
+        // alert("Updated Successfully!");
+        Swal.fire({
+          title: "Edited Successfully",
+          icon: "success"
+        });
+        this.route.navigate(['/aboutme']);
       },
       (error) => {
         console.error('Error submitting application:', error);

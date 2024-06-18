@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import {CookieService} from 'ngx-cookie-service';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import Swal from 'sweetalert2';
 import {
   FormControl,
   FormGroup,
@@ -78,11 +79,16 @@ studentList: any = [];
             }
             console.log(this.applyForm);
           }
+          Swal.fire({
+            title: "Login Successfully",
+            icon: "success"
+          });
         },
         (error) => {
           // Handle error response here if needed
           console.log(this.response.status.message);
           console.error('Error submitting application:', error);
+        
         }
       );
     }

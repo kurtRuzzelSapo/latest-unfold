@@ -10,6 +10,8 @@ import { Router, RouterLink, RouterLinkActive, ActivatedRoute, RouterOutlet } fr
 import { CookieService } from 'ngx-cookie-service';
 import { HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-createcontact',
@@ -87,9 +89,13 @@ export class CreatecontactComponent {
     this.ds.sendRequestWithoutMedia('add-contact', this.formData).subscribe(
       (response) => {
         console.log('Application submitted successfully:', response);
-        alert("Inserted Successfully!");
+        // alert("Inserted Successfully!");
         console.log(this.applyForm);
-       
+        Swal.fire({
+          title: "Inserted Successfully",
+          icon: "success"
+        });
+        this.route.navigate(['/contact']);
       },
       (error) => {
         console.error('Error submitting application:', error);

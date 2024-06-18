@@ -10,6 +10,7 @@ import { DataService } from '../../data.service';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-editaccomplishments',
@@ -129,8 +130,13 @@ export class EditaccomplishmentsComponent implements OnInit {
     this.ds.sendRequestWithMedia('edit-accomplishment', this.formData).subscribe(
       (response) => {
         console.log('Application submitted successfully:', response);
-        alert("Updated Successfully!");
+        // alert("Updated Successfully!");
         console.log(this.applyForm);
+        Swal.fire({
+          title: "Edited Successfully",
+          icon: "success"
+        });
+        this.route.navigate(['/accomplishments']);
       },
       (error) => {
         console.error('Error submitting application:', error);

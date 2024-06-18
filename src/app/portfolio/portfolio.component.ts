@@ -18,6 +18,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatHeaderRowDef, MatRowDef } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import Swal from 'sweetalert2';
 
 
 
@@ -232,6 +233,10 @@ deleteProject(projectId: number): void {
           console.log('Accomplishment deleted successfully:', response);
           // Reload the portfolio to reflect changes
           this.loadPortfolio();
+          Swal.fire({
+            title: "Deleted Successfully",
+            icon: "success"
+          });
       },
       (error) => {
           console.error('Error deleting accomplishment:', error);

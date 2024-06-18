@@ -7,6 +7,7 @@
       import { RouterLink } from '@angular/router';
       import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
       import { ActivatedRoute } from '@angular/router';
+      import Swal from 'sweetalert2';
       
       @Component({
         selector: 'app-viewport',
@@ -242,7 +243,11 @@
           this.ds.Approved(studentID).subscribe(
               (response) => {
                   console.log('Student Approved successfully:', response);
-                  alert("You approved a student!")
+                  // alert("You approved a student!")
+                  Swal.fire({
+                    title: "You approved a student!",
+                    icon: "success"
+                  });
                   // Reload the portfolio to reflect changes
               },
               (error) => {

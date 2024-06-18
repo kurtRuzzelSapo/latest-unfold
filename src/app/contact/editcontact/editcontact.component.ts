@@ -10,6 +10,7 @@ import { Router, RouterLink, RouterLinkActive, ActivatedRoute, RouterOutlet } fr
 import { CookieService } from 'ngx-cookie-service';
 import { HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-editcontact',
@@ -122,8 +123,13 @@ export class EditcontactComponent {
     this.ds.sendRequestWithMedia('edit-contact', this.formData).subscribe(
       (response) => {
         console.log('Application submitted successfully:', response);
-        alert("Updated Successfully!");
+        // alert("Updated Successfully!");
         console.log(this.applyForm);
+        Swal.fire({
+          title: "Edited Successfully",
+          icon: "success"
+        });
+        this.route.navigate(['/contact']);
       },
       (error) => {
         console.error('Error submitting application:', error);
