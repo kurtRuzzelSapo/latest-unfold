@@ -16,3 +16,181 @@
     </div>
   </div>
   
+
+   <!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="leaderboard.component.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <title>Student Leaderboard</title>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <ul class="nav_menu_list">
+            <li class="nav_list">
+                <a href="#home" class="nav-link active-link">Dashboard</a>
+                <div class="circle"></div>
+            </li>
+            <li class="nav_list">
+                <a href="#about" class="nav-link">Portfolio Feed</a>
+                <div class="circle"></div>
+            </li>
+            <li class="nav_list">
+                <a href="#projects" class="nav-link">My Portfolio</a>
+                <div class="circle"></div>
+            </li>
+
+            <li class="searchbar">
+                <input type="text" placeholder="Search Leaderboard">
+            </li>
+
+            <div class="nav-menu-btn">
+                <i class="uil uil-bars" onclick="menubarFunction()"></i>
+            </div>
+
+        </ul>
+
+        <div class="sidebar" id="menubar">
+            <ul class="menu_list">
+                <li class="menu">
+                    <a href="#home" class="nav-link active-link">Dashboard</a>
+                    <div class="circle"></div>
+                </li>
+                <li class="menu">
+                    <a href="#about" class="nav-link">Portfolio Feed</a>
+                    <div class="circle"></div>
+                </li>
+                <li class="menu">
+                    <a href="#projects" class="nav-link">My Portfolio</a>
+                    <div class="circle"></div>
+                </li>
+            </ul>
+        </div>
+    
+
+        
+        
+    </div>
+    
+        <div class="container">
+            <div class="leaderboard">
+                
+                <div class="title">
+                    <h1>Leaderboard</h1>
+                </div>
+               
+
+                <div class="header">
+                    <a href="#" class="view">View</a>
+                    <a href="#" class="apv">Approved</a>
+                </div>
+                
+                
+                <div class="leaderboard-list">
+                    <div class="list">
+                        <ul>
+                            <div class="item">
+                                <div class="profile-card">
+                                    <img src="https://via.placeholder.com/50" alt="Profile Picture">
+                                    <div class="profile-details">
+                                        <div class="profile-name">Edcel Reney Udoni</div>
+                                        <div class="profile-role">Frontend Developer</div>
+                                        <div class="profile-points">85 points</div>
+                                    </div>
+                                </div>
+                                    <div class="icon">
+                                        <img src="data:image/png;base64,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">
+                                    </div>
+                            </div>
+                            
+                            <div class="item">
+                                <div class="profile-card">
+                                    <img src="https://via.placeholder.com/50" alt="Profile Picture">
+                                    <div class="profile-details">
+                                        <div class="profile-name">Edcel Reney Udoni</div>
+                                        <div class="profile-role">Frontend Developer</div>
+                                        <div class="profile-points">85 points</div>
+                                    </div>
+                                </div>
+                                    <div class="icon">
+                                        <img src="data:image/png;base64,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">
+                                    </div>
+                            </div>
+
+                            <div class="item">
+                                <div class="profile-card">
+                                    <img src="https://via.placeholder.com/50" alt="Profile Picture">
+                                    <div class="profile-details">
+                                        <div class="profile-name">Edcel Reney Udoni</div>
+                                        <div class="profile-role">Frontend Developer</div>
+                                        <div class="profile-points">85 points</div>
+                                    </div>
+                                </div>
+                                    <div class="icon">
+                                        <img src="data:image/png;base64,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">
+                                    </div>
+                            </div>
+
+                            <div class="item">
+                                <div class="profile-card">
+                                    <img src="https://via.placeholder.com/50" alt="Profile Picture">
+                                    <div class="profile-details">
+                                        <div class="profile-name">Edcel Reney Udoni</div>
+                                        <div class="profile-role">Frontend Developer</div>
+                                        <div class="profile-points">85 points</div>
+                                    </div>
+                                </div>
+                                    <div class="icon">
+                                        <img src="data:image/png;base64,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">
+                                    </div>
+                            </div>
+
+                            <div class="item">
+                                <div class="profile-card">
+                                    <img src="https://via.placeholder.com/50" alt="Profile Picture">
+                                    <div class="profile-details">
+                                        <div class="profile-name">Edcel Reney Udoni</div>
+                                        <div class="profile-role">Frontend Developer</div>
+                                        <div class="profile-points">85 points</div>
+                                    </div>
+                                </div>
+                                    <div class="icon">
+                                        <img src="data:image/png;base64,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">
+                                    </div>
+                            </div>
+                        </ul>
+                    </div>
+
+                </div>
+            
+            </div>
+                <div class="profile">
+                        <img src="https://via.placeholder.com/100" alt="Edcel Reney Udani">
+                    <h2>Edcel Reney Udani</h2>
+                    <p>You came 5th</p>
+                </div>
+
+    </div>
+
+    <script>
+        function menubarFunction() {
+            var menubar = document.getElementById("menubar");
+            if (menubar.style.display === "block") {
+                menubar.style.display = "none";
+            } else {
+                menubar.style.display = "block";
+            }
+        }
+
+    </script>
+
+
+</body>
+
+</html>
+ -->
