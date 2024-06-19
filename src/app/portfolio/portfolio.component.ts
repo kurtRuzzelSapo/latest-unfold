@@ -1,6 +1,6 @@
 declare var $: any;
 
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, HostListener } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -76,7 +76,19 @@ export class PortfolioComponent implements OnInit {
     );
     this.loadPortfolio();
   }
+  isDropdownVisible = false;
 
+  toggleDropdown(event: MouseEvent) {
+    event.stopPropagation();
+    this.isDropdownVisible = !this.isDropdownVisible;
+  }
+
+  @HostListener('document:click', ['$event'])
+  handleClickOutside(event: MouseEvent) {
+    if (this.isDropdownVisible) {
+      this.isDropdownVisible = false;
+    }
+  }
   loadPortfolio(): void {
     this.ds.getRequestWithParams("view-portfolio", { id: this.userDetails.studentID }).subscribe(
       (response: any) => {
@@ -279,6 +291,9 @@ deleteProject(projectId: number): void {
   routeToEditPorfolio(projectID:any){
     // this.route.navigateByUrl('../createportfolio');
     this.route.navigate([`../editportfolio/${projectID}`], { relativeTo: this.aRoute });
+  }
+  routeToEditProfile(studentID: any) {
+    this.route.navigate([`../editprofile/${studentID}`], { relativeTo: this.aRoute });
   }
   
 }

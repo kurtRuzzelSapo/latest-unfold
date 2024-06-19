@@ -1,5 +1,5 @@
 declare var $: any;
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, HostListener } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -81,6 +81,19 @@ export class AboutmeComponent implements OnInit {
       }
     );
   }
+  isDropdownVisible = false;
+
+  toggleDropdown(event: MouseEvent) {
+    event.stopPropagation();
+    this.isDropdownVisible = !this.isDropdownVisible;
+  }
+
+  @HostListener('document:click', ['$event'])
+  handleClickOutside(event: MouseEvent) {
+    if (this.isDropdownVisible) {
+      this.isDropdownVisible = false;
+    }
+  }
 
   
   loadAbout(): void {
@@ -153,4 +166,8 @@ export class AboutmeComponent implements OnInit {
     // this.route.navigateByUrl('../createportfolio');
     this.route.navigate([`../editaboutme/${aboutID}`], { relativeTo: this.aRoute });
   }
+  routeToEditProfile(studentID: any) {
+    this.route.navigate([`../editprofile/${studentID}`], { relativeTo: this.aRoute });
+  }
+  
 }

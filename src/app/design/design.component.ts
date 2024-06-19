@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, HostListener } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -63,6 +63,20 @@ export class DesignComponent {
       }
     );
 
+  }
+
+  isDropdownVisible = false;
+
+  toggleDropdown(event: MouseEvent) {
+    event.stopPropagation();
+    this.isDropdownVisible = !this.isDropdownVisible;
+  }
+
+  @HostListener('document:click', ['$event'])
+  handleClickOutside(event: MouseEvent) {
+    if (this.isDropdownVisible) {
+      this.isDropdownVisible = false;
+    }
   }
 
   loadPortfolio(): void {
@@ -180,4 +194,9 @@ export class DesignComponent {
     // this.route.navigateByUrl('../createportfolio');
     this.route.navigate([`../createportfolio`], { relativeTo: this.aRoute });
   }
+  
+routeToEditProfile(studentID: any) {
+  this.route.navigate([`../editprofile/${studentID}`], { relativeTo: this.aRoute });
+}
+
 }

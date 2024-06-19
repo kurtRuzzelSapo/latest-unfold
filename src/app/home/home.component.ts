@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, HostListener } from '@angular/core';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 import { TopnavComponent } from '../topnav/topnav.component';
 import { CookieService } from 'ngx-cookie-service';
@@ -80,7 +80,19 @@ export class HomeComponent implements OnInit {
 
     
   }
+  isDropdownVisible = false;
 
+  toggleDropdown(event: MouseEvent) {
+    event.stopPropagation();
+    this.isDropdownVisible = !this.isDropdownVisible;
+  }
+
+  @HostListener('document:click', ['$event'])
+  handleClickOutside(event: MouseEvent) {
+    if (this.isDropdownVisible) {
+      this.isDropdownVisible = false;
+    }
+  }
   countBSITStudents(): void {
     this.bsitCount = this.studentList.filter((student: any) => student.course === 'BSIT').length;
     this.bscsCount = this.studentList.filter((student: any) => student.course === 'BSCS').length;
@@ -169,5 +181,8 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  routeToEditProfile(studentID: any) {
+    this.route.navigate([`../editprofile/${studentID}`], { relativeTo: this.aRoute });
+  }
   
 }

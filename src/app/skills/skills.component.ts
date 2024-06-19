@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, HostListener } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DataService } from '../data.service';
 import { Router, RouterLink, RouterLinkActive, ActivatedRoute } from '@angular/router';
@@ -74,6 +74,19 @@ export class SkillsComponent implements OnInit {
         console.error('Error retrieving portfolio:', error);
       }
     );
+  }
+  isDropdownVisible = false;
+
+  toggleDropdown(event: MouseEvent) {
+    event.stopPropagation();
+    this.isDropdownVisible = !this.isDropdownVisible;
+  }
+
+  @HostListener('document:click', ['$event'])
+  handleClickOutside(event: MouseEvent) {
+    if (this.isDropdownVisible) {
+      this.isDropdownVisible = false;
+    }
   }
 
   loadAccomplishment(): void {
@@ -182,4 +195,8 @@ deleteSkill(accomplishmentId: number): void {
   routeToEditSkill(skillID: any) {
     this.route.navigate([`../editskill/${skillID}`], { relativeTo: this.aRoute });
   }
+  
+routeToEditProfile(studentID: any) {
+  this.route.navigate([`../editprofile/${studentID}`], { relativeTo: this.aRoute });
+}
 }
