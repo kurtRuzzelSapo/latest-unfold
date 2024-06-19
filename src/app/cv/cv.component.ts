@@ -157,9 +157,9 @@ throw new Error('Method not implemented.');
   
     html2canvas(cvContent).then((canvas: { toDataURL: (arg0: string) => any; height: number; width: number; }) => {
       const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF();
-      const imgWidth = 220; // A4 width in mm
-      const pageHeight = 500; // A4 height in mm
+      const pdf = new jsPDF('p', 'mm', 'legal'); // Ensure to specify 'legal' paper size here
+      const imgWidth = 216; // Legal width in mm
+      const pageHeight = 356; // Legal height in mm
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
       let heightLeft = imgHeight;
       let position = 0;
