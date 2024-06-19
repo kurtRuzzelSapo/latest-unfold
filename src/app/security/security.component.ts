@@ -12,13 +12,13 @@ import { CookieService } from 'ngx-cookie-service';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-editprofile',
+  selector: 'app-security',
   standalone: true,
-  imports: [CommonModule, RouterLinkActive, ReactiveFormsModule, RouterLink],
-  templateUrl: './editprofile.component.html',
-  styleUrl: './editprofile.component.css'
+  imports: [ReactiveFormsModule, RouterLink, RouterLinkActive],
+  templateUrl: './security.component.html',
+  styleUrl: './security.component.css'
 })
-export class EditprofileComponent implements OnInit {
+export class SecurityComponent {
   cookieService = inject(CookieService);
   formData: any;
   applyForm: any;
@@ -41,12 +41,9 @@ export class EditprofileComponent implements OnInit {
   ) {
     // Initialize the form group
     this.applyForm = new FormGroup({
-      firstName: new FormControl(null, Validators.required),
-      lastName: new FormControl(null, Validators.required),
-      position: new FormControl(null, Validators.required),
-      birthdate: new FormControl(null, Validators.required),
-      address: new FormControl(null, Validators.required),
-      contacts: new FormControl(null, [Validators.required]),
+      email: new FormControl(null, Validators.required),
+      oldPassword: new FormControl(null, Validators.required),
+      newPassword: new FormControl(null, Validators.required),
     });
     this.formData = new FormData();
   }
@@ -67,14 +64,8 @@ export class EditprofileComponent implements OnInit {
     });
 
     this.applyForm = new FormGroup({
-      firstName: new FormControl(null, Validators.required),
-      lastName: new FormControl(null, Validators.required),
-      position: new FormControl(null, Validators.required),
-      birthdate: new FormControl(null, Validators.required),
-      address: new FormControl(null, Validators.required),
-      contacts: new FormControl(null, [Validators.required]),
-      // course: new FormControl(null, Validators.required),
-      // school: new FormControl(null, Validators.required),
+      oldPassword: new FormControl(null, Validators.required),
+      newPassword: new FormControl(null, Validators.required),
     });
 
     this.ds.getRequestWithParams("view-portfolio", { id: this.userDetails.studentID }).subscribe(
@@ -99,16 +90,12 @@ export class EditprofileComponent implements OnInit {
           console.log(this.studentData);
           console.log(this.studentData.firstName  )
           
-          // Initialize the form with the fetched skill data
-          this.applyForm.patchValue({
-                      firstName: this.studentData.firstName,
-                      lastName: this.studentData.lastName,
-                      position: this.studentData.position,
-                      birthdate: this.studentData.birthdate,
-                      address: this.studentData.address,
-                      contacts: this.studentData.contacts,
-                    
-          });
+//                   this.applyForm.patchValue({
+//           email: this.studentData.email,
+//           oldPassword: this.studentData.password,
+        
+// });
+      
         } else {
           console.error('Unexpected response structure:', response);
         }
@@ -128,19 +115,18 @@ export class EditprofileComponent implements OnInit {
   Edit() {
  
     this.formData.append('studentID', this.studentID);
-    this.formData.append('firstName', this.applyForm.value.firstName);
-    this.formData.append('lastName', this.applyForm.value.lastName);
-    this.formData.append('position', this.applyForm.value.position);
-    this.formData.append('birthdate', this.applyForm.value.birthdate);
-    this.formData.append('address', this.applyForm.value.address);
-    this.formData.append('contacts', this.applyForm.value.contacts);
+    
+    this.formData.append('oldPassword', this.applyForm.value.oldPassword);
+    this.formData.append('newPassword', this.applyForm.value.newPassword);
+
   
 
-    this.ds.sendRequestWithMedia('edit-profile', this.formData).subscribe(
+    this.ds.sendRequestWithMedia('edit-credentials', this.formData).subscribe(
       (response) => {
         console.log('Application submitted successfully:', response);
         alert("Updated Successfully!");
         console.log(this.applyForm);
+
       },
       (error) => {
         console.error('Error submitting application:', error);
@@ -148,10 +134,12 @@ export class EditprofileComponent implements OnInit {
     );
   }
 
+
   routeToUploadProfile(studentID:any){
-    this.route.navigate([`../../uploadprofile/${studentID}`], { relativeTo: this.aRoute });
+    this.route.navigate([`uploadprofile/${studentID}`], { relativeTo: this.aRoute });
   }
-  routeToSecurity(studentID:any){
-    this.route.navigate([`../../security/${studentID}`], { relativeTo: this.aRoute });
+
+  routeToEditProfile(studentID: any) {
+    this.route.navigate([`../../editprofile/${studentID}`], { relativeTo: this.aRoute });
   }
 }
