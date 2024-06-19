@@ -198,7 +198,7 @@
 					<div class="head">
 						<h3>List of Students</h3>
 					</div>
-                    <div class="search-filter-container">
+                    <div class="search-filter-container" style="display: flex;">
                         <div class="search-container">
                           <input type="text" class="search-input" placeholder="Search..." [(ngModel)]="searchTerm" (input)="filterStudents()">
                           <button class="search-button"><i class="uil uil-search"></i></button>
@@ -230,7 +230,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr *ngFor="let student of studentList">
+							<tr *ngFor="let student of filteredStudents">
                 <td>{{ student.studentID }}</td>
                 <td>{{ student.firstName }}</td>
                 <td>{{ student.lastName }}</td>

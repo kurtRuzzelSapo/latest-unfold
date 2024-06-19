@@ -47,6 +47,7 @@ export class HomeComponent implements OnInit {
       (response: any) => {
         this.studentList = response;
         this.countBSITStudents();
+        this.filterStudents();
         console.log('User details:', response);
       },
       (error) => {

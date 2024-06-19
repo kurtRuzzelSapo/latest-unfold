@@ -29,6 +29,7 @@ import { EditprofileComponent } from './editprofile/editprofile.component';
 import { UploadprofileComponent } from './uploadprofile/uploadprofile.component';
 import { CvComponent } from './cv/cv.component';
 import { HomeComponent } from './home/home.component';
+import { SecurityComponent } from './security/security.component';
 
 
 export const routes: Routes = [
@@ -60,8 +61,11 @@ export const routes: Routes = [
     { title: "Unfold | Portfolio Spotlight", path: 'leaderboard', component: LeaderboardComponent },
     { title: "Unfold | Portfolio Approve", path: 'leaderboardapprove', component: LeaderboardapproveComponent },
     { title: "Unfold | Edit Profile", path: 'editprofile/:studentID', component: EditprofileComponent },
+    { title: "Unfold | Edit Profile", path: 'editprofile', component: EditprofileComponent },
     { title: "Unfold | Upload Profile", path: 'uploadprofile/:studentID', component: UploadprofileComponent },
-    { title: "Unfold | CV", path: 'cv/:studentID', component: CvComponent }
+    { title: "Unfold | CV", path: 'cv/:studentID', component: CvComponent },
+    { title: "Unfold | Security", path: 'security', component: SecurityComponent },
+    { title: "Unfold | Security", path: 'security/:studentID', component: SecurityComponent }
     
 
 ];
