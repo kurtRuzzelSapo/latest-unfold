@@ -30,6 +30,7 @@ import { UploadprofileComponent } from './uploadprofile/uploadprofile.component'
 import { CvComponent } from './cv/cv.component';
 import { HomeComponent } from './home/home.component';
 import { SecurityComponent } from './security/security.component';
+import { FacSecurityComponent } from './fac-security/fac-security.component';
 
 
 export const routes: Routes = [
@@ -65,7 +66,8 @@ export const routes: Routes = [
     { title: "Unfold | Upload Profile", path: 'uploadprofile/:studentID', component: UploadprofileComponent },
     { title: "Unfold | CV", path: 'cv/:studentID', component: CvComponent },
     { title: "Unfold | Security", path: 'security', component: SecurityComponent },
-    { title: "Unfold | Security", path: 'security/:studentID', component: SecurityComponent }
+    { title: "Unfold | Security", path: 'security/:studentID', component: SecurityComponent },
+    { title: "Unfold | Security", path: 'facSecurity/:facID', component: FacSecurityComponent }
     
 
 ];
