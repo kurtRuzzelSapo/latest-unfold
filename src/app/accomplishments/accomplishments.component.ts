@@ -1,6 +1,6 @@
 declare var $: any;
 
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, HostListener } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -73,6 +73,19 @@ export class AccomplishmentsComponent implements OnInit {
         console.error('Error retrieving portfolio:', error);
       }
     );
+  }
+  isDropdownVisible = false;
+
+  toggleDropdown(event: MouseEvent) {
+    event.stopPropagation();
+    this.isDropdownVisible = !this.isDropdownVisible;
+  }
+
+  @HostListener('document:click', ['$event'])
+  handleClickOutside(event: MouseEvent) {
+    if (this.isDropdownVisible) {
+      this.isDropdownVisible = false;
+    }
   }
 
 
@@ -207,6 +220,8 @@ routeToCreateAccomplishment(){
 routeToEditAccomplishment(accomID: any) {
   this.route.navigate([`../editaccomplishment/${accomID}`], { relativeTo: this.aRoute });
 }
-
+routeToEditProfile(studentID: any) {
+  this.route.navigate([`../editprofile/${studentID}`], { relativeTo: this.aRoute });
+}
 }
 

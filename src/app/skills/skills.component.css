@@ -582,4 +582,52 @@ body {
 		min-width: 420px;
 	}
 }
+/* Dropdown CSS */
+.user-details{
+	font-family: 'Poppins', sans-serif;
+	font-weight: 800;
+}
+	.prof-icon{
+		border-radius: 50%;
+	}
+.profile {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+  }
+  
+  .dropdown-menu {
+	display: none;
+	position: absolute;
+	top: 70px; /* Adjust based on your needs */
+	right: 0;
+	background-color: white;
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+  }
+  
+  .profile .dropdown-menu ul {
+	list-style-type: none;
+	padding: 20;
+	margin: 0;
+  }
+  
+  .profile .dropdown-menu ul li {
+	padding: 2px 10px;
+	border-bottom: 1px solid #ddd;
+  }
+  
+  .profile .dropdown-menu ul li a {
+	color: black;
+	text-decoration: none;
+  }
+  
+  .profile .dropdown-menu ul li a:hover {
+	background-color: #f1f1f1;
+  }
+  
+  .profile .dropdown-menu.show {
+	display: block;
+  }
+
 

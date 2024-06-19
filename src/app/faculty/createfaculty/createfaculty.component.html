@@ -17,8 +17,9 @@
 <body>
 <!-- SIDEBAR -->
 <section id="sidebar">
-	<a href="#" class="brand">
-		<i class='bx bxl-firebase'></i>
+	<a class="brand">
+		<!-- <i class='bx bxl-firebase'></i> -->
+		<img src="../../assets/icons/Unfold Logo.png" width="40px" height="40px" alt="">
 		<span class="text">UNFOLD</span>
 	</a>
 	<ul class="side-menu top">
@@ -58,7 +59,7 @@
 				<span class="text">Contacts</span>
 			</a>
 		</li>
-		<li *ngIf="userDetails.is_admin === 1" >
+		<li class="active" *ngIf="userDetails.is_admin === 1" >
 			<a routerLink="/faculty">
 				<i class='bx bxs-user' ></i>
 				<span class="text">Faculty</span>

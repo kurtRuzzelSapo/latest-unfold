@@ -19,8 +19,9 @@
 
 	<!-- SIDEBAR -->
 	<section id="sidebar">
-		<a href="#" class="brand">
-			<i class='bx bxl-firebase'></i>
+		<a class="brand">
+			<!-- <i class='bx bxl-firebase'></i> -->
+			<img src="../../assets/icons/Unfold Logo.png" width="40px" height="40px" alt="">
 			<span class="text">UNFOLD</span>
 		</a>
 		<ul class="side-menu top">
@@ -96,11 +97,25 @@
 				<a *ngIf="userDetails.is_admin === 0" routerLink="/viewport/{{userDetails.studentID}}'" class="nav-link">Portfolio</a>
 				<a *ngIf="userDetails.is_admin === 0" routerLink="/newsfeed" class="nav-link">Portfolio Feed</a>
 			</div>
-			<a class="profile">
-			  <b style="margin-right: 10px;" class="user-details"
-			  >{{ userDetails.firstName }} {{ userDetails.lastName }}</b>
-		 <img [src]="baseAPI + studentPortfolio.about[0].aboutImg" alt="">
-		  </a>
+			<!-- STUDENT -->
+			<div *ngIf="userDetails.is_admin === 0"  class="profile" (click)="toggleDropdown($event)">
+				<b style="margin-right: 10px;" class="user-details">
+				  {{ userDetails.firstName }} {{ userDetails.lastName }}
+				</b>
+				<img class="prof-icon" *ngIf="userDetails.is_admin === 0" width="60" height="60" [src]="baseAPI + studentPortfolio.about[0].aboutImg" alt="">
+				
+				<!-- Dropdown Menu -->
+				<div class="dropdown-menu" [class.show]="isDropdownVisible" (click)="$event.stopPropagation()">
+				  <ul>
+					<li><a routerLink="/login">Logout</a></li>
+					<li><a (click)="routeToEditProfile( userDetails.studentID)">Edit Profile</a></li>
+					<!-- <button style="background-color: #f8955e; border:1px solid #f5652f; margin-top: 10px;" class="btn btn-primary" (click)="routeToEditProfile( userDetails.studentID)">
+					  Edit Profile
+				  </button> -->
+				  </ul>
+				</div>
+			  </div>
+	  
 		</nav>
 		<!-- NAVBAR -->
 
