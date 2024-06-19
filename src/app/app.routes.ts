@@ -28,6 +28,7 @@ import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { LeaderboardapproveComponent } from './leaderboardapprove/leaderboardapprove.component';
 import { EditprofileComponent } from './editprofile/editprofile.component';
 import { UploadprofileComponent } from './uploadprofile/uploadprofile.component';
+import { CvComponent } from './cv/cv.component';
 
 
 export const routes: Routes = [
@@ -60,7 +61,7 @@ export const routes: Routes = [
     { title: "Unfold | Portfolio Approve", path: 'leaderboardapprove', component: LeaderboardapproveComponent },
     { title: "Unfold | Edit Profile", path: 'editprofile/:studentID', component: EditprofileComponent },
     { title: "Unfold | Upload Profile", path: 'uploadprofile/:studentID', component: UploadprofileComponent },
-    
+    { title: "Unfold | CV", path: 'cv/:studentID', component: CvComponent }
     
 
 ];

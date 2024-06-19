@@ -27,6 +27,7 @@ export interface Status {
 })
 
 export class LoginComponent {
+  fullName:any
   response: any;
   message: any;
 Error: any;
@@ -71,18 +72,52 @@ studentList: any = [];
             this.userDetails = JSON.parse(this.cookieService.get('user_details'));
             //  this.route.navigateByUrl('/portfolio');
             if(this.userDetails.is_faculty === 1){
-
+              this.userDetails = JSON.parse(this.cookieService.get('user_details'));
+              this.fullName = this.userDetails.facFirstname + this.userDetails.facLastname;
+              const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.onmouseenter = Swal.stopTimer;
+                  toast.onmouseleave = Swal.resumeTimer;
+                }
+              });
+              Toast.fire({
+                icon: "success",
+                title: "You're signed in as " + this.fullName
+              });
               this.route.navigateByUrl('/newsfeed');
+              
             }else{
-
+              this.userDetails = JSON.parse(this.cookieService.get('user_details'));
+              this.fullName = this.userDetails.firstName, this.userDetails.lastName;
+              const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.onmouseenter = Swal.stopTimer;
+                  toast.onmouseleave = Swal.resumeTimer;
+                }
+              });
+              Toast.fire({
+                icon: "success",
+                title: "You're signed in as " + this.fullName
+              });
               this.route.navigateByUrl('/Home');
             }
             console.log(this.applyForm);
           }
-          Swal.fire({
-            title: "Login Successfully",
-            icon: "success"
-          });
+          // Swal.fire({
+          //   title: "Login Successfully",
+          //   icon: "success"
+          // });
+         
         },
         (error) => {
           // Handle error response here if needed

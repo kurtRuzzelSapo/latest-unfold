@@ -4,7 +4,7 @@
       import { CookieService } from 'ngx-cookie-service';
       import { DataService } from '../data.service';
       import { CommonModule } from '@angular/common';
-      import { RouterLink } from '@angular/router';
+      import { Router, RouterLink } from '@angular/router';
       import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
       import { ActivatedRoute } from '@angular/router';
       import Swal from 'sweetalert2';
@@ -35,7 +35,7 @@
   // LOCALHOST BASEAPI
    baseAPI:string = 'http://localhost/unfold/unfold-api/'
       
-        constructor(private ds: DataService, private route: ActivatedRoute, private cookieService: CookieService) {}
+        constructor(private ds: DataService, private route: ActivatedRoute, private cookieService: CookieService, private router: Router) {}
       
         ngOnInit(): void {
           this.formData = new FormData();
@@ -73,8 +73,10 @@
             this.ds.getRequestWithParams("view-portfolio", { id: studentID }).subscribe(
               (response: any) => {
                 this.studentPortfolio = response;
-                console.log('View Portfolio details:', response);
+                console.log('View Portfolio detailssss:', this.studentPortfolio);
+
                 console.log(this.studentPortfolio.student.firstName)
+                console.log(this.studentPortfolio.accomplishments.accomTitle)
                 this.updateCounts(response);
                 this.studentImage = `${this.baseAPI}${this.studentPortfolio.about[0].aboutImg}`;
               },
@@ -177,6 +179,7 @@
           sr.reveal('.featured-image', { delay: 300 });
       
           sr.reveal('.project-box', { interval: 200 });
+          sr.reveal('.project-section', { interval: 200 });
           sr.reveal('.top-header', {});
       
           const srLeft = ScrollReveal({
@@ -215,6 +218,17 @@
               document.querySelector('.nav-menu a[href*=' + sectionId + ']')?.classList.remove('active-link');
             }
           });
+        }
+
+        downloadCV(e: any, studentID: string): void {
+          e.preventDefault();
+          if (studentID) {
+            this.router.navigateByUrl(`cv/${studentID}`);
+            console.log(studentID);
+          } else {
+            console.error('Invalid studentID:', studentID);
+            // Handle the error or display a message to the user
+          }
         }
 
         Insert() {
