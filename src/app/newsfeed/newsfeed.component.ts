@@ -285,5 +285,8 @@ export class NewsfeedComponent implements OnInit, AfterViewInit {
 routeToEditProfile(studentID: any) {
   this.route.navigate([`../editprofile/${studentID}`], { relativeTo: this.aRoute });
 }
+routeToFacSecurity(facID:any){
+  this.route.navigate([`../facSecurity/${facID}`], { relativeTo: this.aRoute });
+}
 
 }
