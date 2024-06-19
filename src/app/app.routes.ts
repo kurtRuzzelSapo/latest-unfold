@@ -8,7 +8,6 @@ import { SkillsComponent } from './skills/skills.component';
 import { ServicesComponent } from './services/services.component';
 import { ContactComponent } from './contact/contact.component';
 import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
 import { NewsfeedComponent } from './newsfeed/newsfeed.component';
 import { ViewportComponent } from './viewport/viewport.component';
@@ -29,6 +28,7 @@ import { LeaderboardapproveComponent } from './leaderboardapprove/leaderboardapp
 import { EditprofileComponent } from './editprofile/editprofile.component';
 import { UploadprofileComponent } from './uploadprofile/uploadprofile.component';
 import { CvComponent } from './cv/cv.component';
+import { HomeComponent } from './home/home.component';
 
 
 export const routes: Routes = [

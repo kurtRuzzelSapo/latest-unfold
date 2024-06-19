@@ -6,16 +6,20 @@ import { DataService } from '../data.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterOutlet, ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [SidenavComponent, TopnavComponent, CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [SidenavComponent, TopnavComponent, CommonModule, RouterOutlet, RouterLink, RouterLinkActive, FormsModule],
   providers: [CookieService],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
+  filteredStudents: any = [];
+  searchTerm: string = '';
+  selectedCategory: string = '';
   selectedFile: any;
   userDetails: any;
   formData: any;
@@ -124,6 +128,44 @@ export class HomeComponent implements OnInit {
     if (event.target.files.length > 0) {
       this.selectedFile = event.target.files[0];
     }
+  }
+
+  filterStudents(): void {
+    console.log("Selected category:", this.selectedCategory);
+    console.log("Search term:", this.searchTerm);
+
+    this.filteredStudents = this.studentList.filter((student: any) => {
+      if (student && student.firstName && student.lastName && student.course && student.address && student.school && student.position) {
+        const fullName = `${student.firstName} ${student.lastName}`.toLowerCase();
+        const course = student.course.toLowerCase();
+        const address = student.address.toLowerCase();
+        const school = student.school.toLowerCase();
+        const position = student.position.toLowerCase();
+        const searchTerm = this.searchTerm.toLowerCase();
+
+        const skillTitles = (student.skills || []).map((skill: any) => skill.toLowerCase());
+        const matchesSkills = skillTitles.some((title: string) => title.includes(searchTerm));
+
+        const matchesSearch =
+          fullName.includes(searchTerm) ||
+          course.includes(searchTerm) ||
+          address.includes(searchTerm) ||
+          school.includes(searchTerm) ||
+          position.includes(searchTerm) ||
+          matchesSkills;
+        const matchesCategory = this.selectedCategory ? course === this.selectedCategory.toLowerCase() : true;
+
+        const matchResult = matchesSearch && matchesCategory;
+
+        if (!matchResult) {
+          console.log("Account not shown:", student.firstName, student.lastName);
+        }
+
+        return matchResult;
+      } else {
+        return false;
+      }
+    });
   }
 
   
