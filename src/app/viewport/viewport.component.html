@@ -107,7 +107,7 @@
             </ul>
         </div>
         <div class="nav-button">
-            <button class="btn">Download CV <i class="uil uil-file-alt"></i></button>
+            <button class="btn" (click)="downloadCV($event, studentPortfolio.student.studentID)">Download CV <i class="uil uil-file-alt"></i></button>
         </div>
         <div class="nav-menu-btn">
             <i class="uil uil-bars" onclick="myMenuFunction()"></i>
@@ -143,7 +143,7 @@
                 <!-- <button (click)="Approved(studentPortfolio.student.studentID)" *ngIf="userDetails.is_faculty === 1" class="btn blue-btn">Approve me <i class="uil-star"></i></button> -->
                 <button (click)="Approved(studentPortfolio.student.studentID)" *ngIf="userDetails.is_faculty === 1" class="btn blue-btn">Approve me <i class="uil-star"></i></button>
                 <button *ngIf="userDetails.is_admin === 0" class="btn blue-btn">Collab with me</button>
-                <button  class="btn">Download CV <i class="uil uil-file-alt"></i></button>
+                <button  class="btn" (click)="downloadCV($event, studentPortfolio.student.studentID)">Download CV <i class="uil uil-file-alt"></i></button>
             </div>
             <div *ngIf="counts.contacts === null || counts.contacts === 0">
                 <p style="color: #ee8d59; font-weight: 500;" >This student doesn't have any social media accounts yet.</p>
@@ -242,77 +242,95 @@
 
 
 
-       <!------------------ PROJECT --------------------- -->
        <section class="section contact" id="contact">
         <div class="top-header">
-          <h1>Projects</h1>
-          <span>Check out my accomplished projects</span>
+            <h1>Projects</h1>
+            <span>Do you have a project in your mind, contact me here</span>
         </div>
-        <div>
-            <div class="row">
-                <div class="col">
-                   <div style="display: flex;" class="contact-info">
-                     <img src="https://dthezntil550i.cloudfront.net/u8/latest/u82311180646396480024838605/57ccfe71-b6c8-4353-b4fb-34ae4b11c80f.jpg" alt="">
-                     <!-- <h1>mamamo</h1> -->
-                   </div>
+        <div *ngIf="counts.projects === null || counts.projects === 0">
+            <p style="color: #ee8d59; font-weight: 500; text-align: center;" >This student doesn't have any Projects yet.</p>
+        </div>
+        <div class="project-grid">
+            <div class="project-section square" *ngFor=" let studentPortfolio of studentPortfolio.project">
+                <a target="_blank" href="{{studentPortfolio.projectLink}}">
+                    <img [src]="baseAPI + studentPortfolio.projectImg" alt="">
+                </a>
+                <div class="project-sectionDesc">
+                    <h4>{{studentPortfolio.projectTitle}}</h4>
+                    <h5>Created: {{studentPortfolio.projectDate | date : "MMMM d, yyyy"}}</h5>
+                    <p>{{studentPortfolio.projectDesc}}</p>
                 </div>
-                <!-- <div class="col">
-                   <div class="form-control">
-                     
-                   </div>
-                </div> -->
-             </div>
-          
+            </div>
         </div>
-     
-     </section>
-       <!------------------ COMPETIITION --------------------- -->
-       <section class="section contact" id="contact">
-        <div class="top-header">
-          <h1>Competitions</h1>
-          <span>Competitions I’ve Recently Participated In</span>
+    </section>
+    
+    
+    <section class="section testimonies" id="testimonies">
+        <div class="top-header text-center">
+            <h1>Testimonies</h1>
+            <span>What others say about me</span>
         </div>
-        <div>
+        <br>
+        <br>
+    <br>
+    <br>
+    
+    <!-- <div *ngIf="counts.contacts === null || counts.contacts === 0">
+        <p style="color: #ee8d59; font-weight: 500; text-align: center;" >This student doesn't have any social media accounts yet.</p>
+    </div> -->
+        <div class='carousel__item' *ngFor="let studentPortfolio of studentPortfolio.testimony">
+      <div class='carousel__item-head'>
+        <img [src]="baseAPI + studentPortfolio.testImg" class="rounded-circle" alt="Testimony Image" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+      </div>
+      <div class='carousel__item-body' >
+        <p class='title'>{{studentPortfolio.testFirstname}} {{studentPortfolio.testLastname}}</p>
+        <b class='title'>{{studentPortfolio.testPosition}}</b>
+        <p>{{studentPortfolio.testDesc}}</p>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    
+    
+    </section>
+    
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script> -->
+    
+    
+          <section class="section" id="competitions">
+        <div class="container">
+            <div class="top-header text-center">
+                <h1>Competitions</h1>
+                <span>Competitions that I've joined recently</span>
+            </div>
             <div class="row">
-                <div class="col">
-                   <div style="display: flex;" class="contact-info">
-                     <img src="https://dthezntil550i.cloudfront.net/u8/latest/u82311180646396480024838605/57ccfe71-b6c8-4353-b4fb-34ae4b11c80f.jpg" alt="">
-                     
-                   </div>
+                <!-- Competition cards -->
+                <div *ngIf="counts.competitions === null || counts.competitions === 0">
+                    <p style="color: #ee8d59; font-weight: 500; text-align: center;" >This student doesn't have any social media accounts yet.</p>
                 </div>
-                <!-- <div class="col">
-                   <div class="form-control">
-                     
-                   </div>
-                </div> -->
-             </div>
-          
-        </div>
-     
-     </section>
+                <div class="col-lg-5 col-md-6">
+                    <div class="card mb-4 competition-card" *ngFor="let studentPortfolio of studentPortfolio.accomplishment">
+                        <img [src]="baseAPI + studentPortfolio.accomImg" class="card-img-top" alt="Competition Image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{studentPortfolio.accomTitle}}</h5>
+                            <p class="card-text">{{studentPortfolio.accomDesc}}</p>
+                            <p class="card-text">Date:{{studentPortfolio.accomDate | date : " MMMM d, yyyy"}}</p>
+                            <a href="{{studentPortfolio.accomLink}}" target="_blank" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
 
-       <!-- <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2022/02/15-Iconic-Shonen-Anime-Protagonists-Ranked-By-Their-Intelligence-Tanjiro-Kamado.jpg" class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2022/02/15-Iconic-Shonen-Anime-Protagonists-Ranked-By-Their-Intelligence-Tanjiro-Kamado.jpg" class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2022/02/15-Iconic-Shonen-Anime-Protagonists-Ranked-By-Their-Intelligence-Tanjiro-Kamado.jpg" class="d-block w-100" alt="...">
-          </div>
+                
+                
+                <!-- Add more competition cards here -->
+            </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div> -->
-
+    </section>
+    
 
    
 

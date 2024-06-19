@@ -133,25 +133,45 @@ export class SkillsComponent implements OnInit {
   }
 
 deleteSkill(accomplishmentId: number): void {
-  
+
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!"
+  }).then((result) => {
+    if (result.isConfirmed) {
       this.ds.deleteSkill(accomplishmentId).subscribe(
-          (response) => {
-              console.log('Accomplishment deleted successfully:', response);
-              // Reload the portfolio to reflect changes
-              this.loadAccomplishment();
-              Swal.fire({
-                title: "Deleted Successfully",
-                icon: "success"
-              });
-          },
-          (error) => {
-              console.error('Error deleting accomplishment:', error);
-              if (error.status === 401) {
-                  console.warn('Unauthorized access - redirecting to login');
-                  this.route.navigateByUrl('/login'); // Or your login route
-              }
-          }
-      );
+        (response) => {
+            console.log('Accomplishment deleted successfully:', response);
+            // Reload the portfolio to reflect changes
+            this.loadAccomplishment();
+            Swal.fire({
+              title: "Deleted Successfully",
+              icon: "success"
+            });
+        },
+        (error) => {
+            console.error('Error deleting accomplishment:', error);
+            if (error.status === 401) {
+                console.warn('Unauthorized access - redirecting to login');
+                this.route.navigateByUrl('/login'); // Or your login route
+            }
+        }
+    );
+
+      Swal.fire({
+        title: "Deleted!",
+        text: "Your file has been deleted.",
+        icon: "success"
+      });
+    }
+  });
+  
+     
   
 }
 

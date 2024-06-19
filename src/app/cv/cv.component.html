@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="cv.component.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- --------- UNICONS ---------- -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <!-- --------- CSS ---------- -->
+    <!-- --------- FAVICON ---------- -->
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+    <!-- ----- TYPING JS Link ----- -->
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <!-- ----- SCROLL REVEAL JS Link----- -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <!-- ----- MAIN JS ----- -->
+    <script defer src="/src/assets/app.js"></script>
+    <title>CV</title>
+</head>
+
+<body>
+<div id="cv-content">
+  <div class="container">
+    <div class="header">
+      <div class="full-name">
+        <p class="first-name">{{ studentPortfolio.student.firstName }} {{ studentPortfolio.student.lastName}}</p> 
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="contact-info">
+            <p><i class="uil uil-envelope"></i>{{ studentPortfolio.student.email }}</p>
+            <p><i class="uil uil-phone"></i>{{ studentPortfolio.student.contacts }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="about">
+        <h2>About me<i class=""></i></h2>
+        <p>
+          Hello! I'm {{ studentPortfolio.student.firstName }} {{ studentPortfolio.student.lastName }}, and I live at {{ studentPortfolio.student.address }}.
+           I am a student at {{ studentPortfolio.student.school }}, <br>
+           currently pursuing a course in {{ studentPortfolio.student.course }}. 
+           I am dedicated to both academic excellence and personal growth. <br>
+           I was born on  {{
+            studentPortfolio.student.birthdate
+          }}. 
+          Through this portfolio, I aim to share my journey, achievements, and aspirations with you.
+        </p>
+      </div>
+    </div>
+
+    <div class="details">
+
+      <div class="section">
+        <div class="section__title">Projects</div>
+        <div class="section__list">
+          <div *ngFor="let studentPortfolio of studentPortfolio.project">
+            <div class="right">{{ studentPortfolio.projectTitle }}</div>
+            <div class="right">Created: {{ studentPortfolio.projectDate }}</div>
+            <div class="right"><a target="_blank" href="{{studentPortfolio.projectLink}}">See more</a></div>
+            <div class="right"><blockquote>{{ studentPortfolio.projectDesc }}</blockquote></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="section">
+        <div class="section__title">Technologies</div>
+        <div style="display: flex;" class="skills">
+          <div  *ngFor=" let studentPortfolio of studentPortfolio.skill">
+            <div style="margin-right: 5px;" class="left">{{studentPortfolio.skillTitle}}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section__title">Competition</div>
+        <div class="section__list">
+          <div *ngFor=" let studentPortfolio of studentPortfolio.accomplishment ">
+            <div class="left">{{studentPortfolio.accomTitle}}</div>
+            <div class="left">{{studentPortfolio.accomDesc}}</div>
+            <div class="right"><a target="_blank" href="{{studentPortfolio.accomLink}}">See more</a></div>
+            <div class="left">Created: {{studentPortfolio.accomDate}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Modal -->
+    <div *ngIf="modalOpen" class="modal">
+      <div class="modal-content">
+        <span (click)="closeModal()" class="close">&times;</span>
+        <p>Modal content goes here...</p>
+        <p>This is where you can display more detailed information or perform actions.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="Download">
+  <a href="{{ studentPortfolio.cvLink }}" target="_blank">Download CV as PDF</a>
+  <button (click)="downloadCV($event, studentPortfolio.studentID)">Download CV</button>
+  </div>
+
+</body>
+</html>
