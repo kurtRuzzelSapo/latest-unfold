@@ -280,6 +280,25 @@
 
     
       }
+
+      toHome(){
+        document.getElementById("homes")?.scrollIntoView()
+      }
+      toAbout(){
+        document.getElementById("about")?.scrollIntoView()
+      }
+      toContacts(){
+        document.getElementById("contact")?.scrollIntoView()
+      }
+      toProjects(){
+        document.getElementById("projects")?.scrollIntoView()
+      }
+      toComp(){
+        document.getElementById("competitions")?.scrollIntoView()
+      }
+      toTest(){
+        document.getElementById("testimonies")?.scrollIntoView()
+      }
       }
       
 

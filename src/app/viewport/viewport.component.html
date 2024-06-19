@@ -81,7 +81,7 @@
                     <div class="circle"></div>
                 </li>
             </ul> -->
-            <a *ngIf="userDetails.is_admin === 0" style="text-decoration: none; list-style-type: none; font-size: 20px; font-weight: bolder; color: #ee8d59;"    routerLink="/newsfeed" class="view-portfolio" href=""
+            <a *ngIf="userDetails.is_admin === 0" style="text-decoration: none; list-style-type: none; font-size: 20px; font-weight: bolder; color: #ee8d59;"     routerLink="/newsfeed" class="view-portfolio" href=""
           ><li class="uil-left-arrow-from-left"></li></a>
             <a *ngIf="userDetails.is_admin === 1" style="text-decoration: none; list-style-type: none; font-size: 20px; font-weight: bolder; color: #ee8d59;"    routerLink="/Home" class="view-portfolio" href=""
           ><li class="uil-left-arrow-from-left"></li></a>
@@ -89,19 +89,27 @@
           ><li class="uil-left-arrow-from-left"></li></a>
             <ul class="nav_menu_list">
                 <li class="nav_list">
-                    <a  href="#projects" class="nav-link active-link">Home</a>
+                    <a [routerLink]="[]" class="nav-link active-link" (click)="toHome()">Home</a>
                     <div class="circle"></div>
                 </li>
                 <li class="nav_list">
-                    <a [routerLink]="[]" fragment="about" class="nav-link">About</a>
+                    <a [routerLink]="[]" fragment="about" class="nav-link" (click)="toAbout()">About</a>
                     <div class="circle"></div>
                 </li>
                 <li class="nav_list">
-                    <a [routerLink]="[]" fragment="projects" class="nav-link">Projects</a>
+                    <a [routerLink]="[]" fragment="projects" class="nav-link" (click)="toProjects()">Projects</a>
                     <div class="circle"></div>
                 </li>
                 <li class="nav_list">
-                    <a [routerLink]="[]" fragment="contact" class="nav-link">Contact</a>
+                    <a [routerLink]="[]" fragment="projects" class="nav-link" (click)="toComp()">Competitions</a>
+                    <div class="circle"></div>
+                </li>
+                <li class="nav_list">
+                    <a [routerLink]="[]" fragment="projects" class="nav-link" (click)="toTest()">Testimony</a>
+                    <div class="circle"></div>
+                </li>
+                <li class="nav_list">
+                    <a [routerLink]="[]" fragment="contact" class="nav-link" (click)="toContacts()">Contact</a>
                     <div class="circle"></div>
                 </li>
             </ul>
@@ -118,7 +126,7 @@
     <!-- -------------- MAIN ---------------- -->
     <main class="wrapper">
        <!-- -------------- FEATURED BOX ---------------- -->
-       <section class="featured-box" id="home">
+       <section class="featured-box" id="homes">
           <div class="featured-text">
             <div class="featured-text-card">
                 
@@ -242,7 +250,7 @@
 
 
 
-       <section class="section contact" id="contact">
+       <section class="section contact" >
         <div class="top-header">
             <h1>Projects</h1>
             <span>Do you have a project in your mind, contact me here</span>
@@ -310,7 +318,7 @@
             <div class="row">
                 <!-- Competition cards -->
                 <div *ngIf="counts.competitions === null || counts.competitions === 0">
-                    <p style="color: #ee8d59; font-weight: 500; text-align: center;" >This student doesn't have any social media accounts yet.</p>
+                    <p style="color: #ee8d59; font-weight: 500; text-align: center;" >This student doesn't join any Competitions yet.</p>
                 </div>
                 <div class="col-lg-5 col-md-6">
                     <div class="card mb-4 competition-card" *ngFor="let studentPortfolio of studentPortfolio.accomplishment">
