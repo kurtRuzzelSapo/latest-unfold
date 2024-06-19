@@ -1,3 +1,4 @@
+<p>home works!</p>
 <!-- <app-topnav></app-topnav> -->
 <!-- <app-sidenav></app-sidenav> -->
 
@@ -178,10 +179,22 @@
 				<div class="order">
 					<div class="head">
 						<h3>List of Students</h3>
-						
-						<i class='bx bx-search' ></i>
-						<i class='bx bx-filter' ></i>
 					</div>
+                    <div class="search-filter-container">
+                        <div class="search-container">
+                          <input type="text" class="search-input" placeholder="Search..." [(ngModel)]="searchTerm" (input)="filterStudents()">
+                          <button class="search-button"><i class="uil uil-search"></i></button>
+                        </div>
+                        <div class="filter-container">
+                          <select [(ngModel)]="selectedCategory" (change)="filterStudents()" name="filter" id="filter">
+                            <option value="">All</option>
+                            <option value="bsit">BSIT</option>
+                            <option value="bscs">BSCS</option>
+                            <option value="bsemc">BSEMC</option>
+                            <option value="act">ACT</option>
+                          </select>
+                        </div>
+                      </div>
 					<table *ngIf="userDetails.is_admin === 1">
 						<thead>
 							<tr>
