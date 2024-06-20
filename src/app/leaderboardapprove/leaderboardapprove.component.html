@@ -1,4 +1,226 @@
-<div class="leaderboard">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- --------- UNICONS ---------- -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+   
+    <!-- --------- CSS ---------- -->
+  
+
+    <!-- --------- FAVICON ---------- -->
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+
+    <!-- ----- TYPING JS Link ----- -->
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+
+    <!-- ----- SCROLL REVEAL JS Link----- -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+ 
+    <!-- ----- MAIN JS ----- -->
+    <script defer src="/src/assets/app.js"></script>
+
+    <title>Portfolio</title>
+
+    <style>
+        
+    </style>
+</head>
+<body style="height: auto;">
+   <div class="container">
+      <!-- --------------- HEADER --------------- -->
+      <nav id="header">
+        <div class="nav-logo">
+            <p class="nav-name">Unfold</p>
+            <span>.</span>
+        </div>
+
+        <div class="nav-menu" id="myNavMenu">
+            <ul class="nav_menu_list dash">
+                <li  class="nav_list">
+                    <a  routerLink="/Home" class="nav-link active-link" >Dashboard</a>
+                    <div class="circle"></div>
+                </li>
+                <!-- <li *ngIf="userDetails.is_faculty === 0 || userDetails.is_admin === 0" class="nav_list ">
+                    <a routerLink="/newsfeed" id="portfolio"  class="nav-link">Portfolio Spotlight</a>
+                    <div class="circle"></div>
+                </li> -->
+               
+                 <li  class="nav_list feed">
+                    <a  routerLink="/newsfeed" class="nav-link">Portfolio feed</a>
+                    <div class="circle"></div>
+                </li>   
+            </ul>
+        </div>
+
+        <div *ngIf="userDetails.is_admin === 0"  class="profile" (click)="toggleDropdown($event)">
+            <b style="margin-right: 10px;" class="user-details">
+              {{ userDetails.firstName }} {{ userDetails.lastName }}
+            </b>
+            <img class="prof-icon" *ngIf="userDetails.is_admin === 0" width="60" height="60" [src]="baseAPI + studentPortfolio.about[0].aboutImg" alt="">
+            
+            <!-- Dropdown Menu -->
+            <div class="dropdown-menu" [class.show]="isDropdownVisible" (click)="$event.stopPropagation()">
+              <ul>
+                <li><a routerLink="/login">Logout</a></li>
+                <li><a (click)="routeToEditProfile( userDetails.studentID)">Edit Profile</a></li>
+                <!-- <button style="background-color: #f8955e; border:1px solid #f5652f; margin-top: 10px;" class="btn btn-primary" (click)="routeToEditProfile( userDetails.studentID)">
+                  Edit Profile
+              </button> -->
+              </ul>
+            </div>
+          </div>
+       
+
+        
+        
+    
+        <div class="nav-menu-btn">
+            <i class="uil uil-bars" onclick="myMenuFunction()"></i>
+        </div>
+
+        
+      </nav>
+   </div>
+   
+  
+
+   
+  <main  style="width: 100%;background-color: #FFFCF8; padding-top: 9%; display: flex; justify-content: center; " class="wrapper">
+          
+    <div class="leaderboard">
+        <div style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; width: 25%; padding: 20px 0;" *ngIf="myRanking > 0" class="my-ranking">
+            <img class="prof-icon" *ngIf="userDetails.is_admin === 0" width="90" height="90" [src]="baseAPI + studentPortfolio.about[0].aboutImg" alt="">
+            
+            <h2>{{ userDetails.firstName }} {{ userDetails.lastName }}</h2>
+            <h2>{{ userDetails.position }}</h2>
+            <h3>Your Ranking</h3>
+            <p>You are ranked <strong>{{ myRanking }}</strong> out of {{ studentList.length }} students.</p>
+          </div>
+
+        <ol style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" class="students">
+            <!-- <h2>Leaderboard</h2> -->
+            <h2 style="margin-top: 10px;">Most Approved Portfolio by Faculty Members </h2>
+            <div>
+                <ul style="display: flex; justify-content: center;">
+                    <li routerLink="/leaderboard" style="cursor: pointer;">Views</li>
+                    <li style="color: #f5652f; cursor: pointer;" routerLink="/leaderboardapprove">Approved</li>
+                </ul>
+            </div>
+          <li  style="display: flex; align-items: center; " *ngFor="let student of studentList; let i = index"
+              [class.top-three]="i < 3"
+              [class.me]="student.studentID === userDetails.studentID">
+            <span class="rank">{{ i + 1 }}</span>
+            <span class="name">{{ student.firstName }} {{ student.lastName }}</span>
+            <span class="name">{{ student.position }}</span>
+            <button style="background-color: #f8955e; border:1px solid #f5652f; padding: 5px; " class="btn btn-primary" (click)="ViewPortfolio($event, student.studentID)">
+                View Portfolio
+            </button>
+            <span class="views">{{ student.approved }} views</span>
+          </li>
+        </ol>
+        
+        
+       
+      </div>
+
+    <!-- <section style="width: 80%;" class="section" id="projects"> -->
+      
+        <!-- <div style="margin-top: 120px; padding-bottom: 40px; " class="project-container">
+          <div style="display: flex;"  class="project-box" *ngFor="let student of studentList">
+            <div class="wew" style="display: flex; justify-content: space-around; align-items: center; width: 90%;">
+              <img width="140" height="140" style=" border-radius: 50%;"  [src]="baseAPI + student.aboutImg" alt="{{ student.firstName }} {{ student.lastName }}" class="student-image">
+              <div style="text-align: center; ">
+                 <i class="uil uil-briefcase-alt"></i>
+               <h2>{{ student.firstName }} {{ student.lastName }}</h2>
+               <div style="display:flex; flex-direction: column;">
+                 <label > {{ student.school }}</label>
+                 <label> {{ student.course }}</label>
+                 <label> {{ student.email }}</label>
+               </div>
+               <div>
+                 <button
+                 style="background-color: #f8955e;  border:1px solid #f5652f; margin-top: 10px;" 
+                 class="btn btn-primary"
+                 (click)="ViewPortfolio($event, student.studentID)"
+               >
+                 View Portfolio
+               </button>
+              </div>
+              
+               </div>
+            </div>
+             
+       
+          </div>
+     
+        </div> -->
+        <!-- <div *ngFor="let student of studentList" style="width: 40%" class="card">
+            <a style="text-decoration: none" href="">
+              <img
+                [src]="baseAPI + student.aboutImg"
+                class="card-img-top"
+                alt="..."
+              />
+              <div
+                class="card-body"
+                style="display: flex; flex-direction: column; gap: 20px"
+              >
+                <b style="margin-bottom: 0" class="card-title text-black me-2"
+                  >{{ student.firstName }} {{ student.lastName }}</b
+                >
+        
+                <b style="color: #f8955e; margin-bottom: 0" class="card-title me-2">{{
+                  student.course
+                }}</b>
+        
+                <b style="color: #f8955e; margin-bottom: 0" class="card-title me-2">{{
+                  student.school
+                }}</b>
+                <p class="card-text text-black">
+                  {{ student.aboutText }}
+                </p>
+                <button
+                  style="background-color: #f8955e;  border:1px solid #f5652f"
+                  class="btn btn-primary"
+                  (click)="ViewPortfolio($event, student.studentID)"
+                >
+                  View Portfolio
+                </button>
+              </div>
+            </a>
+          </div> -->
+          <!-- Inside the <section> element -->
+           
+
+     <!-- </section> -->
+    </main>
+   <script>
+       function myMenuFunction() {
+           var menu = document.getElementById("myNavMenu");
+           if (menu.style.display === "block") {
+               menu.style.display = "none";
+           } else {
+               menu.style.display = "block";
+           }
+       }
+   </script>
+</body>
+</html>
+
+
+
+
+  
+
+ 
+
+
+
+<!-- <div class="leaderboard">
     <h2>Leaderboard</h2>
     <ol>
       <li *ngFor="let student of studentList; let i = index"
@@ -14,5 +236,5 @@
       <h3>Your Ranking</h3>
       <p>You are ranked <strong>{{ myRanking }}</strong> out of {{ studentList.length }} students.</p>
     </div>
-  </div>
+  </div> -->
   

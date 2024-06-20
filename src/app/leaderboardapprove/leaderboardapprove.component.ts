@@ -1,24 +1,26 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { DataService } from '../data.service';
-import { Router, RouterLinkActive } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-leaderboardapprove',
   standalone: true,
-  imports: [CommonModule, RouterLinkActive],
+  imports: [CommonModule, RouterLinkActive, RouterLink, RouterLinkActive ],
   templateUrl: './leaderboardapprove.component.html',
   styleUrl: './leaderboardapprove.component.css'
 })
 export class LeaderboardapproveComponent {
   studentList: any = [];
   topThreeStudents: any[] = [];
+  studentPortfolio: any = {};
   myRanking: number = -1;
   userDetails: any;
   cookieService = inject(CookieService);
+  baseAPI: string = 'http://localhost/unfold/unfold-api/';
 
-  constructor(private ds: DataService, private route: Router) {}
+  constructor(private ds: DataService, private route: Router,  private aRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.userDetails = JSON.parse(this.cookieService.get('user_details'));
@@ -32,6 +34,25 @@ export class LeaderboardapproveComponent {
         console.error('Error fetching student details:', error);
       }
     );
+
+    this.ds.getRequestWithParams("view-portfolio", { id: this.userDetails.studentID }).subscribe(
+      (response: any) => {
+        this.studentPortfolio = response;
+        console.log('View Portfolio details:', response);
+        
+      
+      },
+      (error) => {
+        console.error('Error retrieving portfolio:', error);
+      }
+    );
+  }
+
+  isDropdownVisible = false;
+
+  toggleDropdown(event: MouseEvent) {
+    event.stopPropagation();
+    this.isDropdownVisible = !this.isDropdownVisible;
   }
 
   processLeaderboard(): void {
@@ -49,5 +70,29 @@ export class LeaderboardapproveComponent {
     
     console.log('Top 3 Students:', this.topThreeStudents);
     console.log('My Ranking:', this.myRanking);
+  }
+
+  ViewPortfolio(e: any, studentID: string) {
+    this.ds.addViews(studentID).subscribe(
+        (response) => {
+            console.log('Accomplishment deleted successfully:', response);
+            // Reload the portfolio to reflect changes
+        },
+        (error) => {
+            console.error('Error deleting accomplishment:', error);
+            if (error.status === 401) {
+                console.warn('Unauthorized access - redirecting to login');
+                this.route.navigateByUrl('/login'); // Or your login route
+            }
+        }
+    );
+  e.preventDefault();
+  this.route.navigateByUrl(`viewport/${studentID}`);
+  console.log(studentID);
+
+}
+
+  routeToEditProfile(studentID: any) {
+    this.route.navigate([`../editprofile/${studentID}`], { relativeTo: this.aRoute });
   }
 }

@@ -10,6 +10,7 @@ import { DataService } from '../data.service';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-editprofile',
@@ -139,7 +140,12 @@ export class EditprofileComponent implements OnInit {
     this.ds.sendRequestWithMedia('edit-profile', this.formData).subscribe(
       (response) => {
         console.log('Application submitted successfully:', response);
-        alert("Updated Successfully!");
+        Swal.fire({
+          title: "Profile Updated Successfully",
+          icon: "success"
+        });
+        this.route.navigate(['/newsfeed']);
+        this.userDetails = JSON.parse(this.cookieService.get('user_details'));
         console.log(this.applyForm);
       },
       (error) => {

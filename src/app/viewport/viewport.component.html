@@ -150,7 +150,7 @@
             <div class="featured-text-btn">
                 <!-- <button (click)="Approved(studentPortfolio.student.studentID)" *ngIf="userDetails.is_faculty === 1" class="btn blue-btn">Approve me <i class="uil-star"></i></button> -->
                 <button (click)="Approved(studentPortfolio.student.studentID)" *ngIf="userDetails.is_faculty === 1" class="btn blue-btn">Approve me <i class="uil-star"></i></button>
-                <button *ngIf="userDetails.is_admin === 0" class="btn blue-btn">Collab with me</button>
+                <button *ngIf="userDetails.is_admin === 0" class="btn blue-btn" (click)="toContacts()">Collab with me</button>
                 <button  class="btn" (click)="downloadCV($event, studentPortfolio.student.studentID)">Download CV <i class="uil uil-file-alt"></i></button>
             </div>
             <div *ngIf="counts.contacts === null || counts.contacts === 0">
