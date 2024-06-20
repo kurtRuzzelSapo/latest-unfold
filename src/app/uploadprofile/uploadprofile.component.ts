@@ -10,6 +10,7 @@ import { DataService } from '../data.service';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-uploadprofile',
@@ -131,7 +132,11 @@ export class UploadprofileComponent {
     this.ds.sendRequestWithMedia('edit-profileImg', this.formData).subscribe(
       (response) => {
         console.log('Application submitted successfully:', response);
-        alert("Updated Successfully!");
+        Swal.fire({
+          title: "Profile picture Updated Successfully",
+          icon: "success"
+        });
+        this.route.navigate(['/newsfeed']);
        
         console.log(this.applyForm);
       },

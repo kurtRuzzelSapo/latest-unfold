@@ -10,6 +10,7 @@ import { DataService } from '../data.service';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-security',
@@ -124,8 +125,11 @@ export class SecurityComponent {
     this.ds.sendRequestWithMedia('edit-credentials', this.formData).subscribe(
       (response) => {
         console.log('Application submitted successfully:', response);
-        alert("Updated Successfully!");
-        console.log(this.applyForm);
+        Swal.fire({
+          title: "Profile Updated Successfully",
+          icon: "success"
+        });
+        this.route.navigate(['/newsfeed']);
 
       },
       (error) => {

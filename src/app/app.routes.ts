@@ -67,7 +67,9 @@ export const routes: Routes = [
     { title: "Unfold | CV", path: 'cv/:studentID', component: CvComponent },
     { title: "Unfold | Security", path: 'security', component: SecurityComponent },
     { title: "Unfold | Security", path: 'security/:studentID', component: SecurityComponent },
-    { title: "Unfold | Security", path: 'facSecurity/:facID', component: FacSecurityComponent }
+    { title: "Unfold | Security", path: 'facSecurity/:facID', component: FacSecurityComponent },
+    { title: "Unfold | Leaderboard", path: 'leaderboard/', component: LeaderboardComponent },
+    { title: "Unfold | Leaderboard", path: 'leaderboardAppr/', component: LeaderboardapproveComponent }
     
 
 ];
