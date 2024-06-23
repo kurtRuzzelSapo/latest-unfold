@@ -295,7 +295,6 @@ body {
 
 
 
-
 /* MAIN */
 #content main {
 	width: 100%;
@@ -303,6 +302,7 @@ body {
 	font-family: var(--poppins);
 	max-height: calc(100vh - 56px);
 	overflow-y: auto;
+
 }
 #content main .head-title {
 	display: flex;

@@ -25,7 +25,9 @@
     <title>Portfolio</title>
 
     <style>
-        
+        nav#header{
+          background-color: #333;
+        }
     </style>
 </head>
 <body style="height: auto;">
@@ -43,11 +45,14 @@
                     <a  routerLink="/Home" class="nav-link active-link" >Dashboard</a>
                     <div class="circle"></div>
                 </li>
-                <li *ngIf="userDetails.is_faculty === 0 || userDetails.is_admin === 0" class="nav_list ">
+                <!-- <li *ngIf="userDetails.is_faculty === 0 || userDetails.is_admin === 0" class="nav_list ">
                     <a routerLink="/newsfeed" id="portfolio"  class="nav-link">Portfolio Spotlight</a>
                     <div class="circle"></div>
-                </li>
-               
+                </li> -->
+                <li *ngIf="userDetails.is_faculty === 0 || userDetails.is_admin === 0" class="nav_list ">
+                  <a routerLink="/viewport/{{userDetails.studentID}}'" id="portfolio"  class="nav-link">My Portfolio</a>
+                  <div class="circle"></div>
+              </li>
                  <li  class="nav_list feed">
                     <a  routerLink="/newsfeed" class="nav-link">Portfolio feed</a>
                     <div class="circle"></div>
@@ -88,7 +93,7 @@
   
 
    
-  <main  style="width: 100%;background-color: #FFFCF8; padding-top: 9%; display: flex; justify-content: center; " class="wrapper">
+  <main  style="width: 100%;background-color: #fae7c8; padding-top: 9%; display: flex; justify-content: center; " class="wrapper">
           
     <div class="leaderboard">
         <div style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; width: 25%; padding: 20px 0;" *ngIf="myRanking > 0" class="my-ranking">
