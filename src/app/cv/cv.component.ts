@@ -51,6 +51,7 @@ export class CvComponent implements OnInit{
 ViewPortfolio($event: MouseEvent,arg1: any) {
 throw new Error('Method not implemented.');
 }
+  studentID: any; 
   modalOpen: boolean = false;
   studentList: any = [];
   studentPortfolio: any = {};
@@ -67,6 +68,8 @@ throw new Error('Method not implemented.');
   selectedAccomplishmentId: any;
   selectedAccomplishmentTitle: string = '';
   selectedAccomplishmentDesc: string = '';
+
+  filteredStudents: any = [];
 
   displayedColumns: string[] = ['projectTitle', 'projectDesc', 'skillTitle', 'skillDesc', 'actions'];
   dataSource = new MatTableDataSource<any>();
@@ -99,6 +102,7 @@ throw new Error('Method not implemented.');
     this.ds.getRequest('get-all-students').subscribe(
       (response: any) => {
         this.studentList = response;
+        this.filteredStudents = response;
         console.log('User details:', response);
       },
       (error) => {
@@ -148,36 +152,70 @@ throw new Error('Method not implemented.');
 
   downloadCV(event: Event, studentId: string): void {
     console.log('Student ID:', studentId);
-  
+
     const cvContent = document.getElementById('cv-content');
-    if (!cvContent) {
-      console.error('Element with id "cv-content" not found.');
-      return;
-    }
-  
-    html2canvas(cvContent).then((canvas: { toDataURL: (arg0: string) => any; height: number; width: number; }) => {
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p', 'mm', 'legal'); // Ensure to specify 'legal' paper size here
-      const imgWidth = 216; // Legal width in mm
-      const pageHeight = 356; // Legal height in mm
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      let heightLeft = imgHeight;
-      let position = 0;
-  
-      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-  
-      while (heightLeft > 0) {
-        position = heightLeft - imgHeight;
-        pdf.addPage();
+    if (cvContent) {
+      html2canvas(cvContent).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF();
+        const imgWidth = 210;
+        const pageHeight = 297;
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        let heightLeft = imgHeight;
+        let position = 0;
+
         pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
         heightLeft -= pageHeight;
-      }
-      pdf.save('CV.pdf');
-    }).catch((error: any) => {
-      console.error('Error generating canvas:', error);
-    });
+
+        while (heightLeft > 0) {
+          position = heightLeft - imgHeight;
+          pdf.addPage();
+          pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+          heightLeft -= pageHeight;
+        }
+        pdf.save('CV.pdf');
+      });
+    }
   }
+
+
+  filterStudents(): void {
+    console.log("Selected category:", this['selectedCategory']);
+    console.log("Search term:", this['searchTerm']);
+
+    this.filteredStudents = this.studentList.filter((student: any) => {
+        // Check if student and its properties exist
+        if (student && student.firstName && student.lastName && student.course && student.address && student.school && student.position) {
+            const fullName = `${student.firstName} ${student.lastName}`.toLowerCase();
+            const course = student.course.toLowerCase();
+            const address = student.address.toLowerCase();
+            const school = student.school.toLowerCase();
+            const position = student.position.toLowerCase();
+            const searchTerm = this['searchTerm'].toLowerCase();
+
+            const skillTitles = (student.skills || []).map((skill: any) => skill.toLowerCase());
+            const matchesSkills = skillTitles.some((title: string) => title.includes(searchTerm));
+
+            const matchesSearch = fullName.includes(searchTerm) || 
+                                  course.includes(searchTerm) || 
+                                  address.includes(searchTerm) || 
+                                  school.includes(searchTerm) || 
+                                  position.includes(searchTerm) || 
+                                  matchesSkills;
+            const matchesCategory = this['selectedCategory'] ? course === this['selectedCategory'].toLowerCase() : true;
+
+            const matchResult = matchesSearch && matchesCategory;
+
+            if (!matchResult) {
+                console.log("Account not shown:", student.firstName, student.lastName);
+            }
+
+            return matchResult;
+        } else {
+            return false;
+        }
+    });
+}
 
   openModal(): void {
     this.modalOpen = true;
