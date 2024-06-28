@@ -31,6 +31,7 @@ import { CvComponent } from './cv/cv.component';
 import { HomeComponent } from './home/home.component';
 import { SecurityComponent } from './security/security.component';
 import { FacSecurityComponent } from './fac-security/fac-security.component';
+import { FeedComponent } from './feed/feed.component';
 
 
 export const routes: Routes = [
@@ -69,7 +70,8 @@ export const routes: Routes = [
     { title: "Unfold | Security", path: 'security/:studentID', component: SecurityComponent },
     { title: "Unfold | Security", path: 'facSecurity/:facID', component: FacSecurityComponent },
     { title: "Unfold | Leaderboard", path: 'leaderboard/', component: LeaderboardComponent },
-    { title: "Unfold | Leaderboard", path: 'leaderboardAppr/', component: LeaderboardapproveComponent }
+    { title: "Unfold | Leaderboard", path: 'leaderboardAppr/', component: LeaderboardapproveComponent },
+    { title: "Unfold | Feed", path: 'feed', component: FeedComponent }
     
 
 ];
