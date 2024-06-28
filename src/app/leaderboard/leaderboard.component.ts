@@ -29,6 +29,7 @@ export class LeaderboardComponent implements OnInit {
     this.ds.getRequest("get-all-students").subscribe(
       (response: any) => {
         this.studentList = response;
+        console.log('GET ALL STUDENTS', response);
         this.processLeaderboard();
       },
       (error) => {

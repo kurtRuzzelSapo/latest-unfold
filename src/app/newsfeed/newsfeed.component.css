@@ -581,5 +581,5 @@
         /* Set initial opacity to 0 */
         opacity: 0;
         /* Apply animation properties */
-        animation: fall 0.7s ease-in-out forwards;
+        animation: fall 0.3s ease-in-out forwards;
       }

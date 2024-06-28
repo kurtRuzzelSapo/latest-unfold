@@ -64,11 +64,11 @@
                     <div class="circle"></div>
                 </li>
                 <li *ngIf="userDetails.is_faculty === 1" class="nav_list">
-                  <a routerLink="/projectfeed" id="portfolio"  class="nav-link">Projects feed</a>
+                  <a routerLink="/projectfeed" style="color: #ee8d59;"  id="portfolio"  class="nav-link">Projects feed</a>
                     <div class="circle"></div>
                 </li>
                 <li *ngIf="userDetails.is_faculty === 1" class="nav_list">
-                  <a routerLink="/newsfeed" id="portfolio" style="color: #ee8d59;"  class="nav-link">Student feed</a>
+                  <a routerLink="/newsfeed" id="portfolio"  class="nav-link">Student feed</a>
                     <div class="circle"></div>
                 </li>
                 <!-- FACULTY -->
@@ -252,7 +252,7 @@
           <h2>{{ student.firstName }} {{ student.lastName }}</h2>
           <div style="display:flex; flex-direction: column;">
               <label>{{ student.school }}</label>
-              <label>{{ student.course }}</label>
+              <label>{{ student.projects[0].title }}</label>
               <label><b>{{ student.position }}</b></label>
           </div>
           <div>
