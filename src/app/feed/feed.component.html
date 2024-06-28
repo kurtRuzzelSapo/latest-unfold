@@ -42,16 +42,11 @@
         <div class="nav-menu" id="myNavMenu">
             <ul class="nav_menu_list dash">
               <li *ngIf="userDetails.is_faculty === 0 || userDetails.is_admin === 0" class="nav_list ">
-                <a routerLink="/feed" id="portfolio"  class="nav-link">Feed</a>
-                <div class="circle"></div>
-            </li>
-              <li *ngIf="userDetails.is_faculty === 0 || userDetails.is_admin === 0" class="nav_list ">
                   <a routerLink="/leaderboard" id="portfolio"  class="nav-link">Portfolio Spotlight</a>
                   <div class="circle"></div>
               </li>
-              
               <!-- <li *ngIf="userDetails.is_faculty === 0 || userDetails.is_admin === 0" class="nav_list ">
-                  <a routerLink="/feed" id="portfolio"  class="nav-link">Feed</a>
+                  <a routerLink="/leaderboardapprove" id="portfolio"  class="nav-link">Portfolio Most Approved</a>
                   <div class="circle"></div>
               </li> -->
                 <li *ngIf="userDetails.is_faculty === 0 || userDetails.is_admin === 0" class="nav_list">
@@ -62,21 +57,18 @@
                     <a  routerLink="/Home" class="nav-link active-link" id="dash">Dashboard</a>
                     <div class="circle"></div>
                 </li>
-
-                <!-- FACULTY -->
                 <li *ngIf="userDetails.is_faculty === 1" class="nav_list">
                   <a routerLink="/leaderboard" id="portfolio"  class="nav-link">Portfolio Spotlight</a>
                     <div class="circle"></div>
                 </li>
                 <li *ngIf="userDetails.is_faculty === 1" class="nav_list">
-                  <a routerLink="/projectfeed" id="portfolio"  class="nav-link">Projects feed</a>
+                  <a routerLink="/leaderboardapprove" id="portfolio"  class="nav-link">Portfolio Most Approved</a>
                     <div class="circle"></div>
                 </li>
                 <li *ngIf="userDetails.is_faculty === 1" class="nav_list">
-                  <a routerLink="/newsfeed" id="portfolio" style="color: #ee8d59;"  class="nav-link">Student feed</a>
+                  <a routerLink="/viewport/{{userDetails.studentID}}'" id="portfolio"  class="nav-link">Newsfeed</a>
                     <div class="circle"></div>
                 </li>
-                <!-- FACULTY -->
                 <!-- <li *ngIf="userDetails.is_faculty === 0 || userDetails.is_admin === 0" class="nav_list feed">
                     <a  routerLink="/newsfeed" class="nav-link" id="feed">Portfolio feed</a>
                     <div class="circle"></div>
@@ -178,103 +170,111 @@
   <main  style="width: 100%;background-color: #fae7c8;; height: auto; display: flex; justify-content: center; " class="wrapper">
           
 
-    <section style="width: 80%;" class="section" id="projects">
-      
-        <!-- <div style="margin-top: 120px; padding-bottom: 40px; " class="project-container">
-          <div style="display: flex;"  class="project-box" *ngFor="let student of studentList">
-            <div class="wew" style="display: flex; justify-content: space-around; align-items: center; width: 90%;">
-              <img width="140" height="140" style=" border-radius: 50%;"  [src]="baseAPI + student.aboutImg" alt="{{ student.firstName }} {{ student.lastName }}" class="student-image">
-              <div style="text-align: center; ">
-                 <i class="uil uil-briefcase-alt"></i>
-               <h2>{{ student.firstName }} {{ student.lastName }}</h2>
-               <div style="display:flex; flex-direction: column;">
-                 <label > {{ student.school }}</label>
-                 <label> {{ student.course }}</label>
-                 <label> {{ student.email }}</label>
-               </div>
-               <div>
-                 <button
-                 style="background-color: #f8955e;  border:1px solid #f5652f; margin-top: 10px;" 
-                 class="btn btn-primary"
-                 (click)="ViewPortfolio($event, student.studentID)"
-               >
-                 View Portfolio
-               </button>
-              </div>
-              
-               </div>
+  <!--Section: Newsfeed-->
+<section class="newsfeed">
+    <div  style="margin-top: 120px; padding-bottom: 40px; " class="project-container">
+        <!-- Project 1 -->
+        <div class="card project-card">
+            <div class="card-body">
+                <!-- Data -->
+                <div class="d-flex mb-3">
+                    <a>
+                        <img src="https://mdbcdn.b-cdn.net/img/new/avatars/18.webp" class="border rounded-circle me-2" alt="Avatar" style="height: 40px" />
+                    </a>
+                    <div>
+                        <a class="text-dark mb-0" style="text-decoration: none;">
+                            <strong>Anna Doe</strong>
+                        </a>
+                        <a class="text-muted d-block" style="margin-top: -6px; text-decoration: none;">
+                            <small>Frontend Developer</small>
+                          </a>
+                    </div>
+                </div>
+                <!-- Description -->
+                <div>
+                    <p>
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque ex non impedit corporis sunt nisi nam fuga dolor est, saepe vitae delectus fugit, accusantium qui nulla aut adipisci provident praesentium?
+                    </p>
+                </div>
             </div>
-             
-       
-          </div>
-     
-        </div> -->
-        <!-- <div *ngFor="let student of studentList" style="width: 40%" class="card">
-            <a style="text-decoration: none" href="">
-              <img
-                [src]="baseAPI + student.aboutImg"
-                class="card-img-top"
-                alt="..."
-              />
-              <div
-                class="card-body"
-                style="display: flex; flex-direction: column; gap: 20px"
-              >
-                <b style="margin-bottom: 0" class="card-title text-black me-2"
-                  >{{ student.firstName }} {{ student.lastName }}</b
-                >
-        
-                <b style="color: #f8955e; margin-bottom: 0" class="card-title me-2">{{
-                  student.course
-                }}</b>
-        
-                <b style="color: #f8955e; margin-bottom: 0" class="card-title me-2">{{
-                  student.school
-                }}</b>
-                <p class="card-text text-black">
-                  {{ student.aboutText }}
-                </p>
-                <button
-                  style="background-color: #f8955e;  border:1px solid #f5652f"
-                  class="btn btn-primary"
-                  (click)="ViewPortfolio($event, student.studentID)"
-                >
-                  View Portfolio
-                </button>
-              </div>
-            </a>
-          </div> -->
-          <!-- Inside the <section> element -->
-            <div style="margin-top: 120px; padding-bottom: 40px; " class="project-container">
-              <div style="display: flex;" class="project-box" *ngFor="let student of filteredStudents;  let i = index" [style.animation-delay]="i * 0.2 + 's'" >
-  <div class="wew" style="display: flex; justify-content: space-around; align-items: center; width: 90%;">
-    <div style="display: flex; flex-direction: column; justify-content: space-evenly; align-items: center;">
-      <img width="140" height="140" style="border-radius: 50%; margin-top: 20px;" [src]="baseAPI + student.aboutImg" alt="{{ student.firstName }} {{ student.lastName }}" class="student-image">
-      <label style="padding-top: 44px;">Faculty Approved: <b style="color: #F8955E;">{{ student.approved }} <i class="uil-check"></i></b></label>
+            <!-- Media -->
+            <div class="bg-image hover-overlay ripple rounded-0" data-mdb-ripple-color="light">
+                <img src="https://mdbcdn.b-cdn.net/img/new/standard/people/077.webp" class="w-100" />
+                <a href="#!">
+                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                </a>
+            </div>
+        </div>
 
+        <!-- Project 2 -->
+        <div class="card project-card">
+            <div class="card-body">
+                <!-- Data -->
+                <div class="d-flex mb-3">
+                    <a>
+                        <img src="https://mdbcdn.b-cdn.net/img/new/avatars/18.webp" class="border rounded-circle me-2" alt="Avatar" style="height: 40px" />
+                    </a>
+                    <div>
+                        <a class="text-dark mb-0" style="text-decoration: none;">
+                            <strong>Anna Doe</strong>
+                        </a>
+                        <a class="text-muted d-block" style="margin-top: -6px; text-decoration: none;">
+                            <small>Frontend Developer</small>
+                          </a>
+                    </div>
+                </div>
+                <!-- Description -->
+                <div>
+                    <p>
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque ex non impedit corporis sunt nisi nam fuga dolor est, saepe vitae delectus fugit, accusantium qui nulla aut adipisci provident praesentium?
+                    </p>
+                </div>
+            </div>
+            <!-- Media -->
+            <div class="bg-image hover-overlay ripple rounded-0" data-mdb-ripple-color="light">
+                <img src="https://mdbcdn.b-cdn.net/img/new/standard/people/077.webp" class="w-100" />
+                <a href="#!">
+                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="card project-card">
+            <div class="card-body">
+                <!-- Data -->
+                <div class="d-flex mb-3">
+                    <a>
+                        <img src="https://mdbcdn.b-cdn.net/img/new/avatars/18.webp" class="border rounded-circle me-2" alt="Avatar" style="height: 40px" />
+                    </a>
+                    <div>
+                        <a class="text-dark mb-0" style="text-decoration: none;">
+                            <strong>Anna Doe</strong>
+                        </a>
+                        <a class="text-muted d-block" style="margin-top: -6px; text-decoration: none;">
+                            <small>Frontend Developer</small>
+                          </a>
+                    </div>
+                </div>
+                <!-- Description -->
+                <div>
+                    <p>
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque ex non impedit corporis sunt nisi nam fuga dolor est, saepe vitae delectus fugit, accusantium qui nulla aut adipisci provident praesentium?
+                    </p>
+                </div>
+            </div>
+            <!-- Media -->
+            <div class="bg-image hover-overlay ripple rounded-0" data-mdb-ripple-color="light">
+                <img src="https://mdbcdn.b-cdn.net/img/new/standard/people/077.webp" class="w-100" />
+                <a href="#!">
+                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                </a>
+            </div>
+        </div>
     </div>
-      <div style="text-align: center;">
-          <h2>{{ student.firstName }} {{ student.lastName }}</h2>
-          <div style="display:flex; flex-direction: column;">
-              <label>{{ student.school }}</label>
-              <label>{{ student.course }}</label>
-              <label><b>{{ student.position }}</b></label>
-          </div>
-          <div>
-              <button style="background-color: #f8955e; border:1px solid #f5652f; margin-top: 10px;" class="btn btn-primary" (click)="ViewPortfolio($event, student.studentID)">
-                  View Portfolio
-              </button>
-          </div>
-          <br>
-          <label>Portfolio Views: <b style="color: #F8955E;">{{ student.portfolioView }} <i class="uil-eye"></i> </b></label>
-          <br>
-          
-      </div>
-  </div>
-</div>
-</div>
+</section>
+<!--Section: Newsfeed-->
 
-     </section>
     </main>
    <script>
        function myMenuFunction() {
