@@ -181,7 +181,7 @@
             <div class="card-body">
                 <!-- Data -->
                 <div class="d-flex mb-3">
-                    <a>
+                    <a >
                         <img [src]="baseAPI + student.aboutImg" class="border rounded-circle me-2" alt="Avatar" style="height: 40px" />
                     </a>
                     <div>
@@ -211,11 +211,20 @@
             </div>
             <!-- Media -->
             <div class="bg-image hover-overlay ripple rounded-0" data-mdb-ripple-color="light">
+              <a >
                 <img [src]="baseAPI + student.projectImg" class="w-100" />
-                <a href="#!">
                     <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                 </a>
             </div>
+            <div *ngIf="student.projectLink">
+              <button>
+                <a target="_blank" href="{{ student.projectLink }}">View Project</a>
+              </button>
+              <button>
+                <a>Testimony</a>
+              </button>
+            </div>
+            
         </div>
 
         
