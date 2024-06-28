@@ -226,14 +226,31 @@
  
  
  /* ----- PROJECT DESIGN ----- */
- .project-container{
-     display: flex;
-     width: 100%;
-     justify-content: space-between;
-     gap: 20px;
-     flex-wrap: wrap;
-  
- }
+ /* ----- PROJECT DESIGN ----- */
+.project-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.project-card {
+    flex: 1 1 calc(33.333% - 20px);
+    max-width: calc(33.333% - 20px);
+    background-color: white;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 10px 10px 10px 10px;
+}
+
+/* Ensure images and other content fit within the card */
+.project-card img {
+    max-width: 100%;
+
+}
+
  .project-box{
      /* position: relative; */
      display: flex;
@@ -241,7 +258,7 @@
      align-items: center;
      flex-direction: column;
      width: 30%;
-     height: 250px;
+     height: 500px;
      background-color: #fff;
      border-radius: 20px;
      box-shadow: 1px 8px 10px 2px var(--first-shadow-color);
@@ -581,5 +598,5 @@
  /* Set initial opacity to 0 */
  opacity: 0;
  /* Apply animation properties */
- animation: fall 0.3s ease-in-out forwards;
+ animation: fall 0.7s ease-in-out forwards;
 }
