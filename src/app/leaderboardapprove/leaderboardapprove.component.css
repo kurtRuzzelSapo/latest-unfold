@@ -9,7 +9,9 @@
     display: flex;
     justify-content: space-around;
   }
-  
+  .leaderboard>div{
+    background-color: #fff;
+  }
   .leaderboard h2 {
     text-align: center;
   }
@@ -19,6 +21,7 @@
   .leaderboard ol {
     list-style-type: none;
     padding: 0;
+    background-color: #fff;
   }
   
   .leaderboard li {
@@ -155,9 +158,11 @@
     .user-details{
         font-family: 'Poppins', sans-serif;
         font-weight: 800;
+        color: #fff;
     }
         .prof-icon{
             border-radius: 50%;
+            border: 1px solid #ee8d59;
         }
     .profile {
         position: relative;
@@ -219,11 +224,12 @@
     }
     .nav-logo{
        position: relative;
+       color: #ee8d59;
     }
     .nav-name{
         font-size: 30px;
         font-weight: 600;
-        color: var(--text-color-third);
+        color: #ee8d59;
     }
     .nav-logo span{
         position: absolute;
@@ -234,6 +240,10 @@
     }
     .nav-menu, .nav_menu_list{
         display: flex;
+        color: #fff;
+    }
+    .nav_list:hover{
+        color: #ee8d59;
     }
     .nav-menu .nav_list{
         list-style: none;

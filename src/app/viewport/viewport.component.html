@@ -53,7 +53,8 @@
 </style> -->
     <title>Portfolio</title>
 </head>
-<body style="background-color: rgb(255, 252, 248);" >
+<body style="background-color: #fae7c8;" >
+    <!-- <body style="background: linear-gradient(to right, #f8cd88, #f1b04c);"> -->
    <div  class="container">
     <!-- --------------- HEADER --------------- -->
       <nav id="header">
@@ -89,27 +90,27 @@
           ><li class="uil-left-arrow-from-left"></li></a>
             <ul class="nav_menu_list">
                 <li class="nav_list">
-                    <a [routerLink]="[]" class="nav-link active-link" (click)="toHome()">Home</a>
+                    <a [routerLink]="[]" fragment="homes" class="nav-link" routerLinkActive="active-link" (click)="toHome()">Home</a>
                     <div class="circle"></div>
                 </li>
                 <li class="nav_list">
-                    <a [routerLink]="[]" fragment="about" class="nav-link" (click)="toAbout()">About</a>
+                    <a [routerLink]="[]" fragment="about" class="nav-link" routerLinkActive="active-link" (click)="toAbout()">About</a>
                     <div class="circle"></div>
                 </li>
                 <li class="nav_list">
-                    <a [routerLink]="[]" fragment="projects" class="nav-link" (click)="toProjects()">Projects</a>
+                    <a [routerLink]="[]" fragment="projects" class="nav-link" routerLinkActive="active-link" (click)="toProjects()">Projects</a>
                     <div class="circle"></div>
                 </li>
                 <li class="nav_list">
-                    <a [routerLink]="[]" fragment="projects" class="nav-link" (click)="toComp()">Competitions</a>
+                    <a [routerLink]="[]" fragment="competitions" class="nav-link" routerLinkActive="active-link" (click)="toComp()">Competitions</a>
                     <div class="circle"></div>
                 </li>
                 <li class="nav_list">
-                    <a [routerLink]="[]" fragment="projects" class="nav-link" (click)="toTest()">Testimony</a>
+                    <a [routerLink]="[]" fragment="testimonies" class="nav-link" routerLinkActive="active-link" (click)="toTest()">Testimony</a>
                     <div class="circle"></div>
                 </li>
                 <li class="nav_list">
-                    <a [routerLink]="[]" fragment="contact" class="nav-link" (click)="toContacts()">Contact</a>
+                    <a [routerLink]="[]" fragment="contact" class="nav-link" routerLinkActive="active-link" (click)="toContacts()">Contact</a>
                     <div class="circle"></div>
                 </li>
             </ul>
@@ -253,7 +254,7 @@
        <section class="section contact" >
         <div class="top-header">
             <h1>Projects</h1>
-            <span>Do you have a project in your mind, contact me here</span>
+            <span>Do you have a project in mind?</span>
         </div>
         <div *ngIf="counts.projects === null || counts.projects === 0">
             <p style="color: #ee8d59; font-weight: 500; text-align: center;" >This student doesn't have any Projects yet.</p>
