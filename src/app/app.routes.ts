@@ -31,7 +31,9 @@ import { CvComponent } from './cv/cv.component';
 import { HomeComponent } from './home/home.component';
 import { SecurityComponent } from './security/security.component';
 import { FacSecurityComponent } from './fac-security/fac-security.component';
-import { FeedComponent } from './feed/feed.component';
+import { ProjectfeedComponent } from './projectfeed/projectfeed.component';
+
+
 
 
 export const routes: Routes = [
@@ -71,7 +73,8 @@ export const routes: Routes = [
     { title: "Unfold | Security", path: 'facSecurity/:facID', component: FacSecurityComponent },
     { title: "Unfold | Leaderboard", path: 'leaderboard/', component: LeaderboardComponent },
     { title: "Unfold | Leaderboard", path: 'leaderboardAppr/', component: LeaderboardapproveComponent },
-    { title: "Unfold | Feed", path: 'feed', component: FeedComponent }
+    { title: "Unfold | ProjectFeed", path: 'projectfeed', component: ProjectfeedComponent },
+
     
 
 ];

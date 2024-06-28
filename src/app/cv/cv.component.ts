@@ -56,7 +56,7 @@ throw new Error('Method not implemented.');
   studentList: any = [];
   studentPortfolio: any = {};
   userDetails: any;
-  baseAPI: any;
+  // baseAPI: any;
   formData: any;
   applyForm: any;
   selectedProjectTitle: string = '';
@@ -68,6 +68,7 @@ throw new Error('Method not implemented.');
   selectedAccomplishmentId: any;
   selectedAccomplishmentTitle: string = '';
   selectedAccomplishmentDesc: string = '';
+   baseAPI:string = 'http://localhost/unfold/unfold-api/';
 
   filteredStudents: any = [];
 
@@ -136,6 +137,7 @@ throw new Error('Method not implemented.');
       (response: any) => {
         this.studentPortfolio = response;
         console.log('View Portfolio details:', response);
+        console.log(`${this.baseAPI}${this.studentPortfolio.about[0].aboutImg}`);
         console.log(this.studentPortfolio.student.firstName);
         this['updateCounts'](response);
         this['studentImage'] = `${this.baseAPI}${this.studentPortfolio.about[0].aboutImg}`;

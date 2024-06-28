@@ -62,18 +62,21 @@
                     <a  routerLink="/Home" class="nav-link active-link" id="dash">Dashboard</a>
                     <div class="circle"></div>
                 </li>
+
+                <!-- FACULTY -->
                 <li *ngIf="userDetails.is_faculty === 1" class="nav_list">
                   <a routerLink="/leaderboard" id="portfolio"  class="nav-link">Portfolio Spotlight</a>
                     <div class="circle"></div>
                 </li>
                 <li *ngIf="userDetails.is_faculty === 1" class="nav_list">
-                  <a routerLink="/leaderboardapprove" id="portfolio"  class="nav-link">Portfolio Most Approved</a>
+                  <a routerLink="/projectfeed" id="portfolio"  class="nav-link">Projects feed</a>
                     <div class="circle"></div>
                 </li>
                 <li *ngIf="userDetails.is_faculty === 1" class="nav_list">
-                  <a routerLink="/viewport/{{userDetails.studentID}}'" id="portfolio"  class="nav-link">Newsfeed</a>
+                  <a routerLink="/newsfeed" id="portfolio" style="color: #ee8d59;"  class="nav-link">Student feed</a>
                     <div class="circle"></div>
                 </li>
+                <!-- FACULTY -->
                 <!-- <li *ngIf="userDetails.is_faculty === 0 || userDetails.is_admin === 0" class="nav_list feed">
                     <a  routerLink="/newsfeed" class="nav-link" id="feed">Portfolio feed</a>
                     <div class="circle"></div>

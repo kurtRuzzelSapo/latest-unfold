@@ -4,8 +4,8 @@
   <div class="left-side">
       <div class="profile">
           <div class="profile-img">
-            <div *ngFor="let student of filteredStudents">
-              <img src="baseAPI + student.aboutImg" alt="{{ student.firstName }} {{ student.lastName }}" class="student-image">
+            <div >
+              <img style="background-size: contain;" [src]="this.baseAPI + studentPortfolio.about[0].aboutImg"  class="student-image">
           </div>
          </div>
 

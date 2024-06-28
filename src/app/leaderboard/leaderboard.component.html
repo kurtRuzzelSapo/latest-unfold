@@ -118,6 +118,7 @@
               [class.top-three]="i < 3"
               [class.me]="student.studentID === userDetails.studentID">
             <span class="rank">{{ i + 1 }}</span>
+            <span><img [src]="this.baseAPI + student.aboutImg" style="border-radius: 50%;" width="50" height="50"  alt=""></span>
             <span class="name">{{ student.firstName }} {{ student.lastName }}</span>
             <span class="name">{{ student.position }}</span>
             <button style="background-color: #f8955e; border:1px solid #f5652f; padding: 5px; " class="btn btn-primary" (click)="ViewPortfolio($event, student.studentID)">
