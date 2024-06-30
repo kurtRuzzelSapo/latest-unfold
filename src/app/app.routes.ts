@@ -34,6 +34,8 @@ import { FacSecurityComponent } from './fac-security/fac-security.component';
 import { ProjectfeedComponent } from './projectfeed/projectfeed.component';
 
 
+
+
 export const routes: Routes = [
 
     { title: "Unfold | Login", path: '', component: LoginComponent }, // Default to login
@@ -72,6 +74,7 @@ export const routes: Routes = [
     { title: "Unfold | Leaderboard", path: 'leaderboard/', component: LeaderboardComponent },
     { title: "Unfold | Leaderboard", path: 'leaderboardAppr/', component: LeaderboardapproveComponent },
     { title: "Unfold | ProjectFeed", path: 'projectfeed', component: ProjectfeedComponent },
+
     
 
 ];
