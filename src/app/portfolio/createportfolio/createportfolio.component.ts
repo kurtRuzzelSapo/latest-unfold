@@ -42,6 +42,7 @@ export class CreateportfolioComponent {
       proImg: new FormControl(null, Validators.required),
       proLink: new FormControl(null, Validators.required),
       proDate: new FormControl(null, Validators.required),
+      proType: new FormControl(null, Validators.required),
     });
 
     this.ds.getRequestWithParams("view-portfolio", { id: this.userDetails.studentID }).subscribe(
@@ -87,6 +88,7 @@ export class CreateportfolioComponent {
     this.formData.append('projectDesc', this.applyForm.value.proDesc);
     this.formData.append('projectLink', this.applyForm.value.proLink);
     this.formData.append('projectDate', this.applyForm.value.proDate);
+    this.formData.append('projectType', this.applyForm.value.proType);
     this.formData.append('studentID', this.userDetails.studentID);
     this.formData.append('projectImg', this.selectedFile);
 

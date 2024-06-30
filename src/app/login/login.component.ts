@@ -89,7 +89,7 @@ studentList: any = [];
                 icon: "success",
                 title: "You're signed in as " + this.fullName
               });
-              this.route.navigateByUrl('/newsfeed');
+              this.route.navigateByUrl('/projectfeed');
               
             }else{
               this.userDetails = JSON.parse(this.cookieService.get('user_details'));

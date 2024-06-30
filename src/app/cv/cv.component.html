@@ -1,13 +1,14 @@
+<button class="back-button" (click)="BackPortfolio($event, studentPortfolio.student.studentID)"><-</button>
 <div id="cv-container">
 <div class="resume" id="cv-content">
   <!-- left-side -->
   <div class="left-side">
       <div class="profile">
-          <div class="profile-img">
+          <!-- <div class="profile-img">
             <div >
               <img style="background-size: contain;" [src]="this.baseAPI + studentPortfolio.about[0].aboutImg"  class="student-image">
           </div>
-         </div>
+         </div> -->
 
           <h1 class="name">{{ studentPortfolio.student.firstName }} {{ studentPortfolio.student.lastName }}</h1><br>
           <p class="title">{{ studentPortfolio.student.position }}</p>

@@ -1,7 +1,8 @@
 <div class="container-xl px-4 mt-4">
     <!-- Account page navigation-->
     <nav class="nav nav-borders">
-        <button class="nav-link ms-0"  (click)="routeToEditProfile( userDetails.studentID)">Profile</button>
+        <a routerLink="/newsfeed" class="nav-link  ms-0" >Back</a>
+        <button style="background-color: #ee8d59; color: white;" class="nav-link ms-0"  (click)="routeToEditProfile( userDetails.studentID)">Profile</button>
         <a class="nav-link active" routerLink="/security">Security</a>
         <!-- <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-profile-security-page" target="__blank">Security</a>
         <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-edit-notifications-page"  target="__blank">Notifications</a> -->
@@ -11,6 +12,7 @@
         <div class="col-xl-4">
             <!-- Profile picture card-->
             <div class="card mb-4 mb-xl-0">
+             
                 <div class="card-header">Profile Picture</div>
                 <div class="card-body text-center">
                     <!-- Profile picture image-->
@@ -46,7 +48,7 @@
                             </div>
                         </div>
                         <!-- Save changes button-->
-                        <button class="btn btn-primary" type="submit">Save changes</button>
+                        <button style="background-color: #ee8d59; color: white;" class="btn btn-primary" type="submit">Save changes</button>
                     </form>
                 </div>
             </div>

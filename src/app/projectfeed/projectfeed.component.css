@@ -580,7 +580,7 @@
      background-repeat: no-repeat;
      background-position: right 8px center;
      background-size: 16px;
-     padding-right: 30px;
+     /* padding-right: 0px; */
      appearance: none;
  }
 @keyframes fall {

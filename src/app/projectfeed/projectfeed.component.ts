@@ -28,6 +28,11 @@ export class ProjectfeedComponent {
   searchTerm: string = '';
   selectedCategory: string = '';
   highestViewStudent: any = null; // Property to store student with highest views
+ 
+filteredProjects: any = [];
+
+
+
 
   baseAPI: string = 'http://localhost/unfold/unfold-api/';
 
@@ -42,7 +47,8 @@ export class ProjectfeedComponent {
         this.studentList = response;
         this.filteredStudents = response;
         console.log('User details:', response);
-        this.filterStudents(); // Filter after fetching data
+        // this.filterStudents(); 
+        // Filter after fetching data
   
         // Find and store the student with the highest views
         this.highestViewStudent = this.getStudentWithHighestViews();
@@ -64,6 +70,7 @@ export class ProjectfeedComponent {
     this.ds.getRequest("get-all-project").subscribe(
       (response: any) => {
         this.studentProjects = response;
+        this.filterProjects();
         
         console.log('User Projects:', response);
        
@@ -295,61 +302,40 @@ export class ProjectfeedComponent {
 // }
 
 
-filterStudents(): void {
+filterProjects(): void {
   console.log("Selected category:", this.selectedCategory);
   console.log("Search term:", this.searchTerm);
 
-  this.filteredStudents = this.studentList.filter((student: any) => {
-      // Check if student and its properties exist
-      if (student && student.firstName && student.lastName && student.course && student.address && student.school && student.position) {
-          const fullName = `${student.firstName} ${student.lastName}`.toLowerCase();
-          const course = student.course.toLowerCase();
-          const address = student.address.toLowerCase();
-          const school = student.school.toLowerCase();
-          const position = student.position.toLowerCase();
-          const searchTerm = this.searchTerm.toLowerCase();
+  const searchTerm = this.searchTerm.toLowerCase();
+  const selectedCategory = this.selectedCategory.toLowerCase();
 
-          // Skills search
-          const skillTitles = (student.skills || []).map((skill: any) => skill.toLowerCase());
-          const matchesSkills = skillTitles.some((title: string) => title.includes(searchTerm));
+  this.filteredProjects = this.studentProjects.filter((project: any) => {
+    const projectTitle = typeof project.projectTitle === 'string' ? project.projectTitle.toLowerCase() : '';
+    const projectDesc = typeof project.projectDesc === 'string' ? project.projectDesc.toLowerCase() : '';
+    const projectLink = typeof project.projectLink === 'string' ? project.projectLink.toLowerCase() : '';
+    const projectDate = typeof project.projectDate === 'string' ? project.projectDate.toLowerCase() : '';
+    const projectImg = typeof project.projectImg === 'string' ? project.projectImg.toLowerCase() : '';
+    const projectType = typeof project.projectType === 'string' ? project.projectType.toLowerCase() : '';
 
-          // Projects search
-          const projectMatches = (student.projects || []).some((project: any) => {
-              const projectTitle = project.title ? project.title.toLowerCase() : '';
-              const projectDesc = project.description ? project.description.toLowerCase() : '';
-              const projectLink = project.link ? project.link.toLowerCase() : '';
-              const projectDate = project.date ? project.date.toLowerCase() : '';
-              const projectImg = project.image ? project.image.toLowerCase() : '';
+    // Check projectType against the selected category
+    const matchesProjectType = selectedCategory ? projectType === selectedCategory : true;
 
-              return projectTitle.includes(searchTerm) ||
-                     projectDesc.includes(searchTerm) ||
-                     projectLink.includes(searchTerm) ||
-                     projectDate.includes(searchTerm) ||
-                     projectImg.includes(searchTerm);
-          });
+    const matchesSearch = projectTitle.includes(searchTerm) ||
+                          projectDesc.includes(searchTerm) ||
+                          projectLink.includes(searchTerm) ||
+                          projectDate.includes(searchTerm) ||
+                          projectImg.includes(searchTerm) ||
+                          projectType.includes(searchTerm);
 
-          const matchesSearch = fullName.includes(searchTerm) || 
-                                course.includes(searchTerm) || 
-                                address.includes(searchTerm) || 
-                                school.includes(searchTerm) || 
-                                position.includes(searchTerm) || 
-                                matchesSkills || 
-                                projectMatches;
-
-          const matchesCategory = this.selectedCategory ? course === this.selectedCategory.toLowerCase() : true;
-
-          const matchResult = matchesSearch && matchesCategory;
-
-          if (!matchResult) {
-              console.log("Account not shown:", student.firstName, student.lastName);
-          }
-
-          return matchResult;
-      } else {
-          return false;
-      }
+    return matchesSearch && matchesProjectType;
   });
+
+  console.log("Filtered Projects:", this.filteredProjects);
 }
+
+
+
+
 
 
 routeToEditProfile(studentID: any) {

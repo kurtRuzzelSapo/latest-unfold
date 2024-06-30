@@ -178,6 +178,7 @@
 								<th>ID</th>
 								<th>Image</th>
 								<th>Project Title</th>
+								<th>Project Type</th>
 								<th>Description</th>
 								<th>Date</th>
 								<th>Link</th>
@@ -188,10 +189,11 @@
 							<tr *ngFor=" let studentPortfolio of studentPortfolio.project ">
 								<td>{{studentPortfolio.projectID}}</td>
 								<td> <img [src]="baseAPI + studentPortfolio.projectImg" alt=""></td>
-								<td>{{studentPortfolio.projectTitle}}</td>
+								<td style="margin-right: 5px;">{{studentPortfolio.projectTitle}}</td>
+								<td style="margin-right: 5px;">{{studentPortfolio.projectType}}</td>
 								<td>{{studentPortfolio.projectDesc}}</td>
 								<td>{{studentPortfolio.projectDate}}</td>
-								<td><a target="_blank" href="{{studentPortfolio.projectLink}}">{{studentPortfolio.projectLink}}</a></td>
+								<td><a target="_blank" href="{{studentPortfolio.projectLink}}">Click Here</a></td>
 								<td>
 									<button style="margin-right: 5px;" href="" class="btn btn-ed" (click)="routeToEditPorfolio(studentPortfolio.projectID)">Edit</button>
 									<button style="margin-right: 5px;" href="" class="btn btn-del" (click)="deleteProject(studentPortfolio.projectID)">Delete</button>
