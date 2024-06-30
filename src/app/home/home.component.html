@@ -1,4 +1,3 @@
-
 <!-- <app-topnav></app-topnav> -->
 <!-- <app-sidenav></app-sidenav> -->
 
@@ -103,7 +102,7 @@
 			
 				<a *ngIf="userDetails.is_admin === 0" routerLink="/viewport/{{userDetails.studentID}}'" class="nav-link">Portfolio</a>
 				<!-- <a *ngIf="userDetails.is_admin === 1" routerLink="/newsfeed" class="nav-link">Portfolio Feed</a> -->
-				<a *ngIf="userDetails.is_admin === 0" routerLink="/newsfeed" class="nav-link">Portfolio Feed</a>
+				<a *ngIf="userDetails.is_admin === 0 || userDetails.is_faculty === 1" routerLink="/newsfeed" class="nav-link">Portfolio Feed</a>
 			</div>
 			<!-- STUDENT -->
 			<div *ngIf="userDetails.is_admin === 0"  class="profile" (click)="toggleDropdown($event)">
@@ -136,7 +135,7 @@
 				</div>		
 			</div>
 
-			<ul *ngIf="userDetails.is_admin === 1" class="box-info">
+			<ul *ngIf="userDetails.is_admin === 1 || userDetails.is_faculty ===1" class="box-info">
 				<li>
 					<i class='bx bx-terminal' ></i>
 					<span class="text">
@@ -167,7 +166,7 @@
 				</li>
 			</ul>
 
-			<ul *ngIf="userDetails.is_admin === 0" class="box-info">
+			<ul *ngIf="userDetails.is_admin === 0 " class="box-info">
 				<li>
 					<i class='bx bx-terminal'></i>
 					<span class="text">
@@ -193,7 +192,7 @@
 			</ul>
 
 
-			<div *ngIf="userDetails.is_admin === 1" class="table-data">
+			<div *ngIf="userDetails.is_admin === 1 || userDetails.is_faculty ===1" class="table-data">
 				<div class="order">
 					<div class="head">
 						<h3>List of Students</h3>
@@ -213,7 +212,7 @@
                           </select>
                         </div>
                       </div>
-					<table *ngIf="userDetails.is_admin === 1">
+					<table *ngIf="userDetails.is_admin === 1 || userDetails.is_faculty ===1">
 						<thead>
 							<tr>
                 <th>Student ID</th>
@@ -241,11 +240,11 @@
                 <td>{{ student.sex }}</td>
                 <td>{{ student.birthdate }}</td>
                 <td>{{ student.school }}</td>
-                <td>
+                <!-- <td>
                   <button class="btn btn-del"  (click)="deleteStudent(student)">
                     Delete
                   </button>
-                </td>
+                </td> -->
                 <td>
                  <button class="btn btn-ed"><a  style="color: white;" routerLink="/viewport/{{student.studentID}}'"><b>View Portfolio</b></a></button> 
                 </td>

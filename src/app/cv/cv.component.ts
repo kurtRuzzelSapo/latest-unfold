@@ -83,6 +83,7 @@ throw new Error('Method not implemented.');
     private cookieService: CookieService
   ) {}
 
+  // constructor(private ds: DataService, private route: Router,  private aRoute: ActivatedRoute) {}
   
 
   ngOnInit(): void {
@@ -150,6 +151,25 @@ throw new Error('Method not implemented.');
 
   ngAfterViewInit(): void {
     // Implement any logic that needs to run after view initialization here
+  }
+
+ BackPortfolio(e: any, studentID: string) {
+    this.ds.addViews(studentID).subscribe(
+      (response) => {
+        console.log('Accomplishment deleted successfully:', response);
+        // Reload the portfolio to reflect changes
+      },
+      (error) => {
+        console.error('Error deleting accomplishment:', error);
+        if (error.status === 401) {
+          console.warn('Unauthorized access - redirecting to login');
+          this.router.navigateByUrl('/login'); // Use the Router service
+        }
+      }
+    );
+    e.preventDefault();
+    this.router.navigateByUrl(`viewport/${studentID}`); // Use the Router service
+    console.log(studentID);
   }
 
   downloadCV(event: Event, studentId: string): void {

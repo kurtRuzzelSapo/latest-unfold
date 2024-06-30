@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-editprofile',
   standalone: true,
-  imports: [CommonModule, RouterLinkActive, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, RouterLinkActive, ReactiveFormsModule, RouterLink, RouterOutlet],
   templateUrl: './editprofile.component.html',
   styleUrl: './editprofile.component.css'
 })
@@ -159,5 +159,12 @@ export class EditprofileComponent implements OnInit {
   }
   routeToSecurity(studentID:any){
     this.route.navigate([`../../security/${studentID}`], { relativeTo: this.aRoute });
+  }
+
+  routeToEditProfile(studentID: any) {
+    this.route.navigate([`../editprofile/${studentID}`], { relativeTo: this.aRoute });
+  }
+  routeToFacSecurity(facID:any){
+    this.route.navigate([`../facSecurity/${facID}`], { relativeTo: this.aRoute });
   }
 }

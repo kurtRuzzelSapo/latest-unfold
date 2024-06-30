@@ -45,7 +45,8 @@ export class EditportfolioComponent implements OnInit {
       proLink: new FormControl('', Validators.required),
       proImg: new FormControl(null, Validators.required),
       proDate: new FormControl('', Validators.required),
-      proDesc: new FormControl('', Validators.required)
+      proDesc: new FormControl('', Validators.required),
+      proType: new FormControl('', Validators.required),
     });
     this.formData = new FormData();
   }
@@ -86,7 +87,8 @@ export class EditportfolioComponent implements OnInit {
             proTitle: this.projectData.project.projectTitle,
             proLink: this.projectData.project.projectLink,
             proDate: this.projectData.project.projectDate,
-            proDesc: this.projectData.project.projectDesc
+            proDesc: this.projectData.project.projectDesc,
+            proType: this.projectData.project.projectType,
           });
         } else {
           console.error('Unexpected response structure:', response);
@@ -146,6 +148,7 @@ export class EditportfolioComponent implements OnInit {
     this.formData.append('projectDesc', this.applyForm.value.proDesc);
     this.formData.append('projectLink', this.applyForm.value.proLink);
     this.formData.append('projectDate', this.applyForm.value.proDate);
+    this.formData.append('projectType', this.applyForm.value.proType);
     this.formData.append('projectID', this.projectID);
     this.formData.append('projectImg', this.selectedFile);
 

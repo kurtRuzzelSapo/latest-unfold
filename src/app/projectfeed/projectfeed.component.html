@@ -60,15 +60,19 @@
 
               <!-- FACULTY -->
               <li *ngIf="userDetails.is_faculty === 1" class="nav_list">
-                <a routerLink="/leaderboard" id="portfolio"  class="nav-link">Portfolio Spotlight</a>
+                <a  routerLink="/Home" class="nav-link active-link" id="dash">Dashboard</a>
                   <div class="circle"></div>
-              </li>
+              </li> 
               <li *ngIf="userDetails.is_faculty === 1" class="nav_list">
-                <a routerLink="/projectfeed" id="portfolio" style="color: #ee8d59;"  class="nav-link">Projects feed</a>
+                <a routerLink="/leaderboard" id="portfolio"  class="nav-link"> Spotlight</a>
                   <div class="circle"></div>
               </li>
               <li *ngIf="userDetails.is_faculty === 1" class="nav_list">
                 <a routerLink="/newsfeed" id="portfolio"   class="nav-link">Student feed</a>
+                  <div class="circle"></div>
+              </li>
+              <li *ngIf="userDetails.is_faculty === 1" class="nav_list">
+                <a routerLink="/projectfeed" id="portfolio" style="color: #ee8d59;"  class="nav-link">Projects feed</a>
                   <div class="circle"></div>
               </li>
               <!-- FACULTY -->
@@ -149,21 +153,24 @@
          <div class="search-filter-container">
           <div class="search-container">
               <input type="text" class="search-input" placeholder="Search..." [(ngModel)]="searchTerm"
-                  (input)="filterStudents()">
+                  (input)="filterProjects()">
               <button class="search-button"><i class="uil uil-search"></i></button>
           </div>
-
+        
           <!-- Filter Dropdown -->
-          <div  class="filter-container">
-              <select [(ngModel)]="selectedCategory" (change)="filterStudents()" name="filter" id="filter">
-                  <option value="">All</option>
-                  <option value="bsit">BSIT</option>
-                  <option value="bscs">BSCS</option>
-                  <option value="bsemc">BSEMC</option>
-                  <option value="act">ACT</option>
+          <div style="margin-left: 50px;" class="filter-container">
+              <select [(ngModel)]="selectedCategory" (change)="filterProjects()" name="filter" id="filter">
+                <option value="">All</option>
+                <option value="Programming">Programming</option>
+                <option value="Editing">Editing</option>
+                <option value="Animation">Animation</option>
+                <option value="Drawing">Drawing</option>
+                <option value="Photo Editing">Photo Editing</option>
+                <option value="Video Editing">Video Editing</option>
+                <option value="UI Design">UI Design</option>
               </select>
           </div>
-      </div>
+        </div>
       </nav>
    </div>
    
@@ -177,16 +184,19 @@
 <section class="newsfeed">
     <div  style="margin-top: 120px; padding-bottom: 40px; " class="project-container">
         <!-- Project 1 -->
-        <div *ngFor="let student of studentProjects;" class="card project-card">
+        <div *ngFor="let student of filteredProjects;" class="card project-card">
             <div class="card-body">
                 <!-- Data -->
-                <div class="d-flex mb-3">
+                <div  class="d-flex mb-3">
                     <a >
                         <img [src]="baseAPI + student.aboutImg" class="border rounded-circle me-2" alt="Avatar" style="height: 40px" />
                     </a>
-                    <div>
+                    <div >
                         <a class="text-dark mb-0" style="text-decoration: none;">
-                            <strong>{{student.studentName}}</strong>
+                            <strong style="cursor:pointer" (click)="ViewPortfolio($event, student.studentID)">{{student.studentName}}</strong>
+                        </a>
+                        <a class="text-muted d-block" style="margin-top: -6px; text-decoration: none;">
+                          <small>{{student.projectDate}}</small>
                         </a>
                         <a class="text-dark mb-0" style="text-decoration: none;">
                             <strong>{{student.course}}</strong>
@@ -195,10 +205,13 @@
                             <small>{{student.studentPosition}}</small>
                           </a>
                         <a class="text-muted d-block" style="margin-top: -6px; text-decoration: none;">
-                            <small>{{student.projectDate}}</small>
+                            <small>{{student.projectType}}</small>
                           </a>
-                        <a class="text-muted d-block" style="margin-top: -6px; text-decoration: none;">
-                            <small>DITO MO LAGAY PROJECT TYPE</small>
+                        <a *ngIf="student.projectLink" target="_blank" href="{{ student.projectLink }}" class="text-muted d-block" style="margin-top: -6px; text-decoration: none;">
+                            <strong>{{student.projectTitle}}</strong>
+                          </a>
+                        <a *ngIf="!student.projectLink" class="text-muted d-block" style="margin-top: -6px; text-decoration: none;">
+                            <strong>{{student.projectTitle}}</strong>
                           </a>
                     </div>
                 </div>
@@ -216,14 +229,11 @@
                     <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                 </a>
             </div>
-            <div *ngIf="student.projectLink">
-              <button>
+            <!-- <div  style="display: flex; justify-content: center; align-items: center;" *ngIf="student.projectLink">
+              <button >
                 <a target="_blank" href="{{ student.projectLink }}">View Project</a>
               </button>
-              <button>
-                <a>Testimony</a>
-              </button>
-            </div>
+            </div> -->
             
         </div>
 
