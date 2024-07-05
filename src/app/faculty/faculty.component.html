@@ -98,7 +98,7 @@
 
 			
 				<a *ngIf="userDetails.is_admin === 0" routerLink="/viewport/{{userDetails.studentID}}'" class="nav-link">Portfolio</a>
-				<a *ngIf="userDetails.is_admin === 1" routerLink="/newsfeed" class="nav-link">Portfolio Feed</a>
+				<!-- <a *ngIf="userDetails.is_admin === 1" routerLink="/newsfeed" class="nav-link">Portfolio Feed</a> -->
 			</div>
 			<a class="profile">
 			  <b style="margin-right: 10px;" class="user-details"
@@ -147,8 +147,9 @@
                 <td>{{ faculty.facEmail }}</td>
                 <td>{{ faculty.facPosition }}</td>
                 <td>
-                  <button class="btn btn-del"  (click)="deleteStudent(faculty)">
+                  <button class="btn btn-del"   (click)="DeleteFaculty(faculty.facID)">
                     Delete
+				
                   </button>
                 </td>
                 

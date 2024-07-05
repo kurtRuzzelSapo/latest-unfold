@@ -83,6 +83,9 @@ addViews(studentID: any): Observable<any> {
 Approved(studentID: any): Observable<any> {
   return this.http.delete<any>(`${this.apiURL}approved/${studentID}`);
 }
+DeleteFaculty(facID: any): Observable<any> {
+  return this.http.delete<any>(`${this.apiURL}delete-faculty/${facID}`);
+}
 
   sendRequest(endpoint: string, data: any): Observable<Status> {
     return this.http.post<Status>(this.apiURL + endpoint, JSON.stringify(data));

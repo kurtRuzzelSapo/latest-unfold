@@ -77,29 +77,57 @@ export class FacultyComponent {
     console.log("Editing project:", selectedProject);
   }
 
-  deleteStudent(data: any): void {
-    console.log("click");
-    console.log(data);
-    const payload = {
-      id: data.studentID,
-      is_admin: this.userDetails.is_admin
-    };
+  DeleteFaculty(facID: number): void {
 
-    this.ds.deleteRequest("delete-student", payload).subscribe(
-      (response: any) => {
-        if (response.status_code === 200) {
-          // alert("Student Deleted Successfully");
-          Swal.fire({
-            title: "Deleted Successfully",
-            icon: "success"
-          });
-          window.location.reload();
-        }
-      },
-      (error) => {
-        console.error('Error deleting student:', error);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+  
+        this.ds.DeleteFaculty(facID).subscribe(
+          (response) => {
+              console.log('Accomplishment deleted successfully:', response);
+              // Reload the portfolio to reflect changes
+              this.ds.getRequest("get-all-faculty").subscribe(
+                (response: any) => {
+                  this.facultyList = response;
+                  this.countBSITStudents();
+                  console.log('Faculty details:', response);
+                },
+                (error) => {
+                  console.error('Error retrieving faculty:', error);
+                }
+              );
+              Swal.fire({
+                title: "Deleted Successfully",
+                icon: "success"
+              });
+          },
+          (error) => {
+              console.error('Error deleting accomplishment:', error);
+              if (error.status === 401) {
+                  console.warn('Unauthorized access - redirecting to login');
+                  // this.route.navigateByUrl('/login'); // Or your login route
+              }
+          }
+      );
+  
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your Competition has been deleted.",
+          icon: "success"
+        });
       }
-    );
+    });
+    
+    
+    
   }
 
   onFileSelected(event: any) {

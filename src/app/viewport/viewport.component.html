@@ -274,20 +274,20 @@
     </section>
     
     
-    <section class="section testimonies" id="testimonies">
-        <div class="top-header text-center">
+    <!-- <section class="section testimonies" id="testimonies"> -->
+        <!-- <div class="top-header text-center">
             <h1>Testimonies</h1>
             <span>What others say about me</span>
         </div>
         <br>
         <br>
     <br>
-    <br>
+    <br> -->
     
     <!-- <div *ngIf="counts.contacts === null || counts.contacts === 0">
         <p style="color: #ee8d59; font-weight: 500; text-align: center;" >This student doesn't have any social media accounts yet.</p>
     </div> -->
-        <div class='carousel__item' *ngFor="let studentPortfolio of studentPortfolio.testimony">
+        <!-- <div class='carousel__item' *ngFor="let studentPortfolio of studentPortfolio.testimony">
       <div class='carousel__item-head'>
         <img [src]="baseAPI + studentPortfolio.testImg" class="rounded-circle" alt="Testimony Image" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
       </div>
@@ -302,10 +302,32 @@
     <br>
     <br>
     <br>
-    <br>
+    <br> -->
     
     
-    </section>
+    <!-- </section> -->
+
+
+    <section>
+        <div class="top-header">
+          <h1>Testimony</h1>
+          <span>Faculty members said about me</span>
+        </div>
+        <div class="">
+           <div class="cont">
+              <div *ngFor="let studentPortfolio of studentPortfolio.testimony" class="testi project">
+                <div class="prof">
+                    <img width="50" height="50" [src]="baseAPI + studentPortfolio.testImg" alt="">
+                    <div style="margin-left: 10px;">
+                        <div class="name"><b>{{studentPortfolio.testFirstname}} {{studentPortfolio.testLastname}}</b></div>
+                        <div class="position">{{studentPortfolio.testPosition}}</div>
+                    </div>
+                </div>
+                <div class="desc">{{studentPortfolio.testDesc}}.</div>
+              </div>
+           </div>
+        </div>
+     </section>
     
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script> -->
     
@@ -384,6 +406,32 @@
 
     </main>
 
+<!-- 
+    <li class="nav_list">
+       
+        <div class="circle"></div>
+    </li>
+    <li class="nav_list">
+        
+        <div class="circle"></div>
+    </li>
+    <li class="nav_list">
+       
+        <div class="circle"></div>
+    </li>
+    <li class="nav_list">
+       
+        <div class="circle"></div>
+    </li>
+    <li class="nav_list">
+       
+        <div class="circle"></div>
+    </li>
+    <li class="nav_list">
+       
+        <div class="circle"></div>
+    </li>
+</ul> -->
 
     <!-- --------------- FOOTER --------------- -->
     <footer>
@@ -393,16 +441,22 @@
         <div class="middle-footer">
             <ul class="footer-menu">
                 <li class="footer_menu_list">
-                    <a href="#home">Home</a>
+                    <a [routerLink]="[]" fragment="homes" class="nav-link" routerLinkActive="active-link" (click)="toHome()">Home</a>
                 </li>
                 <li class="footer_menu_list">
-                    <a href="#about">About</a>
+                    <a [routerLink]="[]" fragment="about" class="nav-link" routerLinkActive="active-link" (click)="toAbout()">About</a>
                 </li>
                 <li class="footer_menu_list">
-                    <a href="#projects">Projects</a>
+                    <a [routerLink]="[]" fragment="projects" class="nav-link" routerLinkActive="active-link" (click)="toProjects()">Projects</a>
                 </li>
                 <li class="footer_menu_list">
-                    <a href="#contact">Contact</a>
+                    <a [routerLink]="[]" fragment="competitions" class="nav-link" routerLinkActive="active-link" (click)="toComp()">Competitions</a>
+                </li>
+                <li class="footer_menu_list">
+                    <a [routerLink]="[]" fragment="testimonies" class="nav-link" routerLinkActive="active-link" (click)="toTest()">Testimony</a>
+                </li>
+                <li class="footer_menu_list">
+                    <a [routerLink]="[]" fragment="contact" class="nav-link" routerLinkActive="active-link" (click)="toContacts()">Contact</a>
                 </li>
             </ul>
         </div>
@@ -420,7 +474,7 @@
             </div>
         </div>
         <div class="bottom-footer">
-            <p>Copyright &copy; <a href="#home" style="text-decoration: none;"> {{ studentPortfolio.student.firstName }} {{ studentPortfolio.student.lastName }}</a> - All rights reserved</p>
+            <p>Copyright &copy; <a style="text-decoration: none;"> {{ studentPortfolio.student.firstName }} {{ studentPortfolio.student.lastName }}</a> - All rights reserved</p>
         </div>
     </footer>
 
