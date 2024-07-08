@@ -119,22 +119,51 @@ export class HomeComponent implements OnInit {
       is_admin: this.userDetails.is_admin
     };
 
-    this.ds.deleteRequest("delete-student", payload).subscribe(
-      (response: any) => {
-        if (response.status_code === 200) {
-          Swal.fire({
-            title: "Deleted Successfully",
-            icon: "success"
-          });
-          // alert("Student Deleted Successfully");
-          window.location.reload();
-         
-        }
-      },
-      (error) => {
-        console.error('Error deleting student:', error);
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.ds.deleteRequest("delete-student", payload).subscribe(
+          (response: any) => {
+            if (response.status_code === 200) {
+              window.location.reload();
+             
+              // alert("Student Deleted Successfully");
+             
+            }
+            Swal.fire({
+              title: "Thank you!",
+              text: "Your testimony has been submitted.",
+              icon: "success"
+            });
+          },
+          (error) => {
+            console.error('Error deleting student:', error);
+          }
+        );
+      
+  
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your Competition has been deleted.",
+          icon: "success"
+        });
       }
-    );
+      
+    });
+
+    // Swal.fire({
+    //   title: "Thank you!",
+    //   text: "Your testimony has been submitted.",
+    //   icon: "success"
+    // });
   }
 
   onFileSelected(event: any) {

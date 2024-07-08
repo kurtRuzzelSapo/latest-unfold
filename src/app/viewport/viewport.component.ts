@@ -249,7 +249,9 @@
                 icon: "success"
               });
               console.log(this.applyForm);
-             
+              this.applyForm.reset();
+      
+              this.formData = new FormData();
             },
             (error) => {
               console.error('Error submitting application:', error);

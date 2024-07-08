@@ -240,11 +240,11 @@
                 <td>{{ student.sex }}</td>
                 <td>{{ student.birthdate }}</td>
                 <td>{{ student.school }}</td>
-                <!-- <td>
+                <td *ngIf="userDetails.is_admin === 1">
                   <button class="btn btn-del"  (click)="deleteStudent(student)">
                     Delete
                   </button>
-                </td> -->
+                </td>
                 <td>
                  <button class="btn btn-ed"><a  style="color: white;" routerLink="/viewport/{{student.studentID}}'"><b>View Portfolio</b></a></button> 
                 </td>
