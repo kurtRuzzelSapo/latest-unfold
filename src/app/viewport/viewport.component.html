@@ -308,8 +308,8 @@
     <!-- </section> -->
 
 
-    <section>
-        <div class="top-header">
+    <section id="testimonies">
+        <div  class="top-header">
           <h1>Testimony</h1>
           <span>Faculty members said about me</span>
         </div>
@@ -343,21 +343,23 @@
                 <div *ngIf="counts.competitions === null || counts.competitions === 0">
                     <p style="color: #ee8d59; font-weight: 500; text-align: center;" >This student doesn't join any Competitions yet.</p>
                 </div>
-                <div class="col-lg-5 col-md-6">
-                    <div class="card mb-4 competition-card" *ngFor="let studentPortfolio of studentPortfolio.accomplishment">
-                        <img [src]="baseAPI + studentPortfolio.accomImg" class="card-img-top" alt="Competition Image">
-                        <div class="card-body">
-                            <h5 class="card-title">{{studentPortfolio.accomTitle}}</h5>
-                            <p class="card-text">{{studentPortfolio.accomDesc}}</p>
-                            <p class="card-text">Date:{{studentPortfolio.accomDate | date : " MMMM d, yyyy"}}</p>
-                            <a href="{{studentPortfolio.accomLink}}" target="_blank" class="btn btn-primary">Learn More</a>
+                <!-- <div class="col-lg-5 col-md-6"> -->
+                    <div class="competition-grid">
+                        <div class="card mb-4 competition-card" *ngFor="let studentPortfolio of studentPortfolio.accomplishment">
+                            <img [src]="baseAPI + studentPortfolio.accomImg" class="card-img-top" alt="Competition Image">
+                            <div class="card-body">
+                                <h5 class="card-title">{{studentPortfolio.accomTitle}}</h5>
+                                <p class="card-text">{{studentPortfolio.accomDesc}}</p>
+                                <p class="card-text">Date: {{studentPortfolio.accomDate | date : "MMMM d, yyyy"}}</p>
+                                <a href="{{studentPortfolio.accomLink}}" target="_blank" class="btn btn-primary">Learn More</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <!-- </div> -->
 
                 
                 
-                <!-- Add more competition cards here -->
+                
             </div>
         </div>
     </section>

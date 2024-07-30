@@ -45,10 +45,10 @@
                   <a  routerLink="/portfolio" class="nav-link active-link" id="dash">Dashboard</a>
                   <div class="circle"></div>
               </li>
-              <li *ngIf="userDetails.is_faculty === 0 || userDetails.is_admin === 0" class="nav_list ">
+              <!-- <li *ngIf="userDetails.is_faculty === 0 || userDetails.is_admin === 0" class="nav_list ">
                 <a routerLink="/feed" id="portfolio"  class="nav-link">Feed</a>
                 <div class="circle"></div>
-            </li>
+            </li> -->
               <li *ngIf="userDetails.is_faculty === 0 || userDetails.is_admin === 0" class="nav_list ">
                   <a routerLink="/leaderboard" id="portfolio"  class="nav-link">Portfolio Spotlight</a>
                   <div class="circle"></div>

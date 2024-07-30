@@ -11,7 +11,7 @@ export class DataService {
 
   constructor(private http: HttpClient) {}
 
-  apiURL: string = 'http://localhost/unfold-backup/unfold-api/api/';
+  apiURL: string = 'http://localhost/unfold/unfold-api/api/';
   // apiURL: string = 'https://unfoldap.online/unfold-api/api/';
 
   private generateQueryString(params: any): string {
@@ -80,6 +80,9 @@ deleteService(serviceId: number): Observable<any> {
 addViews(studentID: any): Observable<any> {
   return this.http.delete<any>(`${this.apiURL}add-views/${studentID}`);
 }
+// addViews(studentID: any, viewerID: any): Observable<any> {
+//   return this.http.post<any>(`${this.apiURL}add-views`, { studentID, viewerID });
+// }
 Approved(studentID: any): Observable<any> {
   return this.http.delete<any>(`${this.apiURL}approved/${studentID}`);
 }

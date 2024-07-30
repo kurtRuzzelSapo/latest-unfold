@@ -232,7 +232,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 20px;
-    padding: 10px;
+    padding: 50px;
     border-radius: 10px;
 }
 
@@ -243,11 +243,12 @@
     border-radius: 10px;
     margin-bottom: 20px;
     padding: 10px 10px 10px 10px;
+    border: 1px solid #333;
 }
 
 /* Ensure images and other content fit within the card */
 .project-card img {
-    max-width: 100%;
+    max-width: 70%;
 
 }
 

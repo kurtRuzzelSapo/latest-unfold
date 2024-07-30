@@ -27,6 +27,8 @@ export class NewsfeedComponent implements OnInit, AfterViewInit {
   searchTerm: string = '';
   selectedCategory: string = '';
   highestViewStudent: any = null; // Property to store student with highest views
+  viewedPortfolioIds: string[] = [];
+
 
   baseAPI: string = 'http://localhost/unfold/unfold-api/';
 
@@ -243,6 +245,11 @@ export class NewsfeedComponent implements OnInit, AfterViewInit {
     console.log(studentID);
 
   }
+
+  
+
+
+
 
   filterStudents(): void {
     console.log("Selected category:", this.selectedCategory);

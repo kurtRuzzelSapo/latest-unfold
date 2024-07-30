@@ -173,6 +173,7 @@ body{
     background: var(--first-color-hover);
 }
 
+
 /* Media query adjustments for responsiveness */
 @media only screen and (max-width: 900px) {
     .project-grid {
@@ -221,6 +222,8 @@ body{
     border: 3px solid #fff;
 }
 
+
+
 .carousel__item-head img {
   width: 100px;  /* Adjust the width as needed */
   height: 100px; /* Adjust the height as needed */
@@ -250,7 +253,7 @@ body{
     width: 100%;
     height: auto;
     border-radius: 10px 10px 0 0;
-    object-fit: cover; /* Ensure images cover the entire frame */
+    object-fit: contain; /* Ensure images cover the entire frame */
     aspect-ratio: 3/2; /* Maintain aspect ratio */
 }
 
@@ -283,6 +286,31 @@ body{
 
 .competition-card .btn:hover {
     background-color: var(--first-color-hover);
+}
+.competition-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+@media (max-width: 1200px) {
+    .competition-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .competition-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .competition-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 992px) {
