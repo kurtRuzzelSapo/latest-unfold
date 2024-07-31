@@ -11,6 +11,7 @@ import { AccomplishmentsComponent } from './accomplishments/accomplishments.comp
 import { SkillsComponent } from './skills/skills.component';
 import { ServicesComponent } from './services/services.component';
 import { ContactComponent } from './contact/contact.component';
+import { LandingComponent } from './landing/landing.component';
 
 
 
@@ -19,7 +20,7 @@ import { ContactComponent } from './contact/contact.component';
   standalone: true,
   imports: [RouterOutlet, CommonModule, RouterLink, RouterLinkActive, SidenavComponent, TopnavComponent, 
     HomeComponent, PortfolioComponent, AboutmeComponent, AccomplishmentsComponent,
-    SkillsComponent, ServicesComponent, ContactComponent
+    SkillsComponent, ServicesComponent, ContactComponent, LandingComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

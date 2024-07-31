@@ -32,13 +32,15 @@ import { HomeComponent } from './home/home.component';
 import { SecurityComponent } from './security/security.component';
 import { FacSecurityComponent } from './fac-security/fac-security.component';
 import { ProjectfeedComponent } from './projectfeed/projectfeed.component';
+import { LandingComponent } from './landing/landing.component';
 
 
 
 
 export const routes: Routes = [
 
-    { title: "Unfold | Login", path: '', component: LoginComponent }, // Default to login
+    { title: "Unfold | LandingPage", path: '', component: LandingComponent }, // Default 
+    { title: "Unfold | Login", path: 'login', component: LoginComponent },
     { title: "Unfold | Home", path: 'Home', component: HomeComponent },
     { title: "Unfold | Portfolio", path: 'portfolio', component: PortfolioComponent },
     { title: "Unfold | About Me", path: 'aboutme', component: AboutmeComponent },
@@ -74,6 +76,7 @@ export const routes: Routes = [
     { title: "Unfold | Leaderboard", path: 'leaderboard/', component: LeaderboardComponent },
     { title: "Unfold | Leaderboard", path: 'leaderboardAppr/', component: LeaderboardapproveComponent },
     { title: "Unfold | ProjectFeed", path: 'projectfeed', component: ProjectfeedComponent },
+   
 
     
 
