@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- --------- UNICONS ---------- -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+   
+    <!-- --------- CSS ---------- -->
+
+
+    <!-- --------- FAVICON ---------- -->
+    <!-- <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon"> -->
+
+        <!-- ----- TYPING JS Link ----- -->
+        <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+
+        <!-- ----- SCROLL REVEAL JS Link----- -->
+     <script src="https://unpkg.com/scrollreveal"></script>
+ 
+     <!-- ----- MAIN JS ----- -->
+     <!-- <script defer src="/src/assets/app.js"></script> -->
+
+<!-- <style>
+  .featured-image{
+     /* animation-name: slide;
+     animation-duration: 1.9s;  */
+     animation: slide 2s forwards;
+ }
+  .featured-text{
+     /* animation-name: slide;
+     animation-duration: 1.9s;  */
+     animation: slide-text 2s forwards;
+ }
+
+ @keyframes slide {
+    0% {
+        transform: translateX(500px); /* Start position (right) */
+    }
+    100% {
+        transform: translateX(0px); /* End position (left) */
+    }
+}
+ @keyframes slide-text {
+    0% {
+        transform: translateX(-500px); /* Start position (right) */
+    }
+    100% {
+        transform: translateX(0px); /* End position (left) */
+    }
+}
+</style> -->
+    <title>Portfolio</title>
+</head>
+<body style="background-color: #fae7c8;" >
+    <!-- <body style="background: linear-gradient(to right, #f8cd88, #f1b04c);"> -->
+   <div  class="container">
+    <!-- --------------- HEADER --------------- -->
+      <nav id="header">
+        <div class="nav-logo">
+            <p class="nav-name">{{ studentPortfolio.student.firstName }}</p>
+            <span>.</span>
+        </div>
+        
+        <div class="nav-menu" id="myNavMenu">
+            <!-- <ul class="nav_menu_list">
+                <li class="nav_list">
+                    <a href="#home" class="nav-link active-link">Home</a>
+                    <div class="circle"></div>
+                </li>
+                <li class="nav_list">
+                    <a href="#about" class="nav-link">About</a>
+                    <div class="circle"></div>
+                </li>
+                <li class="nav_list">
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <div class="circle"></div>
+                </li>
+                <li class="nav_list">
+                    <a href="#contact" class="nav-link">Contact</a>
+                    <div class="circle"></div>
+                </li>
+            </ul> -->
+            <a *ngIf="userDetails.is_admin === 0" style="text-decoration: none; list-style-type: none; font-size: 20px; font-weight: bolder; color: #ee8d59;"     routerLink="/newsfeed" class="view-portfolio" href=""
+          ><li class="uil-left-arrow-from-left"></li></a>
+            <a *ngIf="userDetails.is_admin === 1" style="text-decoration: none; list-style-type: none; font-size: 20px; font-weight: bolder; color: #ee8d59;"    routerLink="/Home" class="view-portfolio" href=""
+          ><li class="uil-left-arrow-from-left"></li></a>
+            <a *ngIf="userDetails.is_faculty === 1" style="text-decoration: none; list-style-type: none; font-size: 20px; font-weight: bolder; color: #ee8d59;"    routerLink="/newsfeed" class="view-portfolio" href=""
+          ><li class="uil-left-arrow-from-left"></li></a>
+            <ul class="nav_menu_list">
+                <li class="nav_list">
+                    <a [routerLink]="[]" fragment="homes" class="nav-link" routerLinkActive="active-link" (click)="toHome()">Home</a>
+                    <div class="circle"></div>
+                </li>
+                <li class="nav_list">
+                    <a [routerLink]="[]" fragment="about" class="nav-link" routerLinkActive="active-link" (click)="toAbout()">About</a>
+                    <div class="circle"></div>
+                </li>
+                <li class="nav_list">
+                    <a [routerLink]="[]" fragment="projects" class="nav-link" routerLinkActive="active-link" (click)="toProjects()">Projects</a>
+                    <div class="circle"></div>
+                </li>
+                <li class="nav_list">
+                    <a [routerLink]="[]" fragment="competitions" class="nav-link" routerLinkActive="active-link" (click)="toComp()">Competitions</a>
+                    <div class="circle"></div>
+                </li>
+                <li class="nav_list">
+                    <a [routerLink]="[]" fragment="testimonies" class="nav-link" routerLinkActive="active-link" (click)="toTest()">Testimony</a>
+                    <div class="circle"></div>
+                </li>
+                <li class="nav_list">
+                    <a [routerLink]="[]" fragment="contact" class="nav-link" routerLinkActive="active-link" (click)="toContacts()">Contact</a>
+                    <div class="circle"></div>
+                </li>
+            </ul>
+        </div>
+        <div class="nav-button">
+            <button class="btn" (click)="downloadCV($event, studentPortfolio.student.studentID)">Download CV <i class="uil uil-file-alt"></i></button>
+        </div>
+        <div class="nav-menu-btn">
+            <i class="uil uil-bars" onclick="myMenuFunction()"></i>
+        </div>
+      </nav>
+
+
+    <!-- -------------- MAIN ---------------- -->
+    <main class="wrapper">
+       <!-- -------------- FEATURED BOX ---------------- -->
+       <section class="featured-box" id="homes">
+          <div class="featured-text">
+            <div class="featured-text-card">
+                
+            </div>
+            <div class="featured-name">
+                <p>I'm <span class="typedText">  {{ studentPortfolio.student.firstName }}
+                  {{ studentPortfolio.student.lastName }}</span></p>
+            </div>
+            <div class="featured-text-info">
+                
+                <p>
+                  Hello! I'm {{ studentPortfolio.student.firstName }} {{ studentPortfolio.student.lastName }}, and I live at {{ studentPortfolio.student.address }}.
+                   I am a student at {{ studentPortfolio.student.school }}, currently pursuing a course in {{ studentPortfolio.student.course }}. 
+                   I am dedicated to both academic excellence and personal growth. I was born on  {{
+                    studentPortfolio.student.birthdate | date : "MMMM d, yyyy"
+                  }}. 
+                  Through this portfolio, I aim to share my journey, achievements, and aspirations with you.
+                  
+                </p>
+            </div>
+            <div class="featured-text-btn">
+                <!-- <button (click)="Approved(studentPortfolio.student.studentID)" *ngIf="userDetails.is_faculty === 1" class="btn blue-btn">Approve me <i class="uil-star"></i></button> -->
+                <button (click)="Approved(studentPortfolio.student.studentID)" *ngIf="userDetails.is_faculty === 1" class="btn blue-btn">Approve me <i class="uil-star"></i></button>
+                <button *ngIf="userDetails.is_admin === 0" class="btn blue-btn" (click)="toContacts()">Collab with me</button>
+                <button  class="btn" (click)="downloadCV($event, studentPortfolio.student.studentID)">Download CV <i class="uil uil-file-alt"></i></button>
+            </div>
+            <div *ngIf="counts.contacts === null || counts.contacts === 0">
+                <p style="color: #ee8d59; font-weight: 500;" >This student doesn't have any social media accounts yet.</p>
+            </div>
+            <div *ngIf="counts.contacts !== null && counts.contacts !== 0">
+                <div class="social_icons" *ngFor=" let studentPortfolio of studentPortfolio.contact">
+                    <div  class="icon"><a target="_blank" href="{{studentPortfolio.contLinkedin}}"><i class="uil uil-linkedin-alt"></i></a></div>
+                    <div class="icon"><a target="_blank" href="{{studentPortfolio.contGithub}}"><i class="uil uil-github-alt"></i></a></div>
+                    <div class="icon"><a target="_blank" href="{{studentPortfolio.contFB}}"><i class="uil uil-facebook"></i></a></div>
+                    <div class="icon"><a target="_blank" href="{{studentPortfolio.contIG}}"><i class="uil uil-instagram"></i></a></div>
+                </div>
+            </div>
+          </div>
+          <div   class="featured-image">
+            <div  class="image">
+                <!-- <img src="https://dthezntil550i.cloudfront.net/u8/latest/u82311180646396480024838605/57ccfe71-b6c8-4353-b4fb-34ae4b11c80f.jpg" alt="avatar"> -->
+                <img [src]="baseAPI + studentPortfolio.about[0].aboutImg" alt="avatar">.about[0].aboutText
+               
+            </div>
+          </div>
+          <!-- <div class="scroll-icon-box">
+            <a href="#about" class="scroll-btn">
+                <i class="uil uil-mouse-alt"></i>
+                <p>Scroll Down</p>
+            </a>
+          </div> -->
+
+       </section>
+       <!-- -------------- ABOUT BOX ---------------- -->
+       <section class="section" id="about">
+          <div class="top-header">
+            <h1>About Me</h1>
+          </div>
+          <div class="row">
+            <div class="col">
+                <div class="about-info">
+                    <h3>My introduction</h3>
+                    <p>{{studentPortfolio.about[0].aboutText}}
+                    </p>
+                    <!-- <div class="about-btn">
+                        <button class="btn">Download CV <i class="uil uil-import"></i></button>
+                    </div> -->
+                </div>
+            </div>
+            <div class="col">
+                <div class="skills-box">
+                    <div class="skills-header">
+                        <h3>Technologies</h3>
+                    </div>
+                    <div *ngIf="counts.technologies === null || counts.technologies === 0">
+                        <p style="color: #ee8d59; font-weight: 500;">
+                            This student hasn't acquired any technological skills yet.
+                        </p>
+                    </div>
+                    <div style="display: flex;" *ngIf="counts.technologies !== null && counts.technologies !== 0">
+                        <div style="display: flex; position: relative;" class="skills-list" *ngFor="let studentPortfolio of studentPortfolio.skill">
+                            <span style="margin-right: 5px; background-color: #1f1919;  cursor: pointer;" onmouseover="this.nextElementSibling.style.visibility='visible'; this.nextElementSibling.style.opacity='1';" onmouseout="this.nextElementSibling.style.visibility='hidden'; this.nextElementSibling.style.opacity='0';">
+                                {{studentPortfolio.skillTitle}}
+                            </span>
+                            <span style="margin-right: 5px; visibility: hidden; width: 120px; background-color: #ee8d59; color: #fff; text-align: center; border-radius: 6px; padding: 5px 0; position: absolute; z-index: 1; bottom: 125%; left: 50%; margin-left: -60px; opacity: 0; transition: opacity 0.3s;">
+                                {{studentPortfolio.skillProf}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+          </div>
+       </section>
+
+       <!-- -------------- PROJECT BOX ---------------- -->
+
+       <section class="section" id="projects">
+          <div class="top-header">
+              <h1>Achievements</h1>
+          </div>
+          <div class="project-container">
+            <div  class="project-box">
+                <i class="uil uil-briefcase-alt"></i>
+                <h3>Completed</h3>
+                <label>{{counts.projects}}+ Finished Projects</label>
+            </div>
+            <div class="project-box">
+                <i class="uil-lightbulb"></i>
+                <h3>Technologies</h3>
+                <label>{{counts.technologies}}+ Learned Skills</label>
+            </div>
+            <div class="project-box">
+                <i class="uil uil-award"></i>
+                <h3>Competition</h3>
+                <label>{{counts.competitions}}+ Times in the field</label>
+            </div>
+          </div>
+       </section>
+
+
+
+       <section class="section contact" >
+        <div class="top-header">
+            <h1>Projects</h1>
+            <span>Do you have a project in mind?</span>
+        </div>
+        <div *ngIf="counts.projects === null || counts.projects === 0">
+            <p style="color: #ee8d59; font-weight: 500; text-align: center;" >This student doesn't have any Projects yet.</p>
+        </div>
+        <div class="project-grid">
+            <div class="project-section square" *ngFor=" let studentPortfolio of studentPortfolio.project">
+                <a target="_blank" href="{{studentPortfolio.projectLink}}">
+                    <img [src]="baseAPI + studentPortfolio.projectImg" alt="">
+                </a>
+                <div class="project-sectionDesc">
+                    <h4>{{studentPortfolio.projectTitle}}</h4>
+                    <h5>Created: {{studentPortfolio.projectDate | date : "MMMM d, yyyy"}}</h5>
+                    <p>{{studentPortfolio.projectDesc}}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    <!-- <section class="section testimonies" id="testimonies"> -->
+        <!-- <div class="top-header text-center">
+            <h1>Testimonies</h1>
+            <span>What others say about me</span>
+        </div>
+        <br>
+        <br>
+    <br>
+    <br> -->
+    
+    <!-- <div *ngIf="counts.contacts === null || counts.contacts === 0">
+        <p style="color: #ee8d59; font-weight: 500; text-align: center;" >This student doesn't have any social media accounts yet.</p>
+    </div> -->
+        <!-- <div class='carousel__item' *ngFor="let studentPortfolio of studentPortfolio.testimony">
+      <div class='carousel__item-head'>
+        <img [src]="baseAPI + studentPortfolio.testImg" class="rounded-circle" alt="Testimony Image" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+      </div>
+      <div class='carousel__item-body' >
+        <p class='title'>{{studentPortfolio.testFirstname}} {{studentPortfolio.testLastname}}</p>
+        <b class='title'>{{studentPortfolio.testPosition}}</b>
+        <p>{{studentPortfolio.testDesc}}</p>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br> -->
+    
+    
+    <!-- </section> -->
+
+
+    <section id="testimonies">
+        <div  class="top-header">
+          <h1>Testimony</h1>
+          <span>Faculty members said about me</span>
+        </div>
+        <div class="">
+           <div class="cont">
+              <div *ngFor="let studentPortfolio of studentPortfolio.testimony" class="testi project">
+                <div class="prof">
+                    <img width="50" height="50" [src]="baseAPI + studentPortfolio.testImg" alt="">
+                    <div style="margin-left: 10px;">
+                        <div class="name"><b>{{studentPortfolio.testFirstname}} {{studentPortfolio.testLastname}}</b></div>
+                        <div class="position">{{studentPortfolio.testPosition}}</div>
+                    </div>
+                </div>
+                <div class="desc">{{studentPortfolio.testDesc}}.</div>
+              </div>
+           </div>
+        </div>
+     </section>
+    
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script> -->
+    
+    
+          <section class="section" id="competitions">
+        <div class="container">
+            <div class="top-header text-center">
+                <h1>Competitions</h1>
+                <span>Competitions that I've joined recently</span>
+            </div>
+            <div class="row">
+                <!-- Competition cards -->
+                <div *ngIf="counts.competitions === null || counts.competitions === 0">
+                    <p style="color: #ee8d59; font-weight: 500; text-align: center;" >This student doesn't join any Competitions yet.</p>
+                </div>
+                <!-- <div class="col-lg-5 col-md-6"> -->
+                    <div class="competition-grid">
+                        <div class="card mb-4 competition-card" *ngFor="let studentPortfolio of studentPortfolio.accomplishment">
+                            <img [src]="baseAPI + studentPortfolio.accomImg" class="card-img-top" alt="Competition Image">
+                            <div class="card-body">
+                                <h5 class="card-title">{{studentPortfolio.accomTitle}}</h5>
+                                <p class="card-text">{{studentPortfolio.accomDesc}}</p>
+                                <p class="card-text">Date: {{studentPortfolio.accomDate | date : "MMMM d, yyyy"}}</p>
+                                <a href="{{studentPortfolio.accomLink}}" target="_blank" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                <!-- </div> -->
+
+                
+                
+                
+            </div>
+        </div>
+    </section>
+    
+
+   
+
+       <!-- -------------- CONTACT BOX ---------------- -->
+
+       <section class="section contact" id="contact">
+          <div class="top-header">
+            <h1>Get in touch</h1>
+            <span>Do you have a project in your mind, contact me here</span>
+          </div>
+          <div class="row">
+             <div class="col">
+                <div class="contact-info">
+                    <h2>Find Me <i class="uil uil-corner-right-down"></i></h2>
+                    <p><i class="uil uil-envelope"></i>{{ studentPortfolio.student.email }}</p>
+                    <p><i class="uil uil-phone"></i>{{ studentPortfolio.student.contacts }}</p>
+                </div>
+             </div>
+             <div *ngIf="userDetails.is_faculty === 1 || userDetails.is_admin === 1" class="col"> 
+                <div class="form-control">
+                    <form 	class="needs-validation"
+					novalidate
+					[formGroup]="applyForm"
+					(submit)="Insert()">
+
+                        <!-- <div class="form-inputs">
+                            <input type="text" class="input-field" placeholder="Name">
+                            <input type="text" class="input-field" placeholder="Email">
+                        </div> -->
+                        <div class="text-area">
+                            <textarea formControlName="testDesc" placeholder="Your testimony.."></textarea>
+                        </div>
+                        <div class="form-button">
+                            <button type="submit" class="btn">Send <i class="uil uil-message"></i></button>
+                        </div>
+                    </form>
+                </div>
+             </div>
+          </div>
+       </section>
+    
+
+    </main>
+
+<!-- 
+    <li class="nav_list">
+       
+        <div class="circle"></div>
+    </li>
+    <li class="nav_list">
+        
+        <div class="circle"></div>
+    </li>
+    <li class="nav_list">
+       
+        <div class="circle"></div>
+    </li>
+    <li class="nav_list">
+       
+        <div class="circle"></div>
+    </li>
+    <li class="nav_list">
+       
+        <div class="circle"></div>
+    </li>
+    <li class="nav_list">
+       
+        <div class="circle"></div>
+    </li>
+</ul> -->
+
+    <!-- --------------- FOOTER --------------- -->
+    <footer>
+        <div class="top-footer">
+            <p> {{ studentPortfolio.student.firstName }}</p>
+        </div>
+        <div class="middle-footer">
+            <ul class="footer-menu">
+                <li class="footer_menu_list">
+                    <a [routerLink]="[]" fragment="homes" class="nav-link" routerLinkActive="active-link" (click)="toHome()">Home</a>
+                </li>
+                <li class="footer_menu_list">
+                    <a [routerLink]="[]" fragment="about" class="nav-link" routerLinkActive="active-link" (click)="toAbout()">About</a>
+                </li>
+                <li class="footer_menu_list">
+                    <a [routerLink]="[]" fragment="projects" class="nav-link" routerLinkActive="active-link" (click)="toProjects()">Projects</a>
+                </li>
+                <li class="footer_menu_list">
+                    <a [routerLink]="[]" fragment="competitions" class="nav-link" routerLinkActive="active-link" (click)="toComp()">Competitions</a>
+                </li>
+                <li class="footer_menu_list">
+                    <a [routerLink]="[]" fragment="testimonies" class="nav-link" routerLinkActive="active-link" (click)="toTest()">Testimony</a>
+                </li>
+                <li class="footer_menu_list">
+                    <a [routerLink]="[]" fragment="contact" class="nav-link" routerLinkActive="active-link" (click)="toContacts()">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <div class="footer-social-icons">
+            <div *ngIf="counts.contacts === null || counts.contacts === 0">
+                <p style="color: #ee8d59; font-weight: 500;" >This student doesn't have any social media accounts yet.</p>
+            </div>
+            <div *ngIf="counts.contacts !== null && counts.contacts !== 0">
+                <div class="social_icons" *ngFor=" let studentPortfolio of studentPortfolio.contact">
+                    <div  class="icon"><a target="_blank" href="{{studentPortfolio.contLinkedin}}"><i class="uil uil-linkedin-alt"></i></a></div>
+                    <div class="icon"><a target="_blank" href="{{studentPortfolio.contGithub}}"><i class="uil uil-github-alt"></i></a></div>
+                    <div class="icon"><a target="_blank" href="{{studentPortfolio.contFB}}"><i class="uil uil-facebook"></i></a></div>
+                    <div class="icon"><a target="_blank" href="{{studentPortfolio.contIG}}"><i class="uil uil-instagram"></i></a></div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-footer">
+            <p>Copyright &copy; <a style="text-decoration: none;"> {{ studentPortfolio.student.firstName }} {{ studentPortfolio.student.lastName }}</a> - All rights reserved</p>
+        </div>
+    </footer>
+
+    </div>
+
+
+
+    <script defer src="/src/assets/app.js"></script>
+
+</body>
+</html>

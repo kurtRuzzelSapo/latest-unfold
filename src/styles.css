@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #fae7c8;; /* Apply gradient background */
+  }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@media only screen and (max-width: 414px){
+ 
+}
+#cv-container{
+  background-color: white;
+}

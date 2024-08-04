@@ -1,0 +1,271 @@
+<!-- <app-topnav></app-topnav> -->
+<!-- <app-sidenav></app-sidenav> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	 <!-- --------- UNICONS ---------- -->
+	 <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+	<!-- My CSS -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+
+	<title>Student Dashboard</title>
+</head>
+<body>
+
+
+	<!-- SIDEBAR -->  
+	<section id="sidebar">
+		<a class="brand">
+			<!-- <i class='bx bxl-firebase'></i> -->
+			<img src="../../assets/images/Unfold_Logo.png" width="40px" height="40px" alt="">
+			<span class="text">UNFOLD</span>
+		</a>
+		<ul class="side-menu top">
+			<li class="active">
+				<a routerLink="/Home">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li *ngIf="userDetails.is_admin === 0">
+				<a routerLink="/portfolio">
+					<i class='bx bx-folder-open' ></i>
+					<span class="text">Projects</span>
+				</a>
+			</li>
+			<li *ngIf="userDetails.is_admin === 0">
+				<a routerLink="/skills">
+					<i class='bx bx-bulb' ></i>
+					<span class="text">Technologies</span>
+				</a>
+			</li>
+			<li *ngIf="userDetails.is_admin === 0">
+				<a routerLink="/accomplishments">
+					<i class='bx bx-trophy' ></i>
+					<span class="text">Competitions</span>
+				</a>
+			</li>
+			<li *ngIf="userDetails.is_admin === 0">
+				<a routerLink="/aboutme">
+					<i class='bx bx-user' ></i>
+					<span class="text">About Me</span>
+				</a>
+			</li>
+			<li *ngIf="userDetails.is_admin === 0" >
+				<a routerLink="/contact">
+					<i class='bx bxs-contact' ></i>
+					<span class="text">Contacts</span>
+				</a>
+			</li>
+			<li *ngIf="userDetails.is_admin === 0" >
+				<a routerLink="/design">
+					<i class='bx bxs-paint' ></i>
+					<span class="text">Design</span>
+				</a>
+			</li>
+			<!---------------- ADMIN ------------->
+      <li *ngIf="userDetails.is_admin === 1" >
+				<a routerLink="/faculty">
+					<i class='bx bxs-user' ></i>
+					<span class="text">Faculty</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a routerLink="/login" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section> 
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<div style="display: flex;">
+
+			
+				<a *ngIf="userDetails.is_admin === 0" routerLink="/viewport/{{userDetails.studentID}}'" class="nav-link">Portfolio</a>
+				<!-- <a *ngIf="userDetails.is_admin === 1" routerLink="/newsfeed" class="nav-link">Portfolio Feed</a> -->
+				<a *ngIf="userDetails.is_admin === 0 || userDetails.is_faculty === 1" routerLink="/newsfeed" class="nav-link">Portfolio Feed</a>
+			</div>
+			<!-- STUDENT -->
+			<div *ngIf="userDetails.is_admin === 0"  class="profile" (click)="toggleDropdown($event)">
+				<b style="margin-right: 10px;" class="user-details">
+				  {{ userDetails.firstName }} {{ userDetails.lastName }}
+				</b>
+				<img class="prof-icon" *ngIf="userDetails.is_admin === 0" width="60" height="60" [src]="baseAPI + studentPortfolio.about[0].aboutImg" alt="">
+				
+				<!-- Dropdown Menu -->
+				<div class="dropdown-menu" [class.show]="isDropdownVisible" (click)="$event.stopPropagation()">
+				  <ul>
+					<li><a routerLink="/login">Logout</a></li>
+					<li><a (click)="routeToEditProfile( userDetails.studentID)">Edit Profile</a></li>
+					<!-- <button style="background-color: #f8955e; border:1px solid #f5652f; margin-top: 10px;" class="btn btn-primary" (click)="routeToEditProfile( userDetails.studentID)">
+					  Edit Profile
+				  </button> -->
+				  </ul>
+				</div>
+			  </div>
+	  
+	  
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+		<main>
+			<div class="head-title">
+				<div class="left">
+					<h1> Student Dashboard</h1>
+				</div>		
+			</div>
+
+			<ul *ngIf="userDetails.is_admin === 1 || userDetails.is_faculty ===1" class="box-info">
+				<li>
+					<i class='bx bx-terminal' ></i>
+					<span class="text">
+						<h3>{{bsitCount}}</h3>
+						<p>BSIT</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bx-code-block' ></i>
+					<span class="text">
+						<h3>{{actCount}}</h3>
+						<p>ACT</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bxs-devices' ></i>
+					<span class="text">
+						<h3>{{bsemcCount}}</h3>
+						<p>BSEMC</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bxs-devices' ></i>
+					<span class="text">
+						<h3>{{bscsCount}}</h3>
+						<p>BSCS</p>
+					</span>
+				</li>
+			</ul>
+
+			<ul *ngIf="userDetails.is_admin === 0 " class="box-info">
+				<li>
+					<i class='bx bx-terminal'></i>
+					<span class="text">
+						<h3>{{ counts.projects }}</h3>
+						<p>Projects</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bx-code-block'></i>
+					<span class="text">
+						<h3>{{ counts.technologies }}</h3>
+						<p>Technologies</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bxs-devices'></i>
+					<span class="text">
+						<h3>{{ counts.competitions }}</h3>
+						<p>Competitions</p>
+					</span>
+				</li>
+				
+			</ul>
+
+
+			<div *ngIf="userDetails.is_admin === 1 || userDetails.is_faculty ===1" class="table-data">
+				<div class="order">
+					<div class="head">
+						<h3>List of Students</h3>
+					</div>
+                    <div class="search-filter-container" style="display: flex;">
+                        <div class="search-container">
+                          <input type="text" class="search-input" placeholder="Search..." [(ngModel)]="searchTerm" (input)="filterStudents()">
+                          <button class="search-button"><i class="uil uil-search"></i></button>
+                        </div>
+                        <div class="filter-container">
+                          <select [(ngModel)]="selectedCategory" (change)="filterStudents()" name="filter" id="filter">
+                            <option value="">All</option>
+                            <option value="bsit">BSIT</option>
+                            <option value="bscs">BSCS</option>
+                            <option value="bsemc">BSEMC</option>
+                            <option value="act">ACT</option>
+                          </select>
+                        </div>
+                      </div>
+					<table *ngIf="userDetails.is_admin === 1 || userDetails.is_faculty ===1">
+						<thead>
+							<tr>
+                <th>Student ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Contacts</th>
+                <th>Course</th>
+                <th>Sex</th>
+                <th>Birthdate</th>
+                <th>School</th>
+                <th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let student of filteredStudents">
+                <td>{{ student.studentID }}</td>
+                <td>{{ student.firstName }}</td>
+                <td>{{ student.lastName }}</td>
+                <td>{{ student.email }}</td>
+                <td>{{ student.address }}</td>
+                <td>{{ student.contacts }}</td>
+                <td>{{ student.course }}</td>
+                <td>{{ student.sex }}</td>
+                <td>{{ student.birthdate }}</td>
+                <td>{{ student.school }}</td>
+                <td *ngIf="userDetails.is_admin === 1">
+                  <button class="btn btn-del"  (click)="deleteStudent(student)">
+                    Delete
+                  </button>
+                </td>
+                <td>
+                 <button class="btn btn-ed"><a  style="color: white;" routerLink="/viewport/{{student.studentID}}'"><b>View Portfolio</b></a></button> 
+                </td>
+              </tr>		
+						</tbody>
+					</table>
+				</div>
+				
+			</div>
+		</main>
+		<!-- MAIN -->
+
+		
+
+	
+
+	</section>
+	<!-- CONTENT -->
+	
+
+
+	<script src="script.js"></script>
+</body>
+</html>

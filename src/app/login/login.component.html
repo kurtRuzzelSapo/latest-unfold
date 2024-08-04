@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap"
+    /> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>Document</title>
+   
+  </head>
+
+  <body style="overflow: hidden">
+    <!-- <nav class="navbar bg-custom position-absolute">
+      <div class="child">
+          <img class="img-icon" src="https://cdn-icons-png.flaticon.com/512/45/45648.png" alt="Bootstrap" width="90" height="40" />
+          <h2 style="font-weight: bolder;" class="m-0 p-0 text-center fs-3">Unfold</h2>
+      </div>
+    </nav> -->
+
+    <div
+      style="
+        min-height: 100vh;
+        overflow-y: hidden;
+        margin: 0;
+        /* font-family: 'Poppins', sans-serif; */
+      "
+      class="container-fluid d-flex justify-content-around align-items-center text-black bg-custom"
+    >
+      <div class="left-box">
+        <h1
+          style="
+            text-align: left;
+            font-size: 7rem;
+            margin-bottom: 20px;
+            /* font-family: 'Poppins', sans-serif; */
+          "
+        >
+          Welcome!
+        </h1>
+        <p style="text-align: left; margin-left: 20px; margin-top: 10px;" class="fs-3 fw-light">Let's unfold together.</p>
+      </div>
+      <div class="parent">
+
+      
+      <div class="login-container">
+        <div class="child">
+          <!-- <img class="img-icon" src="https://cdn-icons-png.flaticon.com/512/45/45648.png" alt="Bootstrap" width="90" height="30" /> -->
+          <p id="icon-title" class="m-0 p-0 text-center fs-3">Unfold</p>
+      </div>
+        <!-- <h2 class="m-0 p-0 text-center fs-3">Design Your Future </h2>
+        <h2 class="m-0 p-0 text-center fs-3">here, Students!</h2> -->
+        <p style="font-weight: 500;" class=" pb-lg-4 mt-3 text-center">
+          Log in to Customize Your Portfolio
+        </p>
+        <form
+          [formGroup]="applyForm"
+          (submit)="Login()"
+          class="d-flex flex-column align-items-center justify-content-center"
+          style="width: 20rem"
+        >
+          <div class="mb-3 form-floating">
+            <input
+              formControlName="email"
+              type="email"
+              class="form-control bg-custom text-black"
+              placeholder="example@test.com"
+              required
+              style="width: 20rem; height: 1rem;"
+
+            />
+            @if(Error == "Incorrect email"){
+            <div class="text-danger">Incorrect email</div>
+            } @else{
+            <div class="text-danger"></div>
+            }
+
+            <label class="text-bg-custom" for="floatingInput">Email address</label>
+          </div>
+
+          <div class="mb-3 form-floating">
+            <input
+              formControlName="password"
+              type="password"
+              class="form-control bg-custom text-black"
+              id="exampleInputPassword1"
+              placeholder="..."
+              required
+              style="width: 20rem"
+            />
+            @if(Error == "Incorrect password"){
+            <div class="text-danger">Incorrect password</div>
+            } @else{
+            <div class="text-danger"></div>
+            }
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+          </div>
+          <div class="container d-flex justify-content-center">
+            <button
+              type="submit"
+              class="btn btn-danger mb-3 mt-4 ms-0 me-0"
+              style="width: 29rem; padding-left: 20px;"
+            >
+              Log in <i class="cis-arrow-right"></i>
+            </button>
+          </div>
+          <p class="">
+            Create new account
+            <a
+              routerLink="/signup"
+              class="fw-bold text-danger"
+              style="color: #f5652f !important;"
+              >Here!</a
+            >
+          </p>
+        </form>
+      </div>
+    </div>
+    </div>
+    <style>
+      .btn {
+        background-color: #f5652f;
+        border: none;
+      }
+    </style>
+  </body>
+</html>

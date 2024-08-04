@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="sidenav.component.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap"
+    />
+  </head>
+  <body>
+    <div class="responsive">
+    <div class="side-nav">
+      <div class="side-nav-child"></div>
+      <div class="side-nav-item"></div>
+      <img class="logo" alt="logo" src="/assets/images/logo.png" />
+      <div class="line1"></div>
+      <ul class="something" *ngIf="userDetails.is_admin === 0">
+
+        <li>
+          <a
+            routerLink="/portfolio"
+            class="portfolio"
+            routerLinkActive="active"
+            ariaCurrentWhenActive="page"
+          >
+            <img
+              src="assets/icons/portfolio.png"
+              class="port"
+              alt="Portfolio Icon"
+            />Projects</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/aboutme"
+            class="aboutme"
+            routerLinkActive="active"
+            ariaCurrentWhenActive="page"
+          >
+            <img
+              src="assets/icons/about.png"
+              class="about"
+              alt="About Icon"
+            />About Me</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/accomplishments"
+            class="accomplishments"
+            routerLinkActive="active"
+            ariaCurrentWhenActive="page"
+          >
+            <img
+              src="assets/icons/accomplishment.png"
+              class="accom"
+              alt="Accomplishment Icon"
+            />Accomplishments</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/skills"
+            class="skills"
+            routerLinkActive="active"
+            ariaCurrentWhenActive="page"
+          >
+            <img
+              src="assets/icons/skills.png"
+              class="skills"
+              alt="Skill Icon"
+            />Skills</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/services"
+            class="services"
+            routerLinkActive="active"
+            ariaCurrentWhenActive="page"
+          >
+            <img
+              src="assets/icons/services.png"
+              class="services"
+              alt="Services Icon"
+            />Services</a
+          >
+        </li>
+        <!-- <li>
+          <a
+            routerLink="/contact"
+            class="contact"
+            routerLinkActive="active"
+            ariaCurrentWhenActive="page"
+          >
+            <img
+              src="assets/icons/contact.png"
+              class="contact"
+              alt="Contact Icon"
+            />Contact</a
+          >
+        </li> -->
+        <li>
+          <a
+            routerLink="/contact"
+            class="contact"
+            routerLinkActive="active"
+            ariaCurrentWhenActive="page"
+            (click)="logoutUser()"
+          >
+            <img
+              src="assets/icons/logout.png"
+              class="contact"
+              alt="Contact Icon"
+            />Logout</a
+          >
+        </li>
+      </ul>
+
+      <ul class="something" style="padding-right: 20px;" *ngIf="userDetails.is_admin === 1">
+        <li>
+          <a
+            routerLink="/Home"
+            class="home"
+            routerLinkActive="active"
+            ariaCurrentWhenActive="page"
+          >
+            <img src="assets/icons/home.png" class="home" alt="Home Icon" />
+            Home</a
+          >
+        </li>
+        <li style="padding-right: 170px;" >
+          <a
+
+            routerLink="/contact"
+            class="contact"
+            routerLinkActive="active"
+            ariaCurrentWhenActive="page"
+            (click)="logoutUser()"
+          >
+            <img
+              src="assets/icons/logout.png"
+              class="contact"
+              alt="Contact Icon"
+            />Logout</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+  </body>
+
+</html>
