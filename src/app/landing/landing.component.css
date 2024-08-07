@@ -1,132 +1,387 @@
-/* Reset default styles */
-html, body {
-    background-color: white;
-    font-family: 'Poppins', sans-serif;
+/* body, html {
+    height: 100%;
     margin: 0;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+}
+.logo{
+    height: 60px;
+    width: 60px;
+    margin-left: 40px;
+}
+
+.login-btn{
+    margin-right: 40px;
+}
+.container-fluid {
+    height: 100vh;
     padding: 0;
 }
 
-/* Navbar styling */
-.navbar {
-    background: #333333;
-    padding: 1rem;
-    box-shadow: none; /* Remove any shadow if present */
+.row {
+    height: 100%;
 }
 
-.navbar-brand {
-    font-size: 2rem;
-    font-weight: bold;
-    font-family: 'Poppins', sans-serif;
-    margin-left: 70px;
-    color: #f5652f !important;
-}
-
-
-.nav-link {
-    margin-left: 1rem;
-    font-size: 1.5rem;
-    font-family: 'Poppins', sans-serif;
-    margin-right: 70px;
-    color: #fff;
-}
-
-/* Active link and hover styling */
-.nav-link.active {
-    background-color: #f5652f;
-    color: white;
-    border-radius: 10px;
-    padding: 10px;
-    width: 100px;
-    text-align: center;
-}
-.nav-link.active:hover {
-    background-color: #d1572a;
-    color: white;
-}
-
-.nav-link:hover {
-    color: #f5652f;
-}
-
-/* Centered content styling */
-.container {
-    max-width: 600px;
-    margin-top: 150px; /* Adjust top margin to make the slogan more central */
-}
-
-h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    font-family: 'Poppins', sans-serif;
-    color: #f5652f;
-    font-weight: 600;
-    margin-top: 50px;
-}
-
-p {
-    font-size: 1.5rem;
-    color: #000;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-}
-
-.bg-custom {
-    background-color: #FFFFFF !important;
-    padding: 2rem;
-    border-radius: 10px;
-}
-
-/* Card styling */
-   /* ----- PROJECT DESIGN ----- */
-   .project-container{
+.bg-left {
     display: flex;
-    width: 100%;
-    justify-content: space-between;
-    gap: 20px;
-    flex-wrap: wrap;
- 
+    margin-top: 130px;
+    justify-content: center;
+    padding: 20px;
+    padding-left: 80px;
 }
-.project-box{
-    /* position: relative; */
+
+.bg-right {
+    background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0;
+    height: 55%;
+    border-left: none;
+    width: 30rem;
+}
+
+.search-container {
+    width: 30rem;
+    margin-top: 220px;
+    padding: 25px;
+    border-radius: 5px;
+
+    display: flex;
     flex-direction: column;
-    width: 30%;
-    height: 250px;
-    background-color: #fff;
-    border-radius: 20px;
-    box-shadow: 1px 8px 10px 2px var(--first-shadow-color);
-    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.25);
-    border: 1px solid #333;
-    overflow: hidden;
+    align-items: center;
+    justify-content: center; 
 }
-.project-box>i{
-    font-size: 50px;
-    color: #00B5E7;
-    margin-bottom: 25px;
+
+.search-bar-container {
+    margin-bottom: 20px;
 }
-.project-box label{
-    font-size: 15px;
-    color: #777;
+
+.search-bar-container input {
+    height: 50px;
 }
-/* .project-box::after, .contact-info::after{
-    content: "";
-    position: absolute;
-    bottom: -100%;
-    background: var(--second-color);
+
+.content-container {
+    height: 300px;
+    overflow-y: 40px;
+}
+
+.results-container {
     width: 100%;
     height: 100%;
-    transition: .4s;
-    z-index: 1;
-} */
-.project-box:hover.project-box::after,
-.contact-info:hover.contact-info::after{
-    bottom: 0;
 }
-.project-box:hover.project-box i,
-.project-box:hover.project-box>h3,
-.project-box:hover.project-box>label{
-    color: var(--color-white);
+
+.list-group {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.list-group-item {
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}
+
+.highlighted {
+    background-color: #f0f8ff;
+}
+
+h1 {
+    position: relative;
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    color: #333;
+    font-weight: 600;
+}
+
+h1::before {
+    content: "LET'S";
+    position: absolute; 
+    top: 0;
+    left: 0; 
+    color: #333;
+    font-size: 3rem; 
     z-index: 2;
 }
+
+h1 span {
+    color: #f5652f;
+    font-size: 6rem;
+    position: absolute;
+    top: 4rem;
+    left: 0; 
+    z-index: 1;
+}
+
+p {
+    font-size: 20px;
+    color: #000;
+    font-weight: 300;
+    margin-top: 8rem;
+}
+
+#search-title {
+    font-weight: 600;
+    color: #f5652f;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.search-subtitle {
+    text-align: center;
+    font-weight: 500;
+    color: #f5652f;;
+}
+
+@media screen and (max-width: 896px) {
+    .bg-left {
+        display: none;
+    }
+} */
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+}
+
+.navbar {
+    background-color: transparent;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.navbar .logo {
+    height: 60px;
+    width: 60px;
+    margin-left: 40px;
+}
+
+.navbar .navbar-title {
+    color: #f5652f;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.navbar .navbar-nav {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end; /* Align items to the right */
+}
+
+.navbar .nav-link {
+    color: #333;
+    font-weight: 600;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+.navbar .nav-link:hover {
+    color: #f5652f;
+}
+
+.container-fluid {
+    height: 100vh;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.row {
+    height: 100%;
+}
+
+.bg-left {
+    display: flex;
+    margin-top: 130px;
+    justify-content: center;
+    padding: 20px;
+    padding-left: 80px;
+}
+
+.bg-right {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    height: 55%;
+    border-left: none;
+    width: 30rem;
+}
+
+.search-container {
+    width: 30rem;
+    margin-top: 220px;
+    padding: 25px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* .search-bar-container {
+    margin-bottom: 20px;
+} */
+
+.search-bar-container input {
+    height: 50px;
+}
+
+.content-container {
+    height: 300px;
+    overflow-y: auto;
+}
+
+.results-container {
+    width: 100%;
+    height: 100%;
+}
+
+.list-group {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.list-group-item {
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}
+
+.highlighted {
+    background-color: #f0f8ff;
+}
+
+h1 {
+    position: relative;
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    color: #333;
+    font-weight: 600;
+}
+
+h1::before {
+    content: "LET'S";
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #333;
+    font-size: 3rem;
+    z-index: 2;
+}
+
+h1 span {
+    color: #f5652f;
+    font-size: 6rem;
+    position: absolute;
+    top: 4rem;
+    left: 0;
+    z-index: 1;
+}
+
+p {
+    font-size: 20px;
+    color: #000;
+    font-weight: 300;
+    margin-top: 8rem;
+}
+
+#search-title {
+    font-weight: 600;
+    color: #f5652f;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.search-subtitle {
+    text-align: center;
+    font-weight: 500;
+    color: #f5652f;
+}
+
+/* Additional Styles for Introduction Section */
+.introduction-section {
+    padding: 50px 0;
+    background-color: #f9f9f9;
+}
+
+.introduction-text {
+    padding: 20px;
+}
+
+.introduction-text h2 {
+    margin-bottom: 10px; /* Reduced margin to minimize white space */
+}
+
+.introduction-text p {
+    font-size: 18px; /* Adjust font size if needed */
+    color: #333;
+    font-weight: 300;
+}
+
+.introduction-text.text-right {
+    text-align: right; /* Align text to the right */
+}
+
+.introduction-image {
+    display: flex;
+    justify-content: center; /* Center the image horizontally */
+    align-items: center; /* Center the image vertically */
+}
+
+.introduction-image img {
+    width: 100%;
+    height: auto;
+}
+
+/* Styling for the "Interested?" section */
+.text-center {
+    text-align: center;
+    margin-top: 20px; /* Adjusted to minimize space */
+}
+
+.interested-text {
+    font-size: 22px;
+    color: #333;
+    font-weight: 500;
+}
+
+.login-btn {
+    display: inline-block;
+    background-color: transparent;
+    color: #333;
+    border: 2px solid #333;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 10px; /* Minimal spacing between text and button */
+}
+
+.login-btn:hover {
+    background-color: #f5652f;
+    color: white;
+    border: 2px solid #f5652f;
+}
+
+@media screen and (max-width: 896px) {
+    .bg-left {
+        display: none;
+    }
+}
+

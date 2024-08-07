@@ -94,7 +94,7 @@
 			<div style="display: flex;">
 
 			
-				<a *ngIf="userDetails.is_admin === 0" routerLink="/viewport/{{userDetails.studentID}}'" class="nav-link">Portfolio</a>
+				<a *ngIf="userDetails.is_admin === 0"  (click)="ViewPortfolio( userDetails.studentID)" style="cursor: pointer;" class="nav-link">Portfolio</a>
 				<a *ngIf="userDetails.is_admin === 0" routerLink="/newsfeed" class="nav-link">Portfolio Feed</a>
 			</div>
 			<!-- STUDENT -->
@@ -128,37 +128,50 @@
 				</div>
 			</div>
 		
-			<div class="container mt-4">
-				<div class="row">
-					<div class="col-md-12">
+			<div style="width: 100%;"   class="container w-100 mt-4">
+				<div  class="row ">
+					<div class="col-md-100">
 					  <div class="container">
 						<form [formGroup]="applyForm" (ngSubmit)="changeTemplate()">
 						  <div class="row">
-							<div class="col-md-6">
+							<div class="col-md-20">
 							  <div class="card" [ngClass]="{'selected': selectedCard === '1'}" (click)="selectCard('1')">
 								<div class="card-body text-center">
 								  <h5 class="card-title">Default Theme</h5>
 								  <p class="card-text">Select this theme to use the default design.</p>
-								  <img style="border-radius: 15px;" width="300" height="550" src="../../assets/images/template1.png" alt="Default Theme">
+								  <img style="border-radius: 15px;" width="1000" height="550" src="../../assets/images/template1.png" alt="Default Theme">
 								  <input type="radio" formControlName="templateID" value="1" style="display: none;" (change)="selectCard('1')">
 								</div>
+								<button  type="submit" style="border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;" class="btn btn-primary">Save Theme</button>
 							  </div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-20">
 							  <div class="card" [ngClass]="{'selected': selectedCard === '2'}" (click)="selectCard('2')">
 								<div class="card-body text-center">
 								  <h5 class="card-title">New Theme</h5>
 								  <input type="radio" formControlName="templateID" value="2" style="display: none;" (change)="selectCard('2')">
 								  <p class="card-text">Select this theme to use a new design.</p>
-								  <img style="border-radius: 15px;" width="300" height="550" src="../../assets/images/template2.png" alt="New Theme">
+								  <img style="border-radius: 15px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;" width="1000" height="550" src="../../assets/images/template2.png" alt="New Theme">
 								</div>
+								<button type="submit" style="border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;" class="btn btn-primary">Save Theme</button>
+							  </div>
+							</div>
+							<div class="col-md-20">
+							  <div class="card" [ngClass]="{'selected': selectedCard === '3'}" (click)="selectCard('3')">
+								<div class="card-body text-center">
+								  <h5 class="card-title">Night Theme</h5>
+								  <input type="radio" formControlName="templateID" value="3" style="display: none;" (change)="selectCard('3')">
+								  <p class="card-text">Select this theme to use a new design.</p>
+								  <img style="border-radius: 15px;" width="1000" height="550" src="../../assets/images/template3.png" alt="New Theme">
+								</div>
+								<button type="submit" style="border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;" class="btn btn-primary">Save Theme</button>
 							  </div>
 							</div>
 						  </div>
 						  <div class="row mt-4">
 							<div class="col-md-12 text-center">
-							  <button type="submit" class="btn btn-primary">Save Changes</button>
-							  <button type="button" class="btn btn-secondary ml-2" (click)="cancel()">Cancel</button>
+							  <!-- <button type="submit" class="btn btn-primary">Save Changes</button>
+							  <button type="button" class="btn btn-secondary ml-2" (click)="cancel()">Cancel</button> -->
 							</div>
 						  </div>
 						</form>
