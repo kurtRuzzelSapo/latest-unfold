@@ -100,7 +100,7 @@
 			<div style="display: flex;">
 
 			
-				<a *ngIf="userDetails.is_admin === 0" routerLink="/viewport/{{userDetails.studentID}}'" class="nav-link">Portfolio</a>
+				<a *ngIf="userDetails.is_admin === 0"  (click)="ViewPortfolio($event, userDetails.studentID)" style="cursor: pointer;" class="nav-link">Portfolio</a>
 				<!-- <a *ngIf="userDetails.is_admin === 1" routerLink="/newsfeed" class="nav-link">Portfolio Feed</a> -->
 				<a *ngIf="userDetails.is_admin === 0 || userDetails.is_faculty === 1" routerLink="/newsfeed" class="nav-link">Portfolio Feed</a>
 			</div>

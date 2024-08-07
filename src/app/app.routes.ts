@@ -34,6 +34,7 @@ import { FacSecurityComponent } from './fac-security/fac-security.component';
 import { ProjectfeedComponent } from './projectfeed/projectfeed.component';
 import { LandingComponent } from './landing/landing.component';
 import { TemplateComponent } from './template/template.component';
+import { ChangetemplateComponent } from './changetemplate/changetemplate.component';
 
 
 
@@ -77,7 +78,8 @@ export const routes: Routes = [
     { title: "Unfold | Leaderboard", path: 'leaderboard/', component: LeaderboardComponent },
     { title: "Unfold | Leaderboard", path: 'leaderboardAppr/', component: LeaderboardapproveComponent },
     { title: "Unfold | ProjectFeed", path: 'projectfeed', component: ProjectfeedComponent },
-    { title: "Unfold | Viewport Template 2", path: 'template/:studentID', component: TemplateComponent },
+    { title: "Unfold | ViewPortfolio", path: 'template/:studentID', component: TemplateComponent },
+    { title: "Unfold | ViewPortfolio", path: 'changetemplate/:studentID', component: ChangetemplateComponent },
    
 
     

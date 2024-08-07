@@ -1,1 +1,252 @@
-<p>changetemplate works!</p>
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Responsive Portfolio Website</title>
+	<!---custom css link---->
+	<!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
+    <link rel="stylesheet" href="changetemplate.component.css">
+   <!-- --------- UNICONS ---------- -->
+   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+   
+	<link rel="stylesheet"href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body>
+	<!------Header Section------>
+	<header>
+		<!-- <a href="#" class="logo">Devlo<span>pe</span>r..</a> -->
+		<ul class="navlist">
+            <li class="nav-item back">
+                    <a *ngIf="userDetails.is_admin === 0" routerLink="/newsfeed" class="nav-link" href="">
+                        <i class="fas fa-arrow-left" style="color: white"></i>
+                    </a>
+                </li>
+                <li class="nav-item back">
+                    <a *ngIf="userDetails.is_admin === 1" routerLink="/Home" class="nav-link" href="">
+                        <i class="fas fa-arrow-left" style="color: white"></i>
+                    </a>
+                </li>
+                <li class="nav-item back">
+                    <a *ngIf="userDetails.is_faculty === 1" routerLink="/newsfeed" class="nav-link" href="#home">
+                        <i class="fas fa-arrow-left" style="color: white"></i>
+                    </a>
+			<li><a href="#home" class="active">Home</a></li>
+			<li><a href="#about">About</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#competitions">Competitions</a></li>
+			<li><a href="#contact">Contact</a></li>
+		</ul>
+		<div class="bx bx-menu" id="menu-icon"></div>
+	</header>
+
+	<!---------Home Section--------------->
+	<section class="home" id="home">
+		<div class="home-text">
+			<div class="slide">
+				<span class="one">Hello</span>
+				<span class="two">I'm</span>
+			</div>
+			<h1>{{ studentPortfolio.student.firstName }}
+                {{ studentPortfolio.student.lastName }}</h1>
+			<!-- <h3>Website <span>Designer.</span></h3> -->
+			<p><span class="indent">Hello</span>! I'm {{ studentPortfolio.student.firstName }} 
+                {{ studentPortfolio.student.lastName }}, and I live at {{ studentPortfolio.student.address }}.
+                 I am a student at {{ studentPortfolio.student.school }}, currently pursuing a course in 
+                 {{ studentPortfolio.student.course }}. I am dedicated to both academic excellence and 
+                 personal growth. I was born on 
+                 {{ studentPortfolio.student.birthdate | date : "MMMM d, yyyy" }}. Through this portfolio, I aim to share my journey, achievements, and aspirations with you.</p>
+
+			<div class="button">
+				<a href="#" class="btn" (click)="downloadCV($event, studentPortfolio.student.studentID)">Download CV</a>
+			</div>
+		</div>
+	</section>
+
+	<!---------about Section --------------->
+	<section class="about" id="about">
+		<div class="about-img">
+		<img [src]="baseAPI + studentPortfolio.about[0].aboutImg" alt="avatar">
+		</div>
+
+		<div class="about-text">
+			<h2>About <span>Me</span></h2>
+			<!-- <h4>Website Designer!</h4> -->
+			<p>{{studentPortfolio.about[0].aboutText}}
+				</p>
+				<a href="#" class="btn" (click)="downloadCV($event, studentPortfolio.student.studentID)">Download CV</a>
+		</div>
+	</section>
+
+	<!-----------Services Section-------------->
+	<section class="services" id="services">
+	<div class="main-text">
+		<h2><span>My </span>Accomplishments</h2>
+	</div>
+	<div class="services-content">
+		<div class="box">
+			<div class="s-icons">
+                <i class="uil uil-briefcase-alt"></i>
+			</div>
+			<h3>Completed</h3>
+			<p>{{counts.projects}}+ Finished Projects</p>
+			<!-- <a href="#" class="btn">Read More</a> -->
+		</div>
+
+		<div class="box">
+			<div class="s-icons">
+				<i class="uil-lightbulb"></i>
+			</div>
+			<h3>Technologies</h3>
+			<p>{{counts.technologies}}+ Learned Skills</p>
+			<!-- <a href="#" class="btn">Read More</a> -->
+		</div>
+
+		<div class="box">
+			<div class="s-icons">
+                <i class="uil uil-award"></i>
+
+			</div>
+			<h3>Competition</h3>
+			<p>{{counts.competitions}}+ Times in the field</p>
+			<!-- <a href="#" class="btn">Read More</a> -->
+		</div>
+	</div>
+
+</section>
+
+<!-----------Portfolio Section--------------->
+<section class="portfolio" id="portfolio">
+	<div class="main-text">
+		<h2><span>My </span>Projects</h2>
+	</div>
+	<div class="portfolio-content" >
+		<div class="row" *ngFor=" let studentPortfolio of studentPortfolio.project">
+			<img [src]="baseAPI + studentPortfolio.projectImg" alt="" >
+			<div class="layer">
+				<h5>{{studentPortfolio.projectTitle}}</h5>
+				<p>{{studentPortfolio.projectDesc}}</p>
+				<a href="{{studentPortfolio.projectLink}}" target="_blank"> <i class='bx bx-link-external'></i></a>
+			</div>
+		</div>
+
+
+		
+
+		</div>
+
+</section>
+
+<!-----------Competition Section--------------->
+<section class="portfolio" id="portfolio">
+	<div class="main-text">
+		<h2><span>My </span>Competitions</h2>
+	</div>
+	<div class="portfolio-content" >
+		<div class="row" *ngFor="let studentPortfolio of studentPortfolio.accomplishment">
+			<img [src]="baseAPI + studentPortfolio.accomImg" class="card-img-top" alt="Competition Image" >
+			<div class="layer">
+				<h5>{{studentPortfolio.accomTitle}}</h5>
+				<p>{{studentPortfolio.accomDesc}}</p>
+				<a href="{{studentPortfolio.accomLink}}" target="_blank"> <i class='bx bx-link-external'></i></a>
+			</div>
+		</div>
+
+
+		
+
+		</div>
+
+</section>
+
+<!-- Testmonial Section -->
+<!-- <section id="testimonial" class="testimonial">
+    <div class="container text-center">
+        <div class="main-text">
+        <h2>Testimony</h2>
+    </div>
+        <h3 class="subtitle">Faculty Members said about me</h3>
+        
+        
+        <div class="cont">
+            <div *ngFor="let studentPortfolio of studentPortfolio.testimony" class="testi project">
+              <div class="prof">
+                  <img width="50" height="50" [src]="baseAPI + studentPortfolio.testImg" alt="">
+                  <div style="margin-left: 10px;">
+                      <div class="name"><b>{{studentPortfolio.testFirstname}} {{studentPortfolio.testLastname}}</b></div>
+                      <div class="position">{{studentPortfolio.testPosition}}</div>
+                  </div>
+              </div>
+              <p class="mb-5 pb-4">{{studentPortfolio.testDesc}}.</p>
+            </div>
+         </div>
+         </div>
+        </section> -->
+
+        <section id="testimonies">
+                <div class="main-text">
+                <h2>Testimony</h2>
+            </div>
+            <h3 class="subtitle" style="text-align: center;">Faculty Members said about me</h3>
+            <div class="">
+               <div class="cont">
+                  <div *ngFor="let studentPortfolio of studentPortfolio.testimony" class="testi project">
+                    <div class="prof">
+                        <img width="50" height="50" [src]="baseAPI + studentPortfolio.testImg" alt="">
+                        <div style="margin-left: 10px;">
+                            <div class="name"><b>{{studentPortfolio.testFirstname}} {{studentPortfolio.testLastname}}</b></div>
+                            <div class="position">{{studentPortfolio.testPosition}}</div>
+                        </div>
+                    </div>
+                    <div class="desc">{{studentPortfolio.testDesc}}.</div>
+                  </div>
+               </div>
+            </div>
+         </section>
+<!------------------Contact section------------>
+<section class="contact" id="contact">
+	<div class="contact-text">
+		<h2>Contact <span>Me!</span></h2>
+		<h4>If you have any project in your mind.</h4>
+		<!-- <div class="list">
+			<li><a href="#">0123456789</a></li>
+			<li><a href="#">itechgmail.com</a></li>
+			<li><a href="#">Like Share & Subscribe</a></li>
+		</div> -->
+
+		<div class="contact-icons">
+			<a href="#"><i class='bx bxl-linkedin'></i></a>
+			<a href="#"><i class='bx bxl-github' ></i></a>
+			<a href="#"><i class='bx bxl-facebook' ></i></a>
+			<a href="#"><i class='bx bxl-instagram' ></i></a>
+		</div>
+
+	</div>
+	<!-- <div class="contact-form">
+		<form action="">
+			<input type="name" placeholder="Your Name " required>
+			<input type="email" placeholder="Your Email " required>
+			<input type="number" placeholder="your Mobile Number" required>
+			<textarea name="" id="" cols="35" rows="10" placeholder="How Can I Help You " required></textarea>
+			<input type="submit" value="Send Message" class="submit" required>
+		</form>
+
+	</div> -->
+</section>
+
+<!---------End Section---------->
+<!-- <section class="end">
+	<div class="last-text">
+		<p>Design By itech EazyCode</p>
+	</div>
+	<div class="top">
+		<a href="#home"><i class='bx bx-up-arrow-alt' ></i></a>
+	</div>
+</section> -->
+
+</body>
+
+</html>

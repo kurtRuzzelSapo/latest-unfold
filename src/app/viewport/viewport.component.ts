@@ -4,9 +4,10 @@
       import { CookieService } from 'ngx-cookie-service';
       import { DataService } from '../data.service';
       import { CommonModule } from '@angular/common';
-      import { Router, RouterLink } from '@angular/router';
+      import { Router, RouterLink, RouterLinkActive } from '@angular/router';
       import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
       import { ActivatedRoute } from '@angular/router';
+     
       import Swal from 'sweetalert2';
       
       @Component({
@@ -86,6 +87,12 @@
             );
           });
         }
+
+        // goBack() {
+        //   const previousUrl = this.navigationService.getPreviousUrl();
+        //   this.router.navigateByUrl(previousUrl);
+        // }
+
         updateCounts(data: any): void {
           this.counts.projects = data.project.length;
           this.counts.technologies = data.skill.length;

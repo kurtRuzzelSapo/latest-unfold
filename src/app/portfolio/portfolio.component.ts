@@ -43,6 +43,8 @@ export class PortfolioComponent implements OnInit {
   selectedProjectDesc: string = '';
   selectedProjectImg: string = '';
   selectedprojectID: any;
+  templateID: any = {};
+  viewedPortfolioIds: string[] = [];
   // ONLINE BASEAPI
   // baseAPI: string = 'https://unfoldap.online/unfold-api';
   // LOCALHOST BASEAPI
@@ -65,16 +67,19 @@ export class PortfolioComponent implements OnInit {
 
     this.loadPortfolio();
 
-    this.ds.getRequestWithParams("view-portfolio", { id: this.userDetails.studentID }).subscribe(
-      (response: any) => {
-        this.studentPortfolio = response;
-        console.log('View Portfolio details:', response);
-      },
-      (error) => {
-        console.error('Error retrieving portfolio:', error);
-      }
-    );
-    this.loadPortfolio();
+    // this.ds.getRequestWithParams("view-portfolio", { id: this.userDetails.studentID }).subscribe(
+    //   (response: any) => {
+    //     this.studentPortfolio = response;
+    //     console.log('View Portfolio details:', response);
+    //   },
+    //   (error) => {
+    //     console.error('Error retrieving portfolio:', error);
+    //   }
+    // );
+    // this.loadPortfolio();
+
+    const viewedPortfolioCookie = this.cookieService.get('viewed_portfolios');
+    this.viewedPortfolioIds = viewedPortfolioCookie ? JSON.parse(viewedPortfolioCookie) : [];
   }
   isDropdownVisible = false;
 
@@ -132,6 +137,63 @@ export class PortfolioComponent implements OnInit {
       },
       (error) => {
         console.error('Error submitting application:', error);
+      }
+    );
+  }
+
+  ViewPortfolio(e: any, studentID: string) {
+    e.preventDefault();
+
+    
+    const redirectToPortfolio = (templateID: any) => {
+      if (templateID === "2") {
+        this.route.navigateByUrl(`template/${studentID}`);
+      }else if(templateID === "3"){
+        this.route.navigateByUrl(`changetemplate/${studentID}`);
+      }
+       else {
+        this.route.navigateByUrl(`viewport/${studentID}`);
+      }
+    };
+
+    this.ds.getRequestWithParams("get-template", { id: studentID }).subscribe(
+      (response: any) => {
+        this.templateID = response.templateID;
+        console.log('Template ID:', this.templateID);
+
+        // Check if the portfolio is already viewed
+        if (this.viewedPortfolioIds.includes(studentID)) {
+          console.log('Portfolio already viewed in this session');
+          // Redirect to the portfolio without adding a view
+          redirectToPortfolio(this.templateID);
+        } else {
+          // Add views after fetching the template ID
+          this.ds.addViews(studentID).subscribe(
+            (response) => {
+              console.log('Views added successfully:', response);
+
+              // Update viewedPortfolioIds and store in cookie
+              this.viewedPortfolioIds.push(studentID);
+              this.cookieService.set('viewed_portfolios', JSON.stringify(this.viewedPortfolioIds));
+
+              // Redirect to the portfolio
+              redirectToPortfolio(this.templateID);
+            },
+            (error) => {
+              console.error('Error adding views:', error);
+              if (error.status === 401) {
+                console.warn('Unauthorized access - redirecting to login');
+                this.route.navigateByUrl('/login');
+              } else {
+                // Redirect to the portfolio even if there was an error adding views
+                redirectToPortfolio(this.templateID);
+              }
+            }
+          );
+        }
+      },
+      (error) => {
+        console.error('Error retrieving template:', error);
       }
     );
   }

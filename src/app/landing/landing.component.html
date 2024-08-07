@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -9,24 +9,9 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg fixed-top">
-  <a class="navbar-brand">Unfold.
-  </a>
-  <div class="collapse navbar-collapse justify-content-end">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="/signup">Signup</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link active" href="/login">Login</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-
 <div class="container text-center mt-5 bg-custom">
-  <h1>Start your Portfolio</h1>
-  <p>Let's unfold together.</p>
+  <h1>Let's UNFOLD together!</h1>
+  <p>The free platform for students to create stunning portfolios. Choose from a variety of templates to showcase your talents and achievements. Start crafting your unique story today!</p>
 </div>
 
 <main  style="width: 100%; height: auto; display: flex; justify-content: center; " class="wrapper">
@@ -35,36 +20,320 @@
   <section style="width: 80%;" class="section" id="projects">
     
           <div style="margin-top: 10px; padding-bottom: 40px; " class="project-container">
-            <div style="display: flex;" class="project-box" *ngFor="let student of filteredStudents;  let i = index" [style.animation-delay]="i * 0.2 + 's'" >
-<div class="wew" style="display: flex; justify-content: space-around; align-items: center; width: 90%;">
-  <div style="display: flex; flex-direction: column; justify-content: space-evenly; align-items: center;">
-    <img width="140" height="140" style="border-radius: 50%; margin-top: 20px;" [src]="baseAPI + student.aboutImg" alt="{{ student.firstName }} {{ student.lastName }}" class="student-image">
-    <label style="padding-top: 44px;">Faculty Approved: <b style="color: #F8955E;">{{ student.approved }} <i class="uil-check"></i></b></label>
-
-  </div>
-    <div style="text-align: center;">
-        <h2>{{ student.firstName }} {{ student.lastName }}</h2>
-        <div style="display:flex; flex-direction: column;">
-            <label>{{ student.school }}</label>
-            <label>{{ student.course }}</label>
-            <label><b>{{ student.position }}</b></label>
-        </div>
-        <div>
-            <button style="background-color: #f8955e; border:1px solid #f5652f; margin-top: 10px;" class="btn btn-primary" (click)="ViewPortfolio($event, student.studentID)">
-                View Portfolio
-            </button>
-        </div>
-        <br>
-        <label>Portfolio Views: <b style="color: #F8955E;">{{ student.portfolioView }} <i class="uil-eye"></i> </b></label>
-        <br>
-        
-    </div>
-</div>
-</div>
+            
 </div>
 
    </section>
   </main>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unfold Landing Page</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="landing.component.css">
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="col-md-6 d-flex align-items-center justify-content-start bg-left">
+      <div class="text-content">
+        <h1>Let's UNFOLD together!</h1>
+        <p>The free platform for students to create stunning portfolios. Choose from a variety of templates to showcase your talents and achievements. Start crafting your unique story today!</p>
+      </div>
+    </div>
+
+
+    <div class="col-md-6 d-flex align-items-center justify-content-center bg-right">
+      <div class="search-container">
+        <input type="text" class="form-control" placeholder="Search by name..." [(ngModel)]="searchTerm" (input)="filterStudents()">
+      </div>
+      <div class="results-container">
+        <ul class="list-group">
+          <li *ngFor="let student of filteredStudents" 
+              [ngClass]="{'highlighted': isHighlighted(student)}" 
+              class="list-group-item">
+            <a (click)="ViewPortfolio($event, student.studentID)">{{ student.firstName }} {{ student.lastName }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unfold Landing Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="landing.component.css">
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-md-6 bg-left">
+            <div class="text-content">
+                <h1><span>UNFOLD.</span></h1>
+                <p>The free platform for students to create stunning portfolios. Choose from a variety of templates to showcase your talents and achievements. Start crafting your unique story today!</p>
+            </div>
+        </div>
+
+
+        <div class="col-md-6 bg-right">
+            <div class="search-container">
+                <p class="search-subtitle">Discover here!</p>
+                <div class="search-bar-container">
+                    <input type="text" class="form-control" placeholder="Search by name..." [(ngModel)]="searchTerm" (input)="filterStudents()">
+                </div>
+                <div class="content-container">
+                    <div class="results-container">
+                        <ul class="list-group">
+                            <li *ngFor="let student of filteredStudents" 
+                                [ngClass]="{'highlighted': isHighlighted(student)}" 
+                                class="list-group-item">
+                                <a (click)="ViewPortfolio($event, student.studentID)">{{ student.firstName }} {{ student.lastName }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html> -->
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unfold Landing Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="landing.component.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="#">
+        <img src="../../assets/images/logo.png" alt="Logo" class="logo">
+        <span class="navbar-title">UNFOLD.</span>
+    </a>
+    <div class="ml-auto">
+        <a href="#" class="login-btn">Login</a>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6 bg-left">
+        <div class="text-content">
+            <h1><span>UNFOLD.</span></h1>
+            <p>The free platform for students to create stunning portfolios. Choose from a variety of templates to showcase your talents and achievements. Start crafting your unique story today!</p>
+        </div>
+    </div>
+
+
+
+        <div class="col-md-6 bg-right">
+            <div class="search-container">
+                <p class="search-subtitle">Discover here!</p>
+                <div class="search-bar-container">
+                    <input type="text" class="form-control" placeholder="Search by name..." [(ngModel)]="searchTerm" (input)="filterStudents()">
+                </div>
+                <div class="content-container">
+                    <div class="results-container">
+                        <ul class="list-group">
+                            <li *ngFor="let student of filteredStudents" 
+                                [ngClass]="{'highlighted': isHighlighted(student)}" 
+                                class="list-group-item">
+                                <a (click)="ViewPortfolio($event, student.studentID)">{{ student.firstName }} {{ student.lastName }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unfold Landing Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="landing.component.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+ <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="#">
+        <img src="../../assets/images/logo.png" alt="Logo" class="logo">
+        <span class="navbar-title">UNFOLD.</span>
+    </a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a href="#student-intro" class="nav-link">Student Intro</a>
+            </li>
+            <li class="nav-item">
+                <a href="#faculty-intro" class="nav-link">Faculty Intro</a>
+            </li>
+            <li style="background-color: #f5652f; color: white; border-radius: 10px; " class="nav-item">
+                <a style="color: whitesmoke;" routerLink="/login" class="nav-link">Login</a>
+            </li>
+            <li style="background-color: #f5652f; color: white; border-radius: 10px; margin-left: 10px;" class="nav-item">
+                <a style="color: whitesmoke;" routerLink="/signup" class="nav-link">Signup</a>
+            </li>
+
+          
+        </ul>
+    </div>
+</nav>
+
+<div style="height: 70vh;" class="container-fluid">
+    <div class="row">
+        <!-- Left Side -->
+        <div class="col-md-6 bg-left">
+            <div class="text-content">
+                <h1><span>UNFOLD.</span></h1>
+                <p>The free platform for students to create stunning portfolios. Choose from a variety of templates to showcase your talents and achievements. Start crafting your unique story today!</p>
+            </div>
+        </div>
+
+        <!-- Right Side -->
+        <div class="col-md-6 bg-right">
+            <div class="search-container">
+               
+            
+             
+                   
+                      <img style="border-radius: 15px;" width="300" height="550" src="../../assets/images/template1.png" alt="Default Theme">
+                      
+            
+             
+            </div>
+        </div>
+    </div>
+</div>
+<main  style="width: 100%;" >
+  <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-bottom: 20px;">
+
+    <p style="font-size: 30px;" class="search-subtitle">Discover here!</p>
+    <input width="60%" type="text" class="form-control w-25 center"  placeholder="Search by name..." [(ngModel)]="searchTerm" (input)="filterStudents()">
+  </div>
+
+    <section >
+      
+            <div style="margin-top: 10px; padding-bottom: 40px; display: flex; flex-direction: row; justify-content: space-around; " class="project-container">
+              <div style="display: flex; flex-direction: row;"  class="project-box" *ngFor="let student of filteredStudents;  let i = index" [style.animation-delay]="i * 0.2 + 's'" >
+  <div class="wew" style="width: 100%; box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; border-radius: 15px; display: flex; padding: 5px 30px; justify-content: space-between; align-items: center;" >
+    <div class="wow" style="display: flex;  justify-content: space-between; align-items: center; width: 100%; ">
+      <img width="170" height="170" style="border-radius: 50%; margin-top: -10px;" [src]="baseAPI + student.aboutImg" alt="{{ student.firstName }} {{ student.lastName }}" class="student-image">
+      <!-- <label style="padding-top: 44px;">Faculty Approved: <b style="color: #F8955E;">{{ student.approved }} <i class="uil-check"></i></b></label> -->
+  
+    </div>
+      <div style="text-align: center; margin-top: 20px;">
+          <h2>{{ student.firstName }} {{ student.lastName }}</h2>
+          <div style="display:flex; flex-direction: column;">
+              <!-- <label>{{ student.school }}</label>
+              <label>{{ student.course }}</label> -->
+              <label><b>{{ student.position }}</b></label>
+              <button style=" display: flex; align-items: center; justify-content: center;  background-color: #f8955e; border:1px solid #f5652f; margin-top: 10px; padding: 0 10px;" class="btn btn-primary" (click)="ViewPortfolio($event, student.studentID)">
+               <i style="font-size: 20px;" class="uil-eye"></i>
+            </button>
+          </div>
+       
+             
+          
+          <br>
+          <!-- <label>Portfolio Views: <b style="color: #F8955E;">{{ student.portfolioView }} <i class="uil-eye"></i> </b></label> -->
+          <br>
+          
+      </div>
+  </div>
+  </div>
+  </div>
+  
+     </section>
+    </main>
+<!-- New Introduction Section -->
+<div class="introduction-section" id="student-intro">
+    <div class="container">
+        <div class="row">
+            <!-- Text Content -->
+            <div class="col-md-6 introduction-text">
+                <h2>For students</h2>
+                <p>When you log in as a student, you will be able to create and customize your own portfolio. Choose from a variety of templates to display your skills and achievements. The platform allows you to easily manage and update your portfolio as you grow. Get started by exploring the available features and personalizing your portfolio to reflect your unique story.</p>
+                <div class="text-center mt-4">
+                    <p class="interested-text">Interested?</p>
+                    <a routerLink="/login" class="login-btn">Login</a>
+                </div>
+            </div>
+
+            <!-- Image Content -->
+            <div class="col-md-6 introduction-image">
+                <img src="https://digitalbluee.com/wp-content/uploads/2022/12/pexels-antonio-batini-4164418.jpg" alt="Landscape Photo" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- New Introduction Section for Faculty -->
+<div class="introduction-section" style="background-color: white;" id="faculty-intro">
+  <div class="container">
+      <div class="row">
+          <!-- Image Content -->
+          <div class="col-md-6 introduction-image">
+              <img src="https://digitalbluee.com/wp-content/uploads/2022/12/pexels-antonio-batini-4164418.jpg" alt="Faculty Photo" class="img-fluid">
+          </div>
+
+          <!-- Text Content -->
+          <div class="col-md-6 introduction-text text-right">
+              <h2>For faculty</h2>
+              <p>As a faculty member, you can manage student portfolios and track their progress. Access a range of tools to provide feedback and support, ensuring students receive the guidance they need to excel. Explore the platform's features designed to facilitate communication and enhance the learning experience.</p>
+          </div>
+      </div>
+  </div>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

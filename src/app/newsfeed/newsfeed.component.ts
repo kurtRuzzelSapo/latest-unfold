@@ -237,7 +237,10 @@ export class NewsfeedComponent implements OnInit, AfterViewInit {
     const redirectToPortfolio = (templateID: any) => {
       if (templateID === "2") {
         this.route.navigateByUrl(`template/${studentID}`);
-      } else {
+      }else if(templateID === "3"){
+        this.route.navigateByUrl(`changetemplate/${studentID}`);
+      }
+       else {
         this.route.navigateByUrl(`viewport/${studentID}`);
       }
     };
